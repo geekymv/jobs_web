@@ -1,0 +1,112 @@
+package com.heike.domain.pojo;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ * 用工单位
+ * @author Geek_ymv
+ */
+@Entity
+@Table(name="t_employers")
+public class Employer {
+	private Long id;
+	private String account;	//账号
+	private String password;
+	private String name;	//用工单位名称
+	private String teacher;	//负责老师
+	private String mobile;
+	private Integer totalMoney;	//申请月总金额
+	private Integer postNum;	//申请的岗位数
+	private Integer authority;	//权限(1-管理员， 2-用工单位)
+	private Date regDate;	// 注册时间
+	private Integer status; // 账号是否可用(1可用 ，0不可用，默认为1)
+	private String remarks;		//备注
+	
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	@Column(columnDefinition="float default 0")
+	public Integer getTotalMoney() {
+		return totalMoney;
+	}
+	public void setTotalMoney(Integer totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+	public Integer getPostNum() {
+		return postNum;
+	}
+	public void setPostNum(Integer postNum) {
+		this.postNum = postNum;
+	}
+	public Integer getAuthority() {
+		return authority;
+	}
+	public void setAuthority(Integer authority) {
+		this.authority = authority;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+	@Column(columnDefinition="int default 1", length=1)
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+}
