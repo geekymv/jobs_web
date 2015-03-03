@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @Table(name="t_recruits")
 public class Recruit {
 	private Long id;
-	private String title;
+	private String title;	// 标题
 	private String postName;	//招聘岗位名
 	private Integer postNum;	//招聘岗位数
 	private String salary;	//薪资待遇
@@ -29,7 +29,7 @@ public class Recruit {
 	private int applyNum;		//已报名人数
 	private Date endDate;	//报名截止时间
 	private String remarks;	//备注
-	private Integer status;	//  招聘信息状态(1已发布，0已删除)
+	private Integer status;	//  状态(1已发布，-1已删除)
 	
 	private Employer employer; //用工单位
 	
@@ -114,7 +114,7 @@ public class Recruit {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	@Column(columnDefinition="int default 1")
+	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;
 	}

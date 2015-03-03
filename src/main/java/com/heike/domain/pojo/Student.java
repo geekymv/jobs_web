@@ -2,6 +2,7 @@ package com.heike.domain.pojo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,29 +18,19 @@ import javax.persistence.TemporalType;
 @Table(name="t_students")
 public class Student {
 	private Long id;
-	private String number;	//学号
-	private String password;
-	private String name;
-	private String gender;
-	private String college;	//学院
-	private String profession;	//专业
-	private String mobile;
+	private String num;	//学号
+	private String pwd; // 密码
+	private String name; // 姓名
+	private String gender;  //性别
+	private Long collegeId;	//学院
+	private Long professionId;	//专业
+	private String mobile; // 联系方式
+	private String email;	// 邮箱
 	private String introduce;	//自我介绍
 	private Date regTime;	//注册时间
+	private Integer status;	// 账号状态(1正常， 0冻结， -1删除)
 	
 	public Student() {
-	}
-
-	public Student(String number, String password, String name, String gender,
-			String college, String profession, String mobile, String introduce) {
-		this.number = number;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-		this.college = college;
-		this.profession = profession;
-		this.mobile = mobile;
-		this.introduce = introduce;
 	}
 
 	@Id
@@ -50,32 +41,43 @@ public class Student {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getRegTime() {
-		return regTime;
-	}
-	public void setRegTime(Date regTime) {
-		this.regTime = regTime;
-	}
 
-	public String getNumber() {
-		return number;
+	public String getNum() {
+		return num;
 	}
-	public String getPassword() {
-		return password;
+	public void setNum(String num) {
+		this.num = num;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getName() {
 		return name;
 	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getGender() {
 		return gender;
 	}
-	public String getCollege() {
-		return college;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	public String getProfession() {
-		return profession;
+
+	public Long getCollegeId() {
+		return collegeId;
+	}
+	public void setCollegeId(Long collegeId) {
+		this.collegeId = collegeId;
+	}
+	public Long getProfessionId() {
+		return professionId;
+	}
+	public void setProfessionId(Long professionId) {
+		this.professionId = professionId;
 	}
 	public String getMobile() {
 		return mobile;
@@ -83,31 +85,31 @@ public class Student {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public void setCollege(String college) {
-		this.college = college;
+	public String getEmail() {
+		return email;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setNumber(String number) {
-		this.number = number;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public void setProfession(String profession) {
-		this.profession = profession;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getIntroduce() {
 		return introduce;
 	}
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
+	}
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getRegTime() {
+		return regTime;
+	}
+	public void setRegTime(Date regTime) {
+		this.regTime = regTime;
+	}
+	@Column(columnDefinition="int(1) default 1")
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

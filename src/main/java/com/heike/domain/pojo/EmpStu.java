@@ -13,13 +13,13 @@ import javax.persistence.Table;
  * @author Geek_ymv
  */
 @Entity
-@Table(name="t_empstus")
+@Table(name="t_employer_students")
 public class EmpStu {
 	private Long id;
 	private Long empId; // 用工单位id
 	private Long stuId; // 学生id
 	private String postName;	// 岗位名称
-	private Integer status; // 状态(1-在职，0-离职)
+	private Integer status; // 状态(1在职，-1离职)
 	
 	@Id
 	@GeneratedValue
@@ -43,13 +43,15 @@ public class EmpStu {
 	public void setStuId(Long stuId) {
 		this.stuId = stuId;
 	}
+	@Column(length=60)
 	public String getPostName() {
 		return postName;
 	}
 	public void setPostName(String postName) {
 		this.postName = postName;
 	}
-	@Column(columnDefinition="int default 1", length=1)
+	//   length属性表示字段的长度，当字段的类型为varchar时，该属性才有效，默认为255个字符。
+	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;
 	}

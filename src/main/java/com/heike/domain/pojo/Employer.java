@@ -19,15 +19,15 @@ import javax.persistence.TemporalType;
 public class Employer {
 	private Long id;
 	private String account;	//账号
-	private String password;
+	private String pwd; // 密码
 	private String name;	//用工单位名称
 	private String teacher;	//负责老师
-	private String mobile;
+	private String mobile; // 电话号码
 	private Integer totalMoney;	//申请月总金额
 	private Integer postNum;	//申请的岗位数
 	private Integer authority;	//权限(1-管理员， 2-用工单位)
 	private Date regDate;	// 注册时间
-	private Integer status; // 账号是否可用(1可用 ，0不可用，默认为1)
+	private Integer status; // 账号是否可用(1可用 ，0冻结，-1删除)
 	private String remarks;		//备注
 	
 	@Id
@@ -44,11 +44,11 @@ public class Employer {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getName() {
 		return name;
@@ -101,7 +101,7 @@ public class Employer {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	@Column(columnDefinition="int default 1", length=1)
+	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;
 	}

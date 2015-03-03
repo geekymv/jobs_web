@@ -18,16 +18,16 @@ import javax.persistence.Table;
 @Table(name="t_salaries")
 public class Salary {
 	private Long id;
-	private Date date;
 	private String month;	//月份
 	private String worktime;	//工作时间
 	private float salary;	//基本工资
 	private float bonus;	//奖金
 	private float toolFee;	//工具费
-	private Employer employer;
+	private Employer employer;	// 用工单位
 	private Student student;	//多对一的关联关系，Student是一的一方
-	private Integer status; // 工资状态 1正常， 0已被删除
+	private Integer status; // 工资状态 1正常， -1已被删除
 	private String remarks;		//备注
+	private Date date;
 	
 	public Salary() {
 	}
@@ -105,7 +105,7 @@ public class Salary {
 	public void setWorktime(String worktime) {
 		this.worktime = worktime;
 	}
-	@Column(columnDefinition="int default 1")
+	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;
 	}

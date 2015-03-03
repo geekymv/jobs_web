@@ -17,13 +17,13 @@ import javax.persistence.TemporalType;
  * @author Geek_ymv
  */
 @Entity
-@Table(name="t_recstus")
-public class RecStu {
+@Table(name="t_recruit_students")
+public class RecruitStu {
 	private Long id;
 	private Long recId; // 招聘信息id
 	private Long stuId;	// 学生id
-	private Integer status; // 状态(1已报名，0取消报名)
 	private Date signUpDate;	// 报名时间
+	private Integer status; // 状态(1已报名，0取消报名)
 	
 	@Id
 	@GeneratedValue
@@ -47,6 +47,7 @@ public class RecStu {
 	public void setStuId(Long stuId) {
 		this.stuId = stuId;
 	}
+	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;
 	}
@@ -60,7 +61,5 @@ public class RecStu {
 	public void setSignUpDate(Date signUpDate) {
 		this.signUpDate = signUpDate;
 	}
-
-	
 	
 }
