@@ -25,5 +25,21 @@ public class StudentDao extends HibernateDao<Student>{
 		
 		return student;
 	}
+	
+	/**
+	 * 根据学号查询
+	 * @param num
+	 * @return
+	 */
+	public Student queryByNum(String num) {
+		String hql = "select new Student(num, name) from Student s where s.status=1"
+				+ " and s.num = :num";
+		Student student = (Student) this.getSession()	//
+										.createQuery(hql)	//
+										.setString("num", num) //
+										.uniqueResult();
+		
+		return student;
+	}
 
 }

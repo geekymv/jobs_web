@@ -18,7 +18,7 @@ public class RecruitDao extends HibernateDao<Recruit> {
 		String hql = "from Recruit where status = :status";
 		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("status", SysCode.Recruit.RECRUIT_PUBLISHED);
+		params.put("status", SysCode.RecruitCode.RECRUIT_PUBLISHED);
 		
 		return this.findByPage(hql, params, pager);
 	}

@@ -2,7 +2,7 @@ package com.heike.base;
 
 public final class SysCode {
 
-	public static final class Recruit {
+	public static final class RecruitCode {
 		/**
 		 * 招聘信息状态-已发布
 		 */
@@ -15,7 +15,7 @@ public final class SysCode {
 		
 	}
 	
-	public static final class Employer {
+	public static final class EmployerCode {
 		/**
 		 * 管理员
 		 */
@@ -25,5 +25,17 @@ public final class SysCode {
 		 * 用工单位
 		 */
 		public static final int EMPLOYER_AUTHORITY = 2;
+	}
+	
+	public static final class DictCode {
+		/**
+		 * 学院
+		 */
+		public static final String COLLEGE_TYPE = "XUE_YUAN";
+		
+		/**
+		 * 专业
+		 */
+		public static final String PROFESSION_TYPE = "ZHUAN_YE";
 	}
 }

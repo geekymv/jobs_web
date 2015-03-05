@@ -1,19 +1,24 @@
 package com.heike.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.annotation.Repeat;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
+import com.heike.domain.pojo.Dict;
+import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Recruit;
+import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
 import com.heike.domain.service.RecruitService;
 
@@ -24,6 +29,7 @@ public class IndexController {
 	@Autowired
 	private CommonService commonService;
 	
+	
 	/**
 	 * 跳转到首页
 	 * @return
@@ -32,8 +38,6 @@ public class IndexController {
 	public String index(Model model, HttpServletRequest request) {
 		Pager<Recruit> pager = recruitService.list(1);
 		model.addAttribute("pager", pager);
-		
-//		System.out.println(pager.getDatas());
 		return "index";
 	}
 	
@@ -43,7 +47,29 @@ public class IndexController {
 
 		return null;
 	}
-
+	
+	/**
+	 * 获得所有的学院
+	 * @return
+	 */
+	@RequestMapping("/getColleges")
+	@ResponseBody
+	public List<Dict> getColleges(){
+		return commonService.getColleges();
+	}
+	
+	/**
+	 * 获得该学院的所有专业
+	 * @param colId
+	 * @return
+	 */
+	@RequestMapping("/getProfessions")
+	@ResponseBody
+	public List<Dict> getProfessions(Long colId) {
+		return commonService.getProfessions(colId);
+	}
+	
+	
 	/**
 	 * 跳转到用户登录页面
 	 * @return
@@ -63,32 +89,40 @@ public class IndexController {
 	public String login(String account, String password, String rember, HttpSession session) {
 		return commonService.login(account, password, session);
 	}
-	
+
 	/**
-	 * 跳转到学生首页
+	 * 用户退出
+	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/student/index")
-	public String goStudent() {
-		return "student/index";
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:index";
 	}
 	
 	/**
-	 * 跳转到用工单位首页
+	 * 进入我的主页
 	 * @return
 	 */
-	@RequestMapping("/employer/index")
-	public String goEmployer() {
-		return "employer/index";
-	}
-	
-	/**
-	 * 跳转到管理员首页
-	 * @return
-	 */
-	@RequestMapping("/admin/index")
-	public String goAdmin() {
-		return "admin/index";
+	@RequestMapping("/home")
+	public String home(HttpSession session) {
+		Object object = session.getAttribute("user");
+		String path = "";
+		if(object != null) {
+			if(object instanceof Student) {	// 学生
+				path = "student/home";
+			}else if(object instanceof Employer) {
+				Employer employer = (Employer)object;
+				int authority = employer.getAuthority();
+				if(authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 用工单位
+					path = "admin/home";
+				}else if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 管理员
+					path = "employer/home";
+				}
+			}
+		}
+		return "redirect:" + path;
 	}
 	
 }

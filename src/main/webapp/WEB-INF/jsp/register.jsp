@@ -1,21 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>" />
 <title>学生注册</title>
-
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
-
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,11 +43,11 @@ em {
 	color: red;
 }
 em.error {
-	background: url("img/unchecked.gif") no-repeat 0px 0px;
+	background: url("resources/img/unchecked.gif") no-repeat 0px 0px;
 	padding-left: 16px;
 }
 em.success {
-	background: url("img/checked.gif") no-repeat 0px 0px;
+	background: url("resources/img/checked.gif") no-repeat 0px 0px;
 	padding-left: 16px;
 }
 
@@ -62,12 +56,11 @@ em.success {
 }
 </style>
 
-<script type="text/javascript" src="validation/jquery-1.10.0.js"></script>
-<script type="text/javascript" src="validation/jquery.validate.js"></script>
-<script type="text/javascript" src="validation/jquery.metadata.js"></script>
-<script type="text/javascript" src="validation/messages_zh.js"></script>
-
-<script type="text/javascript" src="js/register-validation.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/validation/jquery-1.10.0.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/validation/jquery.validate.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/validation/jquery.metadata.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/validation/messages_zh.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/register-validation.js'/>"></script>
 
 </head>
 
@@ -81,9 +74,8 @@ em.success {
 		    <label for="number" class="col-sm-4 control-label">学号</label>
 		    <em>*</em>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control focus" id="number" name="number" placeholder="id" autofocus="autofocus">
+		      <input type="text" class="form-control focus" id="number" name="number" autofocus="autofocus" />
 		      <span class="fielderror">
-		      <s:fielderror fieldName="number"></s:fielderror>	
 		      </span>
 		    </div>
 		  </div>
@@ -91,21 +83,21 @@ em.success {
 		    <label for="password" class="col-sm-4 control-label">登录密码</label>
 		    <em>*</em>
 		    <div class="col-sm-3">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="password">
+		      <input type="password" class="form-control" id="password" name="password" />
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="repassword" class="col-sm-4 control-label">确认密码</label>
 		    <em>*</em>
 		    <div class="col-sm-3">
-		      <input type="password" class="form-control" id="repassword" name="repassword" placeholder="repassword">
+		      <input type="password" class="form-control" id="repassword" name="repassword" />
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="name" class="col-sm-4 control-label">姓名</label>
 		    <em>*</em>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="name" name="name" placeholder="name">
+		      <input type="text" class="form-control" id="name" name="name" />
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -124,34 +116,36 @@ em.success {
 		    <label for="mobile" class="col-sm-4 control-label">手机号码</label>
 		    <em>*</em> 
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="mobile" name="mobile" placeholder="mobile">
+		      <input type="text" class="form-control" id="mobile" name="mobile" />
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="college" class="col-sm-4 control-label">学院</label>
 		    <em>*</em> 
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="college" name="college" placeholder="college">
+		      <select class="form-control" id="college" name="college">
+			  </select>
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="profession" class="col-sm-4 control-label">专业</label>
 		    <em>*</em> 
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control" id="profession" name="profession" placeholder="profession">
+		      <select class="form-control" id="profession" name="profession">
+			  </select>
 		    </div>
 		  </div>
 		   <div class="form-group">
 		    <label for="introduce" class="col-sm-4 control-label">自我介绍</label>
 		    <div class="col-sm-3">
-		    	<textarea class="form-control" rows="3" name="introduce" placeholder="introduce"></textarea>
+		    	<textarea class="form-control" rows="3" name="introduce"></textarea>
 		    </div>
 		  </div>
 		 
 		  <div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-4">
-		      <button type="submit" class="btn btn-default">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;
-		      <button type="button" class="btn btn-default" onclick="location.href='<%=basePath%>index.jsp';">取消</button>
+		      <button type="submit" id="register" class="btn btn-default">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;
+		      <button type="button" class="btn btn-default" onclick="window.location.href='${ctx}/index'">取消</button>
 		    </div>
 		  </div>
 		  </fieldset>
@@ -159,5 +153,8 @@ em.success {
 
 	</div>
 </div>
+
+<script type="text/javascript" src="<c:url value='/resources/scripts/register.js'/>"></script>
+
 </body>
 </html>

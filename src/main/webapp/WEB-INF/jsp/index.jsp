@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>首页</title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>" />
-	<link rel="stylesheet" href="<c:url value='/resources/bootstrap/css/bootstrap.min.css'/>" />	
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
 		.custom{
 			height:51px;
@@ -59,17 +59,16 @@
           <ul class="nav navbar-nav navbar-right">
            	<c:if test="${user != null }">
            	<li role="presentation" class="dropdown">
-                 <a href="stu-info.jsp" class="dropdown-toggle" data-toggle="dropdown">
+                 <a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;">
               		用户：${user.name }
                    <span class="caret"></span>
                  </a>
-                
                  <ul class="dropdown-menu" role="menu">
-                   <li><a href="user/login-success.do">进入我的主页</a></li>
+                   <li><a href="${ctx }/home">进入我的主页</a></li>
                  </ul>
-                   
-               </li>
+            </li>
            	</c:if>
+
            	<c:if test="${user == null }">
            		<li>
             	<a href="${ctx }/login">登录 <span class="glyphicon glyphicon-log-in"></span></a>
@@ -79,10 +78,10 @@
             <li class="divider-vertical"></li>
             <li>
             	<c:if test="${user != null }">
-            		<a href="user/user-logout">退出 <span class="glyphicon glyphicon-log-out"></span></a>
+            		<a href="${ctx }/logout">退出 <span class="glyphicon glyphicon-log-out"></span></a>
             	</c:if>
             	<c:if test="${user == null }">
-	            	<a href="register.jsp">注册 <span class="glyphicon glyphicon-user"></span></a>
+	            	<a href="${ctx }/register">注册 <span class="glyphicon glyphicon-user"></span></a>
             	</c:if>
             </li>
           </ul>
@@ -197,37 +196,34 @@
 	    <div class="bottom">
 	        <p> Copyright &copy; 2014 安徽农业大学学生资助管理中心All Rights Reserved 
 	        <br>技术支持：<a href="gyhk.htm" target="_blank">嘿客科技传媒</a>.   联系邮箱：1784160856@qq.com</p>
-	        <a href="register.jsp" target="_blank" class="register">
-				<img src="img/btn_register.png" width="112" height="39" />
+	        <a href="${ctx }/register" class="register">
+				<img src="<c:url value='/resources/img/btn_register.png'/>" width="112" height="39" />
 			</a>
-	        <a href="login.jsp" class="ask">
-				<img src="img/btn_ask.png" width="112" height="39" />
+	        <a href="${ctx }/login" class="ask">
+				<img src="<c:url value='/resources/img/btn_ask.png'/>" width="112" height="39" />
 			</a>
 	    </div>
 	    <div class="close"></div>  
 	</div>
 
-	<img class="mini" src="img/mini.png" width="65" height="37" />
-
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-$(function(){
-	setTimeout(function(){
-	  $(".bottom_box").slideDown("slow");
-	},2000);
-
-	$(".close").click(function(){
-		$(".bottom_box").hide();	
-		$(".mini").show(200);	
-	})
-	$(".mini").click(function(){
-		$(this).hide();	
-		$(".bottom_box").show();	
-	})
-});
-</script>
+	<img class="mini" src="<c:url value='/resources/img/mini.png'/>" width="65" height="37" />
+	
+	<script type="text/javascript">
+		$(function(){
+			setTimeout(function(){
+			  $(".bottom_box").slideDown("slow");
+			},2000);
+		
+			$(".close").click(function(){
+				$(".bottom_box").hide();	
+				$(".mini").show(200);	
+			})
+			$(".mini").click(function(){
+				$(this).hide();	
+				$(".bottom_box").show();	
+			})
+		});
+	</script>
 
 </body>
 </html>
