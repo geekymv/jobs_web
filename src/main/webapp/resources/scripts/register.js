@@ -9,7 +9,20 @@
 			getProfessions();
 		});
 		
+		
 		$("#number").keyup(function(){
+			var num = $("#number").val();
+			if(isNaN(num)) {
+				alert("不是数字");
+			}else {
+				console.log(1);
+				isRegistered();
+			}
+			
+			
+		});
+		$("#number").blur(function(){
+			$(".tips").remove();
 			isRegistered();
 		});
 	});
@@ -61,11 +74,11 @@
 			dataType: "text",
 			success: function(data) {
 				if(data == "yes") {
-					$("#number").after("<span id='res'>学号已经注册了！<a href='login'>请点击登录</a></span>");
+					$("#number").parent().after("<div class='col-sm-3 tips'>学号已经注册了！<a href='login'>请点击登录</a></div>");
 					$("#register").attr("disabled","disabled");
 				}else if(data == "no"){
 					$("#register").removeAttr("disabled");
-					$("#res").html("");
+					$(".tips").remove();
 				}
 			}
 		});

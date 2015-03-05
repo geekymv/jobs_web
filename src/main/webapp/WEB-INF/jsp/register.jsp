@@ -51,17 +51,17 @@ em.success {
 	padding-left: 16px;
 }
 
-.fielderror {
+.tips, .fielderror {
 	color: red;
 }
 </style>
-
+<!-- 
 <script type="text/javascript" src="<c:url value='/resources/validation/jquery-1.10.0.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/validation/jquery.validate.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/validation/jquery.metadata.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/validation/messages_zh.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/register-validation.js'/>"></script>
-
+ -->
 </head>
 
 <body>
@@ -71,38 +71,34 @@ em.success {
 		<fieldset>
 			<legend>学生注册</legend>
 		  <div class="form-group">
-		    <label for="number" class="col-sm-4 control-label">学号</label>
-		    <em>*</em>
+		    <label for="number" class="col-sm-4 control-label">学号<em>*</em></label>
 		    <div class="col-sm-3">
 		      <input type="text" class="form-control focus" id="number" name="number" autofocus="autofocus" />
-		      <span class="fielderror">
-		      </span>
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="password" class="col-sm-4 control-label">登录密码</label>
-		    <em>*</em>
+		    <label for="password" class="col-sm-4 control-label">登录密码<em>*</em></label>
+		   
 		    <div class="col-sm-3">
 		      <input type="password" class="form-control" id="password" name="password" />
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="repassword" class="col-sm-4 control-label">确认密码</label>
-		    <em>*</em>
+		    <label for="repassword" class="col-sm-4 control-label">确认密码<em>*</em></label>
+		    
 		    <div class="col-sm-3">
 		      <input type="password" class="form-control" id="repassword" name="repassword" />
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="name" class="col-sm-4 control-label">姓名</label>
-		    <em>*</em>
+		    <label for="name" class="col-sm-4 control-label">姓名<em>*</em></label>
+		    
 		    <div class="col-sm-3">
 		      <input type="text" class="form-control" id="name" name="name" />
 		    </div>
 		  </div>
 		  <div class="form-group">
-		  	<label for="gender" class="col-sm-4 control-label">性别</label>
-		  	<em>&nbsp;</em>
+		  	<label for="gender" class="col-sm-4 control-label">性别<em>*</em></label>
 		  	<div class="col-sm-3">
 			  	<label class="radio-inline col-sm-5 control-label">
 			  		<input type="radio" name="gender" id="male" value="男" checked="checked"> 男
@@ -113,23 +109,20 @@ em.success {
 			</div>
 		  </div>
 		  <div class="form-group">
-		    <label for="mobile" class="col-sm-4 control-label">手机号码</label>
-		    <em>*</em> 
+		    <label for="mobile" class="col-sm-4 control-label">手机号码<em>*</em></label>
 		    <div class="col-sm-3">
 		      <input type="text" class="form-control" id="mobile" name="mobile" />
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="college" class="col-sm-4 control-label">学院</label>
-		    <em>*</em> 
+		    <label for="college" class="col-sm-4 control-label">学院<em>*</em></label>
 		    <div class="col-sm-3">
 		      <select class="form-control" id="college" name="college">
 			  </select>
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="profession" class="col-sm-4 control-label">专业</label>
-		    <em>*</em> 
+		    <label for="profession" class="col-sm-4 control-label">专业<em>*</em></label>
 		    <div class="col-sm-3">
 		      <select class="form-control" id="profession" name="profession">
 			  </select>
