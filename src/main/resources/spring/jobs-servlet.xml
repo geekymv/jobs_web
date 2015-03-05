@@ -9,6 +9,8 @@
 	<context:component-scan base-package="com.heike.web" />
 	<mvc:annotation-driven />
 	
+	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	
 	<!-- 视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>

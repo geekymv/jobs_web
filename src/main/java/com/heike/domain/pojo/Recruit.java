@@ -30,9 +30,17 @@ public class Recruit {
 	private Date endDate;	//报名截止时间
 	private String remarks;	//备注
 	private Integer status;	//  状态(1已发布，-1已删除)
-	
 	private Employer employer; //用工单位
 	
+	@Override
+	public String toString() {
+		return "Recruit [id=" + id + ", title=" + title + ", postName="
+				+ postName + ", postNum=" + postNum + ", salary=" + salary
+				+ ", context=" + context + ", releaseDate=" + releaseDate
+				+ ", applyNum=" + applyNum + ", endDate=" + endDate
+				+ ", remarks=" + remarks + ", status=" + status + ", employer="
+				+ employer + "]";
+	}
 	@Id
 	@GeneratedValue
 	public Long getId() {

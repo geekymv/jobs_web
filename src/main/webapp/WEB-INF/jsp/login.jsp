@@ -1,21 +1,16 @@
 <%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>用户登录</title>
-<script src="js/jquery-1.11.1.js" type="text/javascript" ></script>
-<link rel="stylesheet" type="text/css" href="css/login.css"/>
+<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/login.css'/>"/>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -36,58 +31,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class='signup_container'>
 
     <h1 class='signup_title'>用户登录</h1>
-    <img src='img/people.png' id='admin'/>
+    <img src="<c:url value='/resources/img/people.png'/>" id="admin" />
     <div class="error_info">
-    	<s:actionerror/>
     </div>
-    <form action="user/user-login.do" method="post">
+    <form>
     <div id="signup_forms" class="signup_forms clearfix">
             <div class="signup_form_form" id="signup_form">
                     <div class="form_row first_row">
                         <label for="signup_name">请输入用户名</label>
-                        <input type="text" name="account" placeholder="请输入用户名" id="signup_name" required="required"/>
+                        <input type="text" name="account" placeholder="请输入用户名" id="account" required="required"/>
                     </div>
                     <div class="form_row">
                         <label for="signup_password">请输入密码</label>
-                        <input type="password" name="password" placeholder="请输入密码" id="signup_password" required="required" />
+                        <input type="password" name="password" placeholder="请输入密码" id="password" required="required" />
                     </div>
            </div>
     </div>
     <div class="login-btn-set">
 		<div class='rem'>记住我</div> 
-		<input type="submit" value="" class='login-btn' />
+		<input type="button" value="" class='login-btn' />
 	</div>
 	</form>
 </div>
 <script type="text/javascript">
-
-$(function(){
-
-    $('.rem').click(function(){
-        $(this).toggleClass('selected');
-    });
-/*
-    $('#signup_select').click(function(){
-        $('.form_row ul').show();
-        event.cancelBubble = true;
-    });
-
-    $('#d').click(function(){
-        $('.form_row ul').toggle();
-        event.cancelBubble = true;
-    });
-
-    $('body').click(function(){
-        $('.form_row ul').hide();
-    });
-
-    $('.form_row li').click(function(){
-        var v  = $(this).text();
-        $('#signup_select').val(v);
-        $('.form_row ul').hide();
-    });
-*/
-});
+	$(function(){
+	    $('.rem').click(function(){
+	        $(this).toggleClass('selected');
+	    });
+	    
+	    $(".login-btn").click(function(){
+	    	$.ajax({
+	    		url: contextPath + "/login",
+	    		type: "POST",
+	    		data: {"account": $("#account").val(), "password": $("#password").val()},
+	    		dataType: "text",
+	    		success: function(data) {
+	    			if(data != "error") {
+	    				window.location.href = contextPath + "/index";
+	    			}else {
+	    				$(".error_info").html("用户名或密码错误！");
+	    			}
+	    			/*
+	    			if(data == "error") {
+	    				$(".error_info").html("用户名或密码错误！");
+	    			}else if (data == "student") {
+						alert("student");	    				
+	    			}else if(data == "employer") {
+	    				alert("employer");
+	    			}else if(data == "admin") {
+	    				alert("admin");
+	    			}
+	    			*/
+	    		}
+	    	});
+	    });
+	});
 </script>
 </body>
 </html>

@@ -30,6 +30,25 @@ public class Employer {
 	private Integer status; // 账号是否可用(1可用 ，0冻结，-1删除)
 	private String remarks;		//备注
 	
+	public Employer() {
+		// TODO Auto-generated constructor stub
+	}
+	public Employer(String account, String name, Integer authority) {
+		this.account = account;
+		this.name = name;
+		this.authority = authority;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Employer [id=" + id + ", account=" + account + ", pwd=" + pwd
+				+ ", name=" + name + ", teacher=" + teacher + ", mobile="
+				+ mobile + ", totalMoney=" + totalMoney + ", postNum="
+				+ postNum + ", authority=" + authority + ", regDate=" + regDate
+				+ ", status=" + status + ", remarks=" + remarks + "]";
+	}
+	
 	@Id
 	@GeneratedValue
 	public Long getId() {

@@ -32,6 +32,14 @@ public class Student {
 	
 	public Student() {
 	}
+	
+	public Student(String num, String name) {
+		super();
+		this.num = num;
+		this.name = name;
+	}
+
+
 
 	@Id
 	@GeneratedValue
