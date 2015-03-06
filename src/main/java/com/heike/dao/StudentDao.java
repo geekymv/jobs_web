@@ -22,7 +22,6 @@ public class StudentDao extends HibernateDao<Student>{
 										.setString("num", num) //
 										.setString("pwd", pwd) //
 										.uniqueResult();
-		
 		return student;
 	}
 	
@@ -38,8 +37,15 @@ public class StudentDao extends HibernateDao<Student>{
 										.createQuery(hql)	//
 										.setString("num", num) //
 										.uniqueResult();
-		
 		return student;
+	}
+	
+	/**
+	 * 保存学生
+	 * @param student
+	 */
+	public Long save(Student student) {
+		return (Long)getSession().save(student);
 	}
 
 }

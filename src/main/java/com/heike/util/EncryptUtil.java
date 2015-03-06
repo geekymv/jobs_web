@@ -26,7 +26,17 @@ public class EncryptUtil {
 			e.printStackTrace();
 			return "";
 		}
-
+	}
+	
+	/**
+	 * 验证密码是否正确
+	 * @param md5Pwd 加密后的密码
+	 * @param pwd 待验证的密码
+	 * @return
+	 */
+	public static boolean checkePassword(String md5Pwd, String pwd){
+		pwd = EncryptUtil.md5Encrypt(pwd);
+		return md5Pwd.equals(pwd);
 	}
 
 	/**
@@ -75,7 +85,10 @@ public class EncryptUtil {
 	}
 
 	public static void main(String[] args) {
-		String s = EncryptUtil.md5Encrypt("123");
+		String s = EncryptUtil.md5Encrypt("111111");
 		System.out.println(s);
+		
+		String c = EncryptUtil.md5Encrypt("abc");
+		System.out.println(c);
 	}
 }

@@ -26,21 +26,17 @@ public class Recruit {
 	private String salary;	//薪资待遇
 	private String context;	//工作要求
 	private Date releaseDate;	//发布时间
+	private Date updateDate;	// 更新时间
 	private int applyNum;		//已报名人数
 	private Date endDate;	//报名截止时间
 	private String remarks;	//备注
-	private Integer status;	//  状态(1已发布，-1已删除)
+	private Integer status;	//  状态(1已发布，0已关闭，-1已删除)
 	private Employer employer; //用工单位
 	
-	@Override
-	public String toString() {
-		return "Recruit [id=" + id + ", title=" + title + ", postName="
-				+ postName + ", postNum=" + postNum + ", salary=" + salary
-				+ ", context=" + context + ", releaseDate=" + releaseDate
-				+ ", applyNum=" + applyNum + ", endDate=" + endDate
-				+ ", remarks=" + remarks + ", status=" + status + ", employer="
-				+ employer + "]";
+	public Recruit() {
+		// TODO Auto-generated constructor stub
 	}
+	
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -101,6 +97,14 @@ public class Recruit {
 	}
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	@Column(columnDefinition="int(11) default 0")
 	public int getApplyNum() {

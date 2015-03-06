@@ -3,6 +3,7 @@ package com.heike.domain.service;
 import com.heike.domain.pojo.Student;
 
 
+
 public interface StudentService {
 	
 	/**
@@ -11,5 +12,12 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student getByNum(String num);
+	
+	/**
+	 * 学生注册
+	 * @param student
+	 * @return
+	 */
+	public Student register(Student student);
 
 }

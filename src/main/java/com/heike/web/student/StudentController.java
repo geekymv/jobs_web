@@ -3,6 +3,7 @@ package com.heike.web.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.heike.domain.pojo.Student;
@@ -18,9 +19,21 @@ public class StudentController {
 	 * 跳转到学生注册页面
 	 * @return
 	 */
-	@RequestMapping("/register")
+	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String resgister() {
 		return "register";
+	}
+	
+	/**
+	 * 学生注册
+	 * @param student
+	 * @return
+	 */
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	@ResponseBody
+	public String register(Student student) {
+		student = studentService.register(student);
+		return student != null ? "success" : "fail";
 	}
 	
 	/**
@@ -34,5 +47,6 @@ public class StudentController {
 		Student student = studentService.getByNum(num);
 		return student == null ? "no" : "yes"; // 被注册
 	}
+	
 	
 }

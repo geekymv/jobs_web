@@ -20,5 +20,9 @@ public class RecruitServiceImpl implements RecruitService {
 		
 		return recruitDao.queryByPage(pager);
 	}
+
+	public Recruit getById(Long id) {
+		return recruitDao.queryById(id);
+	}
 	
 }

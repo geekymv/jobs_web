@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Dict{
 	private Long id;
 	private String name;	// 名称
-	private String type;	// 类别(XY学院)
+	private String type;	// 类别
 	private Long superiorId;	// 上级编号
 	
 	@Id

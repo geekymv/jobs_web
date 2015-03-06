@@ -41,11 +41,15 @@ public class IndexController {
 		return "index";
 	}
 	
+	/**
+	 * 招聘信息详情
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/detail/{id}")
 	@ResponseBody
-	public Recruit detail(@PathVariable("id")Integer id){
-
-		return null;
+	public Recruit detail(@PathVariable Long id){
+		return recruitService.getById(id);
 	}
 	
 	/**

@@ -17,6 +17,14 @@ import com.heike.domain.pojo.Dict;
 public class DictDao extends HibernateDao<Dict>{
 	
 	/**
+	 * 
+	 * @param dict
+	 */
+	public void saveOrUpdate(Dict dict) {
+		getSession().saveOrUpdate(dict);
+	}
+	
+	/**
 	 * 查询所有的学院
 	 * @return
 	 */
@@ -42,4 +50,19 @@ public class DictDao extends HibernateDao<Dict>{
 										.list();
 		return dicts;		
 	}
+	
+	/**
+	 * 根据类型查询
+	 * @param type
+	 * @return
+	 */
+	public Dict queryByType(String type) {
+		String hql = "from Dict d where d.type = :type";
+		return (Dict)getSession().createQuery(hql)	//
+								.setString("type", type)	//
+								.uniqueResult();
+	}
+	
+	
+	
 }

@@ -10,8 +10,8 @@
 		});
 		
 		
-		$("#number").keyup(function(){
-			var num = $("#number").val();
+		$("#num").keyup(function(){
+			var num = $("#num").val();
 			if(isNaN(num)) {
 				alert("不是数字");
 			}else {
@@ -21,10 +21,18 @@
 			
 			
 		});
-		$("#number").blur(function(){
+		$("#num").blur(function(){
 			$(".tips").remove();
 			isRegistered();
 		});
+		
+		// 学生注册事件
+		$("#register").click(function(){
+			//TODO... 注册验证
+			
+			register();
+		});
+		
 	});
 	
 	// 获得所有学院
@@ -66,7 +74,7 @@
 
 	// 判断学号是否已经被注册
 	function isRegistered(){
-		var num = $("#number").val();
+		var num = $("#num").val();
 		$.ajax({
 			url: contextPath + "/isRegistered",
 			data: {"num": num},
@@ -74,7 +82,7 @@
 			dataType: "text",
 			success: function(data) {
 				if(data == "yes") {
-					$("#number").parent().after("<div class='col-sm-3 tips'>学号已经注册了！<a href='login'>请点击登录</a></div>");
+					$("#num").parent().after("<div class='col-sm-3 tips'>学号已经注册了！<a href='login'>请点击登录</a></div>");
 					$("#register").attr("disabled","disabled");
 				}else if(data == "no"){
 					$("#register").removeAttr("disabled");
@@ -82,9 +90,28 @@
 				}
 			}
 		});
-		
 	}
-	
+
+	// 学生注册
+	function register() {
+		var data = $("form").serialize();
+		data = decodeURIComponent(data,true); /* 解决中文乱码问题 */
+	//	console.log(data);
+		$.ajax({
+			url: contextPath + "/register",
+			data: data,
+			type: "post",
+			dataType: "text",
+			success: function(data) {
+				if(data == "success") {
+					alert("注册成功！马上登录吧...");
+					window.location.href = contextPath + "/login";
+				}else if(data == "fail"){
+					alert("注册失败！");
+				}
+			}
+		});
+	}
 
 })();
 

@@ -13,12 +13,28 @@ import com.heike.domain.dto.Pager;
 
 @SuppressWarnings("unchecked")
 public abstract class HibernateDao<T> {
-	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
+	}
+	
+	/**
+	 * 根据id查询
+	 * @param t
+	 * @param id
+	 * @return
+	 */
+	public T queryById(Class<T> cls, Long id) {
+		return (T)getSession().get(cls, id);
+	}
+	
+	/**
+	 * 保存或更新
+	 * @param t
+	 */
+	public void saveOrUpdate(T t) {
+		getSession().saveOrUpdate(t);
 	}
 	
 	/**
@@ -31,9 +47,7 @@ public abstract class HibernateDao<T> {
 	public Pager<T> findByPage(String hql, Map<String, Object> params, Pager<T> pager){
 		int currentPage = pager.getCurrentPage();
 		int pageSize = pager.getPageSize();
-
 		int firstResult = (currentPage  - 1 ) * pageSize ;
-		
 		Query query = this.getSession().createQuery(hql).setProperties(params);
 		
 		List<T> ts = (List<T>)query.setFirstResult(firstResult ) //

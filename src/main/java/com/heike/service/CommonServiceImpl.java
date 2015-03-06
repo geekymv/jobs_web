@@ -1,5 +1,6 @@
 package com.heike.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,8 @@ import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
+import com.heike.util.EncryptUtil;
+
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -26,6 +29,8 @@ public class CommonServiceImpl implements CommonService {
 	private DictDao dictDao;
 	
 	public String login(String account, String password, HttpSession session) {
+		password = EncryptUtil.md5Encrypt(password);
+		
 		Student student = studentDao.queryByNumAndPwd(account, password);
 		if(null != student) {
 			session.setAttribute("user", student);
@@ -38,12 +43,10 @@ public class CommonServiceImpl implements CommonService {
 			int authority = employer.getAuthority();
 			if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 用工单位
 				return "employer";
-		
 			}else if (authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 管理员
 				return "admin";
 			}
 		}
-		
 		return "error";
 	}
 
@@ -51,16 +54,21 @@ public class CommonServiceImpl implements CommonService {
 		return dictDao.queryColleges();
 	}
 	
-	
 	public List<Dict> getProfessions(Long colId) {
 		List<Dict> dicts = dictDao.queryProfessions(colId);
-		if(dicts == null || dicts.size() == 0) {
-			Dict dict = new Dict();
-			dict.setId(1L);
-			dict.setName("其他");
-		}
+//		if(dicts == null || dicts.size() == 0) {
+//			Dict dict = new Dict();
+//			dict.setId(1L);
+//			dict.setName("其他");
+//		}
 		return dicts;
-				
 	}
 
+	public List<String> getSalaryCommitDate() {
+		Dict startDate = dictDao.queryByType(SysCode.DictCode.SALARY_COMMIT_START);		
+		Dict endDate = dictDao.queryByType(SysCode.DictCode.SALARY_COMMIT_END);		
+		
+		return Arrays.asList(startDate.getName(), endDate.getName());
+	}
+	
 }

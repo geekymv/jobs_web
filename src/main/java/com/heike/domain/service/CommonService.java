@@ -29,5 +29,12 @@ public interface CommonService {
 	 * @return
 	 */
 	public List<Dict> getProfessions(Long colId);
-
+	
+	/**
+	 * 获得工资的提交日期
+	 * @return
+	 */
+	public List<String> getSalaryCommitDate();
+	
+	
 }

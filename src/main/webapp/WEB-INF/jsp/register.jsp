@@ -67,20 +67,20 @@ em.success {
 <body>
 <div class="container">
 	<div class="row">
-		<form class="form-horizontal" action="user/user-register.do" role="form" method="post">
+		<form class="form-horizontal" role="form">
 		<fieldset>
 			<legend>学生注册</legend>
 		  <div class="form-group">
 		    <label for="number" class="col-sm-4 control-label">学号<em>*</em></label>
 		    <div class="col-sm-3">
-		      <input type="text" class="form-control focus" id="number" name="number" autofocus="autofocus" />
+		      <input type="text" class="form-control focus" id="num" name="num" autofocus="autofocus" />
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="password" class="col-sm-4 control-label">登录密码<em>*</em></label>
 		   
 		    <div class="col-sm-3">
-		      <input type="password" class="form-control" id="password" name="password" />
+		      <input type="password" class="form-control" id="pwd" name="pwd" />
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -115,16 +115,22 @@ em.success {
 		    </div>
 		  </div>
 		  <div class="form-group">
+		    <label for="email" class="col-sm-4 control-label">邮箱<em>*</em></label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="email" name="email" />
+		    </div>
+		  </div>
+		  <div class="form-group">
 		    <label for="college" class="col-sm-4 control-label">学院<em>*</em></label>
 		    <div class="col-sm-3">
-		      <select class="form-control" id="college" name="college">
+		      <select class="form-control" id="college" name="collegeId">
 			  </select>
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="profession" class="col-sm-4 control-label">专业<em>*</em></label>
 		    <div class="col-sm-3">
-		      <select class="form-control" id="profession" name="profession">
+		      <select class="form-control" id="profession" name="professionId">
 			  </select>
 		    </div>
 		  </div>
@@ -137,7 +143,7 @@ em.success {
 		 
 		  <div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-4">
-		      <button type="submit" id="register" class="btn btn-default">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;
+		      <button type="button" id="register" class="btn btn-default">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;
 		      <button type="button" class="btn btn-default" onclick="window.location.href='${ctx}/index'">取消</button>
 		    </div>
 		  </div>

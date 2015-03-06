@@ -23,7 +23,7 @@ public class RecruitStu {
 	private Long recId; // 招聘信息id
 	private Long stuId;	// 学生id
 	private Date signUpDate;	// 报名时间
-	private Integer status; // 状态(1已报名，0取消报名)
+	private Integer status; // 状态(1通过, 0等待审核, -1审核不通过)
 	
 	@Id
 	@GeneratedValue

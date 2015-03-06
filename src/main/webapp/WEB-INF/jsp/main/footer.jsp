@@ -1,33 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
-	
 	<style type="text/css">
-	
 		#foot {
 			font-style: normal;
 			font-size: large;
 			padding-top: 55px;
 			text-align: center;
 		}
-		
-		
 		#foot a, #foot a:hover, #foot a:visited {
 			color: white;
 			text-decoration: none;
 		}
-		
-	
 	</style>
 	
 	</head>
