@@ -131,23 +131,19 @@
 		         					暂无
 		         				</c:when>
 		         				<c:otherwise>
-		         				
+		         					${recruit.context}
 		         				</c:otherwise>
 		         			</c:choose>
-			        		<c:if test="">
-			        			${recruit.context }
-			        		</c:if>
 	         			</td>
 	         		</tr>
-					
 					<tr>
 						<td>
 							<span>发布时间：</span>
-							<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy年MM月dd日 hh:dd:ss"/>
+							<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy-MM-dd hh:dd:ss"/>
 						</td>
 						<td>
 							<span>截止时间：</span>
-							<fmt:formatDate value="${recruit.endDate }" pattern="yyyy年MM月dd日 hh:dd:ss"/>
+							<fmt:formatDate value="${recruit.endDate }" pattern="yyyy-MM-dd hh:dd:ss"/>
 						</td>
 					</tr>
 					<tr>
@@ -164,7 +160,8 @@
 						</td>
 					</tr>
 	         	</table>
-				<button id="showStudents" class="btn btn-primary" style="margin-top: 20px;">查看已报名学生</button>
+				<button id="showStudents" class="btn btn-primary"
+					 style="margin-top: 20px;margin-left: 400px; margin-bottom: 30px;">查看已报名学生</button>
 	        </c:if>
 	        <div id="students"></div>
 	        </div> <!-- end of panel -->
@@ -191,24 +188,29 @@
 			var html = "<table class='table table-bordered table-hover table-condensed'>"
 				 + "<caption>学生信息</caption>"
 				 + "<tr>"
-				 + "<th>学号</th> <th>姓名</th> <th>专业</th> <th>招聘结果</th>"
+				 + "<th>学号</th> <th>姓名</th> <th>专业</th> <th>报名时间</th> <th>审核结果</th>"
 				 + "</tr>";
 				var flag = "";
 				for(var i = 0; i < data.length; i++){
-					var student = data[i].student;
-					var status = data[i].status;
+					var vo = data[i];
+					var num = vo.num;
+					var name = vo.name;
+					var profession = vo.profession;
+					var applyDate = vo.applyDate;
+					var status = vo.status;
+					
 					if(status == 0){	//等待处理
-						flag = "等待处理";
+						flag = "等待审核";
 					}else if(status == 1) {	//已通过
 						flag = "已通过";
-					}else if(status == 2){	//未通过
-						flag = "已离职";
 					}else if(status == -1) {
 						flag = "未通过";
 					}				
+					
 					html += "<tr>"
-						 + "<td align='center'>"+student.num+"</td>"+ "<td>"+student.name+"</td>"
-						 + "<td>"+student.profession+"</td>" 
+						 + "<td align='center'>"+num+"</td>"+ "<td>"+name+"</td>"
+						 + "<td>"+ profession +"</td>" 
+						 + "<td>"+ applyDate	+"</td>" 
 						 + "<td><span style='color:#00CC33'>"+flag+"</span></td>"
 						 + "</tr>";
 				}

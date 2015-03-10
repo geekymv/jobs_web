@@ -1,20 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<title>学生首页</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
-	
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
 		.custom{
 			height:51px;
@@ -39,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-	<jsp:include page="nav.jsp"></jsp:include>	
+	<jsp:include page="../inc/nav.jsp"></jsp:include>	
       
     <div class="row">
     	<div class="col-md-2">
@@ -86,29 +79,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  					<td><a href="student/stu-details.do?id=${id }">查看</a></td>
             			</tr>
             		</s:iterator>
-	            	
 	            </tbody>
-	          
 	          </table>
-	          
 	            <div class="panel-footer">
-	          	 <ul class="pager">
-	
-	          	 	<li>当前页 ：<s:property value="page"/>&nbsp;&nbsp;</li>
-	          	 	<li>总页数：<s:property value="#request.pageUtil.totalPage"/></li>
-	          	 	
-	          	 	<s:if test="page-1 > 0">
-	          	 		<li><a href="student/stu-listRecruit.do?page=<s:property value=" page-1 "/>" >上一页</a></li>
-	          	 	</s:if>
-			
-					<s:set var="totalPage" value="#request.pageUtil.totalPage"></s:set>
-					<%-- totalPage: <s:property value="#totalPage"/>--%>
-
-	          	 	<s:if test="page+1 <= #totalPage">
-				  		<li><a href="student/stu-listRecruit.do?page=<s:property value=" page+1 "/>" >下一页</a></li>
-	          	 	</s:if>
-				</ul>
-	          </div>
+	            </div>
 	         </s:else>
 	        </div> <!-- end of panel -->
     	</div>
@@ -118,10 +92,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="footer">
    	<jsp:include page="../main/footer.jsp"></jsp:include>
    </div>
-
-
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
 </body>
 </html>

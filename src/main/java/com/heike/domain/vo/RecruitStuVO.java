@@ -1,26 +1,23 @@
 package com.heike.domain.vo;
 
-import java.util.Date;
-
-import com.heike.domain.pojo.Student;
 
 public class RecruitStuVO {
 	private String num;	// 学号
 	private String name;	// 姓名 
 	private String profession; // 专业
-	private Date signUpDate;	// 报名时间
-	private Integer status; // 状态(1通过, 0等待审核, -1审核不通过)
+	private String applyDate;	// 报名时间
+	private Integer status; // 状态(1审核通过, 0等待审核, -1审核不通过)
 	
 	public RecruitStuVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public RecruitStuVO(String num, String name, String profession,
-			Date signUpDate, Integer status) {
+			String applyDate, Integer status) {
 		this.num = num;
 		this.name = name;
 		this.profession = profession;
-		this.signUpDate = signUpDate;
+		this.applyDate = applyDate;
 		this.status = status;
 	}
 
@@ -42,11 +39,11 @@ public class RecruitStuVO {
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
-	public Date getSignUpDate() {
-		return signUpDate;
+	public String getApplyDate() {
+		return applyDate;
 	}
-	public void setSignUpDate(Date signUpDate) {
-		this.signUpDate = signUpDate;
+	public void setApplyDate(String applyDate) {
+		this.applyDate = applyDate;
 	}
 	public Integer getStatus() {
 		return status;

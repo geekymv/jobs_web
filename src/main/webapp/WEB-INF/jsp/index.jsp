@@ -60,7 +60,7 @@
            	<c:if test="${user != null }">
            	<li role="presentation" class="dropdown">
                  <a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;">
-              		用户：${user.name }
+              		${user.name }
                    <span class="caret"></span>
                  </a>
                  <ul class="dropdown-menu" role="menu">
@@ -125,10 +125,10 @@
 		            			<td>${recruit.postName }</td> 
 		            			<td>${recruit.employer.name }</td>
 		            			<td>
-		            				<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy年MM月dd日 hh:mm:ss"/>
+		            				<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy-MM-dd hh:mm:ss"/>
 		            			</td>
 		            			<td>
-		            				<fmt:formatDate value="${recruit.endDate }" pattern="yyyy年MM月dd日"/>
+		            				<fmt:formatDate value="${recruit.endDate }" pattern="yyyy-MM-dd"/>
 		            			</td>
 			  					<td>
 			  						<a href="<c:url value='detail/${recruit.id }'/>">查看</a>

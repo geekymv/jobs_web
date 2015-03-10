@@ -1,7 +1,6 @@
 package com.heike.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.RecruitStuVO;
+import com.heike.util.DateUtils;
 
 @Service
 public class RecruitServiceImpl implements RecruitService {
@@ -44,7 +44,7 @@ public class RecruitServiceImpl implements RecruitService {
 		List<RecruitStu> rss = recruitStuDao.queryById(id);
 		if(rss != null && rss.size() > 0) {
 			for (RecruitStu rs : rss) {
-				Date signUpDate = rs.getApplyDate();
+				String applyDate = DateUtils.format(null, rs.getApplyDate());
 				Integer status = rs.getStatus();
 				Long stuId = rs.getStuId();
 				Student student = studentDao.queryById(stuId);
@@ -53,7 +53,7 @@ public class RecruitServiceImpl implements RecruitService {
 				Long proId = student.getProfessionId();
 				String profession = dictDao.queryById(proId).getName();
 				
-				RecruitStuVO vo = new RecruitStuVO(num, name, profession, signUpDate, status);
+				RecruitStuVO vo = new RecruitStuVO(num, name, profession, applyDate, status);
 				vos.add(vo);
 			}
 		}
