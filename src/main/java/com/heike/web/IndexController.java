@@ -21,6 +21,7 @@ import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
 import com.heike.domain.service.RecruitService;
+import com.heike.domain.vo.RecruitStuVO;
 
 @Controller
 public class IndexController {
@@ -47,9 +48,22 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/detail/{id}")
+	public String detail(@PathVariable Long id, Model model){
+		Recruit recruit = recruitService.getById(id);
+		model.addAttribute("recruit", recruit);
+		
+		return "detail";
+	}
+	
+	/**
+	 * 根据招聘信息id
+	 * @param id 招聘信息id
+	 * @return
+	 */
+	@RequestMapping("/getApplyStudents")
 	@ResponseBody
-	public Recruit detail(@PathVariable Long id){
-		return recruitService.getById(id);
+	public List<RecruitStuVO> getApplyStudents(Long id) {
+		return recruitService.getApplyStudents(id);
 	}
 	
 	/**

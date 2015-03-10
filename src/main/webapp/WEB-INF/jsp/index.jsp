@@ -130,8 +130,9 @@
 		            			<td>
 		            				<fmt:formatDate value="${recruit.endDate }" pattern="yyyy年MM月dd日"/>
 		            			</td>
-		            			
-			  					<td><a href="index-details.do?id=${id }">查看</a></td>
+			  					<td>
+			  						<a href="<c:url value='detail/${recruit.id }'/>">查看</a>
+			  					</td>
 		           			</c:forEach>
 			            </tbody>
 	          		</c:otherwise>

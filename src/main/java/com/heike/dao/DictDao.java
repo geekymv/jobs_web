@@ -63,6 +63,14 @@ public class DictDao extends HibernateDao<Dict>{
 								.uniqueResult();
 	}
 	
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	public Dict queryById(Long id) {
+		return super.queryById(Dict.class, id);
+	}
 	
 	
 }

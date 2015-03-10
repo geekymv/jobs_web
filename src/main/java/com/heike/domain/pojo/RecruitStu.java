@@ -22,8 +22,9 @@ public class RecruitStu {
 	private Long id;
 	private Long recId; // 招聘信息id
 	private Long stuId;	// 学生id
-	private Date signUpDate;	// 报名时间
-	private Integer status; // 状态(1通过, 0等待审核, -1审核不通过)
+	private Long empId;	// 用工单位id
+	private Date applyDate;	// 报名时间
+	private Integer status; // 状态(1审核通过, 0等待审核, -1审核不通过)
 	
 	@Id
 	@GeneratedValue
@@ -54,12 +55,17 @@ public class RecruitStu {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public Long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Long empId) {
+		this.empId = empId;
+	}
 	@Temporal(TemporalType.TIMESTAMP)
-	public Date getSignUpDate() {
-		return signUpDate;
+	public Date getApplyDate() {
+		return applyDate;
 	}
-	public void setSignUpDate(Date signUpDate) {
-		this.signUpDate = signUpDate;
+	public void setApplyDate(Date applyDate) {
+		this.applyDate = applyDate;
 	}
-	
 }

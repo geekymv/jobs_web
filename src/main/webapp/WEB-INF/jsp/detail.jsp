@@ -1,19 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<title>招聘详情</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
-	
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
 		.custom{
 			height:51px;
@@ -24,14 +18,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			height: 165px;
 			margin-top: 190px;
 		}
-		/*
-		ul li {
-			line-height: 40px;
-		}
-		span {
-			font-weight: bold;
-		}
-		*/
 	</style>
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -45,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		  <div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -59,8 +44,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span class="icon-bar"></span>
 			  </button>
               
-			  <a class="navbar-brand" href="index.do">
-              	<img alt="首页" src="img/index.png" height="25"/>
+			  <a class="navbar-brand" href="${ctx }/index">
+              	<img alt="首页" src="<c:url value='/resources/img/index.png'/>" height="25"/>
               	首页
               </a>
 			</div>
@@ -73,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li><a href="help.html" target="_blank">帮助中心</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-           	<s:if test="#session.user != null">
+           	<c:if test="${user != null }">
 	           	<li role="presentation" class="dropdown">
 	                 <a href="stu-info.jsp" class="dropdown-toggle" data-toggle="dropdown">
 	              		用户：${user.name }
@@ -84,72 +69,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 </ul>
                 </li>
            		
-           	</s:if>
-           	<s:else>
+           	</c:if>
+           	<c:if test="${user == null }">
            		<li>
-            	<a href="login.jsp">登录 <span class="glyphicon glyphicon-log-in"></span></a>
+            	<a href="${ctx }/login">登录 <span class="glyphicon glyphicon-log-in"></span></a>
            		</li>
-           	</s:else>
+           	</c:if>
            	
             <li class="divider-vertical"></li>
             <li>
-            	<s:if test="#session.user != null">
-            		<a href="user/user-logout">退出 <span class="glyphicon glyphicon-log-out"></span></a>
-            	</s:if>
-            	<s:else>
-	            	<a href="register.jsp">注册 <span class="glyphicon glyphicon-user"></span></a>
-            	</s:else>
+            	<c:if test="${user != null }">
+            		<a href="${ctx }/logout">退出 <span class="glyphicon glyphicon-log-out"></span></a>
+            	</c:if>
+            	<c:if test="${user == null }">
+	            	<a href="${ctx }/register">注册 <span class="glyphicon glyphicon-user"></span></a>
+            	</c:if>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
     <!-- 以上是导航菜单-->
-    
     <!--空白处-->
     <div class="custom">
     </div>
-    
-     
-      
     <div class="row">
-    
     	<div class="col-md-2">
-	      	<pre>左边</pre>
-	      	<img src="img/hello.jpg" alt="这是一张图片" title="这是一张图片吗" class="img-thumbnail">
-			<%--
-	        <div class="btn-group">
-			  <button type="button" class="btn btn-success">Action</button>
-			  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-			    <span class="caret"></span>
-			    <span class="sr-only">Toggle Dropdown</span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="#">Action</a></li>
-			    <li><a href="#">Another action</a></li>
-			    <li><a href="#">Something else here</a></li>
-			    <li class="divider"></li>
-			    <li><a href="#">Separated link</a></li>
-			  </ul>
-			</div>
-			--%>
+	      	<img src="<c:url value='/resources/img/hello.jpg'/>" alt="这是一张图片" title="这是一张图片吗" class="img-thumbnail">
       	</div>
-    	
     	<div class="col-md-10">
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">招聘信息详情</div>
 	          <div class="panel-body">
-	            <p>招聘啦！</p>
+	            <p>&nbsp;</p>
 	          </div>
 	        
-	        <s:if test="#request.recruit == null">
+	        <c:if test="${recruit == null }">
 	            	没有招聘信息！
-	        </s:if>
-	        <s:else>
+	        </c:if>
+	        <c:if test="${recruit != null }">
 	         	<input type="hidden" id="rId" value="${recruit.id}"/>
-	         	
 	         	<table class="table table-bordered table-hover table-condensed">
-	         		<caption>招聘信息</caption>
+	         		<caption><span style="font-size: 18px; font-weight: bold;">招聘信息</span></caption>
 	         		<tr>
 	         			<td><span>招聘信息标题：</span>${recruit.title }</td>
 	         			<td><span>发布单位：</span>${recruit.employer.name }</td>
@@ -165,27 +126,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         		<tr>
 	         			<td colspan="2">
 		         			<span>工作要求：</span>
-			        		<s:if test="recruit.context  == null">
-			        			暂无
-			        		</s:if>
-			        		<s:else>
+		         			<c:choose>
+		         				<c:when test="${recruit.context  == null }">
+		         					暂无
+		         				</c:when>
+		         				<c:otherwise>
+		         				
+		         				</c:otherwise>
+		         			</c:choose>
+			        		<c:if test="">
 			        			${recruit.context }
-			        		</s:else>
+			        		</c:if>
 	         			</td>
 	         		</tr>
 					
 					<tr>
-						<td><span>发布时间：</span><s:date name="recruit.releaseDate" format="yyyy-MM-dd"/></td>
-						<td><span>截止时间：</span>${recruit.endDate }</td>
+						<td>
+							<span>发布时间：</span>
+							<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy年MM月dd日 hh:dd:ss"/>
+						</td>
+						<td>
+							<span>截止时间：</span>
+							<fmt:formatDate value="${recruit.endDate }" pattern="yyyy年MM月dd日 hh:dd:ss"/>
+						</td>
 					</tr>
-					
 					<tr>
-						<td><span>备注：</span>${recruit.remarks }</td>
+						<td colspan="2">
+							<span>备注：</span>
+							<c:choose>
+								<c:when test="${recruit.remarks == null}">
+									无
+								</c:when>
+								<c:otherwise>
+									${recruit.remarks}
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 	         	</table>
-				<button id="showStudents">查看已报名学生</button>
-
-	        </s:else>
+				<button id="showStudents" class="btn btn-primary" style="margin-top: 20px;">查看已报名学生</button>
+	        </c:if>
 	        <div id="students"></div>
 	        </div> <!-- end of panel -->
     	</div>
@@ -194,60 +174,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div><!-- /.container -->
    
    <div class="footer">
-   <jsp:include page="footer.jsp"></jsp:include>
+   <jsp:include page="main/footer.jsp"></jsp:include>
    </div>
-
-
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	$("#showStudents").button().on("click", function() {
-		$.post("<%=request.getContextPath()%>/employer/queryStudents.do", {"id": $("#rId").val()}, function(data){
-		
-		$("#students").empty();
-		if(data.students == null || data.students.length == 0){
-			alert("还没有学生报名！");
-			return;
-		}
-		
-		var html = "<table class='table table-bordered table-hover table-condensed'>"
-			 + "<caption>学生信息</caption>"
-			 + "<tr>"
-			 + "<th>学号</th> <th>姓名</th> <th>专业</th> <th>招聘结果</th>"
-			 + "</tr>";
-			
-			var flag = "";
-			for(var i = 0; i < data.students.length; i++){
-				var student = data.students[i];
-				var status = data.status[i];
-				
-				if(status == 0){	//等待处理
-					flag = "等待处理";
-				}else if(status == 1) {	//已通过
-					flag = "已通过";
-				}else if(status == 2){	//未通过
-					flag = "已离职";
-				}else if(status == -1) {
-					flag = "未通过";
-				}				
-				
-				html += "<tr>"
-					 + "<td align='center'>"+student.number+"</td>"+ "<td>"+student.name+"</td>"
-					 + "<td>"+student.profession+"</td>" 
-					 + "<td><span style='color:#00CC33'>"+flag+"</span></td>"
-					 
-					 + "</tr>";
+		$.post("${ctx}/getApplyStudents",
+				{"id": $("#rId").val()}, 
+				function(data){
+			$("#students").empty();
+			if(data == null || data.length == 0){
+				alert("还没有学生报名！");
+				return;
 			}
-				html += "</table>";
-
-			$("#students").append(html);
 			
-		});
+			var html = "<table class='table table-bordered table-hover table-condensed'>"
+				 + "<caption>学生信息</caption>"
+				 + "<tr>"
+				 + "<th>学号</th> <th>姓名</th> <th>专业</th> <th>招聘结果</th>"
+				 + "</tr>";
+				var flag = "";
+				for(var i = 0; i < data.length; i++){
+					var student = data[i].student;
+					var status = data[i].status;
+					if(status == 0){	//等待处理
+						flag = "等待处理";
+					}else if(status == 1) {	//已通过
+						flag = "已通过";
+					}else if(status == 2){	//未通过
+						flag = "已离职";
+					}else if(status == -1) {
+						flag = "未通过";
+					}				
+					html += "<tr>"
+						 + "<td align='center'>"+student.num+"</td>"+ "<td>"+student.name+"</td>"
+						 + "<td>"+student.profession+"</td>" 
+						 + "<td><span style='color:#00CC33'>"+flag+"</span></td>"
+						 + "</tr>";
+				}
+				html += "</table>";
+				$("#students").append(html);
+			});
 	});
-	
-
 </script>
-
 </body>
 </html>

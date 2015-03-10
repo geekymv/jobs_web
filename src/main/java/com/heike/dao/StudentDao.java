@@ -41,6 +41,15 @@ public class StudentDao extends HibernateDao<Student>{
 	}
 	
 	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	public Student queryById(Long id) {
+		return super.queryById(Student.class, id);
+	}
+	
+	/**
 	 * 保存学生
 	 * @param student
 	 */

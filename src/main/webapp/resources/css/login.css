@@ -208,10 +208,10 @@ h1.signup_title{
 }
 
 
-#signup_name{
+#account{
 	background: url('../img/i1.png') no-repeat 9px 15px;
 }
-#signup_password{
+#password{
 	background: url('../img/i2.png') no-repeat 9px 15px;
 }
 #signup_select{
