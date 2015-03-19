@@ -18,6 +18,10 @@
 			height: 165px;
 			margin-top: 190px;
 		}
+		
+		#students th, #students td{
+			text-align: center;
+		}
 	</style>
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -188,7 +192,7 @@
 			var html = "<table class='table table-bordered table-hover table-condensed'>"
 				 + "<caption>学生信息</caption>"
 				 + "<tr>"
-				 + "<th>学号</th> <th>姓名</th> <th>专业</th> <th>报名时间</th> <th>审核结果</th>"
+				 + "<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>报名时间</th> <th>审核结果</th>"
 				 + "</tr>";
 				var flag = "";
 				for(var i = 0; i < data.length; i++){
@@ -202,12 +206,13 @@
 					if(status == 0){	//等待处理
 						flag = "等待审核";
 					}else if(status == 1) {	//已通过
-						flag = "已通过";
+						flag = "已录用";
 					}else if(status == -1) {
-						flag = "未通过";
+						flag = "未录用";
 					}				
 					
 					html += "<tr>"
+						 + "<td>" + (i+1) +"</td>"
 						 + "<td align='center'>"+num+"</td>"+ "<td>"+name+"</td>"
 						 + "<td>"+ profession +"</td>" 
 						 + "<td>"+ applyDate	+"</td>" 

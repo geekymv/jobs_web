@@ -121,6 +121,7 @@
 			            </thead>
 			            <tbody>
 		           			<c:forEach items="${pager.datas }" var="recruit">
+		           			<tr>
 		           				<td>${recruit.title }</td> 
 		            			<td>${recruit.postName }</td> 
 		            			<td>${recruit.employer.name }</td>
@@ -133,6 +134,7 @@
 			  					<td>
 			  						<a href="<c:url value='detail/${recruit.id }'/>">查看</a>
 			  					</td>
+			  				</tr>	
 		           			</c:forEach>
 			            </tbody>
 	          		</c:otherwise>
@@ -147,7 +149,7 @@
 	           -->	
 	          <nav style="text-align:center;">
 			  <ul class="pagination">
-			      <pg:pager url="${pageContext.request.contextPath }/stu/index" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="3">  
+			      <pg:pager url="${ctx }/index" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="5">  
 					   <%--  <li><a>总记录数${pager.totalRecord }</a></li>
 					    <li><a>总页数${pager.totalPage }</a></li>
 					    <li><a>当前页${currentPageNumber }</a></li> --%>

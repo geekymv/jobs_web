@@ -3,7 +3,7 @@ package com.heike.base;
 public final class SysCode {
 	/**
 	 * 用户状态
-	 * @author miying
+	 * @author Geek_ymv
 	 */
 	public static final class UserStatus {
 		// 账号状态(1正常， 0冻结， -1删除)
@@ -11,10 +11,48 @@ public final class SysCode {
 		public static final int USER_FREEZE = 0;
 		public static final int USER_DELETE = -1;
 	}
+	
+	/**
+	 * 用工单位-学生
+	 * @author Geek_ymv
+	 *
+	 */
+	public static interface EmployerStudent {
+		/**
+		 * 在职
+		 */
+		public static final Integer ON_JOB = 1;
+		
+		/**
+		 * 离职
+		 */
+		public static final Integer LEAVE_JOB = -1;
+	}
+	
+	/**
+	 * 招聘信息-学生
+	 * @author Geek_ymv
+	 */
+	public static interface RecruitStudent {
+	//	状态(1审核通过, 0等待审核, -1审核不通过)
+		/**
+		 * 等待审核
+		 */
+		public static final Integer WAIT = 0;
+		/**
+		 * 审核通过
+		 */
+		public static final Integer APPROVED = 1;
+		/**
+		 * 审核未通过
+		 */
+		public static final Integer UNAPPROVED = -1;
+		
+	}
 
 	/**
 	 * 招聘信息
-	 * @author miying
+	 * @author Geek_ymv
 	 */
 	public static final class RecruitCode {
 		/**
@@ -35,7 +73,7 @@ public final class SysCode {
 	
 	/**
 	 * 用工单位
-	 * @author miying
+	 * @author Geek_ymv
 	 */
 	public static final class EmployerCode {
 		/**
@@ -51,7 +89,7 @@ public final class SysCode {
 	
 	/**
 	 * 字典
-	 * @author miying
+	 * @author Geek_ymv
 	 */
 	public static final class DictCode {
 		/**

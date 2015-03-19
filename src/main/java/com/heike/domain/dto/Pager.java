@@ -8,7 +8,7 @@ public final class Pager<T> {
 	private int pageSize = 5;	// 每页显示多少条记录
 	private int totalRecord; // 总记录数
 	private int totalPage; // 总页数
-	private int pageOffset;
+	private int pageOffSet;
 	private List<T> datas;
 
 	
@@ -46,11 +46,11 @@ public final class Pager<T> {
 		this.totalPage = totalPage;
 	}
 
-	public int getPageOffset() {
-		return pageOffset;
+	public int getPageOffSet() {
+		return pageOffSet;
 	}
-	public void setPageOffset(int pageOffset) {
-		this.pageOffset = pageOffset;
+	public void setPageOffSet(int pageOffSet) {
+		this.pageOffSet = pageOffSet;
 	}
 
 	public List<T> getDatas() {

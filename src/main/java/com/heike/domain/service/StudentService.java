@@ -1,6 +1,9 @@
 package com.heike.domain.service;
 
+import java.util.List;
+
 import com.heike.domain.pojo.Student;
+import com.heike.domain.vo.ApplyRecruitVO;
 
 
 
@@ -19,5 +22,20 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student register(Student student);
-
+	
+	/**
+	 * 学生报名活动
+	 * @param stuId 学生id
+	 * @param recId 招聘信息id
+	 */
+	public void apply(Long stuId, Long recId); 
+	
+	/**
+	 * 学生查看在职的岗位
+	 * @param stuId
+	 * @return
+	 */
+	public List<ApplyRecruitVO> getOnJobList(Long stuId);
+	
+	
 }

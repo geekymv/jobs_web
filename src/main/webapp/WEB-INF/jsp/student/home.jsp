@@ -20,6 +20,11 @@
 			margin-top: 400px;
 		}
 		
+		.left-sider a {
+			font-weight: bold;
+			text-align: center;
+		}
+		
 	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,8 +42,8 @@
     <div class="row">
     	<div class="col-md-2">
 	    	<div class="panel panel-primary">
-		        <div class="panel-heading">功能导航</div>
-			   	<div class="list-group">
+		        <div class="panel-heading" style="text-align: center;">功能导航</div>
+			   	<div class="list-group left-sider">
 				  <a href="student/stu-stuInfo.do" class="list-group-item">我的资料</a>
 				  <a href="student/stu-approveJob.do" class="list-group-item">我的工作</a>
 				  <a href="student/stu-listJob.do" class="list-group-item">报名记录</a>
@@ -50,40 +55,90 @@
     
       	<div class="col-md-10">
 	        <div class="panel panel-primary">
-	          <div class="panel-heading">招聘列表</div>
+	          <div class="panel-heading">个人首页</div>
 	          <div class="panel-body">
-	            <p>招聘啦！</p>
+	            <p>&nbsp;</p>
 	          </div>
-	        
-		      <s:if test="#request.pageUtil == null || #request.pageUtil.datas.size() == 0">
-	            		没有招聘信息！
-	          </s:if>	
-	        
-	          <s:else>
-	          <!-- Table -->
 	          <table class="table table-bordered table-hover table-condensed">
-	            <thead>
-	                <tr>
-	                   	<th>招聘信息标题</th> <th>岗位名称</th> <th>发布单位</th>
-			  			<th>发布时间</th> <th>截止日期</th>  <th>查看详情</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-            		<s:iterator value="#request.pageUtil.datas">
-            			<tr>
-	            			<td>${title }</td> 
-	            			<td>${postName }</td> 
-	            			<td>${employer.name }</td>
-	            			<td><s:date name="releaseDate" format="yyyy-MM-dd"/></td>
-		  					<td><s:date name="endDate" format="yyyy-MM-dd"/></td>
-		  					<td><a href="student/stu-details.do?id=${id }">查看</a></td>
-            			</tr>
-            		</s:iterator>
-	            </tbody>
+	          	<c:choose>
+	          		<c:when test="${fn:length(pager.datas) == 0}">
+	            			没有招聘信息！
+	            	</c:when>
+	          		<c:otherwise>
+		          		<thead>
+			                <tr>
+			                   	<th>招聘信息标题</th> <th>岗位名称</th> <th>发布单位</th>
+					  			<th>发布时间</th> <th>截止日期</th>  <th>查看详情</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+		           			<c:forEach items="${pager.datas }" var="recruit">
+		           			<tr>
+		           				<td>${recruit.title }</td> 
+		            			<td>${recruit.postName }</td> 
+		            			<td>${recruit.employer.name }</td>
+		            			<td>
+		            				<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy-MM-dd hh:mm:ss"/>
+		            			</td>
+		            			<td>
+		            				<fmt:formatDate value="${recruit.endDate }" pattern="yyyy-MM-dd"/>
+		            			</td>
+			  					<td>
+			  						<a href="<c:url value='detail/${recruit.id }'/>">查看</a>
+			  					</td>
+			  				</tr>	
+		           			</c:forEach>
+			            </tbody>
+	          		</c:otherwise>
+	          	</c:choose>
 	          </table>
-	            <div class="panel-footer">
-	            </div>
-	         </s:else>
+	          <div class="panel-footer">
+	            <!-- 
+	          	分页显示
+	          	maxPageItems:每页显示的行数，默认为10 
+	          	maxIndexPages:在循环输出页码的时候，最大输出多少个页码，默认是10 
+	           -->	
+	           <nav style="text-align:center;">
+			  	<ul class="pagination">
+			      <pg:pager url="${ctx }/student/home" items="${pager.totalRecord }" export="currentPageNumber=pageNumber" maxPageItems="5">  
+					   <%--  <li><a>总记录数${pager.totalRecord }</a></li>
+					    <li><a>总页数${pager.totalPage }</a></li>
+					    <li><a>当前页${currentPageNumber }</a></li> --%>
+					    
+					    <c:if test="${currentPageNumber != 1 }">
+					    <pg:first>
+					    	<li><a href="${pageUrl}">首页</a></li>
+					    </pg:first>  
+					    </c:if>
+
+					    <pg:prev>
+					    	<li><a href="${pageUrl }">上一页</a></li>
+					    </pg:prev>  
+		
+					   <pg:pages>  
+				         <c:choose>  
+				            <c:when test="${currentPageNumber eq pageNumber}">  
+				             	<li class="active"><a>${pageNumber }</a></li>
+				            </c:when>  
+				            <c:otherwise>  
+				           		 <li><a href="${pageUrl }">${pageNumber }</a></li>
+				            </c:otherwise>  
+				         </c:choose>  
+				   	   </pg:pages>  
+		
+					    <pg:next>  
+					        <li><a href="${pageUrl }">下一页</a></li>
+					    </pg:next>  
+					    
+					    <c:if test="${currentPageNumber != pager.totalPage }">
+					    <pg:last>  
+					         <li><a href="${pageUrl }">尾页</a></li>  
+					    </pg:last>  
+					    </c:if> 
+					</pg:pager>  
+				</ul>
+				</nav>
+	          </div>
 	        </div> <!-- end of panel -->
     	</div>
 	</div>

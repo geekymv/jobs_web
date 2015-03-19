@@ -29,9 +29,9 @@ public class RecruitServiceImpl implements RecruitService {
 	@Autowired
 	private DictDao dictDao;
 	
-	public Pager<Recruit> list(int currentPage){
+	public Pager<Recruit> list(int pageOffSet){
 		Pager<Recruit> pager = new Pager<Recruit>();
-		pager.setCurrentPage(currentPage);
+		pager.setPageOffSet(pageOffSet);
 		return recruitDao.queryByPage(pager);
 	}
 

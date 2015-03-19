@@ -18,15 +18,6 @@ import com.heike.domain.pojo.Recruit;
 public class RecruitDao extends HibernateDao<Recruit> {
 
 	/**
-	 * 保存或更新
-	 * @param recruit
-	 * @return
-	 */
-	public void save(Recruit recruit){
-		getSession().saveOrUpdate(recruit);
-	}
-	
-	/**
 	 * 更新已报名人数
 	 * @param id 招聘信息id
 	 * @param applyNum 已报名人数
@@ -62,7 +53,7 @@ public class RecruitDao extends HibernateDao<Recruit> {
 	 * @return
 	 */
 	public Pager<Recruit> queryByPage(Pager<Recruit> pager) {
-		String hql = "from Recruit where status = :status";
+		String hql = "from Recruit r where r.status = :status order by r.endDate desc";
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", SysCode.RecruitCode.RECRUIT_PUBLISHED);

@@ -14,13 +14,6 @@ import com.heike.domain.pojo.RecruitStu;
 @Repository
 @SuppressWarnings("unchecked")
 public class RecruitStuDao extends HibernateDao<RecruitStu> {
-	/**
-	 * 保存
-	 * @param recruitStu
-	 */
-	public void saveOrUpdate(RecruitStu recruitStu) {
-		super.saveOrUpdate(recruitStu);
-	}
 	
 	/**
 	 * 根据招聘id查询

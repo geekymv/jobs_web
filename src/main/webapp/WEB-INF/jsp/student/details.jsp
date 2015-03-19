@@ -1,20 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<title>招聘详情</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
-	
 	<style type="text/css">
 		.custom{
 			height:51px;
@@ -29,6 +21,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		ul li {
 			line-height: 40px;
 		}
+		
+		.left-sider a {
+			border: 1px solid red;
+			text-align: center;
+		}
+		
 	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,14 +38,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-	<jsp:include page="nav.jsp"></jsp:include>
+	<jsp:include page="../inc/nav.jsp"></jsp:include>
       
     <div class="row">
     
     	<div class="col-md-2">
 	    	<div class="panel panel-primary">
 		        <div class="panel-heading">功能导航</div>
-			   	<div class="list-group">
+			   	<div class="list-group left-sider">
 				  <a href="student/stu-stuInfo.do" class="list-group-item">我的资料</a>
 				  <a href="student/stu-approveJob.do" class="list-group-item">我的工作</a>
 				  <a href="student/stu-listJob.do" class="list-group-item">报名记录</a>

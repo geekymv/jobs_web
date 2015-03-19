@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,12 @@ public class IndexController {
 	 */
 	@RequestMapping("/index")
 	public String index(Model model, HttpServletRequest request) {
-		Pager<Recruit> pager = recruitService.list(1);
+		String offSet = request.getParameter("pager.offset");
+		int pageOffSet = 0;
+		if(StringUtils.isNotBlank(offSet)){
+			pageOffSet = Integer.parseInt(offSet);
+		}
+		Pager<Recruit> pager = recruitService.list(pageOffSet);
 		model.addAttribute("pager", pager);
 		return "index";
 	}

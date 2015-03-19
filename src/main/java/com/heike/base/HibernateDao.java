@@ -38,6 +38,14 @@ public abstract class HibernateDao<T> {
 	}
 	
 	/**
+	 * 保存
+	 * @param t
+	 */
+	public Long save(T t) {
+		return (Long)getSession().save(t);
+	} 
+	
+	/**
 	 * 分页查询
 	 * @param hql
 	 * @param params
@@ -45,12 +53,14 @@ public abstract class HibernateDao<T> {
 	 * @return
 	 */
 	public Pager<T> findByPage(String hql, Map<String, Object> params, Pager<T> pager){
-		int currentPage = pager.getCurrentPage();
-		int pageSize = pager.getPageSize();
-		int firstResult = (currentPage  - 1 ) * pageSize ;
+//		int currentPage = pager.getCurrentPage(); 
+		int pageSize = pager.getPageSize(); // 
+//		int firstResult = (currentPage  - 1 ) * pageSize; 
+		int firstResult = pager.getPageOffSet();
+		
 		Query query = this.getSession().createQuery(hql).setProperties(params);
 		
-		List<T> ts = (List<T>)query.setFirstResult(firstResult ) //
+		List<T> ts = (List<T>)query.setFirstResult(firstResult) //
 									.setMaxResults(pageSize) //
 									.list(); 
 		// 页面数据

@@ -1,9 +1,13 @@
 package com.heike.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
+import com.heike.base.SysCode;
 import com.heike.domain.pojo.EmpStu;
+import com.heike.domain.vo.ApplyRecruitVO;
 
 /**
  * 用工单位-学生Dao
@@ -11,14 +15,6 @@ import com.heike.domain.pojo.EmpStu;
  */
 @Repository
 public class EmpStuDao extends HibernateDao<EmpStu> {
-	/**
-	 * 保存
-	 * @param empStu
-	 * @return
-	 */
-	public Long save(EmpStu empStu) {
-		return (Long)getSession().save(empStu);
-	}
 
 	/**
 	 * 更新学生在职状态
@@ -32,10 +28,17 @@ public class EmpStuDao extends HibernateDao<EmpStu> {
 		return result;
 	}
 	
-	public EmpStu queryByEmpAndStu(Long empId, Long stuId) {
-		
-		return null;
-	}
+	@SuppressWarnings("unchecked")
+	public List<ApplyRecruitVO> findOnJob(Long stuId) {
+		String hql = "select new com.heike.domain.vo.ApplyRecruitVO(rs.recId, r.postName, rs.applyDate, e.id, e.name, r.salary) "
+				+ " from EmpStu es, RecruitStu rs, Employer e, Recruit r "
+				+ " where es.stuId = :stuId and es.status = :status and es.empId = rs.empId "
+				+ " and rs.recId = r.id and rs.empId = e.id order by rs.applyDate desc";
+			
+		return (List<ApplyRecruitVO>)getSession().createQuery(hql).setLong("stuId", stuId)	//
+											.setInteger("status", SysCode.EmployerStudent.ON_JOB)	//
+											.list();
+	} 
 	
 }
 

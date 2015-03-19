@@ -49,12 +49,4 @@ public class StudentDao extends HibernateDao<Student>{
 		return super.queryById(Student.class, id);
 	}
 	
-	/**
-	 * 保存学生
-	 * @param student
-	 */
-	public Long save(Student student) {
-		return (Long)getSession().save(student);
-	}
-
 }
