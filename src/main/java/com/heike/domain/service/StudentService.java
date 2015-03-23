@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.ApplyRecruitVO;
+import com.heike.domain.vo.StudentVO;
 
 
 
@@ -11,10 +12,18 @@ public interface StudentService {
 	
 	/**
 	 * 根据学号获得学生信息
-	 * @param num
+	 * @param id 学生id
 	 * @return
 	 */
 	public Student getByNum(String num);
+	
+	/**
+	 * 根据id获得学生信息
+	 * @param id 学生id
+	 * @return
+	 */
+	public StudentVO getById(Long id);
+	
 	
 	/**
 	 * 学生注册

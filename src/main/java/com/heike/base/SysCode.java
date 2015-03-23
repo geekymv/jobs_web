@@ -91,7 +91,7 @@ public final class SysCode {
 	 * 字典
 	 * @author Geek_ymv
 	 */
-	public static final class DictCode {
+	public static interface DictCode {
 		/**
 		 * 学院
 		 */

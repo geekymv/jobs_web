@@ -41,16 +41,7 @@
       
     <div class="row">
     	<div class="col-md-2">
-	    	<div class="panel panel-primary">
-		        <div class="panel-heading" style="text-align: center;">功能导航</div>
-			   	<div class="list-group left-sider">
-				  <a href="student/stu-stuInfo.do" class="list-group-item">我的资料</a>
-				  <a href="student/stu-approveJob.do" class="list-group-item">我的工作</a>
-				  <a href="student/stu-listJob.do" class="list-group-item">报名记录</a>
-				  <a href="student/stu-listRecruit.do" class="list-group-item">查看招聘</a>
-				  <a href="student/preUpdatePassword.do" class="list-group-item">修改密码</a>
-				</div>
-			</div>
+	    	<jsp:include page="left-sider.jsp"></jsp:include>
       	</div>
     
       	<div class="col-md-10">

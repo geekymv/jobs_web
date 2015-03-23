@@ -20,6 +20,7 @@ import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.service.StudentService;
 import com.heike.domain.vo.ApplyRecruitVO;
+import com.heike.domain.vo.StudentVO;
 
 @Controller
 public class StudentController {
@@ -52,8 +53,8 @@ public class StudentController {
 	@RequestMapping("/student/myinfo")
 	public String myInfo(HttpSession session, Model model) {
 		Student student = (Student) session.getAttribute("user");
-		student = studentService.getByNum(student.getNum());
-		model.addAttribute(student);
+		StudentVO studentVO = studentService.getById(student.getId());
+		model.addAttribute("student", studentVO);
 
 		return "student/myinfo";
 	}
@@ -64,12 +65,12 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/jobList/{id}")
+	@RequestMapping("/student/jobs/{id}")
 	public String jobList(@PathVariable("id")Long id, Model model) {
 		List<ApplyRecruitVO> jobs = studentService.getOnJobList(id);
 		model.addAttribute("jobs", jobs);
 		
-		return "/student/jobs";
+		return "student/myjob";
 	}
 	
 	/**

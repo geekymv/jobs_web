@@ -14,6 +14,7 @@ import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.StudentService;
 import com.heike.domain.vo.ApplyRecruitVO;
+import com.heike.domain.vo.StudentVO;
 import com.heike.util.EncryptUtil;
 
 @Service
@@ -30,6 +31,12 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.queryByNum(num);
 	}
 
+	@Override
+	public StudentVO getById(Long id) {
+		return studentDao.findById(id);
+	}
+	
+	
 	@Override
 	public Student register(Student student) {
 		// 设置注册时间
@@ -58,6 +65,7 @@ public class StudentServiceImpl implements StudentService {
 	public List<ApplyRecruitVO> getOnJobList(Long stuId) {
 		return empStuDao.findOnJob(stuId);
 	}
+
 
 }
 

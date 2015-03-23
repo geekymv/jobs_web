@@ -7,25 +7,26 @@ import java.util.Date;
  * @author Geek_ymv
  */
 public class ApplyRecruitVO {
-	
 	private Long recruitId;	// 岗位id
 	private String recruitName;	// 岗位名称
 	private Date date;	// 报名时间
 	private Long employerId;	// 发布单位id
 	private String employer;	// 发布单位
 	private String salary; // 薪水
+	private Integer status;
 	
 	public ApplyRecruitVO() {
 	}
-	
+
 	public ApplyRecruitVO(Long recruitId, String recruitName, Date date,
-			Long employerId, String employer, String salary) {
+			Long employerId, String employer, String salary, Integer status) {
 		this.recruitId = recruitId;
 		this.recruitName = recruitName;
 		this.date = date;
 		this.employerId = employerId;
 		this.employer = employer;
 		this.salary = salary;
+		this.status = status;
 	}
 
 	public Long getRecruitId() {
@@ -68,6 +69,13 @@ public class ApplyRecruitVO {
 	}
 	public void setSalary(String salary) {
 		this.salary = salary;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 }

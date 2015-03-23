@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -39,21 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-	
-	<jsp:include page="nav.jsp"></jsp:include>
+	<jsp:include page="../inc/nav.jsp"></jsp:include>
       
     <div class="row">
     	<div class="col-md-2">
-	    	<div class="panel panel-primary">
-		        <div class="panel-heading">功能导航</div>
-			   	<div class="list-group">
-				  <a href="student/stu-stuInfo.do" class="list-group-item">我的资料</a>
-				  <a href="student/stu-approveJob.do" class="list-group-item">我的工作</a>
-				  <a href="student/stu-listJob.do" class="list-group-item">报名记录</a>
-				  <a href="student/stu-listRecruit.do" class="list-group-item">查看招聘</a>
-				  <a href="student/preUpdatePassword.do" class="list-group-item">修改密码</a> 
-				</div>
-			</div>
+	    	<jsp:include page="left-sider.jsp"></jsp:include>
       	</div>
     
       	<div class="col-md-10">
