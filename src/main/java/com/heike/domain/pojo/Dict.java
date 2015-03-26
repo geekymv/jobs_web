@@ -1,5 +1,7 @@
 package com.heike.domain.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="t_dicts")
-public class Dict{
+public class Dict implements Serializable {
+	private static final long serialVersionUID = 3954898914977186786L;
+
 	private Long id;
 	private String name;	// 名称
 	private String type;	// 类别
