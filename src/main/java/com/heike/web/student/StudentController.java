@@ -113,11 +113,30 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping("/student/detail/{id}")
-	public String detail(@PathVariable("id")Long id, Model model) {
+	public String detail(@PathVariable("id")Long id, Model model, HttpSession session) {
 		Recruit recruit = recruitService.getById(id);
 		model.addAttribute("recruit", recruit);
 		
+		// 判断学生是否已经报名了
+		Student student = (Student) session.getAttribute("user");
+		String isApply = recruitService.isApply(student.getId(), id);
+		model.addAttribute("isApply", isApply);
+		
 		return "student/detail";
+	}
+	
+	
+	/**
+	 * 学生报名招聘信息
+	 * @param recId 招聘信息id
+	 * @return
+	 */
+	@RequestMapping("/student/apply")
+	@ResponseBody
+	public String apply(Long recId, HttpSession session) {
+		Student student = (Student) session.getAttribute("user");
+		studentService.apply(student.getId(), recId);
+		return "success";
 	}
 	
 }

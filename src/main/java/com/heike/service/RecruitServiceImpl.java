@@ -59,5 +59,11 @@ public class RecruitServiceImpl implements RecruitService {
 		}
 		return vos;
 	}
-	
+
+	@Override
+	public String isApply(Long stuId, Long recId) {
+		RecruitStu rs = recruitStuDao.queryByStuIdAndRecId(stuId, recId);
+		return rs == null ? "isApplyed" : "notApply";
+	}
+
 }

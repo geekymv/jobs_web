@@ -28,4 +28,12 @@ public interface RecruitService {
 	 * @return
 	 */
 	public List<RecruitStuVO> getApplyStudents(Long id);
+	
+	/**
+	 * 判断学生是否已经报名了招聘信息
+	 * @param stuId
+	 * @param recId
+	 * @return
+	 */
+	public String isApply(Long stuId, Long recId);
 }

@@ -20,13 +20,11 @@ public class RecruitDao extends HibernateDao<Recruit> {
 	/**
 	 * 更新已报名人数
 	 * @param id 招聘信息id
-	 * @param applyNum 已报名人数
 	 * @return
 	 */
-	public int updateApplyNum(Long id, int applyNum) {
-		String hql = "update Recruit set applyNum = :applyNum where id = :id";
+	public int updateApplyNum(Long id) {
+		String hql = "update Recruit set applyNum = applyNum+1 where id = :id";
 		int result = getSession().createQuery(hql) //
-					.setInteger("applyNum", applyNum) //
 					.setLong("id", id) //
 					.executeUpdate();
 		return result;

@@ -104,8 +104,17 @@
 						</td>
 					</tr>
 	         	</table>
-				<button id="apply" class="btn btn-primary"
-					 style="margin-top: 20px;margin-left: 400px; margin-bottom: 30px;">我要报名</button>
+	         	
+	         	<c:choose>
+	         		<c:when test="${isApply == 'isApplyed' }">
+	         			<button id="apply" class="btn btn-primary"
+							 style="margin-top: 20px;margin-left: 400px; margin-bottom: 30px;">马上报名</button>
+	         		</c:when>
+	         		<c:otherwise>
+	         			<span class="btn btn-success" style="margin-top: 20px;margin-left: 400px; margin-bottom: 30px;">我已报名</span>
+	         		</c:otherwise>
+	         	</c:choose>
+
 	        </c:if>
     	</div>
 		</div>
@@ -115,6 +124,24 @@
    <div class="footer">
    <jsp:include page="../main/footer.jsp"></jsp:include>
    </div>
+   
+   <script type="text/javascript">
+   		$(function(){
+   			$("#apply").click(function(){
+   				$.ajax({
+   					url: contextPath + "/student/apply",
+   					type: "post",
+   					data:{"recId": '${recruit.id}'},
+   					success:function(data){
+   						if(data == "success"){
+   							alert("报名成功！");
+   							window.location.reload();
+   						}
+   					}
+   				});  
+   			});
+   		});
+   </script>
 
 </body>
 </html>

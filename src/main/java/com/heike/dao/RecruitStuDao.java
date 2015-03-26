@@ -26,6 +26,18 @@ public class RecruitStuDao extends HibernateDao<RecruitStu> {
 		return rss;
 	}
 	
-	
+	/**
+	 * 根据学生id和招聘信息id查询
+	 * @param stuId 学生id
+	 * @param recId 招聘信息id
+	 * @return
+	 */
+	public RecruitStu queryByStuIdAndRecId(Long stuId, Long recId) {
+		String hql = "from RecruitStu where recId = :recId and stuId = :stuId";
+		return (RecruitStu) getSession().createQuery(hql)	//
+					.setLong("recId", recId)	//
+					.setLong("stuId", stuId)	//
+					.uniqueResult();
+	}
 	
 }

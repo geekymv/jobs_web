@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.heike.base.SysCode;
 import com.heike.dao.EmpStuDao;
+import com.heike.dao.RecruitDao;
 import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
 import com.heike.domain.pojo.RecruitStu;
@@ -25,6 +26,8 @@ public class StudentServiceImpl implements StudentService {
 	private RecruitStuDao recruitStuDao;
 	@Autowired
 	private EmpStuDao empStuDao;
+	@Autowired
+	private RecruitDao recruitDao;
 	
 	@Override
 	public Student getByNum(String num) {
@@ -58,7 +61,11 @@ public class StudentServiceImpl implements StudentService {
 		rs.setApplyDate(new Date());
 		rs.setStatus(SysCode.RecruitStudent.WAIT);	// 等待审核
 		
-		recruitStuDao.save(rs);
+		recruitStuDao.saveOrUpdate(rs);
+		
+		// 更新已报名人数
+		recruitDao.updateApplyNum(recId);
+		
 	}
 	
 	@Override
