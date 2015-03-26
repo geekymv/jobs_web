@@ -69,7 +69,7 @@
 	                   <span class="caret"></span>
 	                 </a>
 	                 <ul class="dropdown-menu" role="menu">
-	                   <li><a href="user/login-success.do">进入个人主页</a></li>
+				 		<li><a href="${ctx }/home">进入我的主页</a></li>
 	                 </ul>
                 </li>
            		

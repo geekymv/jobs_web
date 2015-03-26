@@ -106,5 +106,18 @@ public class StudentController {
 		return student == null ? "no" : "yes"; // 被注册
 	}
 	
+	/**
+	 * 学生查看招聘详情
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/student/detail/{id}")
+	public String detail(@PathVariable("id")Long id, Model model) {
+		Recruit recruit = recruitService.getById(id);
+		model.addAttribute("recruit", recruit);
+		
+		return "student/detail";
+	}
 	
 }

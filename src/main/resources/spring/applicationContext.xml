@@ -15,22 +15,12 @@
 	
 	<!-- 启用Cache注解 -->	
  	<cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
-	
 	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:ehcache.xml"></property>
 	</bean> 
-	<!-- 保持使用p:shared="true"同一个缓存  
-	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
-			p:config-location="classpath:ehcache.xml" p:shared="true"/>   
-	 --> 
-	
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
 		<property name="cacheManager" ref="ehCacheManager"></property>
 	</bean>
-	 <!-- 默认的cacheManager 
-	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" 
-			p:cache-manager-ref="ehcache"/>  
-	-->	
 	
 	
 	<!-- 配置properties -->

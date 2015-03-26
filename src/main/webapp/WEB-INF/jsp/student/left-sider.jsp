@@ -8,6 +8,5 @@
 		<a href="${ctx }/student/jobs/${user.id}" class="list-group-item">我的工作</a>
 		<a href="student/stu-listJob.do" class="list-group-item">报名记录</a>
 		<a href="${ctx }/student/home" class="list-group-item">查看招聘</a> 
-		<a href="student/preUpdatePassword.do" class="list-group-item">修改密码</a>
 	</div>
 </div>

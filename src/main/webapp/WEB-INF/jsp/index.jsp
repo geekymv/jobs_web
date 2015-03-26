@@ -43,7 +43,7 @@
 				<span class="icon-bar"></span>
 			  </button>
               
-			  <a class="navbar-brand" href="index.do">
+			  <a class="navbar-brand" href="${ctx }/index">
               	<img alt="首页" src="<c:url value='/resources/img/index.png'/>" height="25"/>
               	首页
               </a>

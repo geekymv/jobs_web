@@ -1,13 +1,33 @@
 package com.heike.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
+import com.heike.base.SysCode;
+import com.heike.domain.dto.Pager;
+import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.StudentVO;
 
 @Repository
 public class StudentDao extends HibernateDao<Student>{
+	
+	/**
+	 * 分页查询
+	 * @param pager
+	 * @return
+	 */
+	public Pager<Student> queryByPage(Pager<Student> pager) {
+		String hql = "from Student ";
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		return this.findByPage(hql, params, pager);
+	}
+	
+	
 	/**
 	 * 根据学号和密码查询
 	 * @param num 学号
