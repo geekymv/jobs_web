@@ -6,5 +6,16 @@ import com.heike.domain.pojo.Dict;
 
 public interface DictService {
 	
-	public List<Dict> list();
+	/**
+	 * 根据类别查询
+	 * @param type
+	 * @return
+	 */
+	public List<Dict> list(String type);
+	
+	/**
+	 * 新增
+	 * @param dict
+	 */
+	public Dict add(Dict dict);
 }

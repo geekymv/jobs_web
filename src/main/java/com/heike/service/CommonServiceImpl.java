@@ -51,7 +51,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	public List<Dict> getColleges() {
-		return dictDao.queryColleges();
+		return dictDao.queryAll(SysCode.DictCode.COLLEGE_TYPE);
 	}
 	
 	public List<Dict> getProfessions(Long colId) {

@@ -17,7 +17,7 @@ import com.heike.domain.pojo.Dict;
 public class DictDao extends HibernateDao<Dict>{
 	
 	/**
-	 * 
+	 * 保存
 	 * @param dict
 	 */
 	public void saveOrUpdate(Dict dict) {
@@ -25,17 +25,32 @@ public class DictDao extends HibernateDao<Dict>{
 	}
 	
 	/**
-	 * 查询所有的学院
+	 * 根据类型查询所有
+	 * @param type 类型
 	 * @return
 	 */
-	public List<Dict> queryColleges() {
+	public List<Dict> queryAll(String type) {
 		String hql = "from Dict d where d.type = :type";
 		
 		List<Dict> dicts = (List<Dict>)getSession().createQuery(hql)
-										.setString("type", SysCode.DictCode.COLLEGE_TYPE)
+										.setString("type", type)
 										.list();
 		return dicts;		
 	}
+	
+	/**
+	 * 根据类型查询所有
+	 * @param type 类型
+	 * @return
+	 */
+	public List<Dict> queryAll2() {
+		String hql = "from Dict";
+		List<Dict> dicts = (List<Dict>)getSession().createQuery(hql)
+										.list();
+		return dicts;		
+	}
+	
+	
 	
 	/**
 	 * 根据学院id查询该学院所有的专业

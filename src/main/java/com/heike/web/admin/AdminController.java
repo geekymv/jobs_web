@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.heike.base.SysCode;
 import com.heike.domain.pojo.Dict;
 import com.heike.domain.service.DictService;
 
@@ -24,7 +25,16 @@ public class AdminController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public List<Dict> list(){
-		return dictService.list();
+		return dictService.list(SysCode.DictCode.COLLEGE_TYPE);
+	}
+	
+	@RequestMapping("/add")
+	public void add() {
+		Dict dict = new Dict();
+		dict.setName("test");
+		dict.setType("test");
+		
+		dictService.add(dict);
 	}
 
 }
