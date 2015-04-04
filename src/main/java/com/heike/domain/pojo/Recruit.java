@@ -22,7 +22,7 @@ public class Recruit {
 	private Long id;
 	private String title;	// 标题
 	private String postName;	//招聘岗位名
-	private Integer postNum;	//招聘岗位数
+	private Integer postNum;	//招聘人数
 	private String salary;	//薪资待遇
 	private String context;	//工作要求
 	private Date releaseDate;	//发布时间

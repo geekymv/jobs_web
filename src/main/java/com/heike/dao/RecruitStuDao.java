@@ -19,7 +19,7 @@ public class RecruitStuDao extends HibernateDao<RecruitStu> {
 	 * 根据招聘id查询
 	 */
 	public List<RecruitStu> queryById(Long id) {
-		String hql = "from RecruitStu rs where rs.id = :id order by rs.id";
+		String hql = "from RecruitStu rs where rs.recId = :id order by rs.id";
 		List<RecruitStu> rss = (List<RecruitStu>)getSession().createQuery(hql) //
 													.setLong("id", id) //
 													.list();

@@ -62,7 +62,7 @@ public class IndexController {
 	}
 	
 	/**
-	 * 根据招聘信息id
+	 * 根据招聘信息id查询已报名学生列表
 	 * @param id 招聘信息id
 	 * @return
 	 */
