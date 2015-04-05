@@ -3,6 +3,7 @@ package com.heike.domain.service;
 import java.util.List;
 
 import com.heike.domain.dto.Pager;
+import com.heike.domain.dto.RecruitQueryDto;
 import com.heike.domain.pojo.Recruit;
 import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
@@ -16,6 +17,14 @@ public interface RecruitService {
 	 * @return
 	 */
 	public Pager<RecruitVO> list(int currentPage);
+	
+	/**
+	 * 分页查询已发布的招聘信息
+	 * @param pager
+	 * @param dto
+	 * @return
+	 */
+	public Pager<RecruitVO> findPage(int pageOffSet, RecruitQueryDto dto);
 	
 	/**
 	 * 根据id获得招聘信息详情

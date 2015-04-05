@@ -11,6 +11,7 @@ import com.heike.dao.RecruitDao;
 import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
 import com.heike.domain.dto.Pager;
+import com.heike.domain.dto.RecruitQueryDto;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
@@ -69,8 +70,15 @@ public class RecruitServiceImpl implements RecruitService {
 
 	@Override
 	public List<ApplyRecordVO> getApplyRecords(Long stuId) {
-		
 		return recruitStuDao.queryApplyRecords(stuId);
+	}
+
+	@Override
+	public Pager<RecruitVO> findPage(int pageOffSet, RecruitQueryDto dto) {
+		Pager<RecruitVO> pager = new Pager<RecruitVO>();
+		pager.setPageOffSet(pageOffSet);
+		
+		return recruitDao.queryByPage(pager, dto);
 	}
 
 }

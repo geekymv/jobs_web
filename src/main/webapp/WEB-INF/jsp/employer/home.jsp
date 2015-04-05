@@ -33,7 +33,7 @@
 
 <body>
 	<div class="container">
-	<jsp:include page="nav.jsp"></jsp:include>
+	<jsp:include page="../inc/nav.jsp"></jsp:include>
       
     <div class="row">
     

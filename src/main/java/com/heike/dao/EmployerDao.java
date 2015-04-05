@@ -53,7 +53,7 @@ public class EmployerDao extends HibernateDao {
 	 * @return
 	 */
 	public Employer queryByNumAndPwd(String account, String pwd) {
-		String hql = "select new Employer(account, name, authority) from Employer e where e.status=1"
+		String hql = "select new Employer(id, account, name, authority) from Employer e where e.status=1"
 				+ " and e.account = :account and e.pwd = :pwd";
 		Employer employer = (Employer) this.getSession()	//
 										.createQuery(hql)	//

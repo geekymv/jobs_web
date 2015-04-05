@@ -3,12 +3,14 @@ package com.heike.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
 import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
+import com.heike.domain.dto.RecruitQueryDto;
 import com.heike.domain.pojo.Recruit;
 import com.heike.domain.vo.RecruitVO;
 
@@ -65,6 +67,46 @@ public class RecruitDao extends HibernateDao {
 		return super.findByPage(builder.toString(), params, pager);
 
 	}
+	
+	/**
+	 * 分页查询已发布的招聘信息
+	 * @param pager
+	 * @param dto
+	 * @return
+	 */
+	public Pager<RecruitVO> queryByPage(Pager<RecruitVO> pager, RecruitQueryDto dto) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, e.name)")
+			.append(" from Recruit r, Employer e ")
+			.append(" where r.empId = e.id and r.status = :status")
+			.append(" and r.empId = :empId");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("status", SysCode.RecruitCode.RECRUIT_PUBLISHED);
+		params.put("empId", dto.getEmpId());
+		
+		String startDate = dto.getStartDate();
+		String endDate = dto.getEndDate();
+		String title = dto.getTitle();
+		
+		if(StringUtils.isNotBlank(startDate)){
+			builder.append(" and r.releaseDate >= :startDate");
+			params.put("startDate", startDate);
+		}
+		if(StringUtils.isNotBlank(endDate)){
+			builder.append(" and r.releaseDate <= :endDate");
+			params.put("endDate", endDate);
+		}
+		if(StringUtils.isNotBlank(title)) {
+			builder.append(" and r.title like '%"+ title + "%'");
+		}
+		
+		builder.append(" order by r.endDate desc");
+		
+		return super.findByPage(builder.toString(), params, pager);
+
+	}
+	
 	
 	/**
 	 * 根据id查询

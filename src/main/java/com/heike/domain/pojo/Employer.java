@@ -33,7 +33,8 @@ public class Employer {
 	public Employer() {
 		// TODO Auto-generated constructor stub
 	}
-	public Employer(String account, String name, Integer authority) {
+	public Employer(Long id, String account, String name, Integer authority) {
+		this.id = id;
 		this.account = account;
 		this.name = name;
 		this.authority = authority;
