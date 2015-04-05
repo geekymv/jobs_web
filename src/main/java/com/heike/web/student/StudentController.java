@@ -19,6 +19,7 @@ import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.service.StudentService;
+import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.ApplyRecruitVO;
 import com.heike.domain.vo.StudentVO;
 
@@ -65,11 +66,12 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/student/jobs/{id}")
-	public String jobList(@PathVariable("id")Long id, Model model) {
-		List<ApplyRecruitVO> jobs = studentService.getOnJobList(id);
+	@RequestMapping("/student/jobs")
+	public String jobList(HttpSession session, Model model) {
+		Student student = (Student) session.getAttribute("user");
+		List<ApplyRecruitVO> jobs = studentService.getOnJobList(student.getId());
+
 		model.addAttribute("jobs", jobs);
-		
 		return "student/myjob";
 	}
 	
@@ -127,7 +129,7 @@ public class StudentController {
 	
 	
 	/**
-	 * 学生报名招聘信息
+	 * 学生报名
 	 * @param recId 招聘信息id
 	 * @return
 	 */
@@ -137,6 +139,18 @@ public class StudentController {
 		Student student = (Student) session.getAttribute("user");
 		studentService.apply(student.getId(), recId);
 		return "success";
+	}
+	
+	/**
+	 * 学生查看报名记录
+	 */
+	@RequestMapping("/student/records")
+	public String record(HttpSession session, Model model){
+		Student student = (Student) session.getAttribute("user");
+		List<ApplyRecordVO> records = recruitService.getApplyRecords(student.getId());
+		
+		model.addAttribute("records", records);
+		return "student/records";
 	}
 	
 }

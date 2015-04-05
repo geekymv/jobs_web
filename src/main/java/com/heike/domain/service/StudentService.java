@@ -47,5 +47,4 @@ public interface StudentService {
 	 */
 	public List<ApplyRecruitVO> getOnJobList(Long stuId);
 	
-	
 }

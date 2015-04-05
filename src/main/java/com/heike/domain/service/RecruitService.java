@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.heike.domain.dto.Pager;
 import com.heike.domain.pojo.Recruit;
+import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
 
 public interface RecruitService {
@@ -36,4 +37,11 @@ public interface RecruitService {
 	 * @return
 	 */
 	public String isApply(Long stuId, Long recId);
+	
+	/**
+	 * 根据学生id查询该学生的报名记录
+	 * @param stuId
+	 * @return
+	 */
+	public List<ApplyRecordVO> getApplyRecords(Long stuId);
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
 import com.heike.domain.pojo.RecruitStu;
+import com.heike.domain.vo.ApplyRecordVO;
 
 /**
  * 招聘信息-学生Dao
@@ -38,6 +39,24 @@ public class RecruitStuDao extends HibernateDao<RecruitStu> {
 					.setLong("recId", recId)	//
 					.setLong("stuId", stuId)	//
 					.uniqueResult();
+	}
+	
+	/**
+	 * 根据学生id查询该学生的报名记录
+	 * @param stuId
+	 * @return
+	 */
+	public List<ApplyRecordVO> queryApplyRecords(Long stuId) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new com.heike.domain.vo.ApplyRecordVO(r.postName, e.name, r.salary, rs.applyDate, rs.status)")
+			.append(" from RecruitStu rs,")
+			.append(" Recruit r, ")
+			.append(" Employer e ")
+			.append(" where rs.recId = r.id and rs.empId = e.id and rs.stuId = :stuId order by rs.applyDate desc");
+		
+		return (List<ApplyRecordVO>)getSession().createQuery(builder.toString())
+											.setLong("stuId", stuId).list();
+		
 	}
 	
 }

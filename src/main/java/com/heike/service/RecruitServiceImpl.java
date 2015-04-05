@@ -15,6 +15,7 @@ import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
+import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
 import com.heike.util.DateUtils;
 
@@ -64,6 +65,12 @@ public class RecruitServiceImpl implements RecruitService {
 	public String isApply(Long stuId, Long recId) {
 		RecruitStu rs = recruitStuDao.queryByStuIdAndRecId(stuId, recId);
 		return rs == null ? "isApplyed" : "notApply";
+	}
+
+	@Override
+	public List<ApplyRecordVO> getApplyRecords(Long stuId) {
+		
+		return recruitStuDao.queryApplyRecords(stuId);
 	}
 
 }
