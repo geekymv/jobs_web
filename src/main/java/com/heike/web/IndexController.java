@@ -23,6 +23,7 @@ import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.RecruitStuVO;
+import com.heike.domain.vo.RecruitVO;
 
 @Controller
 public class IndexController {
@@ -43,7 +44,7 @@ public class IndexController {
 		if(StringUtils.isNotBlank(offSet)){
 			pageOffSet = Integer.parseInt(offSet);
 		}
-		Pager<Recruit> pager = recruitService.list(pageOffSet);
+		Pager<RecruitVO> pager = recruitService.list(pageOffSet);
 		model.addAttribute("pager", pager);
 		return "index";
 	}
@@ -55,7 +56,7 @@ public class IndexController {
 	 */
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable Long id, Model model){
-		Recruit recruit = recruitService.getById(id);
+		RecruitVO recruit = recruitService.getById(id);
 		model.addAttribute("recruit", recruit);
 		
 		return "detail";

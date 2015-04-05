@@ -6,7 +6,7 @@ import com.heike.base.HibernateDao;
 import com.heike.domain.pojo.Employer;
 
 @Repository
-public class EmployerDao extends HibernateDao<Employer> {
+public class EmployerDao extends HibernateDao {
 	
 	/**
 	 * 保存或更新

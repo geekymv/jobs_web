@@ -6,6 +6,7 @@ import com.heike.domain.dto.Pager;
 import com.heike.domain.pojo.Recruit;
 import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
+import com.heike.domain.vo.RecruitVO;
 
 public interface RecruitService {
 
@@ -14,14 +15,14 @@ public interface RecruitService {
 	 * @param currentPage
 	 * @return
 	 */
-	public Pager<Recruit> list(int currentPage);
+	public Pager<RecruitVO> list(int currentPage);
 	
 	/**
 	 * 根据id获得招聘信息详情
 	 * @param id
 	 * @return
 	 */
-	public Recruit getById(Long id);
+	public RecruitVO getById(Long id);
 	
 	/**
 	 * 根据招聘信息id获得所有已报名学生的信息

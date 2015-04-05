@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/employer")
 public class EmployerController {
+	
+	@RequestMapping("/home")
+	public String home() {
+		return "employer/home";
+	}
 
 	
 }

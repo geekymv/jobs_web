@@ -13,7 +13,7 @@ import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.StudentVO;
 
 @Repository
-public class StudentDao extends HibernateDao<Student>{
+public class StudentDao extends HibernateDao {
 	
 	/**
 	 * 分页查询

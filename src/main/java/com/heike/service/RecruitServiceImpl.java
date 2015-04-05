@@ -11,12 +11,12 @@ import com.heike.dao.RecruitDao;
 import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
 import com.heike.domain.dto.Pager;
-import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
+import com.heike.domain.vo.RecruitVO;
 import com.heike.util.DateUtils;
 
 @Service
@@ -30,13 +30,13 @@ public class RecruitServiceImpl implements RecruitService {
 	@Autowired
 	private DictDao dictDao;
 	
-	public Pager<Recruit> list(int pageOffSet){
-		Pager<Recruit> pager = new Pager<Recruit>();
+	public Pager<RecruitVO> list(int pageOffSet){
+		Pager<RecruitVO> pager = new Pager<RecruitVO>();
 		pager.setPageOffSet(pageOffSet);
 		return recruitDao.queryByPage(pager);
 	}
 
-	public Recruit getById(Long id) {
+	public RecruitVO getById(Long id) {
 		return recruitDao.queryById(id);
 	}
 

@@ -11,6 +11,7 @@ import com.heike.dao.EmpStuDao;
 import com.heike.dao.RecruitDao;
 import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
+import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.StudentService;

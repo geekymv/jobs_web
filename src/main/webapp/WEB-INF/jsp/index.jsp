@@ -124,7 +124,7 @@
 		           			<tr>
 		           				<td>${recruit.title }</td> 
 		            			<td>${recruit.postName }</td> 
-		            			<td>${recruit.employer.name }</td>
+		            			<td>${recruit.empName }</td>
 		            			<td>
 		            				<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy-MM-dd hh:mm:ss"/>
 		            			</td>

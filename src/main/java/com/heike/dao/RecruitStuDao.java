@@ -14,7 +14,7 @@ import com.heike.domain.vo.ApplyRecordVO;
  */
 @Repository
 @SuppressWarnings("unchecked")
-public class RecruitStuDao extends HibernateDao<RecruitStu> {
+public class RecruitStuDao extends HibernateDao {
 	
 	/**
 	 * 根据招聘id查询
@@ -52,7 +52,7 @@ public class RecruitStuDao extends HibernateDao<RecruitStu> {
 			.append(" from RecruitStu rs,")
 			.append(" Recruit r, ")
 			.append(" Employer e ")
-			.append(" where rs.recId = r.id and rs.empId = e.id and rs.stuId = :stuId order by rs.applyDate desc");
+			.append(" where rs.recId = r.id and r.empId = e.id and rs.stuId = :stuId order by rs.applyDate desc");
 		
 		return (List<ApplyRecordVO>)getSession().createQuery(builder.toString())
 											.setLong("stuId", stuId).list();

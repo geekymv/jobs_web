@@ -21,6 +21,7 @@ import com.heike.domain.service.RecruitService;
 import com.heike.domain.service.StudentService;
 import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.ApplyRecruitVO;
+import com.heike.domain.vo.RecruitVO;
 import com.heike.domain.vo.StudentVO;
 
 @Controller
@@ -42,7 +43,7 @@ public class StudentController {
 		}
 		
 		// 显示招聘信息列表
-		Pager<Recruit> pager = recruitService.list(pageOffSet);
+		Pager<RecruitVO> pager = recruitService.list(pageOffSet);
 		model.addAttribute("pager", pager);
 		
 		return "student/home";
@@ -116,7 +117,7 @@ public class StudentController {
 	 */
 	@RequestMapping("/student/detail/{id}")
 	public String detail(@PathVariable("id")Long id, Model model, HttpSession session) {
-		Recruit recruit = recruitService.getById(id);
+		RecruitVO recruit = recruitService.getById(id);
 		model.addAttribute("recruit", recruit);
 		
 		// 判断学生是否已经报名了

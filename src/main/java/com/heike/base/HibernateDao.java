@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.heike.domain.dto.Pager;
 
 @SuppressWarnings("unchecked")
-public abstract class HibernateDao<T> {
+public abstract class HibernateDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	public Session getSession() {
@@ -25,7 +25,7 @@ public abstract class HibernateDao<T> {
 	 * @param id
 	 * @return
 	 */
-	public T queryById(Class<T> cls, Long id) {
+	public <T> T queryById(Class<T> cls, Long id) {
 		return (T)getSession().get(cls, id);
 	}
 	
@@ -33,7 +33,7 @@ public abstract class HibernateDao<T> {
 	 * 保存或更新
 	 * @param t
 	 */
-	public void saveOrUpdate(T t) {
+	public <T> void saveOrUpdate(T t) {
 		getSession().saveOrUpdate(t);
 	}
 	
@@ -41,7 +41,7 @@ public abstract class HibernateDao<T> {
 	 * 保存
 	 * @param t
 	 */
-	public Long save(T t) {
+	public <T> Long save(T t) {
 		return (Long)getSession().save(t);
 	} 
 	
@@ -52,7 +52,7 @@ public abstract class HibernateDao<T> {
 	 * @param pager
 	 * @return
 	 */
-	public Pager<T> findByPage(String hql, Map<String, Object> params, Pager<T> pager){
+	public <T> Pager<T> findByPage(String hql, Map<String, Object> params, Pager<T> pager){
 //		int currentPage = pager.getCurrentPage(); 
 		int pageSize = pager.getPageSize(); // 
 //		int firstResult = (currentPage  - 1 ) * pageSize; 

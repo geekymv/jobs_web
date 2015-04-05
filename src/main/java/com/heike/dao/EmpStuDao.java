@@ -14,7 +14,7 @@ import com.heike.domain.vo.ApplyRecruitVO;
  * @author miying
  */
 @Repository
-public class EmpStuDao extends HibernateDao<EmpStu> {
+public class EmpStuDao extends HibernateDao {
 
 	/**
 	 * 更新学生在职状态
@@ -32,8 +32,8 @@ public class EmpStuDao extends HibernateDao<EmpStu> {
 	public List<ApplyRecruitVO> findOnJob(Long stuId) {
 		String hql = "select new com.heike.domain.vo.ApplyRecruitVO(rs.recId, r.postName, rs.applyDate, e.id, e.name, r.salary, es.status) "
 				+ " from EmpStu es, RecruitStu rs, Employer e, Recruit r "
-				+ " where es.stuId = :stuId and es.empId = rs.empId "
-				+ " and rs.recId = r.id and rs.empId = e.id order by rs.applyDate desc";
+				+ " where es.stuId = :stuId and es.empId = r.empId "
+				+ " and rs.recId = r.id and r.empId = e.id order by rs.applyDate desc";
 			
 		return (List<ApplyRecruitVO>)getSession().createQuery(hql)
 											.setLong("stuId", stuId)	//

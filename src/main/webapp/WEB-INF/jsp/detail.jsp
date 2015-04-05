@@ -22,6 +22,11 @@
 		#students th, #students td{
 			text-align: center;
 		}
+		
+		td span {
+			font-weight: bold;
+		}
+		
 	</style>
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -65,7 +70,7 @@
            	<c:if test="${user != null }">
 	           	<li role="presentation" class="dropdown">
 	                 <a href="stu-info.jsp" class="dropdown-toggle" data-toggle="dropdown">
-	              		用户：${user.name }
+	              		${user.name }
 	                   <span class="caret"></span>
 	                 </a>
 	                 <ul class="dropdown-menu" role="menu">
@@ -105,7 +110,7 @@
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">招聘信息详情</div>
 	          <div class="panel-body">
-	            <p>&nbsp;</p>
+	            <span>&nbsp;</span>
 	          </div>
 	        
 	        <c:if test="${recruit == null }">
@@ -117,7 +122,9 @@
 	         		<caption><span style="font-size: 18px; font-weight: bold;">招聘信息</span></caption>
 	         		<tr>
 	         			<td><span>招聘信息标题：</span>${recruit.title }</td>
-	         			<td><span>发布单位：</span>${recruit.employer.name }</td>
+	         			
+	         			<td><span>发布单位：</span>${recruit.empName }</td>
+	         			 
 	         		</tr>
 	         		<tr>
 	         			<td><span>岗位名称：</span>${recruit.postName }</td>

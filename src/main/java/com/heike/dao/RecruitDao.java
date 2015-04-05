@@ -3,19 +3,21 @@ package com.heike.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
 import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.pojo.Recruit;
+import com.heike.domain.vo.RecruitVO;
 
 /**
  * 招聘信息Dao
  * @author miying
  */
 @Repository
-public class RecruitDao extends HibernateDao<Recruit> {
+public class RecruitDao extends HibernateDao {
 
 	/**
 	 * 更新已报名人数
@@ -50,13 +52,18 @@ public class RecruitDao extends HibernateDao<Recruit> {
 	 * @param pager
 	 * @return
 	 */
-	public Pager<Recruit> queryByPage(Pager<Recruit> pager) {
-		String hql = "from Recruit r where r.status = :status order by r.endDate desc";
+	public Pager<RecruitVO> queryByPage(Pager<RecruitVO> pager) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, e.name)")
+			.append(" from Recruit r, Employer e ")
+			.append(" where r.empId = e.id and r.status = :status")
+			.append(" order by r.endDate desc");
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", SysCode.RecruitCode.RECRUIT_PUBLISHED);
 		
-		return this.findByPage(hql, params, pager);
+		return super.findByPage(builder.toString(), params, pager);
+
 	}
 	
 	/**
@@ -64,12 +71,18 @@ public class RecruitDao extends HibernateDao<Recruit> {
 	 * @param id
 	 * @return
 	 */
-	public Recruit queryById(Long id) {
-//		String hql = "from Recruit r where r.id = :id";
-//		return (Recruit) getSession().createQuery(hql)
-//									.setLong("id", id)
-//									.uniqueResult();
-		return super.queryById(Recruit.class, id);
+	public RecruitVO queryById(Long id) {
+		String hql = "select r.id as id, r.title as title, r.postName as postName, r.postNum as postNum, r.salary as salary, "
+				+ " r.context as context, "
+					+ " r.releaseDate as releaseDate, r.updateDate as updateDate, r.applyNum as applyNum, r.endDate as endDate,"
+					+ " r.remarks as remarks, r.status as status,"
+					+ " e.name as empName"
+					+ " from Recruit r, Employer e" 
+					+ " where r.empId = e.id and r.id = :id";
+	
+		return (RecruitVO)getSession()
+				.createQuery(hql).setLong("id", id)
+				.setResultTransformer(Transformers.aliasToBean(RecruitVO.class)).uniqueResult();
 	}
 }
 

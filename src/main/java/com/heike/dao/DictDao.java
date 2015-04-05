@@ -14,7 +14,7 @@ import com.heike.domain.pojo.Dict;
  */
 @Repository
 @SuppressWarnings("unchecked")
-public class DictDao extends HibernateDao<Dict>{
+public class DictDao extends HibernateDao {
 	
 	/**
 	 * 保存
