@@ -1,21 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>我的资料</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
-	<link rel="stylesheet" href="css/page.css">	
-	
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
 		.custom{
 			height:51px;
@@ -29,7 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			margin-top: 250px;
 		}
 		
+		.div-top {
+			margin-top: 5px;	
+		}
 	</style>
+	
+	<link href="<c:url value='/resources/css/zzsc.css'/>" rel="stylesheet"/>	
+	<script src="<c:url value='/resources/js/showlist.js'/>"></script>
+	
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-	<jsp:include page="nav.jsp"></jsp:include>
+	<jsp:include page="../inc/nav.jsp"></jsp:include>
       
     <div class="row">
     	<div class="col-md-2">
@@ -57,25 +56,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     	  	<form action="employer/update-updateEmployer.do" method="post" 
 	     	  	class="form-horizontal" role="form" >
 	     	  		<div class="form-group">
-		        		<label class="col-md-3 control-label">账号：</label>
+		        		<label class="col-md-3 control-label">登录账号：</label>
 		        		<div  class="col-md-3 div-top">
-		        			<!-- 
-		        			<input type="text" disabled="disabled" class="form-control" value="${employer.account}"/>
-		        			 -->
 		        			 ${employer.account}
-		        			<input type="hidden" class="form-control" name="empId" value="${employer.id }"/>
+		        			<input type="hidden" class="form-control" id="id" name="id" value="${employer.id }"/>
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
-		        		<label for="name" class="col-md-3 control-label">名称：</label>
+		        		<label for="name" class="col-md-3 control-label">单位名称：</label>
 		        		<div class="col-md-3">
 		        			<input type="text" class="form-control" id="name" name="name" value="${employer.name}" autofocus="autofocus"/>
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
+		        		<label for="name" class="col-md-3 control-label">登录密码：</label>
+		        		<div class="col-md-3">
+		        			<input type="password" class="form-control" id="password" />
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-3 control-label">密码确认：</label>
+		        		<div class="col-md-3">
+		        			<input type="password" class="form-control" id="repassword" />
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
 		        		<label for="name" class="col-md-3 control-label">电话号码：</label>
 		        		<div class="col-md-3">
-		        			<input type="text" class="form-control" name="mobile" value="${employer.mobile}"/>
+		        			<input type="text" class="form-control" id="mobile" name="mobile" value="${employer.mobile}"/>
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
@@ -97,15 +105,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        		</div>
 					</div>
 					<div class="form-group">
+						<label class="col-md-3 control-label">注册时间：</label>	       
+		        		<div class="col-md-3">
+			        		${employer.regDate }	
+		        		</div>
+	        		</div>
+					<div class="form-group">
 						<label class="col-md-3 control-label">备注：</label>	       
 		        		<div class="col-md-3">
-			        		<textarea class="form-control" name="remarks">${employer.remarks }</textarea>	
+			        		<textarea class="form-control" id="remarks" name="remarks">${employer.remarks }</textarea>	
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
 			            <label class="col-md-3 control-label"></label>	
 			            <div class="col-md-7">
-			          	  <input type="submit" class="btn btn-primary" value="保存修改"/>
+			          	  <input type="button" id="edit" class="btn btn-primary" value="保存修改"/>
 			            </div>
 		         	</div>
 		          	
@@ -118,8 +132,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div><!-- /.container -->
    
    <div class="footer">
-   		<jsp:include page="../main/footer.jsp"></jsp:include>
+   		<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
+   
+   <script type="text/javascript">
+   	$(function(){
+   		// TODO 输入验证
+   		var id = $("#id").val();
+   		var name = $("#name").val();
+   		var mobile = $("#mobile").val();
+   		var teacher = $("#teacher").val();
+   		var remarks = $("#remarks").val();
+   		
+		var data = {"id":id, "name": name, "mobile": mobile, "teacher": teacher, "remarks":remarks};
+
+		// 更新
+		$("#edit").click(function(){
+			$.post(contextPath + "/employer/edit", data, "text").done(function(data){
+	   			if(data == "success"){
+	   				alert("更新成功！");
+	   			}
+	   		}).fail(function(data){
+	   			alert("更新失败！");
+	   		});
+		});
+		
+   		
+   	});
+   </script>
 
 </body>
 </html>

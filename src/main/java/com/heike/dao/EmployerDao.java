@@ -1,19 +1,46 @@
 package com.heike.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
+import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.pojo.Employer;
 
 @Repository
 public class EmployerDao extends HibernateDao {
 	
 	/**
-	 * 保存或更新
+	 * 保存
 	 * @param employer
 	 */
-	public void saveOrUpdate(Employer employer) {
-		getSession().saveOrUpdate(employer);
+	public void save(Employer employer) {
+		getSession().save(employer);
+	}
+	
+	public void update(EmployerDto dto) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("update Employer set name = :name");
+		
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("name", dto.getName());
+		
+		if(StringUtils.isNotBlank(dto.getPwd())){	// 更新密码
+			builder.append(", pwd = :pwd");
+			values.put("pwd", dto.getPwd());
+		}
+		
+		builder.append(", teacher =:teacher, mobile = :mobile, remarks = :remarks where id = :id");
+		values.put("teacher", dto.getTeacher());
+		values.put("mobile", dto.getMobile());
+		values.put("remarks", dto.getRemarks());
+		values.put("id", dto.getId());
+
+		getSession().createQuery(builder.toString())
+			.setProperties(values).executeUpdate();
 	}
 	
 	/**

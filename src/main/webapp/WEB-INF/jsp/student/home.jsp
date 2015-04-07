@@ -136,7 +136,7 @@
    </div><!-- /.container -->
    
    <div class="footer">
-   	<jsp:include page="../main/footer.jsp"></jsp:include>
+   	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
 </body>
 </html>

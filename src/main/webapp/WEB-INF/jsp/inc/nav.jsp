@@ -22,7 +22,7 @@
                 <li><a href="help.html" target="_blank">帮助中心</a></li>
           </ul>
 		  <ul class="nav navbar-nav navbar-right">
-	           	<li><a href="${ctx }/student/myinfo">${user.name } <span class="glyphicon glyphicon-user"></span></a></li>
+	           	<li><a style="cursor: pointer;">${user.name } <span class="glyphicon glyphicon-user"></span></a></li>
 	           	<li class="divider-vertical"></li>
 	           	<li><a href="${ctx }/logout">退出 <span class="glyphicon glyphicon-log-out"></span></a></li>
 	      </ul>
