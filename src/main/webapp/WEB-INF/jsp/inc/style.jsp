@@ -2,6 +2,7 @@
 <script src="<c:url value='/resources/js/jquery-1.11.1.min.js'/>"></script>
 <script src="<c:url value='/resources/bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/resources/scripts/bootstrap.page-1.1.2.js'/>"></script>
+<script src="<c:url value='/resources/scripts/utils.js'/>"></script>
 <script>
     var contextPath = "${ctx}";
 </script>

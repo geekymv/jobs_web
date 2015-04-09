@@ -1,14 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-		<jsp:include page="nav.jsp"></jsp:include>
+		<jsp:include page="../inc/nav.jsp"></jsp:include>
     <div class="row">
     	<div class="col-md-2">
 			<div class="panel panel-primary">	 
@@ -98,22 +91,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
    </div><!-- /.container -->
    
-   
    <div class="footer">
-   <jsp:include page="../main/footer.jsp"></jsp:include>
+	   <jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
-
-<!-- 
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="jquery-ui/external/jquery/jquery.js"></script>
-<script src="jquery-ui/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#menu").menu();
-	});
-</script>
- -->
  
 </body>
 </html>

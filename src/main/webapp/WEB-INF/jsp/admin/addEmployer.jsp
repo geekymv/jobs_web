@@ -1,18 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<title>添加用工单位</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
 
 	<style type="text/css">
 		.footer {
@@ -31,9 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
 	
 	<link href="css/zzsc.css" rel="stylesheet" type="text/css" />
-	
-	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 	<script src="js/showlist.js" type="text/javascript"></script>
+	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -105,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-		<jsp:include page="nav.jsp"></jsp:include>
+		<jsp:include page="../inc/nav.jsp"></jsp:include>
 		
 		<div class="row">
     	<div class="col-md-2">
@@ -128,7 +121,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div> 
 					<label class="control-label error-info">
 						<em>*</em>
-					    <s:fielderror fieldName="account"></s:fielderror>
 					</label>
 			  	</div>
 			  	<div class="form-group">	
@@ -138,7 +130,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div> 
 					<label class="control-label error-info">
 						<em>*</em>
-					    <s:fielderror fieldName="password"></s:fielderror>
 					</label>
 			  	</div>
 			  	<div class="form-group">	
@@ -148,7 +139,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div> 
 					<label class="control-label error-info">
 						<em>*</em>
-					    <s:fielderror fieldName="repassword"></s:fielderror>
 					</label>
 			  	</div>
 			  	<div class="form-group">
@@ -158,7 +148,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    </div>
 					    <label class="control-label error-info">
 					    	<em>*</em>
-					    	<s:fielderror fieldName="name"></s:fielderror>
 					    </label>
 				</div>
 				<div class="form-group">
@@ -168,7 +157,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    </div>
 					    <label class="control-label error-info">
 					    	<em>*</em>
-					    	<s:fielderror fieldName="mobile"></s:fielderror>
 					    </label>
 				</div>
 				<div class="form-group">
@@ -178,7 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    </div>
 					    <label class="control-label error-info">
 					    	<em>*</em>
-					    	<s:fielderror fieldName="teacher"></s:fielderror>
 					    </label>
 				</div>
 				<div class="form-group">
@@ -188,7 +175,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    </div>
 					    <label class="control-label error-info">
 					    	<em>*</em>
-					    	<s:fielderror fieldName="postNum"></s:fielderror>
 					    </label>
 				</div>
 			  	<div class="form-group">
@@ -198,7 +184,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    </div>
 					    <label class="control-label error-info">
 					    	<em>*</em>
-					    	<s:fielderror fieldName="totalMoney"></s:fielderror>
 					    </label>
 				</div>
 
@@ -221,14 +206,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
    </div><!-- /.container -->
    
-   
    <div class="footer">
-   <jsp:include page="../main/footer.jsp"></jsp:include>
+	   <jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
-
-
-
-<script src="bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

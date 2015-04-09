@@ -32,7 +32,7 @@
 
 <body>
 	<div class="container">
-		<jsp:include page="nav.jsp"></jsp:include>
+		<jsp:include page="../inc/nav.jsp"></jsp:include>
 		<div class="row">
     	<div class="col-md-2">
     		<div class="panel panel-primary">
@@ -51,7 +51,7 @@
    
    
    <div class="footer">
-   <jsp:include page="../main/footer.jsp"></jsp:include>
+   <jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
 
 </body>

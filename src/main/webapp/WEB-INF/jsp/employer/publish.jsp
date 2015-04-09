@@ -1,14 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-	<base href="<%=basePath%>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
@@ -56,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<div class="container">
-    <jsp:include page="nav.jsp"></jsp:include>   
+    <jsp:include page="../inc/nav.jsp"></jsp:include>   
        
     <div class="row">
     	<div class="col-md-2">
@@ -132,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
    
    <div class="footer">
-   <jsp:include page="../main/footer.jsp"></jsp:include>
+   	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
 
 
@@ -142,39 +135,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		/*
-		$('input[id="title"]').blur(function(){
-			if($(this).val().trim() == ''){
-				alert("标题不能为空！");				
-			}
-		});
-		$('input[id="postName"]').blur(function(){
-			if($(this).val().trim() == ''){
-				alert("岗位名称不能为空！");				
-			}
-		});
-		$('input[id="postNum"]').blur(function(){
-			if($(this).val().trim() == ''){
-				alert("招聘人数不能为空！");				
-			}
-		});
-		$('input[id="salary"]').blur(function(){
-			if($(this).val().trim() == ''){
-				alert("薪资待遇不能为空！");				
-			}
-		});
-		$('input[id="context"]').blur(function(){
-			if($(this).val().trim() == ''){
-				alert("工作要求不能为空！");				
-			}
-		});
-		$('input[id="datepicker"]').blur(function(){
-			if($(this).val().trim() == ''){
-				alert("截止日期不能为空！");				
-			}
-		});
-		*/
-		
 		$("#submit").click(function(){
 			if($("#datepicker").val().trim() == ''){
 				alert("截止日期不能为空！");
