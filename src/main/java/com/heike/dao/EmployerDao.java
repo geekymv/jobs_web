@@ -21,9 +21,13 @@ public class EmployerDao extends HibernateDao {
 		getSession().save(employer);
 	}
 	
+	/**
+	 * 更新
+	 * @param dto
+	 */
 	public void update(EmployerDto dto) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("update Employer set name = :name");
+		builder.append("update Employer set name = :name");	// 用工单位名称
 		
 		Map<String, Object> values = new HashMap<String, Object>();
 		values.put("name", dto.getName());

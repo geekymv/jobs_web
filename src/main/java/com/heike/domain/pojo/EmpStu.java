@@ -1,10 +1,14 @@
 package com.heike.domain.pojo;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 用工单位-学生
@@ -18,6 +22,7 @@ public class EmpStu {
 	private Long id;
 	private Long empId; // 用工单位id
 	private Long stuId; // 学生id
+	private String date;	// 审核时间
 	private Integer status; // 状态(1在职，-1离职)
 	
 	@Id
@@ -42,6 +47,15 @@ public class EmpStu {
 	public void setStuId(Long stuId) {
 		this.stuId = stuId;
 	}
+	
+	@Column(name="audit_date")
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 	// length属性表示字段的长度，当字段的类型为varchar时，该属性才有效，默认为255个字符。
 	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {

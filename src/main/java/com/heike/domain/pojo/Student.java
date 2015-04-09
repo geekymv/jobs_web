@@ -27,7 +27,7 @@ public class Student {
 	private String mobile; // 联系方式
 	private String email;	// 邮箱
 	private String introduce;	//自我介绍
-	private Date regTime;	//注册时间
+	private String regTime;	//注册时间
 	private Integer status;	// 账号状态(1正常， 0冻结， -1删除)
 	
 	public Student() {
@@ -109,11 +109,11 @@ public class Student {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getRegTime() {
+	
+	public String getRegTime() {
 		return regTime;
 	}
-	public void setRegTime(Date regTime) {
+	public void setRegTime(String regTime) {
 		this.regTime = regTime;
 	}
 	@Column(columnDefinition="int(1) default 1")

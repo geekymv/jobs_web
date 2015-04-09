@@ -27,7 +27,7 @@ public class Salary {
 	private Long stuId;	//多对一的关联关系，Student是一的一方
 	private Integer status; // 工资状态 1正常， -1已被删除
 	private String remarks;		//备注
-	private Date date;
+	private String date;
 	
 	public Salary() {
 	}
@@ -112,11 +112,10 @@ public class Salary {
 		this.remarks = remarks;
 	}
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

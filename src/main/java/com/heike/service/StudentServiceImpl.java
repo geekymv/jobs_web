@@ -17,6 +17,7 @@ import com.heike.domain.pojo.Student;
 import com.heike.domain.service.StudentService;
 import com.heike.domain.vo.ApplyRecruitVO;
 import com.heike.domain.vo.StudentVO;
+import com.heike.util.DateUtils;
 import com.heike.util.EncryptUtil;
 
 @Service
@@ -44,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student register(Student student) {
 		// 设置注册时间
-		student.setRegTime(new Date());
+		student.setRegTime(DateUtils.getCurrentGaDate());
 		// 设置用户状态为正常
 		student.setStatus(SysCode.UserStatus.USER_NORMAL);
 		// 对密码加密
@@ -59,7 +60,7 @@ public class StudentServiceImpl implements StudentService {
 		RecruitStu rs = new RecruitStu();
 		rs.setStuId(stuId);
 		rs.setRecId(recId);
-		rs.setApplyDate(new Date());
+		rs.setApplyDate(DateUtils.getCurrentGaDate());
 		rs.setStatus(SysCode.RecruitStudent.WAIT);	// 等待审核
 		
 		recruitStuDao.saveOrUpdate(rs);

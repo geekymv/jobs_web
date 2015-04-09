@@ -46,7 +46,7 @@ public class RecruitServiceImpl implements RecruitService {
 		List<RecruitStu> rss = recruitStuDao.queryById(id);
 		if(rss != null && rss.size() > 0) {
 			for (RecruitStu rs : rss) {
-				String applyDate = DateUtils.format(null, rs.getApplyDate());
+				String applyDate = rs.getApplyDate();
 				Integer status = rs.getStatus();
 				Long stuId = rs.getStuId();
 				Student student = studentDao.queryById(stuId);

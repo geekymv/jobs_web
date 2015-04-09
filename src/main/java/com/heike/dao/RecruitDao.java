@@ -11,7 +11,6 @@ import com.heike.base.HibernateDao;
 import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
-import com.heike.domain.pojo.Recruit;
 import com.heike.domain.vo.RecruitVO;
 
 /**

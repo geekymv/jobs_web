@@ -23,10 +23,10 @@ public class Recruit {
 	private Integer postNum;	//招聘人数
 	private String salary;	//薪资待遇
 	private String context;	//工作要求
-	private Date releaseDate;	//发布时间
-	private Date updateDate;	// 更新时间
+	private String releaseDate;	//发布时间
+	private String updateDate;	// 更新时间
 	private int applyNum;		//已报名人数
-	private Date endDate;	//报名截止时间
+	private String endDate;	//报名截止时间
 	private String remarks;	//备注
 	private Integer status;	//  状态(1已发布，0已关闭，-1已删除)
 	private Long empId; //用工单位
@@ -86,20 +86,18 @@ public class Recruit {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getReleaseDate() {
+
+	public String getReleaseDate() {
 		return releaseDate;
 	}
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 	@Column(columnDefinition="int(11) default 0")
@@ -109,11 +107,11 @@ public class Recruit {
 	public void setApplyNum(int applyNum) {
 		this.applyNum = applyNum;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getEndDate() {
+
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	public String getRemarks() {

@@ -1,5 +1,7 @@
 package com.heike.web.employer;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.heike.domain.dto.EmployerDto;
@@ -16,6 +19,7 @@ import com.heike.domain.dto.RecruitQueryDto;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.service.EmployerService;
 import com.heike.domain.service.RecruitService;
+import com.heike.domain.vo.EmployerStudentVO;
 import com.heike.domain.vo.RecruitVO;
 
 @Controller
@@ -68,6 +72,32 @@ public class EmployerController {
 	@ResponseBody
 	public String edit(EmployerDto dto){
 		
+		employerService.edit(dto);
+		
 		return "success";
+	}
+	
+	/**
+	 * 跳转到学生列表页面
+	 * @return
+	 */
+	@RequestMapping(value="/students", method=RequestMethod.GET)
+	public String listStudent() {
+		return "employer/students";
+	}
+	
+	/**
+	 * 学生列表-分页
+	 * @param pager
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/studentPage")
+	@ResponseBody
+	public Pager<EmployerStudentVO> getList(Pager<EmployerStudentVO> pager, HttpSession session){
+		Employer employer = (Employer)session.getAttribute("user");
+		employerService.getStudentPage(pager, employer.getId());
+	//	pager.setTotalPage(200);
+		return pager;
 	}
 }

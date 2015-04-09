@@ -26,7 +26,7 @@ public class Employer {
 	private Integer totalMoney;	//申请月总金额
 	private Integer postNum;	//申请的岗位数
 	private Integer authority;	//权限(1-管理员， 2-用工单位)
-	private Date regDate;	// 注册时间
+	private String regDate;	// 注册时间
 	private Integer status; // 账号是否可用(1可用 ，0冻结，-1删除)
 	private String remarks;		//备注
 	
@@ -114,11 +114,11 @@ public class Employer {
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getRegDate() {
+	
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 	@Column(columnDefinition="int(1) default 1")

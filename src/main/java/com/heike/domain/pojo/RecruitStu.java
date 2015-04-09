@@ -22,7 +22,7 @@ public class RecruitStu {
 	private Long id;
 	private Long recId; // 招聘信息id
 	private Long stuId;	// 学生id
-	private Date applyDate;	// 报名时间
+	private String applyDate;	// 报名时间
 	private Integer status; // 状态(1审核通过, 0等待审核, -1审核不通过)
 	
 	@Id
@@ -54,11 +54,11 @@ public class RecruitStu {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getApplyDate() {
+	
+	public String getApplyDate() {
 		return applyDate;
 	}
-	public void setApplyDate(Date applyDate) {
+	public void setApplyDate(String applyDate) {
 		this.applyDate = applyDate;
 	}
 }

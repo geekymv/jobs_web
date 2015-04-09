@@ -53,10 +53,10 @@ public abstract class HibernateDao {
 	 * @return
 	 */
 	public <T> Pager<T> findByPage(String hql, Map<String, Object> params, Pager<T> pager){
-//		int currentPage = pager.getCurrentPage(); 
-		int pageSize = pager.getPageSize(); // 
-//		int firstResult = (currentPage  - 1 ) * pageSize; 
-		int firstResult = pager.getPageOffSet();
+		int currentPage = pager.getPageIndex() + 1;
+		int pageSize = pager.getPageSize();
+		int firstResult = (currentPage  - 1 ) * pageSize; 
+//		int firstResult = pager.getPageOffSet();
 		
 		Query query = this.getSession().createQuery(hql).setProperties(params);
 		

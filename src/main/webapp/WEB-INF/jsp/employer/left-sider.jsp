@@ -19,7 +19,7 @@
       <li >
         <h4 >学生管理</h4>
         <div class="list-item none">
-          <p ><a href="employer/stu-listStudent.do" target="_self">学生列表</a></p>
+          <p><a href="${ctx }/employer/students" target="_self">学生列表</a></p>
         </div>
       </li>
       <li >
