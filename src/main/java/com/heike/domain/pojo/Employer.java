@@ -20,7 +20,7 @@ public class Employer {
 	private String teacher;	//负责老师
 	private String mobile; // 电话号码
 	private Integer totalMoney;	//申请月总金额
-	private Integer postNum;	//申请的岗位数
+	private Integer postNum;	//岗位数
 	private Integer authority;	//权限(1-管理员， 2-用工单位)
 	private String regDate;	// 注册时间
 	private Integer status; // 账号是否可用(1可用 ，0冻结，-1删除)
@@ -92,18 +92,21 @@ public class Employer {
 	public void setTotalMoney(Integer totalMoney) {
 		this.totalMoney = totalMoney;
 	}
+	
 	public Integer getPostNum() {
 		return postNum;
 	}
 	public void setPostNum(Integer postNum) {
 		this.postNum = postNum;
 	}
+	
 	public Integer getAuthority() {
 		return authority;
 	}
 	public void setAuthority(Integer authority) {
 		this.authority = authority;
 	}
+	
 	public String getRemarks() {
 		return remarks;
 	}

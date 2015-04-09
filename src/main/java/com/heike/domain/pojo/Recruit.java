@@ -20,7 +20,6 @@ public class Recruit {
 	private String salary;	//薪资待遇
 	private String context;	//工作要求
 	private String releaseDate;	//发布时间
-	private String updateDate;	// 更新时间
 	private int applyNum;		//已报名人数
 	private String endDate;	//报名截止时间
 	private String remarks;	//备注
@@ -91,14 +90,7 @@ public class Recruit {
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-	
-	@Column(length=14)
-	public String getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
+
 	@Column(columnDefinition="int(11) default 0")
 	public int getApplyNum() {
 		return applyNum;

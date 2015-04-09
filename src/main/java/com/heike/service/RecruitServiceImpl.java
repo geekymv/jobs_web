@@ -12,13 +12,13 @@ import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
+import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
 import com.heike.domain.vo.RecruitVO;
-import com.heike.util.DateUtils;
 
 @Service
 public class RecruitServiceImpl implements RecruitService {
@@ -79,6 +79,11 @@ public class RecruitServiceImpl implements RecruitService {
 		pager.setPageOffSet(pageOffSet);
 		
 		return recruitDao.queryByPage(pager, dto);
+	}
+
+	@Override
+	public void add(Recruit recruit) {
+		recruitDao.save(recruit);
 	}
 
 }

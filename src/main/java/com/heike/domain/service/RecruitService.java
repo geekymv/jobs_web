@@ -54,4 +54,10 @@ public interface RecruitService {
 	 * @return
 	 */
 	public List<ApplyRecordVO> getApplyRecords(Long stuId);
+	
+	/**
+	 * 发布招聘信息
+	 * @param recruit
+	 */
+	public void add(Recruit recruit);
 }

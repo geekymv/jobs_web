@@ -150,11 +150,11 @@
 					<tr>
 						<td>
 							<span>发布时间：</span>
-							<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy-MM-dd hh:dd:ss"/>
+							${recruit.releaseDate }
 						</td>
 						<td>
 							<span>截止时间：</span>
-							<fmt:formatDate value="${recruit.endDate }" pattern="yyyy-MM-dd hh:dd:ss"/>
+							${recruit.endDate }
 						</td>
 					</tr>
 					<tr>

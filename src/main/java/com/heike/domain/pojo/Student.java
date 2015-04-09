@@ -47,18 +47,23 @@ public class Student {
 		this.id = id;
 	}
 
+	@Column(length=10)
 	public String getNum() {
 		return num;
 	}
 	public void setNum(String num) {
 		this.num = num;
 	}
+	
+	@Column(length=40)
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+	
+	@Column(length=20)
 	public String getName() {
 		return name;
 	}

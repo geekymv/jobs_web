@@ -1,7 +1,5 @@
 package com.heike.web.employer;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +15,7 @@ import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
 import com.heike.domain.pojo.Employer;
+import com.heike.domain.pojo.Recruit;
 import com.heike.domain.service.EmployerService;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.EmployerStudentVO;
@@ -99,5 +98,22 @@ public class EmployerController {
 		employerService.getStudentPage(pager, employer.getId());
 	//	pager.setTotalPage(200);
 		return pager;
+	}
+	
+	@RequestMapping("/addRecruit")
+	public void add(){
+		for (int i = 4; i < 20; i++) {
+			Recruit recruit = new Recruit();
+			recruit.setTitle("标题" + i);
+			recruit.setContext("内容" + i);
+			recruit.setPostName("岗位名称" + i);
+			recruit.setReleaseDate("20150409113730");
+			recruit.setEndDate("20150412113730");
+			recruit.setEmpId(2L);
+			recruit.setSalary("100");
+			
+			recruitService.add(recruit );
+		}
+		
 	}
 }

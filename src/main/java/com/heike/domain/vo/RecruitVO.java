@@ -1,6 +1,5 @@
 package com.heike.domain.vo;
 
-import java.util.Date;
 
 public class RecruitVO {
 	private Long id;
@@ -9,10 +8,9 @@ public class RecruitVO {
 	private Integer postNum;	//招聘人数
 	private String salary;	//薪资待遇
 	private String context;	//工作要求
-	private Date releaseDate;	//发布时间
-	private Date updateDate;	// 更新时间
+	private String releaseDate;	//发布时间
 	private int applyNum;		//已报名人数
-	private Date endDate;	//报名截止时间
+	private String endDate;	//报名截止时间
 	private String remarks;	//备注
 	private Integer status;	//  状态(1已发布，0已关闭，-1已删除)
 	private String empName;	// 用工单位名称
@@ -21,8 +19,8 @@ public class RecruitVO {
 	public RecruitVO() {
 	}
 
-	public RecruitVO(Long id, String title, String postName, Date releaseDate,
-			Date endDate, String empName) {
+	public RecruitVO(Long id, String title, String postName, String releaseDate,
+			String endDate, String empName) {
 		this.id = id;
 		this.title = title;
 		this.postName = postName;
@@ -30,9 +28,6 @@ public class RecruitVO {
 		this.endDate = endDate;
 		this.empName = empName;
 	}
-
-
-
 
 	public Long getId() {
 		return id;
@@ -70,28 +65,23 @@ public class RecruitVO {
 	public void setContext(String context) {
 		this.context = context;
 	}
-	public Date getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+	
 	public int getApplyNum() {
 		return applyNum;
 	}
 	public void setApplyNum(int applyNum) {
 		this.applyNum = applyNum;
 	}
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	public String getRemarks() {

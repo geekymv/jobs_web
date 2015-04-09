@@ -44,7 +44,7 @@ public class EmpStu {
 		this.stuId = stuId;
 	}
 	
-	@Column(name="audit_date")
+	@Column(name="audit_date", length=14)
 	public String getDate() {
 		return date;
 	}

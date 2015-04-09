@@ -115,7 +115,7 @@ public class RecruitDao extends HibernateDao {
 	public RecruitVO queryById(Long id) {
 		String hql = "select r.id as id, r.title as title, r.postName as postName, r.postNum as postNum, r.salary as salary, "
 				+ " r.context as context, "
-					+ " r.releaseDate as releaseDate, r.updateDate as updateDate, r.applyNum as applyNum, r.endDate as endDate,"
+					+ " r.releaseDate as releaseDate, r.applyNum as applyNum, r.endDate as endDate,"
 					+ " r.remarks as remarks, r.status as status,"
 					+ " e.name as empName"
 					+ " from Recruit r, Employer e" 
@@ -125,6 +125,7 @@ public class RecruitDao extends HibernateDao {
 				.createQuery(hql).setLong("id", id)
 				.setResultTransformer(Transformers.aliasToBean(RecruitVO.class)).uniqueResult();
 	}
+	
 }
 
 

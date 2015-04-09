@@ -842,6 +842,11 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		return "";
 	}
 	
+	public static void main(String[] args) {
+		
+		System.out.println(getCurrentGaDate());
+		
+	}
 }
 
 

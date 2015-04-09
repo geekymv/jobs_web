@@ -6,9 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
-import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
-import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.StudentVO;
 

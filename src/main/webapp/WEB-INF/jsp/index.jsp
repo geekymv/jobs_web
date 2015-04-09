@@ -126,10 +126,10 @@
 		            			<td>${recruit.postName }</td> 
 		            			<td>${recruit.empName }</td>
 		            			<td>
-		            				<fmt:formatDate value="${recruit.releaseDate }" pattern="yyyy-MM-dd hh:mm:ss"/>
+		            				${recruit.releaseDate }
 		            			</td>
 		            			<td>
-		            				<fmt:formatDate value="${recruit.endDate }" pattern="yyyy-MM-dd"/>
+		            				${recruit.endDate }
 		            			</td>
 			  					<td>
 			  						<a href="<c:url value='detail/${recruit.id }'/>">查看</a>
