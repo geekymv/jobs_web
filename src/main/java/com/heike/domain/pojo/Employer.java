@@ -1,14 +1,10 @@
 package com.heike.domain.pojo;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * 用工单位
@@ -115,6 +111,7 @@ public class Employer {
 		this.teacher = teacher;
 	}
 	
+	@Column(length=14)
 	public String getRegDate() {
 		return regDate;
 	}

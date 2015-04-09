@@ -1,14 +1,10 @@
 package com.heike.domain.pojo;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * 招聘信息
@@ -87,6 +83,7 @@ public class Recruit {
 		this.salary = salary;
 	}
 
+	@Column(length=14)
 	public String getReleaseDate() {
 		return releaseDate;
 	}
@@ -94,6 +91,7 @@ public class Recruit {
 		this.releaseDate = releaseDate;
 	}
 	
+	@Column(length=14)
 	public String getUpdateDate() {
 		return updateDate;
 	}
@@ -107,7 +105,8 @@ public class Recruit {
 	public void setApplyNum(int applyNum) {
 		this.applyNum = applyNum;
 	}
-
+	
+	@Column(length=14)
 	public String getEndDate() {
 		return endDate;
 	}

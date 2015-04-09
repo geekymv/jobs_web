@@ -1,14 +1,10 @@
 package com.heike.domain.pojo;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * 学生类
@@ -110,12 +106,14 @@ public class Student {
 		this.introduce = introduce;
 	}
 	
+	@Column(length=14)
 	public String getRegTime() {
 		return regTime;
 	}
 	public void setRegTime(String regTime) {
 		this.regTime = regTime;
 	}
+	
 	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;
