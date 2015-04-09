@@ -4,15 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
-import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.vo.ApplyRecruitVO;
 import com.heike.domain.vo.EmployerStudentVO;
-import com.heike.domain.vo.RecruitVO;
 
 /**
  * 用工单位-学生Dao

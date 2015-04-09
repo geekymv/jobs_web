@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
@@ -10,16 +9,6 @@
 	<title>基本资料</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
-		.custom{
-			height:51px;
-		}
-		
-		.footer {
-			background-color:  #333;
-			width: 100%;
-			height: 165px;
-			margin-top: 240px;
-		}
 		ul li {
 			line-height: 40px;
 		}
@@ -57,7 +46,7 @@
 		        	<li>专业：${student.profession }</li>
 		        	<li>手机号码：${student.mobile }</li>
 		        	<li>自我介绍：${student.introduce }</li>	
-		        	<li>注册时间：<fmt:formatDate value="${student.regTime }" pattern="yyyy-MM-dd hh:mm:ss"/></li>
+		        	<li id="regTime">注册时间：</li>
 		        </ul>	
 		        <%--
 		        <a href="student/preupdate.do" class="btn btn-primary">修改基本资料</a>	
@@ -70,6 +59,12 @@
    <div class="footer">
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
-
+   <script type="text/javascript">
+		$(function(){
+			// 注册时间处理
+			var regTime = '${student.regTime }';
+			$('#regTime').append(formatterDate(regTime));
+		});   	
+   </script>
 </body>
 </html>

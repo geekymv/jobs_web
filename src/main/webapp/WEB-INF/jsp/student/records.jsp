@@ -9,15 +9,6 @@
 	<title>我的报名记录</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
-		.custom{
-			height:51px;
-		}
-		.footer {
-			background-color:  #333;
-			width: 100%;
-			height: 165px;
-			margin-top: 450px;
-		}
 		.left-sider a {
 			font-weight: bold;
 			text-align: center;
@@ -61,7 +52,7 @@
 		            			<td>${record.postName }</td>
 		            			<td>${record.employer }</td>
 		            			<td>${record.salary }</td>
-		            			<td><fmt:formatDate value="${record.applyTime }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+		            			<td>${record.applyTime }</td>
 		            			<td>
 		            			<c:choose>
 		            				<c:when test="${record.status  == 1}">

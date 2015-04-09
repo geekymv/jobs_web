@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
-import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
 import com.heike.domain.service.RecruitService;
@@ -39,14 +37,19 @@ public class IndexController {
 	 */
 	@RequestMapping("/index")
 	public String index(Model model, HttpServletRequest request) {
-		String offSet = request.getParameter("pager.offset");
-		int pageOffSet = 0;
-		if(StringUtils.isNotBlank(offSet)){
-			pageOffSet = Integer.parseInt(offSet);
-		}
-		Pager<RecruitVO> pager = recruitService.list(pageOffSet);
-		model.addAttribute("pager", pager);
 		return "index";
+	}
+	
+	/**
+	 * 首页分页显示招聘信息
+	 * @param pager
+	 * @return
+	 */
+	@RequestMapping("/recruits")
+	@ResponseBody
+	public Pager<RecruitVO> recruits(Pager<RecruitVO> pager) {
+		recruitService.findPage(pager);
+		return pager;
 	}
 	
 	/**

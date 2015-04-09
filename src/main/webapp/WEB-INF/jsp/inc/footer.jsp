@@ -7,7 +7,7 @@
 		#foot {
 			font-style: normal;
 			font-size: large;
-			padding-top: 55px;
+			padding-top: 50px;
 			text-align: center;
 		}
 		#foot a, #foot a:hover, #foot a:visited {

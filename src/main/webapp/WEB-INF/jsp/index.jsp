@@ -34,7 +34,6 @@
 		  <div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-              
 			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 			     
                data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span>
@@ -103,51 +102,25 @@
         <div class="panel panel-primary">
 	          <div class="panel-heading">招聘信息</div>
 	          <div class="panel-body">
-	            <p>&nbsp;</p>
 	          </div>
 	        
 	          <!-- Table -->
 	          <table class="table table-bordered table-hover table-condensed">
-	          	<c:choose>
-	          		<c:when test="${fn:length(pager.datas) == 0}">
-	            			没有招聘信息！
-	            	</c:when>
-	          		<c:otherwise>
-		          		<thead>
-			                <tr>
-			                   	<th>招聘信息标题</th> <th>岗位名称</th> <th>发布单位</th>
-					  			<th>发布时间</th> <th>截止日期</th>  <th>查看详情</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-		           			<c:forEach items="${pager.datas }" var="recruit">
-		           			<tr>
-		           				<td>${recruit.title }</td> 
-		            			<td>${recruit.postName }</td> 
-		            			<td>${recruit.empName }</td>
-		            			<td>
-		            				${recruit.releaseDate }
-		            			</td>
-		            			<td>
-		            				${recruit.endDate }
-		            			</td>
-			  					<td>
-			  						<a href="<c:url value='detail/${recruit.id }'/>">查看</a>
-			  					</td>
-			  				</tr>	
-		           			</c:forEach>
-			            </tbody>
-	          		</c:otherwise>
-	          	</c:choose>
+          		<thead>
+	                <tr>
+	                   	<th>招聘信息标题</th> <th>岗位名称</th> <th>发布单位</th>
+			  			<th>发布时间</th> <th>截止日期</th>  <th>查看详情</th>
+	                </tr>
+	            </thead>
+	            <tbody id="list">
+	            </tbody>
 	          </table>
-	        <c:if test="${pager.totalPage > 1}">
+	       
 			<div class="panel-footer">
-          		<nav style="text-align: center;">
+				<nav style="text-align: center;">
 				    <ul id="page" class="pagination" data-first-btn-text="首页" data-last-btn-text="尾页"></ul>
 				</nav>
             </div>
-            </c:if>
-	         
 	         
 	        </div> <!-- end of panel -->
       </div>
@@ -169,12 +142,42 @@
 
 	<img class="mini" src="<c:url value='/resources/img/mini.png'/>" width="65" height="37" />
 	
-	<script type="text/javascript">
-		$(function(){
+	 <script type="text/javascript">
+   		$(function(){
+			$("#page").page({
+			//	pageSize: 1,
+			//	btnCount: 11, // 按钮数需要设置成奇数
+				alwaysShowPage: true,
+			    remote: {
+			        url: contextPath + '/recruits',  //请求地址
+			        callback: function (result) {
+			            var datas = result.datas;
+ 			            var length = datas.length;
+			            var html = "";
+ 			            for(var i = 0; i < length; i++) {
+							var data = datas[i];
+							html += "<tr>"
+								+ "<td>"+ data.title +"</td>"	
+								+ "<td>"+ data.postName +"</td>"	
+								+ "<td>"+ data.empName +"</td>"	
+								+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
+								+ "<td>"+ formatterDate(data.endDate) +"</td>"	
+								+ "<td><a href='${ctx}/detail/"+data.id+"'>查看详情</a></td>"	
+								+ "</tr>";
+			            }
+ 			            $("tbody").html(html);
+			        }
+			    },
+				pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
+				pageSizeName: 'pageSize',       //请求参数，每页数量
+				totalName: 'totalRecord'       //指定返回数据的总数据量
+			});
+
+			// 首页底部效果
 			setTimeout(function(){
-			  $(".bottom_box").slideDown("slow");
-			},2000);
-		
+				  $(".bottom_box").slideDown("slow");
+				},2000);
+			
 			$(".close").click(function(){
 				$(".bottom_box").hide();	
 				$(".mini").show(200);	
@@ -183,7 +186,10 @@
 				$(this).hide();	
 				$(".bottom_box").show();	
 			})
-		});
+				
+   		});
+ 
+		
 	</script>
 
 </body>

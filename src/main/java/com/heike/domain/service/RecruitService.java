@@ -16,7 +16,7 @@ public interface RecruitService {
 	 * @param currentPage
 	 * @return
 	 */
-	public Pager<RecruitVO> list(int currentPage);
+	public void findPage(Pager<RecruitVO> pager);
 	
 	/**
 	 * 分页查询已发布的招聘信息

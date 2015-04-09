@@ -53,7 +53,7 @@ public class RecruitDao extends HibernateDao {
 	 * @param pager
 	 * @return
 	 */
-	public Pager<RecruitVO> queryByPage(Pager<RecruitVO> pager) {
+	public void queryByPage(Pager<RecruitVO> pager) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, e.name)")
 			.append(" from Recruit r, Employer e ")
@@ -63,7 +63,7 @@ public class RecruitDao extends HibernateDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", SysCode.RecruitCode.RECRUIT_PUBLISHED);
 		
-		return super.findByPage(builder.toString(), params, pager);
+		findByPage(builder.toString(), params, pager);
 
 	}
 	

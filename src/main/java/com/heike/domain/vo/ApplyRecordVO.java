@@ -1,6 +1,5 @@
 package com.heike.domain.vo;
 
-import java.util.Date;
 
 /**
  * 报名记录
@@ -9,14 +8,14 @@ public class ApplyRecordVO {
 	private String postName;	// 岗位名称
 	private String 	employer;	// 发布单位
 	private String salary;	// 薪资待遇
-	private Date applyTime;	// 报名时间
+	private String applyTime;	// 报名时间
 	private Integer status;	//审核状态(1审核通过, 0等待审核, -1审核不通过)
 	
 	public ApplyRecordVO() {
 	}
 	
 	public ApplyRecordVO(String postName, String employer, String salary,
-			Date applyTime, Integer status) {
+			String applyTime, Integer status) {
 		this.postName = postName;
 		this.employer = employer;
 		this.salary = salary;
@@ -44,10 +43,10 @@ public class ApplyRecordVO {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	public Date getApplyTime() {
+	public String getApplyTime() {
 		return applyTime;
 	}
-	public void setApplyTime(Date applyTime) {
+	public void setApplyTime(String applyTime) {
 		this.applyTime = applyTime;
 	}
 	public Integer getStatus() {

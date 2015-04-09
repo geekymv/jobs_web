@@ -56,10 +56,8 @@ public abstract class HibernateDao {
 		int currentPage = pager.getPageIndex() + 1;
 		int pageSize = pager.getPageSize();
 		int firstResult = (currentPage  - 1 ) * pageSize; 
-//		int firstResult = pager.getPageOffSet();
 		
 		Query query = this.getSession().createQuery(hql).setProperties(params);
-		
 		List<T> ts = (List<T>)query.setFirstResult(firstResult) //
 									.setMaxResults(pageSize) //
 									.list(); 

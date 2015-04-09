@@ -1,6 +1,5 @@
 package com.heike.domain.vo;
 
-import java.util.Date;
 
 public class EmployerStudentVO {
 	private Long id;	// 学生id
@@ -9,7 +8,7 @@ public class EmployerStudentVO {
 	private String profession;	// 学生专业
 	private String postName;	// 岗位名称
 	private String salary;	// 基本工资
-	private Date date;	// 审核时间
+	private String date;	// 审核时间
 	private Integer status; // 状态(1在职，-1离职)
 	
 	public EmployerStudentVO() {
@@ -17,7 +16,7 @@ public class EmployerStudentVO {
 	}
 	
 	public EmployerStudentVO(Long id, String num, String name, String profession, 
-			String postName, String salary, Date date,
+			String postName, String salary, String date,
 			Integer status) {
 		this.id = id;
 		this.name = name;
@@ -68,10 +67,10 @@ public class EmployerStudentVO {
 		this.salary = salary;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

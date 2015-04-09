@@ -1,6 +1,5 @@
 package com.heike.domain.vo;
 
-import java.util.Date;
 
 /**
  * 学生申请的岗位
@@ -9,7 +8,7 @@ import java.util.Date;
 public class ApplyRecruitVO {
 	private Long recruitId;	// 岗位id
 	private String recruitName;	// 岗位名称
-	private Date date;	// 报名时间
+	private String date;	// 报名时间
 	private Long employerId;	// 发布单位id
 	private String employer;	// 发布单位
 	private String salary; // 薪水
@@ -18,7 +17,7 @@ public class ApplyRecruitVO {
 	public ApplyRecruitVO() {
 	}
 
-	public ApplyRecruitVO(Long recruitId, String recruitName, Date date,
+	public ApplyRecruitVO(Long recruitId, String recruitName, String date,
 			Long employerId, String employer, String salary, Integer status) {
 		this.recruitId = recruitId;
 		this.recruitName = recruitName;
@@ -43,10 +42,10 @@ public class ApplyRecruitVO {
 		this.recruitName = recruitName;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

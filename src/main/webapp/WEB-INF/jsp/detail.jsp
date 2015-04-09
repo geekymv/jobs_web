@@ -9,16 +9,6 @@
 	<title>招聘详情</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
-		.custom{
-			height:51px;
-		}
-		.footer {
-			background-color:  #333;
-			width: 100%;
-			height: 165px;
-			margin-top: 190px;
-		}
-		
 		#students th, #students td{
 			text-align: center;
 		}
@@ -149,12 +139,10 @@
 	         		</tr>
 					<tr>
 						<td>
-							<span>发布时间：</span>
-							${recruit.releaseDate }
+							<span id="releaseDate">发布时间：</span>
 						</td>
 						<td>
-							<span>截止时间：</span>
-							${recruit.endDate }
+							<span id="endDate">截止时间：</span>
 						</td>
 					</tr>
 					<tr>
@@ -186,50 +174,63 @@
    </div>
 
 <script type="text/javascript">
-	$("#showStudents").button().on("click", function() {
-		$.post("${ctx}/getApplyStudents",
-				{"id": $("#rId").val()}, 
-				function(data){
-			$("#students").empty();
-			if(data == null || data.length == 0){
-				alert("还没有学生报名！");
-				return;
-			}
-			
-			var html = "<table class='table table-bordered table-hover table-condensed'>"
-				 + "<caption>学生信息</caption>"
-				 + "<tr>"
-				 + "<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>报名时间</th> <th>审核结果</th>"
-				 + "</tr>";
-				var flag = "";
-				for(var i = 0; i < data.length; i++){
-					var vo = data[i];
-					var num = vo.num;
-					var name = vo.name;
-					var profession = vo.profession;
-					var applyDate = vo.applyDate;
-					var status = vo.status;
-					
-					if(status == 0){	//等待处理
-						flag = "等待审核";
-					}else if(status == 1) {	//已通过
-						flag = "已录用";
-					}else if(status == -1) {
-						flag = "未录用";
-					}				
-					
-					html += "<tr>"
-						 + "<td>" + (i+1) +"</td>"
-						 + "<td align='center'>"+num+"</td>"+ "<td>"+name+"</td>"
-						 + "<td>"+ profession +"</td>" 
-						 + "<td>"+ applyDate	+"</td>" 
-						 + "<td><span style='color:#00CC33'>"+flag+"</span></td>"
-						 + "</tr>";
+	$(function(){
+		// 日期处理
+		var releaseDate = '${recruit.releaseDate }';	// 发布时间
+		$("#releaseDate").after(formatterDate(releaseDate));
+		var endDate = '${recruit.endDate }';	// 截止时间
+		$("#endDate").after(formatterDate(endDate));
+		
+		
+		
+		$("#showStudents").button().on("click", function() {
+			$.post("${ctx}/getApplyStudents",
+					{"id": $("#rId").val()}, 
+					function(data){
+				$("#students").empty();
+				if(data == null || data.length == 0){
+					alert("还没有学生报名！");
+					return;
 				}
-				html += "</table>";
-				$("#students").append(html);
-			});
+				
+				var html = "<table class='table table-bordered table-hover table-condensed'>"
+					 + "<caption>学生信息</caption>"
+					 + "<tr>"
+					 + "<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>报名时间</th> <th>审核结果</th>"
+					 + "</tr>";
+					var flag = "";
+					for(var i = 0; i < data.length; i++){
+						var vo = data[i];
+						var num = vo.num;
+						var name = vo.name;
+						var profession = vo.profession;
+						var applyDate = vo.applyDate;
+						var status = vo.status;
+						
+						if(status == 0){	//等待处理
+							flag = "等待审核";
+						}else if(status == 1) {	//已通过
+							flag = "已录用";
+						}else if(status == -1) {
+							flag = "未录用";
+						}				
+						
+						html += "<tr>"
+							 + "<td>" + (i+1) +"</td>"
+							 + "<td align='center'>"+num+"</td>"+ "<td>"+name+"</td>"
+							 + "<td>"+ profession +"</td>" 
+							 + "<td>"+ applyDate	+"</td>" 
+							 + "<td><span style='color:#00CC33'>"+flag+"</span></td>"
+							 + "</tr>";
+					}
+					html += "</table>";
+					$("#students").append(html);
+				});
+		});
+		
 	});
+
+	
 </script>
 </body>
 </html>

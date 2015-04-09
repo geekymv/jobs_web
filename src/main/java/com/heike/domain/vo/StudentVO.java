@@ -1,6 +1,5 @@
 package com.heike.domain.vo;
 
-import java.util.Date;
 
 public class StudentVO {
 	private Long id;
@@ -12,7 +11,7 @@ public class StudentVO {
 	private String mobile; // 联系方式
 	private String email;	// 邮箱
 	private String introduce;	//自我介绍
-	private Date regTime;	//注册时间
+	private String regTime;	//注册时间
 	
 	public StudentVO() {
 		// TODO Auto-generated constructor stub
@@ -20,7 +19,7 @@ public class StudentVO {
 	
 	public StudentVO(Long id, String num, String name, String gender,
 			String college, String profession, String mobile, String email,
-			String introduce, Date regTime) {
+			String introduce, String regTime) {
 		this.id = id;
 		this.num = num;
 		this.name = name;
@@ -87,10 +86,10 @@ public class StudentVO {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	public Date getRegTime() {
+	public String getRegTime() {
 		return regTime;
 	}
-	public void setRegTime(Date regTime) {
+	public void setRegTime(String regTime) {
 		this.regTime = regTime;
 	}
 	
