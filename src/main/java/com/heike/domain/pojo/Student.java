@@ -38,9 +38,6 @@ public class Student {
 		this.name = name;
 	}
 
-	
-
-
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -68,6 +65,7 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Column(length=5)
 	public String getGender() {
 		return gender;
 	}
@@ -87,18 +85,22 @@ public class Student {
 	public void setProfessionId(Long professionId) {
 		this.professionId = professionId;
 	}
+	@Column(length=20)
 	public String getMobile() {
 		return mobile;
 	}
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	@Column(length=20)
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String getIntroduce() {
 		return introduce;
 	}

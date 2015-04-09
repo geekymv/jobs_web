@@ -37,18 +37,18 @@ public class Salary {
 		this.id = id;
 	}
 
+	@Column(length=10)
 	public String getMonth() {
 		return month;
 	}
-
 	public void setMonth(String month) {
 		this.month = month;
 	}
 
+	@Column(length=20)
 	public String getWorktime() {
 		return worktime;
 	}
-
 	public void setWorktime(String worktime) {
 		this.worktime = worktime;
 	}

@@ -76,6 +76,7 @@ public class Recruit {
 		this.postNum = postNum;
 	}
 	
+	@Column(length=40)
 	public String getSalary() {
 		return salary;
 	}
@@ -113,12 +114,14 @@ public class Recruit {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	
 	public String getRemarks() {
 		return remarks;
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+	
 	@Column(columnDefinition="int(1) default 1")
 	public Integer getStatus() {
 		return status;

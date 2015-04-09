@@ -60,24 +60,31 @@ public class Employer {
 	public void setAccount(String account) {
 		this.account = account;
 	}
+	
+	@Column(length=40)
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+	
+	@Column(length=60)
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Column(length=20)
 	public String getMobile() {
 		return mobile;
 	}
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
 	@Column(columnDefinition="float default 0")
 	public Integer getTotalMoney() {
 		return totalMoney;
