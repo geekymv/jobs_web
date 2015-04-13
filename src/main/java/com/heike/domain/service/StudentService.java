@@ -36,9 +36,9 @@ public interface StudentService {
 	 * 学生报名活动
 	 * @param stuId 学生id
 	 * @param recId 招聘信息id
-	 * @return "success"报名成功，"fail"报名失败
+	 * @return "onJob" 在职, "isApplyed", "success"报名成功，"fail"报名失败
 	 */
-	public void apply(Long stuId, Long recId); 
+	public String apply(Long stuId, Long recId); 
 	
 	/**
 	 * 学生查看在职的岗位

@@ -100,7 +100,6 @@
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">招聘信息详情</div>
 	          <div class="panel-body">
-	            <span>&nbsp;</span>
 	          </div>
 	        
 	        <c:if test="${recruit == null }">

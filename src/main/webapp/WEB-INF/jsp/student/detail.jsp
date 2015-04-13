@@ -126,8 +126,21 @@
    					type: "post",
    					data:{"recId": '${recruit.id}'},
    					success:function(data){
+   						// "onJob" 在职, "isApplyed" 已在该用工单位报名, "success"报名成功，"fail"报名失败
+   						if(data == "onJob") {
+   							alert("你已经在该用工单位任职了！");
+   							return;
+   						}
+   						if(data == "isApplyed") {
+   							alert("你已经在该用工单位报名了！");
+   							return;
+   						}
    						if(data == "success"){
    							alert("报名成功！");
+   							window.location.reload();
+   						}
+   						if(data == "fail"){
+   							alert("报名失败！");
    							window.location.reload();
    						}
    					}

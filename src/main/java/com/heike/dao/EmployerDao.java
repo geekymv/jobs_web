@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.heike.base.HibernateDao;
 import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.pojo.Employer;
+import com.heike.util.EncryptUtil;
 
 @Repository
 public class EmployerDao extends HibernateDao {
@@ -34,7 +35,7 @@ public class EmployerDao extends HibernateDao {
 		
 		if(StringUtils.isNotBlank(dto.getPwd())){	// 更新密码
 			builder.append(", pwd = :pwd");
-			values.put("pwd", dto.getPwd());
+			values.put("pwd", EncryptUtil.md5Encrypt(dto.getPwd()));
 		}
 		
 		builder.append(", teacher =:teacher, mobile = :mobile, remarks = :remarks where id = :id");

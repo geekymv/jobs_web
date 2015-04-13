@@ -14,6 +14,16 @@
 			text-align: center;
 		}
 		
+		.pagination a {
+		    cursor: pointer;
+		    -moz-user-select: none;
+		    -webkit-user-select: none;
+		    -ms-user-select: none;
+		    -khtml-user-select: none;
+		    user-select: none;
+		}
+		
+		
 	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -50,7 +50,7 @@
 		            		<tr>
 		            			<td>${job.recruitName }</td>
 		            			<td>${job.employer }</td>
-		            			<td><fmt:formatDate value="${job.date }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+		            			<td id="apply_date"></td>
 		            			<td>${job.salary }</td>
 		            			<td>
 		            			<c:choose>
@@ -75,5 +75,16 @@
    <div class="footer">
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
+   
+   <script type="text/javascript">
+   	$(function() {
+   		// 对报名时间的处理
+   		var apply_date = ${job.date }
+   		$("#apply_date").html(formatterDate(apply_date));
+   	});
+   
+   
+   </script>
+   
 </body>
 </html>

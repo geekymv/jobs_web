@@ -54,18 +54,29 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public void apply(Long stuId, Long recId) {
+	public String apply(Long stuId, Long recId) {
+		boolean res = empStuDao.isOnJob(stuId, recId);
+		if(res) {
+			return "onJob";	// 已在职
+		}
+		
+		res = recruitStuDao.isApplyed(stuId, recId);
+		if(res) {
+			return "isApplyed";	// 已申请该用工单位的信息
+		}
+		
 		RecruitStu rs = new RecruitStu();
 		rs.setStuId(stuId);
 		rs.setRecId(recId);
 		rs.setApplyDate(DateUtils.getCurrentGaDate());
 		rs.setStatus(SysCode.RecruitStudent.WAIT);	// 等待审核
 		
-		recruitStuDao.saveOrUpdate(rs);
+		recruitStuDao.save(rs);
 		
 		// 更新已报名人数
 		recruitDao.updateApplyNum(recId);
 		
+		return "success";
 	}
 	
 	@Override

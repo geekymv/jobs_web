@@ -124,8 +124,12 @@ public class StudentController {
 	@ResponseBody
 	public String apply(Long recId, HttpSession session) {
 		Student student = (Student) session.getAttribute("user");
-		studentService.apply(student.getId(), recId);
-		return "success";
+		/**
+		 *  1.判断学生是否在该用工单位在职
+		 *  2.判断学生是否已经在该用工单位报名了，状态为等审核
+		 */
+		return studentService.apply(student.getId(), recId);
+
 	}
 	
 	/**

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
+import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.vo.ApplyRecruitVO;
 import com.heike.domain.vo.EmployerStudentVO;
@@ -39,7 +40,7 @@ public class EmpStuDao extends HibernateDao {
 	public List<ApplyRecruitVO> findOnJob(Long stuId) {
 		String hql = "select new com.heike.domain.vo.ApplyRecruitVO(rs.recId, r.postName, rs.applyDate, e.id, e.name, r.salary, es.status) "
 				+ " from EmpStu es, RecruitStu rs, Employer e, Recruit r "
-				+ " where es.stuId = :stuId and es.empId = r.empId "
+				+ " where es.stuId = :stuId and rs.stuId = es.stuId and es.empId = r.empId "
 				+ " and rs.recId = r.id and r.empId = e.id order by rs.applyDate desc";
 			
 		return (List<ApplyRecruitVO>)getSession().createQuery(hql)
@@ -70,6 +71,29 @@ public class EmpStuDao extends HibernateDao {
 		
 		super.findByPage(builder.toString(), params, pager);
 
+	}
+	
+	/**
+	 * 判断学生是否在该用工单位任职
+	 * @param stuId
+	 * @param empId
+	 * @return true 在职，false 不在职
+	 */
+	public boolean isOnJob(Long stuId, Long recId) {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("select count(*) from EmpStu es, Recruit r")
+			.append(" where es.stuId = :stuId and r.id = :recId")
+			.append(" and es.empId = r.empId")
+			.append(" and es.status = :status");
+		
+		long count = (Long) getSession().createQuery(builder.toString())
+				.setLong("stuId", stuId)
+				.setLong("recId", recId)
+				.setInteger("status", SysCode.EmployerStudent.ON_JOB)
+				.uniqueResult();	// 在职
+		
+		return Integer.valueOf(count+"") == 1 ? true : false;
 	}
 	
 }

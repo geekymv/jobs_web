@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
+import com.heike.base.SysCode;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.vo.ApplyRecordVO;
 
@@ -57,6 +58,28 @@ public class RecruitStuDao extends HibernateDao {
 		return (List<ApplyRecordVO>)getSession().createQuery(builder.toString())
 											.setLong("stuId", stuId).list();
 		
+	}
+	
+	/**
+	 * 判断学生是否报名该用工单位的招聘信息
+	 * @param stuId
+	 * @param empId
+	 * @return true 有待审核的招聘信息
+	 */
+	public boolean isApplyed(Long stuId, Long recId) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select count(*) from RecruitStu rs, Recruit r")
+			.append(" where rs.stuId = :stuId")
+			.append(" and rs.recId = :recId")
+			.append(" and rs.status = :status");
+		
+		long count = (Long)getSession().createQuery(builder.toString())
+				.setLong("stuId", stuId)
+				.setLong("recId", recId)
+				.setInteger("status", SysCode.RecruitStudent.WAIT) // 等待审核
+				.uniqueResult();
+		
+		return Integer.parseInt(count + "") == 1 ? true : false;
 	}
 	
 }

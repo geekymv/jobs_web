@@ -69,10 +69,13 @@ public class EmployerController {
 	
 	@RequestMapping("/edit")
 	@ResponseBody
-	public String edit(EmployerDto dto){
-		
+	public String edit(EmployerDto dto, HttpSession session){
 		employerService.edit(dto);
-		
+		// 更新session
+		Employer employer = (Employer)session.getAttribute("user");
+		employer = employerService.getInfo(employer.getId());
+		session.setAttribute("user", employer);
+				
 		return "success";
 	}
 	

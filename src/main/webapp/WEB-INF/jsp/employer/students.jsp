@@ -9,15 +9,6 @@
 	<title>学生列表</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
-		.custom{
-			height:51px;
-		}
-		.footer {
-			background-color:  #333;
-			width: 100%;
-			height: 165px;
-			margin-top: 450px;
-		}
 		table th, td {
 			text-align: center;
 		}
@@ -83,13 +74,8 @@
 	<script type="text/javascript">
    		$(function(){
 			$("#page").page({
-				click: function(pageIndex){
-					//pageIndex:当前点击页数，索引从0开始，页数=索引+1
-				//	alert("你点击了第" + (pageIndex + 1) + "页");
-				},
 			    remote: {
 			        url: contextPath + '/employer/studentPage',  //请求地址
-			  //      params: { name: "test" },       //自定义请求参数
 			        callback: function (result) {
 						$("tbody").empty();
 			        	var datas = result.datas;
@@ -126,10 +112,9 @@
  			            $("tbody").html(html);
 			        }
 			    },
-
-			//    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
-			//    pageSizeName: 'pageSize',       //请求参数，每页数量
-				  totalName: 'totalPage'       //指定返回数据的总数据量
+			    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
+			    pageSizeName: 'pageSize',       //请求参数，每页数量
+				totalName: 'totalRecord'       //指定返回数据的总数据量
 			});
    		});
 
