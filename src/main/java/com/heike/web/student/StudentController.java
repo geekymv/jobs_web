@@ -48,19 +48,30 @@ public class StudentController {
 	}
 	
 	/**
+	 * 跳转到我的工作列表页面
+	 * @param id 学生id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/student/jobs", method=RequestMethod.GET)
+	public String jobList() {
+		return "student/myjob";
+	}
+	
+	/**
 	 * 学生查看自己的工作列表
 	 * @param id 学生id
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/student/jobs")
-	public String jobList(HttpSession session, Model model) {
+	@RequestMapping(value="/student/jobs", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ApplyRecruitVO> jobList(HttpSession session) {
 		Student student = (Student) session.getAttribute("user");
-		List<ApplyRecruitVO> jobs = studentService.getOnJobList(student.getId());
-
-		model.addAttribute("jobs", jobs);
-		return "student/myjob";
+		
+		return studentService.getOnJobList(student.getId());
 	}
+	
 	
 	/**
 	 * 跳转到学生注册页面
@@ -133,15 +144,22 @@ public class StudentController {
 	}
 	
 	/**
-	 * 学生查看报名记录
+	 * 跳转到报名记录页面
 	 */
-	@RequestMapping("/student/records")
-	public String record(HttpSession session, Model model){
-		Student student = (Student) session.getAttribute("user");
-		List<ApplyRecordVO> records = recruitService.getApplyRecords(student.getId());
-		
-		model.addAttribute("records", records);
+	@RequestMapping(value="/student/records", method=RequestMethod.GET)
+	public String record(){
 		return "student/records";
+	}
+	
+	/**
+	 * 跳转到报名记录页面
+	 */
+	@RequestMapping(value="/student/records", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ApplyRecordVO> record(HttpSession session, Model model){
+		Student student = (Student) session.getAttribute("user");
+
+		return recruitService.getApplyRecords(student.getId());
 	}
 	
 }

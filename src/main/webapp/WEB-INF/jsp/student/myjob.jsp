@@ -34,40 +34,15 @@
       	<div class="col-md-10">
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">我的工作</div>
-	        <c:choose>
-	        	<c:when test="${fn:length(jobs) == 0}">
-	        		<a href="${ctx }/student/home">暂无工作！快去报名吧...</a>
-	        	</c:when>
-	        	<c:otherwise>
 		          <table class="table table-bordered table-hover table-condensed">
-		            <thead>
+		            <thead id="t_header">
 		                <tr>
 		                   	<th>岗位名称</th> <th>所在单位</th> <th>报名时间</th> <th>基本工资</th> <th>状态</th>
 		                </tr>
 		            </thead>
 		            <tbody>
-		            	<c:forEach items="${jobs }" var="job">
-		            		<tr>
-		            			<td>${job.recruitName }</td>
-		            			<td>${job.employer }</td>
-		            			<td id="apply_date"></td>
-		            			<td>${job.salary }</td>
-		            			<td>
-		            			<c:choose>
-		            				<c:when test="${job.status  == 1}">
-		            					在职
-		            				</c:when>
-	            					<c:when test="${job.status  == 0}">
-		            					离职
-		            				</c:when>
-		            			</c:choose>
-		            			</td>
-		            		</tr>
-		            	</c:forEach>
 		            </tbody>
 		          </table>
-	        	</c:otherwise>
-	        </c:choose>	
 	        </div> <!-- end of panel -->
     	</div>
 	</div>
@@ -77,13 +52,35 @@
    </div>
    
    <script type="text/javascript">
-   	$(function() {
-   		// 对报名时间的处理
-   		var apply_date = ${job.date }
-   		$("#apply_date").html(formatterDate(apply_date));
+   	$(function(){
+   		$.ajax({
+   			url: contextPath + "/student/jobs",
+   			type: "POST",
+   			dataType: "json",
+   			success: function(data) {
+   				var len = data.length;
+   				var html = "";
+				if(len == 0) {
+					html += "<tr>"
+						+ "<td colspan='5'><a href='${ctx}/student/home'>暂无工作，快点去报名吧...</a></td>"
+						+ "</tr>";
+					$("#t_header").hide();	
+				}else {
+					$("#t_header").show();
+					for(var i = 0; i < len; i++) {
+						html += "<tr>"
+							+ "<td>" + data[i].recruitName + "</td>"
+							+ "<td>" + data[i].employer + "</td>"
+							+ "<td>" + formatterDate(data[i].date) + "</td>"
+							+ "<td>" + data[i].salary + "</td>"
+							+ "<td>" + (data[i].status == 1 ? '在职' : '离职') + "</td>"
+							+ "</tr>";
+	   				}
+				}
+   				$("tbody").html(html);
+   			}
+   		});
    	});
-   
-   
    </script>
    
 </body>

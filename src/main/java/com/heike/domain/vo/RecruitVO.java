@@ -20,12 +20,13 @@ public class RecruitVO {
 	}
 
 	public RecruitVO(Long id, String title, String postName, String releaseDate,
-			String endDate, String empName) {
+			String endDate, String salary, String empName) {
 		this.id = id;
 		this.title = title;
 		this.postName = postName;
 		this.releaseDate = releaseDate;
 		this.endDate = endDate;
+		this.salary = salary;
 		this.empName = empName;
 	}
 

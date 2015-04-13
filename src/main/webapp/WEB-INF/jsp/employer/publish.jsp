@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
@@ -6,32 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<title>发布招聘信息</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">	
-	
-	<link rel="stylesheet" href="jquery-ui/jquery-ui.css">
-	
+	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
-		.custom{
-			height:51px;
-		}
-		
-		.footer {
-			background-color:  #333;
-			width: 100%;
-			height: 165px;
-			
-			margin-top: 300px;
-		}
-		
-		.publish {
-			margin-left: 220px;
-		}
-		
-		form input {
-			margin: 0 auto;
-			margin-top: 10px;
-		}
-		
 		em{
 			font-weight: bold;
 			margin-left: 1em;
@@ -39,12 +16,16 @@
 			color: red;
 		}
 	</style>
+	
+	<link href="<c:url value='/resources/css/zzsc.css'/>" rel="stylesheet"/>	
+	<script src="<c:url value='/resources/js/showlist.js'/>"></script>
+	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->		
+    <![endif]-->	
 	</head>
 
 <body>
@@ -62,60 +43,51 @@
       	<div class="col-md-10">
       		 <div class="panel panel-primary">
 	          <div class="panel-heading">发布招聘信息</div>
-	          	<div class="panel-body">
-					<p>
-						操作说明：<br/>
-						①<em>*</em> 为必填信息<br/>
-						②发布成功后，页面跳转至首页，显示所有的招聘信息						
-					</p>
-	          	</div>
-	          	<div class="publish">
-			     	<form action="employer/emp-publish.do" id="commentForm" method="post">
-			   		招聘标题:<input type="text" id="title" name="recruit.title" class="required"/>
-			   				<span style="color:red">
-			   					<em>*</em>
-			   					<s:fielderror fieldName="title"></s:fielderror>
-			   				</span>
-			   			
-			   		 <br />
-			   		岗位名称:<input type="text" id="postName" name="recruit.postName"/>
-		   					<span style="color:red">
-		   						<em>*</em>
-		   						<s:fielderror fieldName="postName"></s:fielderror>
-		   					</span>
-			   		<br />
-			   		招聘人数:<input type="number" id="postNum" name="recruit.postNum"/>
-			   				<span style="color:red">
-			   					<em>*</em>
-			   					<s:fielderror fieldName="postNum"></s:fielderror>
-			   				</span>
-			   		<br />
-			   		薪资待遇:<input type="text" id="salary" name="recruit.salary"/>
-			   				<span style="color:red">
-			   					<em>*</em>
-			   					<s:fielderror fieldName="salary"></s:fielderror>
-			   				</span>
-			   		<br />
-			   		工作要求：<br/><textarea id="context" rows="5" cols="40" name="recruit.context"></textarea>
-			   				<span style="color:red">
-			   					<em>*</em>
-			   					<s:fielderror fieldName="context"></s:fielderror>
-			   				</span>
-			   		<br/>
-			   		截止日期:<input type="text" id="datepicker" name="recruit.endDate"/>
-			   				<span style="color:red">
-			   					<em>*</em>
-			   					<s:fielderror fieldName="endDate"></s:fielderror>
-			   				</span>
-			   		<br />
-			   		备注:<input type="text" name="recruit.remarks"/><em>&nbsp;</em> 
-			   			<s:fielderror fieldName="remarks" cssStyle="color:red"></s:fielderror>
-			   		<br />
-			   		
-			   		<input type="submit" id="submit" value="发布">
-			   		
-			   		</form>
-		   		</div>
+	          	<form class="form-horizontal" role="form" style="margin-top: 10px;">
+	     	  		<div class="form-group">
+		        		<label class="col-md-4 control-label">招聘标题：</label>
+		        		<div  class="col-md-3">
+		        			<input type="text" class="form-control" id="title" name="title" autofocus="autofocus" />
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">岗位名称：</label>
+		        		<div class="col-md-3">
+		        			<input type="text" class="form-control" id="postName" name="postName" />
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">招聘人数：</label>
+		        		<div class="col-md-3">
+		        			<input type="text" class="form-control" id="postNum" name="postNum" maxlength="3" />
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">薪资待遇：</label>
+		        		<div class="col-md-3">
+		        			<input type="text" class="form-control" id="salary" name="salary" />
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">工作要求：</label>
+		        		<div class="col-md-3">
+		        			<textarea class="form-control" rows="5" id="context" name="context"></textarea>	
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="teacher" class="col-md-4 control-label">截止日期：</label>
+		        		<div class="col-md-3">
+		        			<input type="text" class="form-control" id="endDate" name="endDate"
+		        			 onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false, readOnly:true})" />
+		      			</div>
+	      			</div>
+	        		<div class="form-group">
+			            <label class="col-md-4 control-label"></label>	
+			            <div class="col-md-7">
+			          	  <input type="button" id="publish" class="btn btn-primary" value="发布招聘"/>
+			            </div>
+		         	</div>
+		        </form> 
 		     </div>
     	</div>
       
@@ -123,29 +95,87 @@
     
    </div><!-- /.container -->
    
-   
    <div class="footer">
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#publish").click(function() {
+				// 标题
+				var title = $("#title");
+				if(title.val().trim() == "") {
+					alert("标题不能为空！");
+					title.focus();
+					return;
+				}
+				// 岗位名称
+				var postName = $("#postName");
+				if(postName.val().trim() == "") {
+					alert("岗位名称不能为空！");
+					postName.focus();
+					return;
+				}
+				// 正整数
+				var reg = /^(?:[1-9]\d*|0)$/;
+				// 招聘人数
+				var postNum = $("#postNum");
+				if(postNum.val().trim() == "") {
+					alert("招聘人数不能为空！");
+					postNum.focus();
+					return;
+				}
+				if(!reg.test(postNum.val())) {
+					alert("招聘人数非法！");
+					postNum.focus();
+					return;
+				}
 
-
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$("#submit").click(function(){
-			if($("#datepicker").val().trim() == ''){
-				alert("截止日期不能为空！");
-				return false;
-			}
+				// 薪资待遇
+				var salary = $("#salary");
+				if(salary.val().trim() == "") {
+					alert("薪资待遇不能为空！");
+					salary.focus();
+					return;
+				}
+				
+				// 工作要求
+				var context = $("#context");
+				if(context.val().trim() == "") {
+					alert("工作要求不能为空！");
+					context.focus();
+					return;
+				}
+				
+				// 截止日期
+				var endDate = $("#endDate").val();
+				if(endDate == "") {
+					alert("截止日期不能为空！");
+					return;
+				}
+				// 替换所有的'-'				
+				endDate = endDate.replace(/-/g, "");
+				endDate = endDate + "240000";
+				
+				var values = {"title" : title.val(), "postName": postName.val(), "postNum": postNum.val(), 
+						"salary": salary.val(), "context": context.val(), "endDate": endDate};	
+				
+				$.ajax({
+					url: contextPath + "/employer/publish",
+					data: values,
+					type: "POST",
+					success: function(data) {
+						if(data == "success") {
+							alert("发布成功！");
+						}
+					}
+				});
+			
+			});
 		});
-		
-		$( "#datepicker" ).datepicker({
-			dateFormat:"yy-mm-dd",		
-		});
-	});
-</script>
+	
+	</script>
+
 </body>
 </html>
+

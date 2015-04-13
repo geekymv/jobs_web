@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.heike.base.SysCode;
 import com.heike.dao.DictDao;
 import com.heike.dao.RecruitDao;
 import com.heike.dao.RecruitStuDao;
@@ -19,6 +20,7 @@ import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.ApplyRecordVO;
 import com.heike.domain.vo.RecruitStuVO;
 import com.heike.domain.vo.RecruitVO;
+import com.heike.util.DateUtils;
 
 @Service
 public class RecruitServiceImpl implements RecruitService {
@@ -72,16 +74,29 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 
 	@Override
-	public Pager<RecruitVO> findPage(int pageOffSet, RecruitQueryDto dto) {
-		Pager<RecruitVO> pager = new Pager<RecruitVO>();
-		pager.setPageOffSet(pageOffSet);
-		
+	public Pager<RecruitVO> findPage(Pager<RecruitVO> pager, RecruitQueryDto dto) {
 		return recruitDao.queryByPage(pager, dto);
 	}
 
 	@Override
-	public void add(Recruit recruit) {
+	public void add(Recruit recruit, Long empId) {
+		recruit.setEmpId(empId);
+		recruit.setReleaseDate(DateUtils.getCurrentGaDate());
+		recruit.setStatus(SysCode.RecruitCode.RECRUIT_PUBLISHED);
+	
 		recruitDao.save(recruit);
+	}
+
+	@Override
+	public boolean edit(Recruit recruit) {
+		int res = recruitDao.update(recruit);
+		return res == 1 ? true : false;
+	}
+
+	@Override
+	public boolean delete(Long id) {
+		int res = recruitDao.updateStatus(id, SysCode.RecruitCode.RECRUIT_DELETED);
+		return res == 1 ? true : false;
 	}
 
 }

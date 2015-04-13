@@ -11,6 +11,7 @@ import com.heike.base.HibernateDao;
 import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
+import com.heike.domain.pojo.Recruit;
 import com.heike.domain.vo.RecruitVO;
 
 /**
@@ -48,6 +49,24 @@ public class RecruitDao extends HibernateDao {
 		return result;
 	}
 	
+	public int update(Recruit recruit) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("update Recruit set title = :title, postName = :postName, postNum = :postNum,")
+			.append(" salary = :salary, context = :context, endDate = :endDate")
+			.append(" where id = :id");
+		
+		return getSession().createQuery(builder.toString())
+				.setString("title", recruit.getTitle())
+				.setString("postName", recruit.getPostName())
+				.setInteger("postNum", recruit.getPostNum())
+				.setString("salary", recruit.getSalary())
+				.setString("context", recruit.getContext())
+				.setString("endDate", recruit.getEndDate())
+				.setLong("id", recruit.getId())
+				.executeUpdate();
+		
+	}
+	
 	/**
 	 * 分页查询已发布的招聘信息
 	 * @param pager
@@ -55,7 +74,7 @@ public class RecruitDao extends HibernateDao {
 	 */
 	public void queryByPage(Pager<RecruitVO> pager) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, e.name)")
+		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, r.salary, e.name)")
 			.append(" from Recruit r, Employer e ")
 			.append(" where r.empId = e.id and r.status = :status")
 			.append(" order by r.endDate desc");
@@ -75,7 +94,7 @@ public class RecruitDao extends HibernateDao {
 	 */
 	public Pager<RecruitVO> queryByPage(Pager<RecruitVO> pager, RecruitQueryDto dto) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, e.name)")
+		builder.append("select new com.heike.domain.vo.RecruitVO(r.id, r.title, r.postName, r.releaseDate, r.endDate, r.salary, e.name)")
 			.append(" from Recruit r, Employer e ")
 			.append(" where r.empId = e.id and r.status = :status")
 			.append(" and r.empId = :empId");

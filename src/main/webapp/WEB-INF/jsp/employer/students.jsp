@@ -51,7 +51,7 @@
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead>
 	                <tr id="head">
-	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>基本工资</th> <th>审核日期</th> <th>选择操作</th> 
+	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>基本工资</th> <th>审核日期</th> <th>状态</th> 
 	                </tr>
 	            </thead>
 	            <tbody>

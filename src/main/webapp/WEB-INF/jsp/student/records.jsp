@@ -35,11 +35,6 @@
       	<div class="col-md-10">
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">我的报名记录</div>
-	        <c:choose>
-	        	<c:when test="${fn:length(records) == 0}">
-	        		<a href="${ctx }/student/home">暂无报名记录！快去报名吧...</a>
-	        	</c:when>
-	        	<c:otherwise>
 		          <table class="table table-bordered table-hover table-condensed">
 		            <thead>
 		                <tr>
@@ -47,31 +42,9 @@
 		                </tr>
 		            </thead>
 		            <tbody>
-		            	<c:forEach items="${records }" var="record">
-		            		<tr>
-		            			<td>${record.postName }</td>
-		            			<td>${record.employer }</td>
-		            			<td>${record.salary }</td>
-		            			<td>${record.applyTime }</td>
-		            			<td>
-		            			<c:choose>
-		            				<c:when test="${record.status  == 1}">
-		            					审核通过
-		            				</c:when>
-	            					<c:when test="${record.status  == 0}">
-		            					等待审核
-		            				</c:when>
-		            				<c:when test="${record.status  == -1}">
-		            					审核未通过
-		            				</c:when>
-		            			</c:choose>
-		            			</td>
-		            		</tr>
-		            	</c:forEach>
+		            	
 		            </tbody>
 		          </table>
-	        	</c:otherwise>
-	        </c:choose>	
 	        </div> <!-- end of panel -->
     	</div>
 	</div>
@@ -79,5 +52,57 @@
    <div class="footer">
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
+   
+   <script type="text/javascript">
+   	$(function(){
+		$.ajax({
+			url: contextPath + "/student/records",
+			type: "POST",
+			dateType: "json",
+			success: function(data) {
+				var len = data.length;
+   				var html = "";
+				if(len == 0) {
+					html += "<tr>"
+						+ "<td colspan='5'><a href='${ctx}/student/home'>暂无报名记录，快点去报名吧...</a></td>"
+						+ "</tr>";
+					$("#t_header").hide();	
+				}else {
+					$("#t_header").show();
+					for(var i = 0; i < len; i++) {
+						var status = data[i].status.toString();
+						switch (status) {
+						case "0":
+							status = "等待审核";							
+							break;
+						case "1":
+							status = "审核通过";
+							break;
+						case "-1":
+							status = "审核不通过";
+							break;
+						default:
+							break;
+						}		
+						
+						html += "<tr>"
+							+ "<td>" + data[i].postName + "</td>"
+							+ "<td>" + data[i].employer + "</td>"
+							+ "<td>" + data[i].salary + "</td>"
+							+ "<td>" + formatterDate(data[i].applyTime) + "</td>"
+							+ "<td>" + status + "</td>"
+							+ "</tr>";
+	   				}
+				}
+   				$("tbody").html(html);
+   				
+			}
+		});   		
+   	});
+   
+   
+   
+   </script>
+   
 </body>
 </html>

@@ -1,12 +1,11 @@
 package com.heike.web.employer;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,21 +33,39 @@ public class EmployerController {
 	 * @return
 	 */
 	@RequestMapping("/home")
-	public String home(HttpServletRequest request, HttpSession session, Model model,
-			RecruitQueryDto dto) {
+	public String home() {
+		return "employer/home";
+	}
+
+	/**
+	 * 用工单位查看自己发布的招聘信息
+	 * @param session
+	 * @param dto
+	 * @param pager
+	 * @return
+	 */
+	@RequestMapping("/myRecruits")
+	@ResponseBody
+	public Pager<RecruitVO> pager(HttpSession session, RecruitQueryDto dto,
+			Pager<RecruitVO> pager) {
 		Employer employer = (Employer)session.getAttribute("user");
 		dto.setEmpId(employer.getId());
 		
-		String offSet = request.getParameter("pager.offset");
-		int pageOffSet = 0;
-		if(StringUtils.isNotBlank(offSet)){
-			pageOffSet = Integer.parseInt(offSet);
-		}
+		return recruitService.findPage(pager, dto);
+	}
+	
+	/**
+	 * 查看招聘详情
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/detail/{id}")
+	public String detail(@PathVariable("id")Long id, Model model) {
+		RecruitVO recruitVO = recruitService.getById(id);
+		model.addAttribute("recruit", recruitVO);
 		
-		Pager<RecruitVO> pager = recruitService.findPage(pageOffSet, dto);
-		model.addAttribute("pager", pager);
-		
-		return "employer/home";
+		return "employer/detail";
 	}
 	
 	/**
@@ -67,6 +84,12 @@ public class EmployerController {
 		return "employer/myinfo";
 	}
 	
+	/**
+	 * 编辑个人信息
+	 * @param dto
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/edit")
 	@ResponseBody
 	public String edit(EmployerDto dto, HttpSession session){
@@ -99,24 +122,61 @@ public class EmployerController {
 	public Pager<EmployerStudentVO> getList(Pager<EmployerStudentVO> pager, HttpSession session){
 		Employer employer = (Employer)session.getAttribute("user");
 		employerService.getStudentPage(pager, employer.getId());
-	//	pager.setTotalPage(200);
 		return pager;
 	}
+
+	/**
+	 * 跳转到发布招聘信息页面
+	 * @return
+	 */
+	@RequestMapping(value="/publish", method=RequestMethod.GET)
+	public String publish() {
+		return "employer/publish";
+	}
 	
-	@RequestMapping("/addRecruit")
-	public void add(){
-		for (int i = 4; i < 20; i++) {
-			Recruit recruit = new Recruit();
-			recruit.setTitle("标题" + i);
-			recruit.setContext("内容" + i);
-			recruit.setPostName("岗位名称" + i);
-			recruit.setReleaseDate("20150409113730");
-			recruit.setEndDate("20150412113730");
-			recruit.setEmpId(2L);
-			recruit.setSalary("100");
-			
-			recruitService.add(recruit );
-		}
+	/**
+	 * 用工单位发布招聘信息
+	 * @param session
+	 * @param recruit
+	 * @return
+	 */
+	@RequestMapping(value="/publish", method=RequestMethod.POST)
+	@ResponseBody
+	public String publish(HttpSession session, Recruit recruit) {
+		Employer employer = (Employer)session.getAttribute("user");
+		recruitService.add(recruit, employer.getId());
 		
+		return "success";
+	}
+	
+	
+	/**
+	 * 编辑招聘信息
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/editRecruit")
+	@ResponseBody
+	public String edit(HttpSession session, Recruit recruit) {
+		if(recruitService.edit(recruit)) {
+			return "success";
+		}
+
+		return "fail";
+	}
+	
+	/**
+	 * 删除招聘信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/deleteRecruit")
+	@ResponseBody
+	public String delete(Long id) {
+		if(recruitService.delete(id)) {
+			return "success";
+		}
+
+		return "fail";
 	}
 }

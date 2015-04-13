@@ -24,7 +24,7 @@ public interface RecruitService {
 	 * @param dto
 	 * @return
 	 */
-	public Pager<RecruitVO> findPage(int pageOffSet, RecruitQueryDto dto);
+	public Pager<RecruitVO> findPage(Pager<RecruitVO> pager, RecruitQueryDto dto);
 	
 	/**
 	 * 根据id获得招聘信息详情
@@ -59,5 +59,18 @@ public interface RecruitService {
 	 * 发布招聘信息
 	 * @param recruit
 	 */
-	public void add(Recruit recruit);
+	public void add(Recruit recruit, Long empId);
+	
+	/**
+	 * 编辑招聘信息
+	 * @param recruit
+	 */
+	public boolean edit(Recruit recruit);
+	
+	/**
+	 * 删除招聘信息
+	 * @param id
+	 * @return
+	 */
+	public boolean delete(Long id);
 }

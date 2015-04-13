@@ -9,16 +9,6 @@
 	<title>招聘列表</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
-		.custom{
-			height:51px;
-		}
-		.footer {
-			background-color:  #333;
-			width: 100%;
-			height: 165px;
-			margin-top: 450px;
-		}
-		
 		.pagination a {
 		    cursor: pointer;
 		    -moz-user-select: none;
@@ -26,6 +16,10 @@
 		    -ms-user-select: none;
 		    -khtml-user-select: none;
 		    user-select: none;
+		}
+		
+		table td, th {
+			text-align: center;
 		}
 
 
@@ -58,14 +52,21 @@
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">招聘列表</div>
 	          <div class="panel-body">
-	            <p>&nbsp;</p>
-	            
-	           
-	            
 	          </div>
+			  
+			   <table class="table table-bordered table-hover table-condensed">
+          		<thead>
+	                <tr>
+	                   	<th>招聘信息标题</th> <th>岗位名称</th> <th>发布时间</th> <th>截止日期</th> <th>基本工资</th> <th>查看详情</th>
+	                </tr>
+	            </thead>
+	            <tbody id="t_body">
+	            </tbody>
+	          </table>	
+	          
 	          <div class="panel-footer">
-	           	<nav style="text-align: center;">
-				    <ul id="page" class="pagination" data-first-btn-text="首页" data-last-btn-text="尾页"></ul>
+	           	 <nav style="text-align: center;">
+				 	<ul id="page" class="pagination" data-first-btn-text="首页" data-last-btn-text="尾页"></ul>
 				</nav>
 	          </div>
 	        </div> <!-- end of panel -->
@@ -81,14 +82,12 @@
    <script type="text/javascript">
    		$(function(){
 			$("#page").page({
-				//pageIndex:当前点击页数，索引从0开始，页数=索引+1
-				click: function(pageIndex){
-				//	alert("你点击了第" + (pageIndex + 1) + "页");
-				},
+				alwaysShowPage: true,
 			    remote: {
-			        url: contextPath + '/employer/studentPage',  //请求地址
-			        params: { name: "test" },       //自定义请求参数
+			        url: contextPath + '/employer/myRecruits',
+			//        params: { name: "test" },       //自定义请求参数
 			        callback: function (result) {
+			        	
 			            //回调函数，result 为 请求返回的数据，绑定数据
 			            console.log(result.datas);
 			            var datas = result.datas;
@@ -97,23 +96,22 @@
  			            for(var i = 0; i < length; i++) {
 							var data = datas[i];
 							html += "<tr>"
-								+ "<td>"+ data.id +"</td>"	
-								+ "<td>"+ data.num +"</td>"	
-								+ "<td>"+ data.name +"</td>"	
+								+ "<td>"+ data.title +"</td>"	
 								+ "<td>"+ data.postName +"</td>"	
-								+ "<td>"+ data.profession +"</td>"	
+								+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
+								+ "<td>"+ formatterDate(data.endDate) +"</td>"	
 								+ "<td>"+ data.salary +"</td>"	
-								+ "<td>"+ data.status +"</td>"	
+								+ "<td><a href='${ctx}/employer/detail/"+data.id+"'>查看</a></td>"	
 								+ "</tr>";
 			            }
  			            
- 			            $("#head").after(html);
+ 			            $("#t_body").html(html);
 			        }
 			    },
 
-			//    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
-			//    pageSizeName: 'pageSize',       //请求参数，每页数量
-				  totalName: 'totalPage'       //指定返回数据的总数据量
+			    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
+			    pageSizeName: 'pageSize',       //请求参数，每页数量
+				totalName: 'totalRecord'       //指定返回数据的总数据量
 			});
    			
    		});
