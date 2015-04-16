@@ -60,6 +60,7 @@ public class EmpStuDao extends HibernateDao {
 			.append(" from EmpStu es, Student s,")
 			.append(" RecruitStu rs, Recruit r, Dict d")
 			.append(" where es.empId = :empId")
+			.append(" and es.status = :status")
 			.append(" and es.stuId = rs.stuId and es.stuId = s.id ")
 			.append(" and rs.recId = r.id")
 			.append(" and s.professionId = d.id")
@@ -68,6 +69,7 @@ public class EmpStuDao extends HibernateDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("empId", empId);
+		params.put("status", SysCode.EmployerStudent.ON_JOB);	// 在职
 		
 		super.findByPage(builder.toString(), params, pager);
 

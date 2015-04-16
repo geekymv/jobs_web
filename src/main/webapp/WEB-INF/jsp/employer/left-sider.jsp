@@ -20,7 +20,7 @@
         <h4 >学生管理</h4>
         <div class="list-item none">
           <p><a href="${ctx }/employer/students" target="_self">在职学生列表</a></p>
-          <p><a href="${ctx }/employer/students" target="_self">待审核列表</a></p>
+          <p><a href="${ctx }/employer/approveStudents" target="_self">待审核列表</a></p>
         </div>
       </li>
       <li >

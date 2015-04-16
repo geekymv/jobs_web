@@ -89,9 +89,9 @@
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
-		        		<label for="name" class="col-md-4 control-label">工作要求：</label>
+		        		<label for="context" class="col-md-4 control-label">工作要求：</label>
 		        		<div class="col-md-3">
-		        			<textarea class="form-control" rows="5" id="context" name="context">${recruit.context }</textarea>	
+		        			<textarea class="form-control" id="context" rows="5" id="context" name="context">${recruit.context }</textarea>	
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
@@ -103,13 +103,13 @@
 	        		<div class="form-group">
 		        		<label for="endDate" class="col-md-4 control-label">截止日期：</label>
 		        		<div class="col-md-3">
-		        			<input type="text" class="form-control" id="endDate" name="endDate"
+		        			<input type="text" class="form-control" id="endDate" name="endDate" 
 		        			 onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false, readOnly:true})" />
 		      			</div>
 	      			</div>
 	        		<div class="form-group">
 			            <label class="col-md-4 control-label"></label>	
-			            <div class="col-md-7">
+			            <div class="col-md-7" id="is_applyed">
 			          	  <input type="button" id="edit" class="btn btn-primary" value="更新"/>
 			          	  &nbsp;
 			          	  <input type="button" id="delete" class="btn btn-primary" value="删除"/>
@@ -133,6 +133,26 @@
 		
 		var releaseDate = '${recruit.releaseDate }';
 		$("#releaseDate").html(dateFormatter(releaseDate));
+		
+		// 判断该招聘信息是否被申请
+		$.ajax({
+			url: contextPath + '/employer/isApply',
+			type: 'POST',
+			data: {'recId': $("#id").val()},
+			dataType: 'text',
+			success: function(data) {
+				if(data == 'isApplyed') {
+					$('#title').attr('readonly', 'readonly')
+					$('#postNum').attr('readonly', 'readonly')
+					$('#postName').attr('readonly', 'readonly')
+					$('#endDate').attr('readonly', 'readonly')
+					$('#salary').attr('readonly', 'readonly')
+					$('#context').attr('readonly', 'readonly')
+					$("#is_applyed").html('<span color="red">已经被申请了，不可编辑</span>');
+				}else if(data == 'notApplyed') {
+				}					
+			}
+		});
 		
 		// 删除
 		$("#delete").click(function() {

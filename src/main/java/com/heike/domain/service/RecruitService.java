@@ -65,7 +65,7 @@ public interface RecruitService {
 	 * 编辑招聘信息
 	 * @param recruit
 	 */
-	public boolean edit(Recruit recruit);
+	public int edit(Recruit recruit);
 	
 	/**
 	 * 删除招聘信息
@@ -73,4 +73,11 @@ public interface RecruitService {
 	 * @return
 	 */
 	public boolean delete(Long id);
+	
+	/**
+	 * 判断某条招聘信息是否有学生报名
+	 * @param recId
+	 * @return
+	 */
+	public boolean isApplyed(Long recId);
 }

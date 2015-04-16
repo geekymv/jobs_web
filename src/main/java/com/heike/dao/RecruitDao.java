@@ -20,6 +20,17 @@ import com.heike.domain.vo.RecruitVO;
  */
 @Repository
 public class RecruitDao extends HibernateDao {
+	
+	/**
+	 * 根据招聘信息id查询报名学生数
+	 */
+	public int findApplyNum(Long recId) {
+		String hql = "select applyNum from Recruit r where r.id = :id";
+		int applyNum = (Integer)getSession().createQuery(hql)
+					.setLong("id", recId).uniqueResult();
+		
+		return applyNum;
+	}
 
 	/**
 	 * 更新已报名人数

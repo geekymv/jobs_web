@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.heike.domain.dto.ApproveDto;
 import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
@@ -18,6 +19,7 @@ import com.heike.domain.pojo.Recruit;
 import com.heike.domain.service.EmployerService;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.EmployerStudentVO;
+import com.heike.domain.vo.RecruitStuVO;
 import com.heike.domain.vo.RecruitVO;
 
 @Controller
@@ -112,7 +114,7 @@ public class EmployerController {
 	}
 	
 	/**
-	 * 学生列表-分页
+	 * 在职学生列表-分页
 	 * @param pager
 	 * @param session
 	 * @return
@@ -123,6 +125,41 @@ public class EmployerController {
 		Employer employer = (Employer)session.getAttribute("user");
 		employerService.getStudentPage(pager, employer.getId());
 		return pager;
+	}
+	
+	
+	/**
+	 * 跳转到待审核学生列表页面
+	 * @return
+	 */
+	@RequestMapping(value="/approveStudents", method=RequestMethod.GET)
+	public String waitStudents() {
+		return "employer/approveStudents";
+	}
+	
+	/**
+	 * 获得待审核学生列表
+	 * @param pager
+	 * @param empId
+	 */
+	@RequestMapping(value="/approveStudents", method=RequestMethod.POST)
+	@ResponseBody
+	public Pager<RecruitStuVO> getWaitStudents(Pager<RecruitStuVO> pager, HttpSession session) {
+		Employer employer = (Employer)session.getAttribute("user");
+		employerService.getWaitStudents(pager, employer.getId());
+
+		return pager;
+	}
+	
+	@RequestMapping("/approve")
+	@ResponseBody
+	public String approve(ApproveDto dto, HttpSession session) {
+		Employer employer = (Employer)session.getAttribute("user");
+		dto.setEmpId(employer.getId());
+	
+		employerService.approve(dto);
+		
+		return "success";
 	}
 
 	/**
@@ -149,6 +186,21 @@ public class EmployerController {
 		return "success";
 	}
 	
+	/**
+	 * 判断招聘信息是否被报名
+	 * @param recId
+	 * @return
+	 */
+	@RequestMapping("/isApply")
+	@ResponseBody
+	public String isApply(Long recId) {
+		boolean res = recruitService.isApplyed(recId);
+		if(res) {
+			return "isApplyed";
+		}
+		
+		return "notApplyed";
+	}
 	
 	/**
 	 * 编辑招聘信息
@@ -158,7 +210,11 @@ public class EmployerController {
 	@RequestMapping("/editRecruit")
 	@ResponseBody
 	public String edit(HttpSession session, Recruit recruit) {
-		if(recruitService.edit(recruit)) {
+		int res = recruitService.edit(recruit);
+		if(res == 2) {	// 被申请了
+			return "applyed";
+			
+		}else if(res == 1) { // 更新成功
 			return "success";
 		}
 

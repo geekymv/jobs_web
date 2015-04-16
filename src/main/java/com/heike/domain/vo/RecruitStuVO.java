@@ -2,10 +2,13 @@ package com.heike.domain.vo;
 
 
 public class RecruitStuVO {
+	private Long stuId;	// 学生id
 	private String num;	// 学号
 	private String name;	// 姓名 
 	private String profession; // 专业
 	private String applyDate;	// 报名时间
+	private Long recId;	// 报名的招聘信息id
+	private String postName;	// 岗位名称
 	private Integer status; // 状态(1审核通过, 0等待审核, -1审核不通过)
 	
 	public RecruitStuVO() {
@@ -19,6 +22,24 @@ public class RecruitStuVO {
 		this.profession = profession;
 		this.applyDate = applyDate;
 		this.status = status;
+	}
+	
+	public RecruitStuVO(Long stuId, String num, String name, String profession,
+			String applyDate, String postName, Long recId) {
+		this.stuId = stuId;
+		this.num = num;
+		this.name = name;
+		this.profession = profession;
+		this.applyDate = applyDate;
+		this.postName = postName;
+		this.recId = recId;
+	}
+	
+	public Long getStuId() {
+		return stuId;
+	}
+	public void setStuId(Long stuId) {
+		this.stuId = stuId;
 	}
 
 	public String getNum() {
@@ -45,6 +66,21 @@ public class RecruitStuVO {
 	public void setApplyDate(String applyDate) {
 		this.applyDate = applyDate;
 	}
+	
+	public Long getRecId() {
+		return recId;
+	}
+	public void setRecId(Long recId) {
+		this.recId = recId;
+	}
+
+	public String getPostName() {
+		return postName;
+	}
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}

@@ -112,7 +112,7 @@ public class IndexController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/login")
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public String login(String account, String password, String rember, HttpSession session) {
 		return commonService.login(account, password, session);

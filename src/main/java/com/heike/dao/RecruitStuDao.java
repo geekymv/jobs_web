@@ -1,13 +1,17 @@
 package com.heike.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
 import com.heike.base.SysCode;
+import com.heike.domain.dto.Pager;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.vo.ApplyRecordVO;
+import com.heike.domain.vo.RecruitStuVO;
 
 /**
  * 招聘信息-学生Dao
@@ -16,6 +20,31 @@ import com.heike.domain.vo.ApplyRecordVO;
 @Repository
 @SuppressWarnings("unchecked")
 public class RecruitStuDao extends HibernateDao {
+	/**
+	 *  查询待审核的学生列表
+	 * @param pager
+	 * @param empId
+	 * @return
+	 */
+	public Pager<RecruitStuVO> queryWaitStudents(Pager<RecruitStuVO> pager, Long empId) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new com.heike.domain.vo.RecruitStuVO(s.id, s.num, s.name, d.name, rs.applyDate, r.postName, r.id)")
+		.append(" from RecruitStu rs, Recruit r, Student s, Dict d")
+		.append(" where rs.recId = r.id and rs.stuId = s.id")
+		.append(" and s.professionId = d.id")
+		.append(" and r.empId = :empId")
+		.append(" and rs.status = :status")
+		.append(" order by rs.applyDate");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("empId", empId);
+		params.put("status", SysCode.RecruitStudent.WAIT);	// 待审核
+		
+		findByPage(builder.toString(), params , pager);
+		
+		return null;
+	}
+	
 	
 	/**
 	 * 根据招聘id查询

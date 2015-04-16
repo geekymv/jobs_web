@@ -6,12 +6,19 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<title>学生列表</title>
+	<title>待审核学生列表</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
 		table th, td {
 			text-align: center;
 		}
+		
+		div.nostudent {
+			font-size: 14px;
+			color: red;
+			text-align: center;
+		}
+		
 	</style>
 	
 	<link href="<c:url value='/resources/css/zzsc.css'/>" rel="stylesheet"/>	
@@ -41,17 +48,14 @@
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">学生列表</div>
 	          <div class="panel-body">
-	            <p>
-	            	温馨提示：<br/>
-	            	①当学生离职后，需要删除该学生，否则该学生不能继续报名本单位发布的招聘信息！
-	            </p>
+	            <p>&nbsp;</p>
 	          </div>
 	        
 	           <!-- Table -->
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead>
 	                <tr id="head">
-	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>基本工资</th> <th>审核时间</th> <th>操作</th> 
+	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>操作</th> 
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -75,7 +79,7 @@
    		$(function(){
 			$("#page").page({
 			    remote: {
-			        url: contextPath + '/employer/studentPage',  //请求地址
+			        url: contextPath + '/employer/approveStudents',  //请求地址
 			        callback: function (result) {
 						$("tbody").empty();
 			        	var datas = result.datas;
@@ -83,40 +87,54 @@
 			        	//  如果没有数据，隐藏表头
 			        	if(datas == null || length == 0){
 							$("#head").hide();			        		
+							$("tbody").html("<div class='nostudent'>暂无待审核的学生</div>");
 			        	}else {
 			        		$("#head").show();	
+			        		
+			        		var html = "";
+	 			            for(var i = 0; i < length; i++) {
+								var data = datas[i];
+								html += "<tr>"
+									+ "<td>"+ (i+1) +"</td>"	
+									+ "<td>"+ data.num +"</td>"	
+									+ "<td>"+ data.name +"</td>"	
+									+ "<td>"+ data.profession +"</td>"	
+									+ "<td>"+ data.postName +"</td>"	
+									+ "<td>"
+									+ "<button class='btn btn-primary btn-sm' onclick='hire("+data.stuId + "," +data.recId + ","+ 1 +")'>&nbsp;录用&nbsp;</button>&nbsp;&nbsp;"
+									+ "<button class='btn btn-primary btn-sm' onclick='hire("+data.stuId + "," +data.recId + ","+ -1 +")'>不录用</button></td>" 
+									+ "</tr>";
+				            }
+	 			            
+	 			            $("tbody").html(html);
+		 			            
 			        	}
  			            
-			            var html = "";
- 			            for(var i = 0; i < length; i++) {
-							var data = datas[i];
-							var status = data.status;
-							if("1" == status) {
-								status = "在职";				
-							}else if("-1" == status) {
-								status = "离职";
-							}
-							
-							html += "<tr>"
-								+ "<td>"+ (i+1) +"</td>"	
-								+ "<td>"+ data.num +"</td>"	
-								+ "<td>"+ data.name +"</td>"	
-								+ "<td>"+ data.profession +"</td>"	
-								+ "<td>"+ data.postName +"</td>"	
-								+ "<td>"+ data.salary +"</td>"
-								+ "<td>"+ formatterDate(data.date) +"</td>"
-								+ "<td>"+ status +"</td>"	
-								+ "</tr>";
-			            }
- 			            
- 			            $("tbody").html(html);
+ 			            // glyphicon glyphicon-ok-sign
+						// glyphicon glyphicon-remove-sign
 			        }
 			    },
 			    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
 			    pageSizeName: 'pageSize',       //请求参数，每页数量
 				totalName: 'totalRecord'       //指定返回数据的总数据量
 			});
+			
+			
    		});
+   		// status -1不录用，1录用
+   		function hire(stuId, recId, status) {
+			alert(stuId + "," + recId + "," + status)   			
+
+   			$.ajax({
+   				url: contextPath + '/employer/approve',
+   				type: 'post',
+   				data: {'stuId': stuId, 'recId': recId, 'status': status},
+   				dataType: 'text',
+   				success: function(data){
+	   				alert(data);
+   				}
+   			});
+   		}
 
    	</script>
 

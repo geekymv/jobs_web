@@ -88,15 +88,26 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 
 	@Override
-	public boolean edit(Recruit recruit) {
+	public int edit(Recruit recruit) {
+		// 判断这条招聘信息是有学生报名
+		int num = recruitDao.findApplyNum(recruit.getId());
+		if(num > 0) { // 有学生报名
+			return 2;
+		}
 		int res = recruitDao.update(recruit);
-		return res == 1 ? true : false;
+		return res;
 	}
 
 	@Override
 	public boolean delete(Long id) {
 		int res = recruitDao.updateStatus(id, SysCode.RecruitCode.RECRUIT_DELETED);
 		return res == 1 ? true : false;
+	}
+
+	@Override
+	public boolean isApplyed(Long recId) {
+		int applyNum = recruitDao.findApplyNum(recId);
+		return applyNum > 0 ? true : false;
 	}
 
 }
