@@ -7,7 +7,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
-import com.heike.domain.dto.ApproveDto;
 import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.pojo.Employer;
 import com.heike.util.EncryptUtil;

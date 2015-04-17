@@ -2,6 +2,7 @@ package com.heike.domain.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.heike.domain.pojo.Dict;
@@ -36,5 +37,11 @@ public interface CommonService {
 	 */
 	public List<String> getSalaryCommitDate();
 	
+	/**
+	 * 工资下载
+	 * @param object
+	 * @param response
+	 */
+	public void download(Object object, HttpServletResponse response);
 	
 }

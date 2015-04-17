@@ -3,6 +3,7 @@ package com.heike.service;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,15 @@ import org.springframework.stereotype.Service;
 import com.heike.base.SysCode;
 import com.heike.dao.DictDao;
 import com.heike.dao.EmployerDao;
+import com.heike.dao.SalaryDao;
 import com.heike.dao.StudentDao;
+import com.heike.domain.dto.SalaryDto;
 import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
 import com.heike.util.EncryptUtil;
+import com.heike.util.ExcelUtil;
 
 
 @Service
@@ -27,6 +31,8 @@ public class CommonServiceImpl implements CommonService {
 	private EmployerDao employerDao;
 	@Autowired
 	private DictDao dictDao;
+	@Autowired
+	private SalaryDao salaryDao;
 	
 	public String login(String account, String password, HttpSession session) {
 		password = EncryptUtil.md5Encrypt(password);
@@ -69,6 +75,33 @@ public class CommonServiceImpl implements CommonService {
 		Dict endDate = dictDao.queryByType(SysCode.DictCode.SALARY_COMMIT_END);		
 		
 		return Arrays.asList(startDate.getName(), endDate.getName());
+	}
+	
+	
+	
+	public void download(Object object, HttpServletResponse response) {
+		if(object != null) {
+			if(object instanceof Student) {	// 学生
+				return;
+			}else if(object instanceof Employer) {
+				Employer employer = (Employer)object;
+				
+				String[] title = {"序号", "姓名", "学号", "专业", "岗位名称", "所在单位", "工作时间", "基本工资", "工具费", "奖金", "实发工资", "备注"};
+				String name = "文件名";
+				// 内容
+				List<SalaryDto> list = null;
+				
+				int authority = employer.getAuthority();
+				if(authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 管理员
+					list = salaryDao.queryList();
+				}else if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 用工单位
+					list = salaryDao.queryList2(employer.getId());
+				}
+				
+				ExcelUtil.createExcel(list , title , name, response);
+				
+			}
+		}
 	}
 	
 }

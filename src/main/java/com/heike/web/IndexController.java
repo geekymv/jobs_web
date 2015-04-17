@@ -30,7 +30,6 @@ public class IndexController {
 	@Autowired
 	private CommonService commonService;
 	
-	
 	/**
 	 * 跳转到首页
 	 * @return
@@ -143,9 +142,9 @@ public class IndexController {
 			}else if(object instanceof Employer) {
 				Employer employer = (Employer)object;
 				int authority = employer.getAuthority();
-				if(authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 用工单位
+				if(authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 管理员
 					path = "admin/home";
-				}else if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 管理员
+				}else if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 用工单位
 					path = "employer/home";
 				}
 			}

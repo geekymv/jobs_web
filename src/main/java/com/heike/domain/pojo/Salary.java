@@ -16,9 +16,9 @@ public class Salary {
 	private Long id;
 	private String month;	//月份
 	private String worktime;	//工作时间
-	private float salary;	//基本工资
-	private float bonus;	//奖金
-	private float toolFee;	//工具费
+	private String salary;	//基本工资
+	private String bonus;	//奖金
+	private String toolFee;	//工具费
 	private Long empId;	// 用工单位
 	private Long stuId;	//多对一的关联关系，Student是一的一方
 	private Integer status; // 工资状态 1正常， -1已被删除
@@ -53,27 +53,24 @@ public class Salary {
 		this.worktime = worktime;
 	}
 
-	public float getSalary() {
+	public String getSalary() {
 		return salary;
 	}
-
-	public void setSalary(float salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 
-	public float getBonus() {
+	public String getBonus() {
 		return bonus;
 	}
-
-	public void setBonus(float bonus) {
+	public void setBonus(String bonus) {
 		this.bonus = bonus;
 	}
 
-	public float getToolFee() {
+	public String getToolFee() {
 		return toolFee;
 	}
-
-	public void setToolFee(float toolFee) {
+	public void setToolFee(String toolFee) {
 		this.toolFee = toolFee;
 	}
 
