@@ -2,6 +2,7 @@ package com.heike.domain.service;
 
 import java.util.List;
 
+import com.heike.domain.dto.ApplyDto;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.ApplyRecruitVO;
 import com.heike.domain.vo.StudentVO;
@@ -38,7 +39,7 @@ public interface StudentService {
 	 * @param recId 招聘信息id
 	 * @return "onJob" 在职, "isApplyed", "success"报名成功，"fail"报名失败
 	 */
-	public String apply(Long stuId, Long recId); 
+	public String apply(ApplyDto applyDto); 
 	
 	/**
 	 * 学生查看在职的岗位

@@ -14,10 +14,13 @@ import com.heike.domain.dto.ApproveDto;
 import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
+import com.heike.domain.dto.SalaryQueryDto;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Recruit;
+import com.heike.domain.pojo.Salary;
 import com.heike.domain.service.EmployerService;
 import com.heike.domain.service.RecruitService;
+import com.heike.domain.service.SalaryService;
 import com.heike.domain.vo.EmployerStudentVO;
 import com.heike.domain.vo.RecruitStuVO;
 import com.heike.domain.vo.RecruitVO;
@@ -29,6 +32,8 @@ public class EmployerController {
 	private RecruitService recruitService;
 	@Autowired
 	private EmployerService employerService;
+	@Autowired
+	private SalaryService salaryService;
 	
 	/**
 	 * 首页
@@ -249,4 +254,63 @@ public class EmployerController {
 
 		return "fail";
 	}
+
+	/**
+	 * 跳转到提交工资列表页面
+	 * @return
+	 */
+	@RequestMapping(value="/pubSalary", method=RequestMethod.GET)
+	public String pubSalary() {	
+		return "employer/pubSalary";
+	}
+
+	/**
+	 * 判断学生某月的工资是否已经提交
+	 * @param sqd
+	 * @return
+	 */
+	@RequestMapping("/isPubSalary")
+	@ResponseBody
+	public String isPubSalary(SalaryQueryDto sqd, HttpSession session) {
+		Employer employer = (Employer)session.getAttribute("user");
+		sqd.setEmpId(employer.getId());
+		
+		if(salaryService.isPubSalary(sqd)) {
+			return "isPublished";	// 已经提交
+		}
+
+		return "noPublished";	// 未提交
+	}
+	
+	/**
+	 * 提交工资
+	 * @param session
+	 * @param salary
+	 * @return
+	 */
+	@RequestMapping(value="/pubSalary", method=RequestMethod.POST)
+	@ResponseBody
+	public String pubSalary(HttpSession session, Salary salary) {
+		Employer employer = (Employer)session.getAttribute("user");
+		salary.setEmpId(employer.getId());
+		if(salaryService.pubSalary(salary)) {
+			return "success";
+		}
+		
+		return "fail";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

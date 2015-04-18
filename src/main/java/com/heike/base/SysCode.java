@@ -113,4 +113,19 @@ public final class SysCode {
 		public static final String SALARY_COMMIT_END = "END_DATE";
 		
 	}
+	
+	/**
+	 * 工资状态
+	 * @author Geek_ymv
+	 */
+	public static interface SalaryStatus {
+		/**
+		 * 正常
+		 */
+		public static final Integer NORMA = 1;
+		/**
+		 * 已删除
+		 */
+		public static final Integer DELETED = -1;
+	}
 }

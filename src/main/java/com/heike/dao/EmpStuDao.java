@@ -76,6 +76,7 @@ public class EmpStuDao extends HibernateDao {
 			.append(" and es.status = :status")
 			.append(" and es.stuId = rs.stuId and es.stuId = s.id ")
 			.append(" and rs.recId = r.id")
+			.append(" and r.empId = es.empId")	// 用工单位发布的招聘信息
 			.append(" and s.professionId = d.id")
 			.append(" order by es.date desc");
 		
@@ -94,17 +95,17 @@ public class EmpStuDao extends HibernateDao {
 	 * @param empId
 	 * @return true 在职，false 不在职
 	 */
-	public boolean isOnJob(Long stuId, Long recId) {
+	public boolean isOnJob(Long stuId, Long empId) {
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("select count(*) from EmpStu es, Recruit r")
-			.append(" where es.stuId = :stuId and r.id = :recId")
-			.append(" and es.empId = r.empId")
+		builder.append("select count(*) from EmpStu es")
+			.append(" where es.stuId = :stuId")
+			.append(" and es.empId = :empId")
 			.append(" and es.status = :status");
 		
 		long count = (Long) getSession().createQuery(builder.toString())
 				.setLong("stuId", stuId)
-				.setLong("recId", recId)
+				.setLong("empId", empId)
 				.setInteger("status", SysCode.EmployerStudent.ON_JOB)
 				.uniqueResult();	// 在职
 		

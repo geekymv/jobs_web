@@ -72,32 +72,6 @@
     	</div>
 	</div>
    </div><!-- /.container -->
-   
-   
-   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">工资提交</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-   
    <div class="footer">
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
@@ -111,35 +85,34 @@
 						$("tbody").empty();
 			        	var datas = result.datas;
 			        	var length = datas.length;
+			        	var html = "";
 			        	//  如果没有数据，隐藏表头
 			        	if(datas == null || length == 0){
-							$("#head").hide();			        		
+							$("#head").hide();	
+							html = "<div style='text-align:center;color:blue;'>暂无学生...</div>";
 			        	}else {
 			        		$("#head").show();	
+		        		    for(var i = 0; i < length; i++) {
+								var data = datas[i];
+								var status = data.status;
+								if("1" == status) {
+									status = "在职";				
+								}else if("-1" == status) {
+									status = "离职";
+								}
+								
+								html += "<tr>"
+									+ "<td>"+ (i+1) +"</td>"	
+									+ "<td>"+ data.num +"</td>"	
+									+ "<td>"+ data.name +"</td>"	
+									+ "<td>"+ data.profession +"</td>"	
+									+ "<td>"+ data.postName +"</td>"	
+									+ "<td>"+ data.salary +"</td>"
+									+ "<td>"+ formatterDate(data.date) +"</td>"
+									+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='layoff("+ data.id +","+ data.num +")'>解聘</button></td>" 	
+									+ "</tr>";
+				            }
 			        	}
- 			            
-			            var html = "";
- 			            for(var i = 0; i < length; i++) {
-							var data = datas[i];
-							var status = data.status;
-							if("1" == status) {
-								status = "在职";				
-							}else if("-1" == status) {
-								status = "离职";
-							}
-							
-							html += "<tr>"
-								+ "<td>"+ (i+1) +"</td>"	
-								+ "<td>"+ data.num +"</td>"	
-								+ "<td>"+ data.name +"</td>"	
-								+ "<td>"+ data.profession +"</td>"	
-								+ "<td>"+ data.postName +"</td>"	
-								+ "<td>"+ data.salary +"</td>"
-								+ "<td>"+ formatterDate(data.date) +"</td>"
-								+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='layoff("+ data.id +","+ data.num +")'>解聘</button></td>" 	
-								+ "</tr>";
-			            }
- 			            
  			            $("tbody").html(html);
 			        }
 			    },

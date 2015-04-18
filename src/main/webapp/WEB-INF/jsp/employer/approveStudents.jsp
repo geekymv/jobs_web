@@ -17,7 +17,7 @@
 		
 		div.nostudent {
 			font-size: 14px;
-			color: red;
+			color: blue;
 			text-align: center;
 		}
 		

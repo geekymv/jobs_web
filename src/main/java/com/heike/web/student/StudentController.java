@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.heike.domain.dto.ApplyDto;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.service.StudentService;
@@ -133,13 +134,14 @@ public class StudentController {
 	 */
 	@RequestMapping("/student/apply")
 	@ResponseBody
-	public String apply(Long recId, HttpSession session) {
+	public String apply(ApplyDto applyDto, HttpSession session) {
 		Student student = (Student) session.getAttribute("user");
 		/**
 		 *  1.判断学生是否在该用工单位在职
 		 *  2.判断学生是否已经在该用工单位报名了，状态为等审核
 		 */
-		return studentService.apply(student.getId(), recId);
+		applyDto.setStuId(student.getId());
+		return studentService.apply(applyDto);
 
 	}
 	

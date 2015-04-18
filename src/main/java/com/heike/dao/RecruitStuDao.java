@@ -95,16 +95,16 @@ public class RecruitStuDao extends HibernateDao {
 	 * @param empId
 	 * @return true 有待审核的招聘信息
 	 */
-	public boolean isApplyed(Long stuId, Long recId) {
+	public boolean isApplyed(Long stuId, Long empId) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("select count(*) from RecruitStu rs, Recruit r")
+		builder.append("select count(*) from RecruitStu rs")
 			.append(" where rs.stuId = :stuId")
-			.append(" and rs.recId = :recId")
+			.append(" and rs.empId = :empId")
 			.append(" and rs.status = :status");
 		
 		long count = (Long)getSession().createQuery(builder.toString())
 				.setLong("stuId", stuId)
-				.setLong("recId", recId)
+				.setLong("empId", empId)
 				.setInteger("status", SysCode.RecruitStudent.WAIT) // 等待审核
 				.uniqueResult();
 		

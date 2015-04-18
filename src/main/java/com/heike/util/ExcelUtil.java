@@ -115,13 +115,14 @@ public class ExcelUtil {
 		        		String num = s.getNum();
 		        		if(map.containsKey(num)) {
 		        			SalaryDto salaryDto = map.get(num);	
-		        			salaryDto.setEmpName(salaryDto.getEmpName() + "," + s.getEmpName());
-		        			salaryDto.setWorktime(salaryDto.getWorktime() + "," + s.getWorktime());
-		        			salaryDto.setSalary(salaryDto.getSalary() + "," + s.getSalary());
-		        			salaryDto.setToolFee(salaryDto.getToolFee() + "," + s.getToolFee());
-		        			salaryDto.setBonus(salaryDto.getBonus() + "," + s.getBonus());
+		        			salaryDto.setPostName(salaryDto.getPostName() + "，" + s.getPostName());
+		        			salaryDto.setEmpName(salaryDto.getEmpName() + "，" + s.getEmpName());
+		        			salaryDto.setWorktime(salaryDto.getWorktime() + "+" + s.getWorktime());
+		        			salaryDto.setSalary(salaryDto.getSalary() + "+" + s.getSalary());
+		        			salaryDto.setToolFee(salaryDto.getToolFee() + "+" + s.getToolFee());
+		        			salaryDto.setBonus(salaryDto.getBonus() + "+" + s.getBonus());
 		        			salaryDto.setTotal(salaryDto.getTotal() + s.getTotal());
-		        			
+		        			salaryDto.setRemarks(salaryDto.getRemarks() + "，" + s.getRemarks());
 		        		}else {
 		        			map.put(num, s);
 		        		}

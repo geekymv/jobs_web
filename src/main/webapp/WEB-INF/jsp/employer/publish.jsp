@@ -167,6 +167,7 @@
 					success: function(data) {
 						if(data == "success") {
 							alert("发布成功！");
+							window.location.href="${ctx}/employer/home"
 						}
 					}
 				});

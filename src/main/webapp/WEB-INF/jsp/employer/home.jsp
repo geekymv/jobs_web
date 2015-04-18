@@ -55,7 +55,7 @@
 	          </div>
 			  
 			   <table class="table table-bordered table-hover table-condensed">
-          		<thead>
+          		<thead id="head">
 	                <tr>
 	                   	<th>招聘信息标题</th> <th>岗位名称</th> <th>发布时间</th> <th>截止日期</th> <th>基本工资</th> <th>查看详情</th>
 	                </tr>
@@ -85,25 +85,34 @@
 				alwaysShowPage: true,
 			    remote: {
 			        url: contextPath + '/employer/myRecruits',
-			//        params: { name: "test" },       //自定义请求参数
 			        callback: function (result) {
-			        	
 			            //回调函数，result 为 请求返回的数据，绑定数据
-			            console.log(result.datas);
 			            var datas = result.datas;
  			            var length = datas.length;
-			            var html = "";
- 			            for(var i = 0; i < length; i++) {
-							var data = datas[i];
-							html += "<tr>"
-								+ "<td>"+ data.title +"</td>"	
-								+ "<td>"+ data.postName +"</td>"	
-								+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
-								+ "<td>"+ formatterDate(data.endDate) +"</td>"	
-								+ "<td>"+ data.salary +"</td>"	
-								+ "<td><a href='${ctx}/employer/detail/"+data.id+"'>查看</a></td>"	
-								+ "</tr>";
-			            }
+ 			            
+ 			           var html = "";
+ 			           
+ 			       		//  如果没有数据，隐藏表头
+			        	if(datas == null || length == 0){
+							$("#head").hide();	
+							html = "<div style='text-align:center;'><a href='${ctx}/employer/publish'>您还没有发布招聘信息，马上去发布吧...</a></div>";
+			        	}else {
+			        		$("#head").show();
+			        		for(var i = 0; i < length; i++) {
+								var data = datas[i];
+								html += "<tr>"
+									+ "<td>"+ data.title +"</td>"	
+									+ "<td>"+ data.postName +"</td>"	
+									+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
+									+ "<td>"+ formatterDate(data.endDate) +"</td>"	
+									+ "<td>"+ data.salary +"</td>"	
+									+ "<td><a href='${ctx}/employer/detail/"+data.id+"'>查看</a></td>"	
+									+ "</tr>";
+				            }
+			        	}
+ 			       
+			          
+ 			            
  			            
  			            $("#t_body").html(html);
 			        }

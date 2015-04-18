@@ -10,6 +10,7 @@ import com.heike.dao.EmpStuDao;
 import com.heike.dao.RecruitDao;
 import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
+import com.heike.domain.dto.ApplyDto;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.StudentService;
@@ -54,19 +55,24 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public String apply(Long stuId, Long recId) {
-		boolean res = empStuDao.isOnJob(stuId, recId);
+	public String apply(ApplyDto applyDto) {
+		Long stuId = applyDto.getStuId();
+		Long empId = applyDto.getEmpId();
+		Long recId = applyDto.getRecId();
+		
+		boolean res = empStuDao.isOnJob(stuId, empId);
 		if(res) {
 			return "onJob";	// 已在职
 		}
 		
-		res = recruitStuDao.isApplyed(stuId, recId);
+		res = recruitStuDao.isApplyed(stuId, empId);
 		if(res) {
 			return "isApplyed";	// 已申请该用工单位的信息
 		}
 		
 		RecruitStu rs = new RecruitStu();
 		rs.setStuId(stuId);
+		rs.setEmpId(empId);
 		rs.setRecId(recId);
 		rs.setApplyDate(DateUtils.getCurrentGaDate());
 		rs.setStatus(SysCode.RecruitStudent.WAIT);	// 等待审核

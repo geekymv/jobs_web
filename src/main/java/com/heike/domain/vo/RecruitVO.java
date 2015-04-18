@@ -14,6 +14,7 @@ public class RecruitVO {
 	private String remarks;	//备注
 	private Integer status;	//  状态(1已发布，0已关闭，-1已删除)
 	private String empName;	// 用工单位名称
+	private Long empId;	// 用工单位id
 	
 	
 	public RecruitVO() {
@@ -103,4 +104,12 @@ public class RecruitVO {
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
+	public Long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Long empId) {
+		this.empId = empId;
+	}
+	
+	
 }

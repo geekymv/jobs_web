@@ -129,7 +129,7 @@
    				$.ajax({
    					url: contextPath + "/student/apply",
    					type: "post",
-   					data:{"recId": '${recruit.id}'},
+   					data:{"recId": '${recruit.id}', 'empId': '${recruit.empId}'},
    					success:function(data){
    						// "onJob" 在职, "isApplyed" 已在该用工单位报名, "success"报名成功，"fail"报名失败
    						if(data == "onJob") {

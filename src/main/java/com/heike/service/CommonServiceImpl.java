@@ -94,13 +94,13 @@ public class CommonServiceImpl implements CommonService {
 				
 				int authority = employer.getAuthority();
 				if(authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 管理员
-					fileName = "学生勤工助学工资表" + month + ".xls";
+					fileName = "学生勤工助学工资表（" + month + "）";
 					titles = Arrays.asList("序号", "姓名", "学号", "专业", "岗位名称", "所在单位", "工作时间", "基本工资", "工具费", "奖金", "实发工资", "备注");
-					contents = salaryDao.queryList();
+					contents = salaryDao.queryList(month);
 				}else if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 用工单位
-					fileName = "学生勤工助学工资表（" + employer.getName() + month + "）.xls";
+					fileName = "学生勤工助学工资表（" + employer.getName() + month + "）";
 					titles = Arrays.asList("序号", "姓名", "学号", "专业", "岗位名称", "工作时间", "基本工资", "工具费", "奖金", "实发工资", "备注");
-					contents = salaryDao.queryList2(employer.getId());
+					contents = salaryDao.queryList2(employer.getId(), month);
 				}
 				
 				

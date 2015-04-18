@@ -17,7 +17,9 @@ import javax.persistence.Table;
 public class RecruitStu {
 	private Long id;
 	private Long recId; // 招聘信息id
+	private Long empId; // 发布招聘信息的用工单位
 	private Long stuId;	// 学生id
+	
 	private String applyDate;	// 报名时间
 	private Integer status; // 状态(1审核通过, 0等待审核, -1审核不通过)
 	
@@ -36,6 +38,16 @@ public class RecruitStu {
 	public void setRecId(Long recId) {
 		this.recId = recId;
 	}
+	
+	@Column(name="employer_id")
+	public Long getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Long empId) {
+		this.empId = empId;
+	}
+	
+	
 	@Column(name="student_id")
 	public Long getStuId() {
 		return stuId;
