@@ -70,5 +70,11 @@ public class EmployerServiceImpl implements EmployerService {
 			recruitStuDao.saveOrUpdate(rs);
 		}
 	}
+
+	@Override
+	public boolean layoff(Long stuId, Long empId) {
+		int res = empStuDao.updateStatus(SysCode.EmployerStudent.LEAVE_JOB, stuId, empId);
+		return res == 1 ? true : false;
+	}
 	
 }

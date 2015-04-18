@@ -29,7 +29,7 @@ public class SalaryDao extends HibernateDao{
 	public List<SalaryDto> queryList2(Long empId) {
 		StringBuilder builder = new StringBuilder("select new com.heike.domain.dto.SalaryDto");
 		builder.append("(s.name, s.num, d.name, r.postName, "
-				+ "e.name, sl.worktime, sl.salary, sl.toolFee, sl.bonus, sl.remarks)")
+				+ "sl.worktime, sl.salary, sl.toolFee, sl.bonus, sl.remarks)")
 		.append(" from Salary sl, Student s, Employer e, Recruit r, RecruitStu rs, Dict d")
 		.append(" where s.professionId = d.id")
 		.append(" and sl.stuId = s.id and sl.empId = e.id")

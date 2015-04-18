@@ -41,5 +41,13 @@ public interface EmployerService {
 	 * @param dto
 	 */
 	public void approve(ApproveDto dto);
+	
+	/**
+	 * 解聘学生
+	 * @param stuId 学生id
+	 * @param empId 用工单位id
+	 * @return
+	 */
+	public boolean layoff(Long stuId, Long empId);
 
 }

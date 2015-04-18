@@ -9,8 +9,10 @@
 	<title>待审核学生列表</title>
 	<%@ include file="/WEB-INF/jsp/inc/style.jsp" %>
 	<style type="text/css">
+		
 		table th, td {
 			text-align: center;
+			vertical-align: bottom;
 		}
 		
 		div.nostudent {
@@ -19,6 +21,10 @@
 			text-align: center;
 		}
 		
+		.mybtn {
+			width: 50px;
+			height: 27px;
+		}
 	</style>
 	
 	<link href="<c:url value='/resources/css/zzsc.css'/>" rel="stylesheet"/>	
@@ -46,7 +52,7 @@
     	
       	<div class="col-md-10">
 	        <div class="panel panel-primary">
-	          <div class="panel-heading">学生列表</div>
+	          <div class="panel-heading">待审核学生列表</div>
 	          <div class="panel-body">
 	            <p>&nbsp;</p>
 	          </div>
@@ -55,7 +61,7 @@
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead>
 	                <tr id="head">
-	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>操作</th> 
+	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>报名时间</th> <th>操作</th> 
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -100,9 +106,10 @@
 									+ "<td>"+ data.name +"</td>"	
 									+ "<td>"+ data.profession +"</td>"	
 									+ "<td>"+ data.postName +"</td>"	
+									+ "<td>"+ formatterDate(data.applyDate) +"</td>"	
 									+ "<td>"
-									+ "<button class='btn btn-primary btn-sm' onclick='hire("+data.stuId + "," +data.recId + ","+ 1 +")'>&nbsp;录用&nbsp;</button>&nbsp;&nbsp;"
-									+ "<button class='btn btn-primary btn-sm' onclick='hire("+data.stuId + "," +data.recId + ","+ -1 +")'>不录用</button></td>" 
+									+ "<button class='btn btn-primary btn-sm mybtn' onclick='hire("+data.stuId + "," +data.recId + ","+ 1 +")'>&nbsp;录用&nbsp;</button>&nbsp;&nbsp;"
+									+ "<button class='btn btn-primary btn-sm mybtn' onclick='hire("+data.stuId + "," +data.recId + ","+ -1 +")'>不录用</button></td>" 
 									+ "</tr>";
 				            }
 	 			            
@@ -123,15 +130,16 @@
    		});
    		// status -1不录用，1录用
    		function hire(stuId, recId, status) {
-			alert(stuId + "," + recId + "," + status)   			
-
    			$.ajax({
    				url: contextPath + '/employer/approve',
    				type: 'post',
    				data: {'stuId': stuId, 'recId': recId, 'status': status},
    				dataType: 'text',
    				success: function(data){
-	   				alert(data);
+	   				if(data == 'success') {
+	   					alert('审核成功！');
+						window.location.reload();
+	   				}
    				}
    			});
    		}

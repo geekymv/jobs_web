@@ -42,6 +42,6 @@ public interface CommonService {
 	 * @param object
 	 * @param response
 	 */
-	public void download(Object object, HttpServletResponse response);
+	public void download(Object object, String month, HttpServletResponse response);
 	
 }

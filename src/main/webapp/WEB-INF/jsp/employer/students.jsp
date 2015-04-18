@@ -12,6 +12,12 @@
 		table th, td {
 			text-align: center;
 		}
+		
+		.mybtn {
+			width: 50px;
+			height: 27px;
+		}
+		
 	</style>
 	
 	<link href="<c:url value='/resources/css/zzsc.css'/>" rel="stylesheet"/>	
@@ -43,7 +49,7 @@
 	          <div class="panel-body">
 	            <p>
 	            	温馨提示：<br/>
-	            	①当学生离职后，需要删除该学生，否则该学生不能继续报名本单位发布的招聘信息！
+	            	①当学生离职后，需要解聘该学生，否则该学生不能继续报名本单位发布的招聘信息！
 	            </p>
 	          </div>
 	        
@@ -130,7 +136,7 @@
 								+ "<td>"+ data.postName +"</td>"	
 								+ "<td>"+ data.salary +"</td>"
 								+ "<td>"+ formatterDate(data.date) +"</td>"
-								+ "<td>"+ status +"</td>"	
+								+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='layoff("+ data.id +","+ data.num +")'>解聘</button></td>" 	
 								+ "</tr>";
 			            }
  			            
@@ -141,8 +147,27 @@
 			    pageSizeName: 'pageSize',       //请求参数，每页数量
 				totalName: 'totalRecord'       //指定返回数据的总数据量
 			});
+		
    		});
-
+	
+   		function layoff(stuId, stuNum) {
+   			var res = confirm('确定要解聘学号是'+ stuNum +'的学生吗？')
+			if(res) {
+				// 解聘学生
+				$.ajax({
+					url: contextPath + '/employer/layoff',
+					data: {'stuId': stuId}
+				}).done(function(data){
+					if(data == 'success') {
+						alert('解聘成功！')
+						window.location.reload();
+					}
+				}).fail(function(){
+					alert('解聘失败！');
+				});
+			} 			
+   		}
+   		
    	</script>
 
 </body>

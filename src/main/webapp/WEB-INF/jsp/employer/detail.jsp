@@ -146,6 +146,7 @@
 					$('#postNum').attr('readonly', 'readonly')
 					$('#postName').attr('readonly', 'readonly')
 					$('#endDate').attr('readonly', 'readonly')
+					$('#endDate').removeAttr('onFocus')
 					$('#salary').attr('readonly', 'readonly')
 					$('#context').attr('readonly', 'readonly')
 					$("#is_applyed").html('<span color="red">已经被申请了，不可编辑</span>');

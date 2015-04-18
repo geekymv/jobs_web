@@ -36,7 +36,7 @@
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">我的报名记录</div>
 		          <table class="table table-bordered table-hover table-condensed">
-		            <thead>
+		            <thead id="t_header">
 		                <tr>
 		                   	<th>岗位名称</th> <th>发布单位</th> <th>薪资待遇</th> <th>报名时间</th> <th>状态</th>
 		                </tr>

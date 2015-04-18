@@ -14,6 +14,7 @@ import com.heike.dao.DictDao;
 import com.heike.dao.EmployerDao;
 import com.heike.dao.SalaryDao;
 import com.heike.dao.StudentDao;
+import com.heike.domain.dto.DownloadDto;
 import com.heike.domain.dto.SalaryDto;
 import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
@@ -79,26 +80,38 @@ public class CommonServiceImpl implements CommonService {
 	
 	
 	
-	public void download(Object object, HttpServletResponse response) {
+	public void download(Object object, String month, HttpServletResponse response) {
 		if(object != null) {
 			if(object instanceof Student) {	// 学生
 				return;
 			}else if(object instanceof Employer) {
 				Employer employer = (Employer)object;
 				
-				String[] title = {"序号", "姓名", "学号", "专业", "岗位名称", "所在单位", "工作时间", "基本工资", "工具费", "奖金", "实发工资", "备注"};
-				String name = "文件名";
+				List<String> titles = null;
+				String fileName = "文件名";
 				// 内容
-				List<SalaryDto> list = null;
+				List<SalaryDto> contents = null;
 				
 				int authority = employer.getAuthority();
 				if(authority == SysCode.EmployerCode.ADMIN_AUTHORITY) { // 管理员
-					list = salaryDao.queryList();
+					fileName = "学生勤工助学工资表" + month + ".xls";
+					titles = Arrays.asList("序号", "姓名", "学号", "专业", "岗位名称", "所在单位", "工作时间", "基本工资", "工具费", "奖金", "实发工资", "备注");
+					contents = salaryDao.queryList();
 				}else if(authority == SysCode.EmployerCode.EMPLOYER_AUTHORITY) { // 用工单位
-					list = salaryDao.queryList2(employer.getId());
+					fileName = "学生勤工助学工资表（" + employer.getName() + month + "）.xls";
+					titles = Arrays.asList("序号", "姓名", "学号", "专业", "岗位名称", "工作时间", "基本工资", "工具费", "奖金", "实发工资", "备注");
+					contents = salaryDao.queryList2(employer.getId());
 				}
 				
-				ExcelUtil.createExcel(list , title , name, response);
+				
+				DownloadDto downloadDto = new DownloadDto();
+				downloadDto.setFileName(fileName);
+				downloadDto.setTitles(titles);
+				downloadDto.setMonth(month);
+				downloadDto.setContents(contents);
+				downloadDto.setAuthority(authority);
+				
+				ExcelUtil.createExcel(downloadDto, response);
 				
 			}
 		}

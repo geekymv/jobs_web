@@ -127,6 +127,20 @@ public class EmployerController {
 		return pager;
 	}
 	
+	/**
+	 * 解聘学生
+	 * @return
+	 */
+	@RequestMapping("/layoff")
+	@ResponseBody
+	public String layoff(HttpSession session, Long stuId) {
+		Employer employer = (Employer)session.getAttribute("user");
+		if(employerService.layoff(stuId, employer.getId())) {
+			return "success";
+		}
+
+		return "fail";
+	}
 	
 	/**
 	 * 跳转到待审核学生列表页面

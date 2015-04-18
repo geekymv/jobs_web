@@ -23,10 +23,15 @@ public class EmpStuDao extends HibernateDao {
 	 * 更新学生在职状态
 	 * @param status
 	 */
-	public int updateStatus(Integer status) {
-		String hql = "update EmpStu set status = :status";
-		int result = getSession().createQuery(hql)
+	public int updateStatus(Integer status, Long stuId, Long empId) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("update EmpStu set status = :status")
+			.append(" where stuId = :stuId and empId = :empId");	
+
+		int result = getSession().createQuery(builder.toString())
 						.setInteger("status", status)
+						.setLong("stuId", stuId)
+						.setLong("empId", empId)
 						.executeUpdate();
 		return result;
 	}
@@ -38,13 +43,21 @@ public class EmpStuDao extends HibernateDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ApplyRecruitVO> findOnJob(Long stuId) {
-		String hql = "select new com.heike.domain.vo.ApplyRecruitVO(rs.recId, r.postName, rs.applyDate, e.id, e.name, r.salary, es.status) "
-				+ " from EmpStu es, RecruitStu rs, Employer e, Recruit r "
-				+ " where es.stuId = :stuId and rs.stuId = es.stuId and es.empId = r.empId "
-				+ " and rs.recId = r.id and r.empId = e.id order by rs.applyDate desc";
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new com.heike.domain.vo.ApplyRecruitVO(rs.recId, r.postName, rs.applyDate, e.id, e.name, r.salary, es.status) ")
+			.append(" from EmpStu es, RecruitStu rs, Employer e, Recruit r ")
+			.append(" where es.stuId = :stuId and rs.stuId = es.stuId and es.empId = r.empId ")
+			.append(" and rs.status = :status")
+			.append(" and rs.recId = r.id and r.empId = e.id order by rs.applyDate desc");
+		
+//		String hql = ""
+//				+ " from EmpStu es, RecruitStu rs, Employer e, Recruit r "
+//				+ " where es.stuId = :stuId and rs.stuId = es.stuId and es.empId = r.empId "
+//				+ " and rs.recId = r.id and r.empId = e.id order by rs.applyDate desc";
 			
-		return (List<ApplyRecruitVO>)getSession().createQuery(hql)
+		return (List<ApplyRecruitVO>)getSession().createQuery(builder.toString())
 											.setLong("stuId", stuId)	//
+											.setInteger("status", SysCode.RecruitStudent.APPROVED)
 											.list();
 	} 
 

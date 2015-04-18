@@ -75,12 +75,10 @@
 	         		</tr>
 					<tr>
 						<td>
-							<span>发布时间：</span>
-							${recruit.releaseDate }
+							<span id="releaseDate">发布时间：</span>
 						</td>
 						<td>
-							<span>截止时间：</span>
-							${recruit.endDate }
+							<span id="endDate">截止时间：</span>
 						</td>
 					</tr>
 					<tr>
@@ -120,6 +118,13 @@
    
    <script type="text/javascript">
    		$(function(){
+   			
+   			// 日期处理
+   			var releaseDate = '${recruit.releaseDate }';	// 发布时间
+   			$("#releaseDate").after(formatterDate(releaseDate));
+   			var endDate = '${recruit.endDate }';	// 截止时间
+   			$("#endDate").after(formatterDate(endDate));
+   			
    			$("#apply").click(function(){
    				$.ajax({
    					url: contextPath + "/student/apply",

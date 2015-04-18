@@ -7,6 +7,20 @@ public class SalaryDto {
 	}
 	
 	public SalaryDto(String name, String num, String profession,
+			String postName, String worktime, String salary,
+			String toolFee, String bonus, String remarks) {
+		this.name = name;
+		this.num = num;
+		this.profession = profession;
+		this.postName = postName;
+		this.worktime = worktime;
+		this.salary = salary;
+		this.toolFee = toolFee;
+		this.bonus = bonus;
+		this.remarks = remarks;
+	}
+
+	public SalaryDto(String name, String num, String profession,
 			String postName, String empName, String worktime, String salary,
 			String toolFee, String bonus, String remarks) {
 		this.name = name;
@@ -20,7 +34,7 @@ public class SalaryDto {
 		this.bonus = bonus;
 		this.remarks = remarks;
 	}
-
+	
 	/**
 	 * 姓名
 	 */
@@ -57,6 +71,11 @@ public class SalaryDto {
 	 * 奖金
 	 */
 	private String bonus;
+	
+	/**
+	 * 总金额
+	 */
+	private float total;
 	
 	/**
 	 * 备注
@@ -135,6 +154,13 @@ public class SalaryDto {
 		this.bonus = bonus;
 	}
 
+	public void setTotal(float total) {
+		this.total = total;
+	}
+	public float getTotal() {
+		return total;
+	}
+	
 	public String getRemarks() {
 		return remarks;
 	}
