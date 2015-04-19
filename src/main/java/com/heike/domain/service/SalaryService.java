@@ -23,10 +23,19 @@ public interface SalaryService {
 	public boolean isPubSalary(SalaryQueryDto sqd);
 	
 	/**
-	 * 分页查询工资列表
+	 * 用工单位-分页查询工资列表
 	 * @param pager
 	 * @param sqd
 	 */
 	public void getSalaryPage(Pager<SalaryDto> pager, SalaryQueryDto sqd);
+	
+	
+	/**
+	 * 管理员分页查询工资列表
+	 * @param pager
+	 * @param sqd
+	 */
+	public void getSalaryPage2(Pager<SalaryDto> pager, SalaryQueryDto sqd);
+	
 
 }

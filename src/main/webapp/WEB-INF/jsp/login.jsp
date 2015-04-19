@@ -39,7 +39,7 @@
             <div class="signup_form_form" id="signup_form">
                     <div class="form_row first_row">
                         <label for="signup_name">请输入用户名</label>
-                        <input type="text" name="account" placeholder="请输入用户名" id="account" required="required"/>
+                        <input type="text" name="account" placeholder="请输入用户名" id="account" required="required" autofocus="autofocus"/>
                     </div>
                     <div class="form_row">
                         <label for="signup_password">请输入密码</label>

@@ -15,14 +15,6 @@ import com.heike.util.EncryptUtil;
 public class EmployerDao extends HibernateDao {
 	
 	/**
-	 * 保存
-	 * @param employer
-	 */
-	public void save(Employer employer) {
-		getSession().save(employer);
-	}
-	
-	/**
 	 * 更新
 	 * @param dto
 	 */

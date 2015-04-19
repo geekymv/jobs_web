@@ -44,6 +44,16 @@ public class SalaryServiceImpl implements SalaryService {
 		
 		salaryDao.queryByPage(pager, sqd);
 	}
+
+	@Override
+	public void getSalaryPage2(Pager<SalaryDto> pager, SalaryQueryDto sqd) {
+		String month = sqd.getMonth();
+		if(StringUtils.isBlank(month)) {
+			sqd.setMonth(DateUtils.formatYearMonth(new Date()));
+		}
+		
+		salaryDao.queryByPage2(pager, sqd);
+	}
 	
 
 }

@@ -86,6 +86,27 @@ public class SalaryDao extends HibernateDao{
 		
 		findByPage(builder.toString(), params , pager);
 	}
+	
+	/**
+	 * 管理员查询工资列表
+	 * @param pager
+	 * @param sqd
+	 */
+	public void queryByPage2(Pager<SalaryDto> pager, SalaryQueryDto sqd) {
+		StringBuilder builder = new StringBuilder("select new com.heike.domain.dto.SalaryDto");
+		builder.append("(s.name, s.num, d.name, r.postName, "
+				+ "e.name, sl.worktime, sl.salary, sl.toolFee, sl.bonus, sl.remarks, sl.month)")
+		.append(" from Salary sl, Student s, Employer e, Recruit r, RecruitStu rs, Dict d")
+		.append(" where sl.month = :month and s.professionId = d.id")
+		.append(" and sl.stuId = s.id and sl.empId = e.id")
+		.append(" and rs.recId = r.id and rs.stuId = sl.stuId")
+		.append(" and r.empId = sl.empId");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("month", sqd.getMonth());
+		
+		findByPage(builder.toString(), params , pager);
+	}
 }
 
 

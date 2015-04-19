@@ -19,10 +19,16 @@ public class StudentDao extends HibernateDao {
 	 * @return
 	 */
 	public Pager<Student> queryByPage(Pager<Student> pager) {
-		String hql = "from Student ";
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("select new com.heike.domain.dto.StudentDto(")
+			.append(")")
+			.append(" from Student s, Dict d1, Dict d2 ")
+			.append(" where s.collegeId = d1.id and s.professionId = d2.id ");
+		
 		Map<String, Object> params = new HashMap<String, Object>();
 		
-		return this.findByPage(hql, params, pager);
+		return this.findByPage(builder.toString(), params, pager);
 	}
 	
 	

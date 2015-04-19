@@ -57,7 +57,7 @@ public class EmployerInterceptor implements HandlerInterceptor {
 			System.out.println("session拦截通过...");
 			if(obj instanceof Employer) { 
 				Employer e = (Employer)obj;
-				if(SysCode.EmployerCode.ADMIN_AUTHORITY == e.getAuthority()) { 	// 管理员
+				if(SysCode.EmployerCode.EMPLOYER_AUTHORITY == e.getAuthority()) { 	// 用工单位
 					return true;
 				}
 			}
