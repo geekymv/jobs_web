@@ -49,11 +49,20 @@
     </div>
     <div class="login-btn-set">
 		<div class='rem'>记住我</div> 
-		<input type="button" value="" class='login-btn' />
+		<input type="button" value="" id="login-btn" class='login-btn' />
 	</div>
 	</form>
 </div>
 <script type="text/javascript">
+	/*
+	function document.onkeydown(event){
+		if(event.keyCode==13){
+			document.getElementById("button").click();
+			return false;
+		}	
+	}
+	*/
+	
 	$(function(){
 	    $('.rem').click(function(){
 	        $(this).toggleClass('selected');

@@ -14,6 +14,7 @@ import com.heike.domain.dto.ApproveDto;
 import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
+import com.heike.domain.dto.SalaryDto;
 import com.heike.domain.dto.SalaryQueryDto;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Recruit;
@@ -299,6 +300,31 @@ public class EmployerController {
 		
 		return "fail";
 	}
+	
+	/**
+	 * 跳转到工资列表页面
+	 * @return
+	 */
+	@RequestMapping("/salaryList")
+	public String salaryList() {
+		return "employer/salaryList";
+	}
+	
+	/**
+	 * 查询工资列表
+	 * @param month
+	 */
+	@RequestMapping(value="/salaryList", method=RequestMethod.POST)
+	@ResponseBody
+	public Pager<SalaryDto> salaryList(Pager<SalaryDto> pager, SalaryQueryDto sqd, HttpSession session) {
+		Employer employer = (Employer)session.getAttribute("user");
+		
+		sqd.setEmpId(employer.getId());
+		salaryService.getSalaryPage(pager, sqd);
+		return pager;
+	}
+	
+	
 }
 
 

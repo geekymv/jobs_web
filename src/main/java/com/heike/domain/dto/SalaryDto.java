@@ -7,6 +7,22 @@ public class SalaryDto {
 	}
 	
 	public SalaryDto(String name, String num, String profession,
+			String postName, String empName, String worktime, String salary,
+			String toolFee, String bonus, String remarks, String month) {
+		this.name = name;
+		this.num = num;
+		this.profession = profession;
+		this.postName = postName;
+		this.empName = empName;
+		this.worktime = worktime;
+		this.salary = salary;
+		this.toolFee = toolFee;
+		this.bonus = bonus;
+		this.remarks = remarks;
+		this.month = month;
+	}
+	
+	public SalaryDto(String name, String num, String profession,
 			String postName, String worktime, String salary,
 			String toolFee, String bonus, String remarks) {
 		this.name = name;
@@ -34,6 +50,11 @@ public class SalaryDto {
 		this.bonus = bonus;
 		this.remarks = remarks;
 	}
+	
+	/**
+	 * 月份
+	 */
+	private String month;
 	
 	/**
 	 * 姓名
@@ -81,6 +102,13 @@ public class SalaryDto {
 	 * 备注
 	 */
 	private String remarks;
+	
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
 
 	public String getName() {
 		return name;

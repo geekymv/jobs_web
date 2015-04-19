@@ -27,7 +27,7 @@
         <h4 >工资管理</h4>
         <div class="list-item none">
           <p ><a href="${ctx }/employer/pubSalary" target="_self">提交工资</a></p>
-          <p ><a href="employer/salary-list.do" target="_self">工资列表</a></p>
+          <p ><a href="${ctx }/employer/salaryList" target="_self">工资列表</a></p>
         </div>
       </li>
     </ul>
