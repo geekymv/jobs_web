@@ -257,77 +257,99 @@
 					return;
 				}
 				
-				var fffds = /^\d+(\.\d+)?$/;	// 匹配非负浮点数(0、正浮点数)
-				var zfds = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/; //匹配正浮点数
-				var ffzs =   /^\d+$/; // 匹配非负整数
 				
-				// 工作时间是非负浮点数 、 0、 非负整数	
-				var worktime = $('#worktime').val();
-				if(worktime.trim() == "") {
-					alert('工作时间不能为空！');
-					$('#worktime').focus();
-					return;
-				}
-				if(!ffzs.test(worktime) || !fffds.test(worktime)) {
-					alert('工作时间不合法！');	
-					$('#worktime').focus();
-					return;
-				}
-				
-				var salary = $('#salary').val();
-				if(salary.trim() == "") {
-					alert('基本工资不能为空！');
-					$('#salary').focus();
-					return;
-				}
-				if(!ffzs.test(salary) || !fffds.test(salary)) {
-					alert('基本工资不合法！');	
-					$('#salary').focus();
-					return;
-				}
-				
-				var bonus = $('#bonus').val();
-				if(bonus.trim() == "") {
-					alert('奖金不能为空！');
-					$('#bonus').focus();
-					return;
-				}
-				if(!ffzs.test(bonus) || !fffds.test(bonus)) {
-					alert('奖金不合法！');	
-					$('#salary').focus();
-					return;
-				}
-				
-				var toolFee = $('#toolFee').val();
-				if(toolFee.trim() == "") {
-					alert('工具费不能为空！');
-					$('#toolFee').focus();
-					return;
-				}
-				if(!ffzs.test(toolFee) || !fffds.test(toolFee)) {
-					alert('工具费不合法！');	
-					$('#toolFee').focus();
-					return;
-				}
-
-				var remarks = $('#remarks').val();
-				
-				// 提交工资
+				// 判断当前月的工资是否已经提交
 				$.ajax({
-					url: contextPath + '/employer/pubSalary',
+					url: contextPath + '/employer/isPubSalary',
 					type: 'POST',
-					data: {'stuId': stuId, 'month': month, 'worktime': worktime, 'salary': salary, 
-						'bonus': bonus, 'toolFee': toolFee, 'remarks': remarks },
+					data: {'stuId': stuId, 'month': month},
 					dataType: 'text'
+					
 				}).done(function(data){
-					if(data == 'success') {
-						alert('提交成功！');
-						$('#myModal').modal('hide')
-					}	
+					if(data == 'isPublished') {
+						$('#tips').show();
+						return;
+					}else if(data == 'noPublished') {
+						$('#tips').hide();
+						// ==
+						var fffds = /^\d+(\.\d+)?$/;	// 匹配非负浮点数(0、正浮点数)
+						var zfds = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/; //匹配正浮点数
+						var ffzs =   /^\d+$/; // 匹配非负整数
+						
+						// 工作时间是非负浮点数 、 0、 非负整数	
+						var worktime = $('#worktime').val();
+						if(worktime.trim() == "") {
+							alert('工作时间不能为空！');
+							$('#worktime').focus();
+							return;
+						}
+						if(!ffzs.test(worktime) || !fffds.test(worktime)) {
+							alert('工作时间不合法！');	
+							$('#worktime').focus();
+							return;
+						}
+						
+						var salary = $('#salary').val();
+						if(salary.trim() == "") {
+							alert('基本工资不能为空！');
+							$('#salary').focus();
+							return;
+						}
+						if(!ffzs.test(salary) || !fffds.test(salary)) {
+							alert('基本工资不合法！');	
+							$('#salary').focus();
+							return;
+						}
+						
+						var bonus = $('#bonus').val();
+						if(bonus.trim() == "") {
+							alert('奖金不能为空！');
+							$('#bonus').focus();
+							return;
+						}
+						if(!ffzs.test(bonus) || !fffds.test(bonus)) {
+							alert('奖金不合法！');	
+							$('#salary').focus();
+							return;
+						}
+						
+						var toolFee = $('#toolFee').val();
+						if(toolFee.trim() == "") {
+							alert('工具费不能为空！');
+							$('#toolFee').focus();
+							return;
+						}
+						if(!ffzs.test(toolFee) || !fffds.test(toolFee)) {
+							alert('工具费不合法！');	
+							$('#toolFee').focus();
+							return;
+						}
+
+						var remarks = $('#remarks').val();
+						
+						// 提交工资
+						$.ajax({
+							url: contextPath + '/employer/pubSalary',
+							type: 'POST',
+							data: {'stuId': stuId, 'month': month, 'worktime': worktime, 'salary': salary, 
+								'bonus': bonus, 'toolFee': toolFee, 'remarks': remarks },
+							dataType: 'text'
+						}).done(function(data){
+							if(data == 'success') {
+								alert('提交成功！');
+								$('#myModal').modal('hide')
+							}	
+							
+						}).fail(function(){
+							
+						});						
+						//===
+					}
 					
 				}).fail(function(){
 					
 				});
+				
 			});
    			
 		

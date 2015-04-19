@@ -2,7 +2,6 @@ package com.heike.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +30,11 @@ public class IndexController {
 	private CommonService commonService;
 	
 	/**
-	 * 跳转到首页
+	 * 进入首页 
 	 * @return
 	 */
-	@RequestMapping("/index")
-	public String index(Model model, HttpServletRequest request) {
+	@RequestMapping(value={"/", "/index"})
+	public String index() {
 		return "index";
 	}
 	

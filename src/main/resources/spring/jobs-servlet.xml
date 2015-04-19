@@ -11,6 +11,39 @@
 	
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 拦截学生操作 -->
+			<mvc:mapping path="/student/**"/>
+			<bean class="com.heike.interceptor.StudentInterceptor">
+				<!-- 
+				不需要拦截的url地址	
+				<property name="excludeUrls">
+					<list>
+						<value>/ccms/</value>
+						<value>/ccms/login</value>
+					</list>
+				</property>
+			-->	
+			</bean>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<!-- 拦截用工单位操作 -->
+			<mvc:mapping path="/employer/**"/>
+			<bean class="com.heike.interceptor.EmployerInterceptor">
+			</bean>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<!-- 拦截管理员操作 -->
+			<mvc:mapping path="/admin/**"/>
+			<bean class="com.heike.interceptor.AdminInterceptor">
+			</bean>
+		</mvc:interceptor>		
+	
+	</mvc:interceptors>
+	
 	<!-- 视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>

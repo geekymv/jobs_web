@@ -55,8 +55,9 @@
 					     onClick="WdatePicker({dateFmt:'yyyy-MM', maxDate:'%y-%M', isShowClear:false})" />
 					  </div>
 					  &nbsp;&nbsp;
-					  <button type="button" class="btn btn-primary" id="download">下载</button>&nbsp;&nbsp;
 					  <button type="button" class="btn btn-primary" id="search">查询</button>
+					  &nbsp;&nbsp;
+					  <button type="button" class="btn btn-primary" id="download">下载</button> 
 					</form>
 				</div>	
 	          </div>
@@ -140,8 +141,8 @@
 								+ "<td>"+ data.month +"</td>"	
 								+ "<td>"+ data.remarks +"</td>"	
 								+ "<td>"
-								+	"<button id='edit' class='btn btn-primary mybtn'>编辑</button>&nbsp;&nbsp;"
-								+	"<button id='delete' class='btn btn-primary mybtn'>删除</button>"
+								+	"<button id='edit' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
+								+	"<button id='delete' class='btn btn-primary btn-sm mybtn'>删除</button>"
 								+ "</td>"	
 								+ "</tr>";
 			            }
