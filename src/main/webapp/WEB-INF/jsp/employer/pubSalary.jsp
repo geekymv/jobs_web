@@ -219,7 +219,8 @@
    			$('#worktime').focus(function(){
    				var month = $('#month').val();
    				if(month.trim() == '') {
-   					
+   					alert('请选择月份');
+   					return;
    				}
    				
 				var stuId = $('#stuId').val();

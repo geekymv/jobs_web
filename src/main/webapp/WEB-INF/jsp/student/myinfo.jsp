@@ -18,6 +18,10 @@
 			text-align: center;
 		}
 		
+		.div-top {
+			margin-top: 8px;
+		}
+		
 	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,23 +38,86 @@
     	<div class="col-md-2">
     		<jsp:include page="left-sider.jsp"></jsp:include>
       	</div>
-    
       	<div class="col-md-10">
       		 <div class="panel panel-primary">
 	          <div class="panel-heading">我的资料</div>
-		     	 <ul>
-		        	<li>学号：${student.num}</li>
-		        	<li>姓名：${student.name }</li>
-		        	<li>性别：${student.gender }</li>
-		        	<li>学院：${student.college }</li>
-		        	<li>专业：${student.profession }</li>
-		        	<li>手机号码：${student.mobile }</li>
-		        	<li>自我介绍：${student.introduce }</li>	
-		        	<li id="regTime">注册时间：</li>
-		        </ul>	
-		        <%--
-		        <a href="student/preupdate.do" class="btn btn-primary">修改基本资料</a>	
-		     	 --%>
+	          	<form class="form-horizontal" role="form" id="form" >
+	     	  		<div class="form-group div-top">
+		        		<label for="num" class="col-md-4 control-label">学号：</label>
+		        		<div  class="col-md-3">
+		        			<input type="text" class="form-control" id="num" name="num" value="${student.num }"/>
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">姓名：</label>
+		        		<div  class="col-md-3">
+		        			<input type="text" class="form-control" id="name" name="name" value="${student.name }"/>
+		        		</div>
+	        		</div>
+	        		
+	        		<div class="form-group">
+					  	<label for="gender" class="col-md-4 control-label">性别：</label>
+					  	<div class="col-md-3">
+					  		<c:choose>
+					  			<c:when test="${gender == '男' }">
+					  				 <label class="radio-inline control-label">
+								  		<input type="radio" name="gender" id="male" value="男" checked="checked"> 男
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="gender" id="female" value="女"> 女
+									</label>
+					  			</c:when>
+								<c:otherwise>
+									<label class="radio-inline control-label">
+								  		<input type="radio" name="gender" id="male" value="男"> 男
+									</label>
+									<label class="radio-inline">
+									  <input type="radio" name="gender" id="female" value="女"  checked="checked"> 女
+									</label>
+								</c:otherwise>					  			
+					  		
+					  		</c:choose>
+						 
+						</div>
+					</div>
+					<div class="form-group">
+					    <label for="college" class="col-sm-4 control-label">学院：</label>
+					    <div class="col-sm-3">
+					      <select class="form-control" id="college" name="collegeId">
+						  </select>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="profession" class="col-sm-4 control-label">专业：</label>
+					    <div class="col-sm-3">
+					      <select class="form-control" id="profession" name="professionId">
+						  </select>
+					    </div>
+					</div>
+	        		<div class="form-group">
+		        		<label for="mobile" class="col-md-4 control-label">手机号码：</label>
+		        		<div  class="col-md-3">
+		        			<input type="text" class="form-control" id="mobile" name="mobile" value="${student.mobile }"/>
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="introduce" class="col-md-4 control-label">自我介绍：</label>
+		        		<div  class="col-md-3">
+		        			<textarea id="introduce" name="introduce" class="form-control">${student.introduce }</textarea>
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label class="col-md-4 control-label">注册时间：</label>
+		        		<div  class="col-md-3 div-top" id="regTime">
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+	        			<div class="col-md-10 div-top" id="regTime" style="text-align: center;">
+		        			<button type="button" id="edit" name="" class="btn btn-primary">更新</button>
+		        		</div>
+	        		</div>
+	        	</form>
+
 		     </div>
     	</div>
 	</div>
@@ -60,11 +127,88 @@
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
    <script type="text/javascript">
+   		var params = {}
+   		
 		$(function(){
 			// 注册时间处理
 			var regTime = '${student.regTime }';
 			$('#regTime').append(formatterDate(regTime));
-		});   	
+			
+			// 获取所有专业
+			getColleges();
+			
+			// 专业改变事件
+			$("#college").change(function(){
+				params.colId = $("#college").val();
+				getProfessions();
+			});
+			
+			// 修改事件
+			$('#edit').click(function(){
+				var datas = $("#form").serialize();
+   				datas = decodeURIComponent(datas, true); /* 解决中文乱码问题 */
+
+   				$.post(contextPath+'/student/edit', datas).done(function(data){
+					if(data == 'success') {
+						alert("更新成功！");						
+					}					
+				}).fail(function(msg){
+					
+				});
+   				
+			});
+		});   
+		
+		// 获得所有学院
+		function getColleges(){
+			$.ajax({
+				url: contextPath + "/getColleges",
+				type: "post",
+				dataType: "json",
+				success: function(data) {
+					var html = "";
+					var collegeId = '${student.collegeId}';
+					for(var i = 0; i < data.length; i++) {
+						// 学生专业选择
+						var pro = "<option value="+data[i].id+">" + data[i].name + "</option>";
+						if(collegeId == data[i].id) {
+							pro = "<option selected='selected' value="+data[i].id+">" + data[i].name + "</option>";
+						}
+						html += pro;
+					}
+					// 学生所在学院id
+					params.colId = collegeId;
+					getProfessions(); 
+					
+					$("#college").html(html);
+				}
+			});
+		}
+		
+		// 根据学院id获得该学院的专业
+		function getProfessions(){
+			$.ajax({
+				url: contextPath + "/getProfessions",
+				data: params,
+				type: "post",
+				dataType: "json",
+				success: function(data) {
+					var html = "";
+					var professionId = '${student.professionId}';
+					for(var i = 0; i < data.length; i++) {
+						var pro = "<option value="+data[i].id+">" + data[i].name + "</option>";
+						if(professionId == data[i].id) {
+							pro = "<option selected='selected' value="+data[i].id+">" + data[i].name + "</option>";
+						}
+						html += pro;
+					}
+					$("#profession").html(html);
+				}
+			});
+		}
+		
+		
+		
    </script>
 </body>
 </html>

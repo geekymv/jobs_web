@@ -36,14 +36,18 @@ public class Employer {
 		this.authority = authority;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Employer [id=" + id + ", account=" + account + ", pwd=" + pwd
-				+ ", name=" + name + ", teacher=" + teacher + ", mobile="
-				+ mobile + ", totalMoney=" + totalMoney + ", postNum="
-				+ postNum + ", authority=" + authority + ", regDate=" + regDate
-				+ ", status=" + status + ", remarks=" + remarks + "]";
+	
+	
+	public Employer(Long id, String account, String name, String teacher,
+			String mobile, Integer totalMoney, Integer postNum, Integer status) {
+		this.id = id;
+		this.account = account;
+		this.name = name;
+		this.teacher = teacher;
+		this.mobile = mobile;
+		this.totalMoney = totalMoney;
+		this.postNum = postNum;
+		this.status = status;
 	}
 	
 	@Id

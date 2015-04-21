@@ -91,6 +91,28 @@ public class AdminController {
 	}
 	
 	/**
+	 * 跳转到用工单位列表
+	 * @return
+	 */
+	@RequestMapping(value="/employerList", method=RequestMethod.GET)
+	public String employerList() {
+		return "admin/employerList";
+	}
+	
+	/**
+	 * 分页显示用工单位列表
+	 * @param pager
+	 * @return
+	 */
+	@RequestMapping(value="/employerList", method=RequestMethod.POST)
+	@ResponseBody
+	public Pager<Employer> employerList(Pager<Employer> pager) {
+		adminService.getEmployerByPage(pager);
+		return pager;
+	}
+	
+	
+	/**
 	 * 跳转到学生列表
 	 * @return
 	 */
@@ -107,7 +129,7 @@ public class AdminController {
 	@RequestMapping(value="/students", method=RequestMethod.POST)
 	@ResponseBody
 	public Pager<StudentDto> students(Pager<StudentDto> pager) {
-		
+		adminService.getStudentByPage(pager);
 		return pager;
 	}
 	

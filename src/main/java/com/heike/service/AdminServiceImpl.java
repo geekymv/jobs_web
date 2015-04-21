@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.heike.base.SysCode;
 import com.heike.dao.EmployerDao;
+import com.heike.dao.StudentDao;
+import com.heike.domain.dto.Pager;
+import com.heike.domain.dto.StudentDto;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.service.AdminService;
 import com.heike.util.DateUtils;
@@ -14,6 +17,8 @@ import com.heike.util.EncryptUtil;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private EmployerDao employerDao;
+	@Autowired
+	private StudentDao studentDao;
 	
 	
 	public boolean isExist(String account) {
@@ -30,6 +35,16 @@ public class AdminServiceImpl implements AdminService {
 		
 		Long res = employerDao.save(employer);
 		return res != null ? true : false;
+	}
+
+	@Override
+	public void getStudentByPage(Pager<StudentDto> pager) {
+		studentDao.queryByPage(pager);
+	}
+
+	@Override
+	public void getEmployerByPage(Pager<Employer> pager) {
+		employerDao.queryByPage(pager);
 	}
 
 }

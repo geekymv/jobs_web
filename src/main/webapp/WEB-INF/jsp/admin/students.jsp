@@ -48,8 +48,6 @@
 	          <div class="panel-heading">学生列表</div>
 	          <div class="panel-body">
 	            <p>
-	            	温馨提示：<br/>
-	            	①当学生离职后，需要解聘该学生，否则该学生不能继续报名本单位发布的招聘信息！
 	            </p>
 	          </div>
 	        
@@ -57,7 +55,7 @@
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead>
 	                <tr id="head">
-	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th><th>操作</th> 
+	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>学院</th> <th>专业</th><th>操作</th> 
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -80,7 +78,7 @@
    		$(function(){
 			$("#page").page({
 			    remote: {
-			        url: contextPath + '/employer/studentPage',  //请求地址
+			        url: contextPath + '/admin//students',  //请求地址
 			        callback: function (result) {
 						$("tbody").empty();
 			        	var datas = result.datas;
@@ -105,11 +103,9 @@
 									+ "<td>"+ (i+1) +"</td>"	
 									+ "<td>"+ data.num +"</td>"	
 									+ "<td>"+ data.name +"</td>"	
+									+ "<td>"+ data.college +"</td>"
 									+ "<td>"+ data.profession +"</td>"	
-									+ "<td>"+ data.postName +"</td>"	
-									+ "<td>"+ data.salary +"</td>"
-									+ "<td>"+ formatterDate(data.date) +"</td>"
-									+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='layoff("+ data.id +","+ data.num +")'>解聘</button></td>" 	
+									+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='edit(this)'>编辑</button></td>" 	
 									+ "</tr>";
 				            }
 			        	}
@@ -122,24 +118,14 @@
 			});
 		
    		});
-	
-   		function layoff(stuId, stuNum) {
-   			var res = confirm('确定要解聘学号是'+ stuNum +'的学生吗？')
-			if(res) {
-				// 解聘学生
-				$.ajax({
-					url: contextPath + '/employer/layoff',
-					data: {'stuId': stuId}
-				}).done(function(data){
-					if(data == 'success') {
-						alert('解聘成功！')
-						window.location.reload();
-					}
-				}).fail(function(){
-					alert('解聘失败！');
-				});
-			} 			
+		
+   		
+   		// 编辑
+   		function edit(t) {
+   			var $this = $(t);
+   			alert('编辑功能正在研发...');
    		}
+   		
    		
    	</script>
 

@@ -15,6 +15,46 @@ public class StudentDto {
 	private String regTime;	//注册时间
 	private Integer status;	// 账号状态(1正常， 0冻结， -1删除)
 	
+	public StudentDto() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public StudentDto(Long id, String num, String name, Long collegeId,
+			String college, Long professionId, String profession) {
+		this.id = id;
+		this.num = num;
+		this.name = name;
+		this.collegeId = collegeId;
+		this.college = college;
+		this.professionId = professionId;
+		this.profession = profession;
+	}
+
+
+
+	public StudentDto(Long id, String num, String name, String gender,
+			Long collegeId, String college, Long professionId,
+			String profession, String mobile, String email, String introduce,
+			String regTime, Integer status) {
+		this.id = id;
+		this.num = num;
+		this.name = name;
+		this.gender = gender;
+		this.collegeId = collegeId;
+		this.college = college;
+		this.professionId = professionId;
+		this.profession = profession;
+		this.mobile = mobile;
+		this.email = email;
+		this.introduce = introduce;
+		this.regTime = regTime;
+		this.status = status;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}

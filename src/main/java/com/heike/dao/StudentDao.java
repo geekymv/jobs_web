@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
 import com.heike.domain.dto.Pager;
+import com.heike.domain.dto.StudentDto;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.StudentVO;
 
@@ -18,11 +19,11 @@ public class StudentDao extends HibernateDao {
 	 * @param pager
 	 * @return
 	 */
-	public Pager<Student> queryByPage(Pager<Student> pager) {
+	public Pager<StudentDto> queryByPage(Pager<StudentDto> pager) {
 		StringBuilder builder = new StringBuilder();
-		
 		builder.append("select new com.heike.domain.dto.StudentDto(")
-			.append(")")
+			.append(" s.id, s.num, s.name, d1.id, d1.name, d2.id, d2.name")
+			.append(" )")
 			.append(" from Student s, Dict d1, Dict d2 ")
 			.append(" where s.collegeId = d1.id and s.professionId = d2.id ");
 		
@@ -72,7 +73,7 @@ public class StudentDao extends HibernateDao {
 	 */
 	public StudentVO findById(Long id) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("select new com.heike.domain.vo.StudentVO(s.id, s.num, s.name, s.gender, d1.name, d2.name, s.mobile, s.email, s.introduce, s.regTime) ")
+		builder.append("select new com.heike.domain.vo.StudentVO(s.id, s.num, s.name, s.gender, d1.id, d1.name, d2.id, d2.name, s.mobile, s.email, s.introduce, s.regTime) ")
 				.append(" from Student s, Dict d1, Dict d2 where s.id = :id and s.collegeId = d1.id ")
 				.append(" and s.professionId = d2.id");
 		

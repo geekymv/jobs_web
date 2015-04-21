@@ -7,7 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
+import com.heike.base.SysCode;
 import com.heike.domain.dto.EmployerDto;
+import com.heike.domain.dto.Pager;
 import com.heike.domain.pojo.Employer;
 import com.heike.util.EncryptUtil;
 
@@ -113,5 +115,35 @@ public class EmployerDao extends HibernateDao {
 //					.uniqueResult();
 		
 	}
+	
+	/**
+	 * 分页查询
+	 * @param pager
+	 */
+	public void queryByPage(Pager<Employer> pager) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new Employer(e.id, e.account, e.name, e.teacher, e.mobile, ")
+			.append(" e.totalMoney, e.postNum, e.status) from Employer e")
+			.append(" where e.authority = :authority");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("authority", SysCode.EmployerCode.EMPLOYER_AUTHORITY);
+		
+		findByPage(builder.toString(), params, pager);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

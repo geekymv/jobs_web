@@ -1,5 +1,7 @@
 package com.heike.domain.service;
 
+import com.heike.domain.dto.Pager;
+import com.heike.domain.dto.StudentDto;
 import com.heike.domain.pojo.Employer;
 
 public interface AdminService {
@@ -17,5 +19,23 @@ public interface AdminService {
 	 * @return
 	 */
 	public boolean addEmployer(Employer employer);
+	
+	
+	/**
+	 * 分页获得学生列表
+	 * @param pager
+	 * @return
+	 */
+	public void getEmployerByPage(Pager<Employer> pager);
+	
+	
+	/**
+	 * 分页获得学生列表
+	 * @param pager
+	 * @return
+	 */
+	public void getStudentByPage(Pager<StudentDto> pager);
+	
+	
 
 }

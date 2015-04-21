@@ -49,6 +49,17 @@ public class StudentController {
 	}
 	
 	/**
+	 * 编辑
+	 * @param student
+	 * @return
+	 */
+	@RequestMapping("/student/edit")
+	@ResponseBody
+	public String edit(Student student) {
+		return "success";
+	}
+	
+	/**
 	 * 跳转到我的工作列表页面
 	 * @param id 学生id
 	 * @param model
