@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.heike.base.SysCode;
 import com.heike.domain.dto.ApplyDto;
+import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Student;
+import com.heike.domain.service.DictService;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.service.StudentService;
 import com.heike.domain.vo.ApplyRecordVO;
@@ -27,6 +30,8 @@ public class StudentController {
 	private StudentService studentService;
 	@Autowired
 	private RecruitService recruitService;
+	@Autowired
+	private DictService dictService;
 	/**
 	 * 进入学生首页
 	 * @return
@@ -98,6 +103,16 @@ public class StudentController {
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String resgister() {
 		return "register";
+	}
+	
+	/**
+	 * 加载所有的密保问题
+	 * @return
+	 */
+	@RequestMapping("/questions")
+	@ResponseBody
+	public List<Dict> questions() {
+		return dictService.list(SysCode.DictCode.MI_BAO_QUESTION);
 	}
 	
 	/**

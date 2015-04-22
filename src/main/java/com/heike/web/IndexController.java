@@ -18,6 +18,7 @@ import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.CommonService;
+import com.heike.domain.service.DictService;
 import com.heike.domain.service.RecruitService;
 import com.heike.domain.vo.RecruitStuVO;
 import com.heike.domain.vo.RecruitVO;
@@ -28,6 +29,9 @@ public class IndexController {
 	private RecruitService recruitService;
 	@Autowired
 	private CommonService commonService;
+	@Autowired
+	private DictService dictService;
+	
 	
 	/**
 	 * 进入首页 
@@ -81,7 +85,7 @@ public class IndexController {
 	@RequestMapping("/getColleges")
 	@ResponseBody
 	public List<Dict> getColleges(){
-		return commonService.getColleges();
+		return dictService.list(SysCode.DictCode.COLLEGE_TYPE);
 	}
 	
 	/**

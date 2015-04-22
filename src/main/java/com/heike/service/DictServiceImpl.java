@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.heike.dao.DictDao;
@@ -29,10 +28,10 @@ public class DictServiceImpl implements DictService {
 	 * value="queryCache"对应于ehcache.xml里的缓存名字
 	 * key = 参数 + 方法名,key="#params+'list'"
 	 */
-	@Cacheable(value="dictCache")
+	@Cacheable(value="dictCache", key="#type")
 	@Override
 	public List<Dict> list(String type) {
-		return dictDao.queryAll2();
+		return dictDao.queryAllByType(type);
 	}
 	
 	/**

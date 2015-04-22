@@ -29,7 +29,7 @@ public class DictDao extends HibernateDao {
 	 * @param type 类型
 	 * @return
 	 */
-	public List<Dict> queryAll(String type) {
+	public List<Dict> queryAllByType(String type) {
 		String hql = "from Dict d where d.type = :type";
 		
 		List<Dict> dicts = (List<Dict>)getSession().createQuery(hql)
@@ -38,17 +38,16 @@ public class DictDao extends HibernateDao {
 		return dicts;		
 	}
 	
-	/**
-	 * 根据类型查询所有
-	 * @param type 类型
-	 * @return
-	 */
-	public List<Dict> queryAll2() {
-		String hql = "from Dict";
-		List<Dict> dicts = (List<Dict>)getSession().createQuery(hql)
-										.list();
-		return dicts;		
-	}
+//	/**
+//	 * 查询所有
+//	 * @return
+//	 */
+//	public List<Dict> queryAll2() {
+//		String hql = "from Dict";
+//		List<Dict> dicts = (List<Dict>)getSession().createQuery(hql)
+//										.list();
+//		return dicts;		
+//	}
 	
 	
 	

@@ -21,6 +21,13 @@
    		table th, td {
    			text-align: center;
    		}
+   		
+   		.mybtn {
+			width: 45px;
+			height: 27px;
+		}
+		
+		
    	</style>
    	
 	</head>
@@ -30,7 +37,7 @@
 	
 	<jsp:include page="../inc/nav.jsp"></jsp:include>
       
-    <div class="row">
+    <div class="row row-top">
        	<div class="col-md-2">
        		<div class="panel panel-primary">
     		  <div class="panel-heading">功能导航</div>	
@@ -43,6 +50,16 @@
 	          <div class="panel-heading">用工单位列表</div>
 	          
 	          <div class="panel-body">
+	          	<div style="text-align: center;">
+					<form class="form-inline">
+					  <div class="form-group">
+					    <label for="name">单位名称</label>
+					    <input type="text" class="form-control" id="name" name="name" placeholder="请输入单位名称" autofocus="autofocus" />
+					  </div>
+					  &nbsp;&nbsp;
+					  <button type="button" class="btn btn-primary" id="search">查询</button>
+					</form>
+				</div>	
 			  </div>
 	          <!-- Table -->
 	          <table class="table table-bordered table-hover table-condensed">

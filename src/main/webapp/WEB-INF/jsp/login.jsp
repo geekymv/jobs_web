@@ -27,7 +27,7 @@
 </style>
 
 </head>
-<body>
+<body onkeydown="on_login();">
 <div class='signup_container'>
 
     <h1 class='signup_title'>用户登录</h1>
@@ -63,12 +63,18 @@
 	}
 	*/
 	
+	function on_login() {
+		if(window.event.keyCode == 13) {
+			$('#login-btn').click();
+		}
+	}
+	
 	$(function(){
 	    $('.rem').click(function(){
 	        $(this).toggleClass('selected');
 	    });
 	    
-	    $(".login-btn").click(function(){
+	    $("#login-btn").click(function(){
 	    	$.ajax({
 	    		url: contextPath + "/login",
 	    		type: "POST",

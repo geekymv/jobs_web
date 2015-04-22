@@ -33,7 +33,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="../inc/nav.jsp"></jsp:include>
-		<div class="row">
+		<div class="row row-top">
     	<div class="col-md-2">
     		<div class="panel panel-primary">
     		  <div class="panel-heading">功能导航</div>	

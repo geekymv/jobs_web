@@ -35,7 +35,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="../inc/nav.jsp"></jsp:include>
-    <div class="row">
+    <div class="row row-top">
     	<div class="col-md-2">
 			<div class="panel panel-primary">	 
 			<div class="panel-heading">功能导航</div>
@@ -47,8 +47,16 @@
 	        <div class="panel panel-primary">
 	          <div class="panel-heading">学生列表</div>
 	          <div class="panel-body">
-	            <p>
-	            </p>
+	            <div style="text-align: center;">
+					<form class="form-inline">
+					  <div class="form-group">
+					    <label for="num">学生学号</label>
+					    <input type="text" class="form-control" id="num" name="num" placeholder="请输入学生学号" autofocus="autofocus" />
+					  </div>
+					  &nbsp;&nbsp;
+					  <button type="button" class="btn btn-primary" id="search">查询</button>
+					</form>
+				</div>	
 	          </div>
 	        
 	           <!-- Table -->

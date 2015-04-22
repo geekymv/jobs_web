@@ -98,7 +98,7 @@
     <!--空白处-->
     <div class="custom">
     </div>
-    <div class="row">
+    <div class="row row-top">
     	<div class="col-md-2">
 	      	<img src="<c:url value='/resources/img/hello.jpg'/>" alt="这是一张图片" title="这是一张图片吗" class="img-thumbnail">
       	</div>

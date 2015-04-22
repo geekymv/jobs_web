@@ -140,7 +140,23 @@ em.success {
 		    	<textarea class="form-control" rows="3" name="introduce"></textarea>
 		    </div>
 		  </div>
-		 
+		  <%--
+		  <div class="form-group">
+		    <label for="college" class="col-sm-4 control-label">密码问题一<em>*</em></label>
+		    <div class="col-sm-3">
+		      <select class="form-control" id="question1" name="question1">
+			  </select>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="college" class="col-sm-4 control-label">密保问题二<em>*</em></label>
+		    <div class="col-sm-3">
+		       <select class="form-control" id="question2" name="question2">
+			   </select>
+		    </div>
+		  </div>
+		  --%>
+		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-4">
 		      <button type="button" id="register" class="btn btn-default">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;

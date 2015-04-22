@@ -57,9 +57,10 @@ public class CommonServiceImpl implements CommonService {
 		return "error";
 	}
 
-	public List<Dict> getColleges() {
-		return dictDao.queryAll(SysCode.DictCode.COLLEGE_TYPE);
-	}
+//	@Cacheable()
+//	public List<Dict> getColleges() {
+//		return dictDao.queryAllByType(SysCode.DictCode.COLLEGE_TYPE);
+//	}
 	
 	public List<Dict> getProfessions(Long colId) {
 		List<Dict> dicts = dictDao.queryProfessions(colId);

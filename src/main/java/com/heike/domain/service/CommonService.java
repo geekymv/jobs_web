@@ -22,7 +22,7 @@ public interface CommonService {
 	 * 获得所有的学院
 	 * @return
 	 */
-	public List<Dict> getColleges();
+//	public List<Dict> getColleges();
 	
 	/**
 	 * 根据学院id获得该学院所有的专业

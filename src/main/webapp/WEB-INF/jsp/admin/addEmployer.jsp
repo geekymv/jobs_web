@@ -39,7 +39,7 @@
 	<div class="container">
 		<jsp:include page="../inc/nav.jsp"></jsp:include>
 		
-		<div class="row">
+		<div class="row row-top">
     	<div class="col-md-2">
     		<div class="panel panel-primary">
     		  <div class="panel-heading">功能导航</div>	
@@ -55,87 +55,63 @@
 	          <form id="add_form" class="form-horizontal" method="post">
 				<div class="form-group">	
 					<label for="account" class="col-sm-2 control-label">登录账号</label>  
-					<div class="col-sm-3">
+					<div class="col-md-4">
 					  <input type="text" name="account" id="account" class="form-control" autofocus="autofocus" required="required"/>
 					</div> 
-					<label class="control-label error-info">
-						<em>*</em>
-					</label>
 			  	</div>
 			  	<div class="form-group">	
 					<label for="password" class="col-sm-2 control-label">登录密码</label>  
-					<div class="col-sm-3">
+					<div class="col-md-4">
 					  <input type="password" id="password" name="pwd" class="form-control" required="required"/>
 					</div> 
-					<label class="control-label error-info">
-						<em>*</em>
-					</label>
 			  	</div>
 			  	<div class="form-group">	
 					<label for="repassword" class="col-sm-2 control-label">密码确认</label>  
-					<div class="col-sm-3">
+					<div class="col-md-4">
 					  <input type="password" id="repassword" name="repassword" class="form-control" required="required"/>
 					</div> 
-					<label class="control-label error-info">
-						<em>*</em>
-					</label>
 			  	</div>
 			  	<div class="form-group">
-					    <label for="name" class="col-sm-2 control-label">单位名称</label>
-					    <div class="col-sm-3">
-					      <input type="text" class="form-control focus" id="name" name="name" required="required">
-					    </div>
-					    <label class="control-label error-info">
-					    	<em>*</em>
-					    </label>
+				    <label for="name" class="col-sm-2 control-label">单位名称</label>
+				    <div class="col-md-4">
+				      <input type="text" class="form-control focus" id="name" name="name" required="required">
+				    </div>
 				</div>
 				<div class="form-group">
-					    <label for="mobile" class="col-sm-2 control-label">电话号码</label>
-					    <div class="col-sm-3">
-					      <input type="text" class="form-control" id="mobile" name="mobile" required="required">
-					    </div>
-					    <label class="control-label error-info">
-					    	<em>*</em>
-					    </label>
+				    <label for="mobile" class="col-sm-2 control-label">电话号码</label>
+				    <div class="col-md-4">
+				      <input type="text" class="form-control" id="mobile" name="mobile" required="required">
+				    </div>
 				</div>
 				<div class="form-group">
-					    <label for="teacher" class="col-sm-2 control-label">负责老师</label>
-					    <div class="col-sm-3">
-					      <input type="text" class="form-control focus" id="teacher" name="teacher" required="required"/>
-					    </div>
-					    <label class="control-label error-info">
-					    	<em>*</em>
-					    </label>
+				    <label for="teacher" class="col-sm-2 control-label">负责老师</label>
+				    <div class="col-md-4">
+				      <input type="text" class="form-control focus" id="teacher" name="teacher" required="required"/>
+				    </div>
 				</div>
 				<div class="form-group">
-					    <label for="postNum" class="col-sm-2 control-label">岗位数</label>
-					    <div class="col-sm-3">
-					      <input type="text" id="postNum" class="form-control" id="postNum" name="postNum" required="required"/>
-					    </div>
-					    <label class="control-label error-info">
-					    	<em>*</em>
-					    </label>
+				    <label for="postNum" class="col-sm-2 control-label">岗位数</label>
+				    <div class="col-md-4">
+				      <input type="text" id="postNum" class="form-control" id="postNum" name="postNum" required="required"/>
+				    </div>
 				</div>
 			  	<div class="form-group">
-					    <label for="totalMoney" class="col-sm-2 control-label">月总金额(元)</label>
-					    <div class="col-sm-3">
-					      <input type="text" id="totalMoney" class="form-control" id="totalMoney" name="totalMoney"/>
-					    </div>
-					    <label class="control-label error-info">
-					    	<em>*</em>
-					    </label>
+				    <label for="totalMoney" class="col-sm-2 control-label">月总金额(元)</label>
+				    <div class="col-md-4">
+				      <input type="text" id="totalMoney" class="form-control" id="totalMoney" name="totalMoney"/>
+				    </div>
 				</div>
 
 			  	<div class="form-group">
-					    <label for="remarks" class="col-sm-2 control-label">备注信息</label>
-					    <div class="col-sm-3">
-						    <textarea class="form-control" rows="2" name="remarks"></textarea>
-					    </div>
+				    <label for="remarks" class="col-sm-2 control-label">备注信息</label>
+				    <div class="col-md-4">
+					    <textarea class="form-control" rows="2" name="remarks"></textarea>
+				    </div>
 				</div>
 			  	 <div class="form-group">
-					    <div class="col-sm-offset-2 col-sm-4">
-					      <button type="button" id="addEmployer" class="btn btn-primary">添加</button>
-					    </div>
+				    <div class="col-sm-offset-3 col-sm-4">
+				      <button type="button" id="addEmployer" class="btn btn-primary">添加</button>
+				    </div>
 				</div>
 	    	</form>
 	        </div>

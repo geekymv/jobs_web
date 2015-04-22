@@ -112,6 +112,11 @@ public final class SysCode {
 		 */
 		public static final String SALARY_COMMIT_END = "END_DATE";
 		
+		/**
+		 * 密保问题
+		 */
+		public static final String MI_BAO_QUESTION = "MI_BAO_QUESTION";
+		
 	}
 	
 	/**
