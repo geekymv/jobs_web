@@ -57,7 +57,7 @@
 	        		<div class="form-group">
 		        		<label for="name" class="col-md-4 control-label">登录密码：</label>
 		        		<div class="col-md-3">
-		        			<input type="password" class="form-control" id="password" maxlength="20" />
+		        			<input type="password" class="form-control" name="pwd" id="password" maxlength="20" />
 		        			<span style="font-size: 9px; color: blue;">若不改密码，不用填写！</span>
 		        		</div>
 	        		</div>

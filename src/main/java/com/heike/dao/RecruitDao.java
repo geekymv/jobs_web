@@ -155,6 +155,17 @@ public class RecruitDao extends HibernateDao {
 				.createQuery(hql).setLong("id", id)
 				.setResultTransformer(Transformers.aliasToBean(RecruitVO.class)).uniqueResult();
 	}
+
+	/**
+	 * 根据招聘信息id获得招聘信息的报名截止日期
+	 * @param recId
+	 */
+	public String getEndDate(Long recId) {
+		String hql = "select endDate from Recruit r where r.id = :id";
+		return (String)getSession().createQuery(hql)
+						.setLong("id", recId)
+						.uniqueResult();
+	}
 	
 }
 

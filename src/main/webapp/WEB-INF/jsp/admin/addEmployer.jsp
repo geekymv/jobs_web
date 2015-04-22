@@ -259,6 +259,8 @@
 					// 提交表单数据
 	   				var data = $("#add_form").serialize();
 	   				data = decodeURIComponent(data,true); /* 解决中文乱码问题 */
+	   				alert(data);
+	   				
 	   				$.post(contextPath+'/admin/addemployer', data)
 	   				.done(function(data){
 	   					if(data == 'success'){

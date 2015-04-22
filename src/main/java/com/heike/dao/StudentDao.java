@@ -3,6 +3,7 @@ package com.heike.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.heike.base.HibernateDao;
@@ -10,9 +11,40 @@ import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.StudentDto;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.vo.StudentVO;
+import com.heike.util.EncryptUtil;
 
 @Repository
 public class StudentDao extends HibernateDao {
+	
+	/**
+	 * 更新信息
+	 * @param student
+	 * @return
+	 */
+	public int update(Student student) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("update Student set name = :name, gender = :gender, collegeId = :collegeId, ");
+		builder.append("professionId = :professionId, mobile = :mobile, email = :email, introduce = :introduce");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(StringUtils.isNotBlank(student.getPwd())) {
+			builder.append(", pwd = :pwd ");
+			params.put("pwd", EncryptUtil.md5Encrypt(student.getPwd()));
+		}
+		builder.append(" where id = :id");
+
+		params.put("name", student.getName());
+		params.put("gender", student.getGender());
+		params.put("collegeId", student.getCollegeId());
+		params.put("professionId", student.getProfessionId());
+		params.put("mobile", student.getMobile());
+		params.put("email", student.getEmail());
+		params.put("introduce", student.getIntroduce());
+		params.put("id", student.getId());
+		
+		return getSession().createQuery(builder.toString())
+				.setProperties(params).executeUpdate();
+	}
 	
 	/**
 	 * 分页查询

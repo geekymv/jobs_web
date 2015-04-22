@@ -55,8 +55,14 @@ public class StudentController {
 	 */
 	@RequestMapping("/student/edit")
 	@ResponseBody
-	public String edit(Student student) {
-		return "success";
+	public String edit(Student student, HttpSession session) {
+		if(studentService.update(student)) {
+			// 修改session
+			session.setAttribute("user", student);
+			return "success";
+		}
+		
+		return "fail";
 	}
 	
 	/**
@@ -118,6 +124,13 @@ public class StudentController {
 		return student == null ? "no" : "yes"; // 被注册
 	}
 	
+	@RequestMapping("/student/isApply")
+	@ResponseBody
+	public String isApply(HttpSession session, Long recId) {
+		Student student = (Student) session.getAttribute("user");
+		return recruitService.isApply(student.getId(), recId);
+	}
+	
 	/**
 	 * 学生查看招聘详情
 	 * @param id
@@ -148,8 +161,10 @@ public class StudentController {
 	public String apply(ApplyDto applyDto, HttpSession session) {
 		Student student = (Student) session.getAttribute("user");
 		/**
-		 *  1.判断学生是否在该用工单位在职
-		 *  2.判断学生是否已经在该用工单位报名了，状态为等审核
+		 * 1.判断招聘信息是否到截止时间了
+		 * 2.判断学生是否在该用工单位在职
+		 * 3.判断学生是否已经在该用工单位报名了，状态为等审核
+		 *  
 		 */
 		applyDto.setStuId(student.getId());
 		return studentService.apply(applyDto);

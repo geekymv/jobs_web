@@ -37,7 +37,8 @@ public interface StudentService {
 	 * 学生报名活动
 	 * @param stuId 学生id
 	 * @param recId 招聘信息id
-	 * @return "onJob" 在职, "isApplyed", "success"报名成功，"fail"报名失败
+	 * @return "onJob" 在职, "isApplyed"已申请该用工单位的信息,
+	 *  "isPastDue"过期， "success"报名成功，"fail"报名失败
 	 */
 	public String apply(ApplyDto applyDto); 
 	
@@ -47,5 +48,13 @@ public interface StudentService {
 	 * @return
 	 */
 	public List<ApplyRecruitVO> getOnJobList(Long stuId);
+	
+	/**
+	 * 更新信息
+	 * @param student
+	 * @return
+	 */
+	public boolean update(Student student);
+	
 	
 }

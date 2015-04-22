@@ -18,10 +18,6 @@
 			text-align: center;
 		}
 		
-		.div-top {
-			margin-top: 8px;
-		}
-		
 	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +30,7 @@
 <body>
 	<div class="container">
 	<jsp:include page="../inc/nav.jsp"></jsp:include>	
-    <div class="row">
+    <div class="row row-top">
     	<div class="col-md-2">
     		<jsp:include page="left-sider.jsp"></jsp:include>
       	</div>
@@ -45,13 +41,28 @@
 	     	  		<div class="form-group div-top">
 		        		<label for="num" class="col-md-4 control-label">学号：</label>
 		        		<div  class="col-md-3">
-		        			<input type="text" class="form-control" id="num" name="num" value="${student.num }"/>
+		        			<input type="text" class="form-control" readonly="readonly" value="${student.num }"/>
+		        			<input type="hidden" name="id" value="${student.id }">
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
 		        		<label for="name" class="col-md-4 control-label">姓名：</label>
 		        		<div  class="col-md-3">
-		        			<input type="text" class="form-control" id="name" name="name" value="${student.name }"/>
+		        			<input type="text" class="form-control" id="name" name="name" autofocus="autofocus" value="${student.name }"/>
+		        		</div>
+	        		</div>
+	        		
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">登录密码：</label>
+		        		<div class="col-md-3">
+		        			<input type="password" class="form-control" name="pwd" id="password" maxlength="20" />
+		        			<span style="font-size: 9px; color: blue;">若不改密码，不用填写！</span>
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
+		        		<label for="name" class="col-md-4 control-label">密码确认：</label>
+		        		<div class="col-md-3">
+		        			<input type="password" class="form-control" id="repassword" maxlength="20"/>
 		        		</div>
 	        		</div>
 	        		
@@ -59,7 +70,7 @@
 					  	<label for="gender" class="col-md-4 control-label">性别：</label>
 					  	<div class="col-md-3">
 					  		<c:choose>
-					  			<c:when test="${gender == '男' }">
+					  			<c:when test="${student.gender == '男' }">
 					  				 <label class="radio-inline control-label">
 								  		<input type="radio" name="gender" id="male" value="男" checked="checked"> 男
 									</label>
@@ -101,6 +112,12 @@
 		        		</div>
 	        		</div>
 	        		<div class="form-group">
+		        		<label for="email" class="col-md-4 control-label">邮箱：</label>
+		        		<div  class="col-md-3">
+		        			<input type="text" class="form-control" id="email" name="email" value="${student.email }"/>
+		        		</div>
+	        		</div>
+	        		<div class="form-group">
 		        		<label for="introduce" class="col-md-4 control-label">自我介绍：</label>
 		        		<div  class="col-md-3">
 		        			<textarea id="introduce" name="introduce" class="form-control">${student.introduce }</textarea>
@@ -136,15 +153,55 @@
 			
 			// 获取所有专业
 			getColleges();
-			
 			// 专业改变事件
 			$("#college").change(function(){
 				params.colId = $("#college").val();
 				getProfessions();
 			});
 			
-			// 修改事件
+			// 更新个人信息
 			$('#edit').click(function(){
+				// 输入验证
+				var name = $('#name').val();
+				if(name.trim() == '') {
+					alert('姓名不能为空！') ;
+					$('#name').focus();
+					return;
+				}
+				
+				// 密码
+				var password = $('#password').val();
+				var repassword = $('#repassword').val();
+				// 验证密码
+				if(repassword.trim() != ""){
+					if(password.trim() == ""){
+						alert("密码不能为空！");
+						$('#password').focus();
+						return;
+					}
+					if(repassword != password){
+						alert("密码不一致！");
+						$('#repassword').focus();
+						return;
+					}
+				}
+				
+				// 手机号码
+				var mobile = $('#mobile').val();
+				if(mobile.trim() == '') {
+					alert('手机号码不能为空！');
+					$('#mobile').focus();
+					return;
+				}		
+				
+				// 邮箱验证
+				var email = $('#email').val();
+				if(email.trim() == '') {
+					alert('邮箱不能为空！');					
+					$('#email').focus();
+				}
+				
+				
 				var datas = $("#form").serialize();
    				datas = decodeURIComponent(datas, true); /* 解决中文乱码问题 */
 
@@ -155,8 +212,9 @@
 				}).fail(function(msg){
 					
 				});
-   				
 			});
+			
+			
 		});   
 		
 		// 获得所有学院

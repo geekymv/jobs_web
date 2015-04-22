@@ -65,7 +65,7 @@ public class RecruitServiceImpl implements RecruitService {
 	@Override
 	public String isApply(Long stuId, Long recId) {
 		RecruitStu rs = recruitStuDao.queryByStuIdAndRecId(stuId, recId);
-		return rs == null ? "isApplyed" : "notApply";
+		return rs == null ? "notApply" : "isApplyed";
 	}
 
 	@Override

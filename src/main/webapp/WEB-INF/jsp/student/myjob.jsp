@@ -27,7 +27,7 @@
 <body>
 	<div class="container">
 	<jsp:include page="../inc/nav.jsp"></jsp:include>
-    <div class="row">
+    <div class="row row-top">
     	<div class="col-md-2">
 	    	<jsp:include page="left-sider.jsp"></jsp:include>
       	</div>

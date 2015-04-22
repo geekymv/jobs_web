@@ -1,7 +1,11 @@
 @CHARSET "UTF-8";
 
 .div-top {
-	margin-top: 5px;	
+	margin-top: 6px;	
+}
+
+.row-top {
+	margin-top: 10px;	
 }
 
 /*底部样式*/

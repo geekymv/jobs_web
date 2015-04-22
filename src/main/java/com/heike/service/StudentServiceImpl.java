@@ -60,6 +60,15 @@ public class StudentServiceImpl implements StudentService {
 		Long empId = applyDto.getEmpId();
 		Long recId = applyDto.getRecId();
 		
+		// 判断招聘信息是否到截止日期了
+		String endDate = recruitDao.getEndDate(recId);
+		String nowDate = DateUtils.getCurrentGaDate();
+		long e = Long.valueOf(endDate);
+		long n = Long.valueOf(nowDate);
+		if(e < n) {
+			return "isPastDue";	// 过期
+		}
+		
 		boolean res = empStuDao.isOnJob(stuId, empId);
 		if(res) {
 			return "onJob";	// 已在职
@@ -88,6 +97,12 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<ApplyRecruitVO> getOnJobList(Long stuId) {
 		return empStuDao.findOnJob(stuId);
+	}
+
+	@Override
+	public boolean update(Student student) {
+		int res = studentDao.update(student);
+		return res == 1 ? true : false;
 	}
 
 

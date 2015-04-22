@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*, com.heike.domain.pojo.Student" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -15,6 +15,12 @@
 		
 		td span {
 			font-weight: bold;
+		}
+		
+		.mybtn {
+			margin-top: 20px;
+			margin-left: 10px;
+			margin-bottom: 30px;
 		}
 		
 	</style>
@@ -158,8 +164,26 @@
 						</td>
 					</tr>
 	         	</table>
-				<button id="showStudents" class="btn btn-primary"
-					 style="margin-top: 20px;margin-left: 400px; margin-bottom: 30px;">查看已报名学生</button>
+				
+				<%-- 如果是学生显示报名功能 --%>
+				<%
+					Object obj = session.getAttribute("user");
+					// 是学生显示我要报名功能
+					if(obj instanceof Student) {
+					%>
+					<div style="text-align: center;">
+						<button type="button" id="showStudents" class="btn btn-primary mybtn" >查看已报名学生</button>
+						<button type="button" class="btn btn-primary mybtn" id="apply">我要报名</button>	
+					</div>
+					<%
+					}else {
+					%>
+					<div style="text-align: center;">
+						<button id="showStudents" class="btn btn-primary mybtn">查看已报名学生</button>
+					</div>
+					<%
+					}
+				%>
 	        </c:if>
 	        <div id="students"></div>
 	        </div> <!-- end of panel -->
@@ -174,12 +198,61 @@
 
 <script type="text/javascript">
 	$(function(){
+		var apply = $('.col-md-10').find('#apply').attr('type');
+	//	alert(typeof(apply))
+		if(apply == undefined) {
+			// 不是学生
+		} else if(apply == 'button') {
+			// 学生，判断学生是否已经报名了
+			$.post(contextPath+"/student/isApply", {'recId': '${recruit.id}'}).done(function(msg){
+				if(msg == 'isApplyed') {
+					$('#apply').hide();
+					$('#showStudents').after('<button class="btn btn-success mybtn">我已报名</button>');
+				}else if(msg == 'notApply') {
+					
+				}
+			}).fail(function(msg){
+				
+			});
+		}
+		
 		// 日期处理
 		var releaseDate = '${recruit.releaseDate }';	// 发布时间
 		$("#releaseDate").after(formatterDate(releaseDate));
 		var endDate = '${recruit.endDate }';	// 截止时间
 		$("#endDate").after(formatterDate(endDate));
 		
+		// 我要报名
+		$("#apply").click(function(){
+				$.ajax({
+					url: contextPath + "/student/apply",
+					type: "post",
+					data:{"recId": '${recruit.id}', 'empId': '${recruit.empId}'},
+					success:function(data){
+						// "onJob" 在职, "isApplyed" 已在该用工单位报名, "success"报名成功，"fail"报名失败
+						if(data == 'isPastDue') {
+							alert("已经过了报名时间了！");
+							return;
+						}
+						if(data == "onJob") {
+							alert("你已经在该用工单位任职了！");
+							return;
+						}
+						if(data == "isApplyed") {
+							alert("你已经在该用工单位报名了！");
+							return;
+						}
+						if(data == "success"){
+							alert("报名成功！");
+							window.location.reload();
+						}
+						if(data == "fail"){
+							alert("报名失败！");
+							window.location.reload();
+						}
+					}
+				});  
+			});
 		
 		
 		$("#showStudents").button().on("click", function() {
@@ -218,7 +291,7 @@
 							 + "<td>" + (i+1) +"</td>"
 							 + "<td align='center'>"+num+"</td>"+ "<td>"+name+"</td>"
 							 + "<td>"+ profession +"</td>" 
-							 + "<td>"+ applyDate	+"</td>" 
+							 + "<td>"+ formatterDate(applyDate)	+"</td>" 
 							 + "<td><span style='color:#00CC33'>"+flag+"</span></td>"
 							 + "</tr>";
 					}
