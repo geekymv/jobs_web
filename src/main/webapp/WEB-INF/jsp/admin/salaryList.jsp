@@ -35,7 +35,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="../inc/nav.jsp"></jsp:include>
-    <div class="row">
+    <div class="row row-top">
     	<div class="col-md-2">
 			<div class="panel panel-primary">	 
 			<div class="panel-heading">功能导航</div>
@@ -66,8 +66,11 @@
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead id="head">
 	                <tr>
-	                	<th>学号</th> <th>姓名</th> <th>工作时间</th> <th>基本工资</th>
-	                	<th>工具费</th> <th>奖金</th> <th>月份</th> <th>用工单位</th> <th>选择操作</th> 
+	                	<th>序号</th> <th>学号</th> <th>姓名</th> <th>工作时间</th> <th>基本工资</th>
+	                	<th>工具费</th> <th>奖金</th> <th>月份</th> <th>用工单位</th> 
+						<%-- 
+	                	<th>选择操作</th>
+	                	--%> 
 	                </tr>
 	            </thead>
 	            <tbody id="t_body">
@@ -107,7 +110,14 @@
    		
    		
    		$('#search').click(function(){
-   			$('#page').page( 'destroy' )
+   			var month = $('#month').val();
+   			if(month.trim() == '') {
+   				alert('请选择月份！');
+   				$('#month').focus();
+   				return;
+   			}
+   			
+   			$('#page').page('destroy')
 			page();  			
    		});
    		
@@ -132,6 +142,7 @@
 		        		for(var i = 0; i < length; i++) {
 							var data = datas[i];
 							html += "<tr>"
+								+ "<td>"+ (i+1) +"</td>"	
 								+ "<td>"+ data.num +"</td>"	
 								+ "<td>"+ data.name +"</td>"	
 								+ "<td>"+ data.worktime +"</td>"	
@@ -140,13 +151,15 @@
 								+ "<td>"+ data.bonus +"</td>"	
 								+ "<td>"+ data.month +"</td>"	
 								+ "<td>"+ data.empName +"</td>"	
-								+ "<td>"
-								+	"<button id='edit' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
-								+	"<button id='delete' class='btn btn-primary btn-sm mybtn'>删除</button>"
-								+ "</td>"	
 								+ "</tr>";
 			            }
 		        	}
+			       	
+			       	/*
+			       		+ "<td>"
+						+	"<button id='edit' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
+						+ "</td>"	
+			       	*/
 			    
 			       	$("#t_body").html(html);
 		        }

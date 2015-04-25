@@ -213,11 +213,9 @@
 					
 				});
 			});
-			
-			
 		});   
-		
-		// 获得所有学院
+
+   		// 获得所有学院
 		function getColleges(){
 			$.ajax({
 				url: contextPath + "/getColleges",

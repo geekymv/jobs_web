@@ -55,13 +55,6 @@ em.success {
 	color: red;
 }
 </style>
-<!-- 
-<script type="text/javascript" src="<c:url value='/resources/validation/jquery-1.10.0.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/validation/jquery.validate.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/validation/jquery.metadata.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/validation/messages_zh.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/register-validation.js'/>"></script>
- -->
 </head>
 
 <body>
@@ -87,7 +80,7 @@ em.success {
 		    <label for="repassword" class="col-sm-4 control-label">确认密码<em>*</em></label>
 		    
 		    <div class="col-sm-3">
-		      <input type="password" class="form-control" id="repassword" name="repassword" />
+		      <input type="password" class="form-control" id="repwd" name="repassword" />
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -140,23 +133,6 @@ em.success {
 		    	<textarea class="form-control" rows="3" name="introduce"></textarea>
 		    </div>
 		  </div>
-		  <%--
-		  <div class="form-group">
-		    <label for="college" class="col-sm-4 control-label">密码问题一<em>*</em></label>
-		    <div class="col-sm-3">
-		      <select class="form-control" id="question1" name="question1">
-			  </select>
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="college" class="col-sm-4 control-label">密保问题二<em>*</em></label>
-		    <div class="col-sm-3">
-		       <select class="form-control" id="question2" name="question2">
-			   </select>
-		    </div>
-		  </div>
-		  --%>
-		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-4">
 		      <button type="button" id="register" class="btn btn-default">注册</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -169,7 +145,6 @@ em.success {
 	</div>
 </div>
 
-<script type="text/javascript" src="<c:url value='/resources/scripts/register.js'/>"></script>
-
+	<script type="text/javascript" src="<c:url value='/resources/scripts/ui/register.js'/>"></script>
 </body>
 </html>

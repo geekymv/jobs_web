@@ -22,7 +22,7 @@
 		}
 		
 		.mybtn {
-			width: 45px;
+			width: 50px;
 			height: 27px;
 		}
 	</style>

@@ -24,17 +24,19 @@ public interface AdminService {
 	/**
 	 * 分页获得学生列表
 	 * @param pager
+	 * @param name 单位名称
 	 * @return
 	 */
-	public void getEmployerByPage(Pager<Employer> pager);
+	public void getEmployerByPage(Pager<Employer> pager, String name);
 	
 	
 	/**
 	 * 分页获得学生列表
 	 * @param pager
+	 * @param content 查询条件
 	 * @return
 	 */
-	public void getStudentByPage(Pager<StudentDto> pager);
+	public void getStudentByPage(Pager<StudentDto> pager, String content);
 	
 	
 

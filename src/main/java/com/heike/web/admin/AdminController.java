@@ -1,7 +1,5 @@
 package com.heike.web.admin;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.heike.base.SysCode;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.SalaryDto;
 import com.heike.domain.dto.SalaryQueryDto;
 import com.heike.domain.dto.StudentDto;
-import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
+import com.heike.domain.pojo.Student;
 import com.heike.domain.service.AdminService;
 import com.heike.domain.service.DictService;
 import com.heike.domain.service.SalaryService;
+import com.heike.domain.service.StudentService;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,26 +28,28 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private SalaryService salaryService;
+	@Autowired
+	private StudentService studentService;
 	
 	@RequestMapping("/home")
 	public String home(){
 		return "admin/home";
 	}
 	
-	@RequestMapping("/list")
-	@ResponseBody
-	public List<Dict> list(){
-		return dictService.list(SysCode.DictCode.COLLEGE_TYPE);
-	}
-	
-	@RequestMapping("/add")
-	public void add() {
-		Dict dict = new Dict();
-		dict.setName("test");
-		dict.setType("test");
-		
-		dictService.add(dict);
-	}
+//	@RequestMapping("/list")
+//	@ResponseBody
+//	public List<Dict> list(){
+//		return dictService.list(SysCode.DictCode.COLLEGE_TYPE);
+//	}
+//	
+//	@RequestMapping("/add")
+//	public void add() {
+//		Dict dict = new Dict();
+//		dict.setName("test");
+//		dict.setType("test");
+//		
+//		dictService.add(dict);
+//	}
 	
 	/**
 	 * 跳转到添加用工单位页面
@@ -106,8 +106,8 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/employerList", method=RequestMethod.POST)
 	@ResponseBody
-	public Pager<Employer> employerList(Pager<Employer> pager) {
-		adminService.getEmployerByPage(pager);
+	public Pager<Employer> employerList(Pager<Employer> pager, String name) {
+		adminService.getEmployerByPage(pager, name);
 		return pager;
 	}
 	
@@ -128,9 +128,23 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/students", method=RequestMethod.POST)
 	@ResponseBody
-	public Pager<StudentDto> students(Pager<StudentDto> pager) {
-		adminService.getStudentByPage(pager);
+	public Pager<StudentDto> students(Pager<StudentDto> pager, String content) {
+		adminService.getStudentByPage(pager, content);
 		return pager;
+	}
+	
+	/**
+	 * 更新学生信息
+	 * @param student
+	 * @return
+	 */
+	@RequestMapping("/editStudent")
+	@ResponseBody
+	public String editStudent(Student student) {
+		if(studentService.update(student)) {
+			return "success";
+		}
+		return "fail";
 	}
 	
 	

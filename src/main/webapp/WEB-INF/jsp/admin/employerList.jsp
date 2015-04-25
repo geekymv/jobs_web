@@ -53,7 +53,6 @@
 	          	<div style="text-align: center;">
 					<form class="form-inline">
 					  <div class="form-group">
-					    <label for="name">单位名称</label>
 					    <input type="text" class="form-control" id="name" name="name" placeholder="请输入单位名称" autofocus="autofocus" />
 					  </div>
 					  &nbsp;&nbsp;
@@ -94,10 +93,19 @@
    
    <script type="text/javascript">
    	$(function(){
-   		
+   		page();
+		
+		$('#search').click(function(){
+			$('#page').page( 'destroy' )
+			page();  			
+		});
+   	});
+   	
+   	function page() {
    		$("#page").page({
 		    remote: {
 		        url: contextPath + '/admin/employerList',
+		        params: {"name": $('#name').val()},	// 单位名称
 		        callback: function (result) {
 		            var datas = result.datas;
 			        var length = datas.length;
@@ -120,8 +128,8 @@
 								+ "<td>"+ data.totalMoney +"</td>"	
 								+ "<td>"+ data.status +"</td>"	
 								+ "<td>"
-								+	"<button id='edit' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
-								+	"<button id='delete' class='btn btn-primary btn-sm mybtn'>删除</button>"
+								+	"<button id='edit' onclick='edit(this)' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
+								+	"<button id='delete' onclick='del(this)' class='btn btn-primary btn-sm mybtn'>删除</button>"
 								+ "</td>"	
 								+ "</tr>";
 			            }
@@ -135,10 +143,19 @@
 		    pageSizeName: 'pageSize',       //请求参数，每页数量
 			totalName: 'totalRecord'       //指定返回数据的总数据量
 		});
-   		
-   		
-   	});
-   
+   	}
+   	
+   	// 编辑用工单位信息
+   	function edit(t) {
+		var $this = $(t);
+		alert($this);
+   	}
+
+   	// 删除用工单位
+   	function del(t) {
+		var $this = $(t);
+		alert($this);
+   	}
    
    
    </script>

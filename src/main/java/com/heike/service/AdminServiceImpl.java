@@ -38,13 +38,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void getStudentByPage(Pager<StudentDto> pager) {
-		studentDao.queryByPage(pager);
+	public void getStudentByPage(Pager<StudentDto> pager, String content) {
+		studentDao.queryByPage(pager, content);
 	}
 
 	@Override
-	public void getEmployerByPage(Pager<Employer> pager) {
-		employerDao.queryByPage(pager);
+	public void getEmployerByPage(Pager<Employer> pager, String name) {
+		employerDao.queryByPage(pager, name);
 	}
 
 }

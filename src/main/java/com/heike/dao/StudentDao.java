@@ -49,17 +49,22 @@ public class StudentDao extends HibernateDao {
 	/**
 	 * 分页查询
 	 * @param pager
+	 * @param content 查询条件
 	 * @return
 	 */
-	public Pager<StudentDto> queryByPage(Pager<StudentDto> pager) {
+	public Pager<StudentDto> queryByPage(Pager<StudentDto> pager, String content) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("select new com.heike.domain.dto.StudentDto(")
 			.append(" s.id, s.num, s.name, d1.id, d1.name, d2.id, d2.name")
 			.append(" )")
 			.append(" from Student s, Dict d1, Dict d2 ")
 			.append(" where s.collegeId = d1.id and s.professionId = d2.id ");
-		
+			
 		Map<String, Object> params = new HashMap<String, Object>();
+		if(StringUtils.isNotBlank(content)) {
+			builder.append(" and s.num = :num");
+			params.put("num", content);
+		}
 		
 		return this.findByPage(builder.toString(), params, pager);
 	}

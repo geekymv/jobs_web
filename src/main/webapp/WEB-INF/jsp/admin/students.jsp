@@ -50,8 +50,7 @@
 	            <div style="text-align: center;">
 					<form class="form-inline">
 					  <div class="form-group">
-					    <label for="num">学生学号</label>
-					    <input type="text" class="form-control" id="num" name="num" placeholder="请输入学生学号" autofocus="autofocus" />
+					    <input type="text" class="form-control" id="content" name="content" placeholder="请输入学生学号" autofocus="autofocus" />
 					  </div>
 					  &nbsp;&nbsp;
 					  <button type="button" class="btn btn-primary" id="search">查询</button>
@@ -78,64 +77,108 @@
     	</div>
 	</div>
    </div><!-- /.container -->
+   
+   <%-- 学生信息模态框 --%>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">学生资料</h4>
+	      </div>
+	      <div class="modal-body">
+      		<form class="form-horizontal" role="form" id="form" >
+     	  		<div class="form-group div-top">
+	        		<label for="num" class="col-md-4 control-label">学号：</label>
+	        		<div  class="col-md-6">
+	        			<input type="text" class="form-control" id="num" name="num" />
+	        			<input type="hidden" id="id" name="id" />
+	        		</div>
+        		</div>
+        		<div class="form-group">
+	        		<label for="name" class="col-md-4 control-label">姓名：</label>
+	        		<div  class="col-md-6">
+	        			<input type="text" class="form-control" id="name" name="name" autofocus="autofocus" value="${student.name }"/>
+	        		</div>
+        		</div>
+        		
+        		<div class="form-group">
+	        		<label for="name" class="col-md-4 control-label">登录密码：</label>
+	        		<div class="col-md-6">
+	        			<input type="password" class="form-control" name="pwd" id="password" maxlength="20" />
+	        			<span style="font-size: 9px; color: blue;">若不改密码，不用填写！</span>
+	        		</div>
+        		</div>
+        		<div class="form-group">
+	        		<label for="name" class="col-md-4 control-label">密码确认：</label>
+	        		<div class="col-md-6">
+	        			<input type="password" class="form-control" id="repassword" maxlength="20"/>
+	        		</div>
+        		</div>
+        		
+        		<div class="form-group">
+				  	<label for="gender" class="col-md-4 control-label">性别：</label>
+				  	<div class="col-md-6">
+		  				<label class="radio-inline control-label">
+					  		<input type="radio" name="gender" id="male" value="男" checked="checked"> 男
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="gender" id="female" value="女"> 女
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+				    <label for="college" class="col-sm-4 control-label">学院：</label>
+				    <div class="col-sm-6">
+				      <select class="form-control" id="college" name="collegeId">
+					  </select>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label for="profession" class="col-sm-4 control-label">专业：</label>
+				    <div class="col-sm-6">
+				      <select class="form-control" id="profession" name="professionId">
+					  </select>
+				    </div>
+				</div>
+        		<div class="form-group">
+	        		<label for="mobile" class="col-md-4 control-label">手机号码：</label>
+	        		<div  class="col-md-6">
+	        			<input type="text" class="form-control" id="mobile" name="mobile" value="${student.mobile }"/>
+	        		</div>
+        		</div>
+        		<div class="form-group">
+	        		<label for="email" class="col-md-4 control-label">邮箱：</label>
+	        		<div  class="col-md-6">
+	        			<input type="text" class="form-control" id="email" name="email" value="${student.email }"/>
+	        		</div>
+        		</div>
+        		<div class="form-group">
+	        		<label for="introduce" class="col-md-4 control-label">自我介绍：</label>
+	        		<div  class="col-md-6">
+	        			<textarea id="introduce" name="introduce" class="form-control"></textarea>
+	        		</div>
+        		</div>
+        		<div class="form-group">
+	        		<label class="col-md-4 control-label">注册时间：</label>
+	        		<div  class="col-md-6 div-top" id="regTime">
+	        		</div>
+        		</div>
+        	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary" id="update">更新</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>   
+   
    <div class="footer">
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
-	
-	<script type="text/javascript">
-   		$(function(){
-			$("#page").page({
-			    remote: {
-			        url: contextPath + '/admin//students',  //请求地址
-			        callback: function (result) {
-						$("tbody").empty();
-			        	var datas = result.datas;
-			        	var length = datas.length;
-			        	var html = "";
-			        	//  如果没有数据，隐藏表头
-			        	if(datas == null || length == 0){
-							$("#head").hide();	
-							html = "<div style='text-align:center;color:blue;'>暂无学生...</div>";
-			        	}else {
-			        		$("#head").show();	
-		        		    for(var i = 0; i < length; i++) {
-								var data = datas[i];
-								var status = data.status;
-								if("1" == status) {
-									status = "在职";				
-								}else if("-1" == status) {
-									status = "离职";
-								}
-								
-								html += "<tr>"
-									+ "<td>"+ (i+1) +"</td>"	
-									+ "<td>"+ data.num +"</td>"	
-									+ "<td>"+ data.name +"</td>"	
-									+ "<td>"+ data.college +"</td>"
-									+ "<td>"+ data.profession +"</td>"	
-									+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='edit(this)'>编辑</button></td>" 	
-									+ "</tr>";
-				            }
-			        	}
- 			            $("tbody").html(html);
-			        }
-			    },
-			    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
-			    pageSizeName: 'pageSize',       //请求参数，每页数量
-				totalName: 'totalRecord'       //指定返回数据的总数据量
-			});
-		
-   		});
-		
-   		
-   		// 编辑
-   		function edit(t) {
-   			var $this = $(t);
-   			alert('编辑功能正在研发...');
-   		}
-   		
-   		
-   	</script>
-
+   
+   <script type="text/javascript" src="<c:url value='/resources/scripts/ui/admin_students.js'/>"></script>
 </body>
 </html>

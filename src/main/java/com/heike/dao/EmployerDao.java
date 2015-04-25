@@ -119,14 +119,20 @@ public class EmployerDao extends HibernateDao {
 	/**
 	 * 分页查询
 	 * @param pager
+	 * @param name 单位名称
 	 */
-	public void queryByPage(Pager<Employer> pager) {
+	public void queryByPage(Pager<Employer> pager, String name) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("select new Employer(e.id, e.account, e.name, e.teacher, e.mobile, ")
 			.append(" e.totalMoney, e.postNum, e.status) from Employer e")
 			.append(" where e.authority = :authority");
 		
 		Map<String, Object> params = new HashMap<String, Object>();
+		if(StringUtils.isNotBlank(name)) {
+			builder.append(" and e.name like :name");
+			params.put("name", "%"+ name +"%");
+		}
+	
 		params.put("authority", SysCode.EmployerCode.EMPLOYER_AUTHORITY);
 		
 		findByPage(builder.toString(), params, pager);

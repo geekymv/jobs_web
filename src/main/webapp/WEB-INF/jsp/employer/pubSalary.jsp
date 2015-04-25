@@ -338,7 +338,7 @@
 						}).done(function(data){
 							if(data == 'success') {
 								alert('提交成功！');
-								$('#myModal').modal('hide')
+								$('#myModal').modal('hide');
 							}	
 							
 						}).fail(function(){
