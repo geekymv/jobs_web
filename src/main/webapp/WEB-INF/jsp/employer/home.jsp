@@ -82,7 +82,6 @@
    <script type="text/javascript">
    		$(function(){
 			$("#page").page({
-				alwaysShowPage: true,
 			    remote: {
 			        url: contextPath + '/employer/myRecruits',
 			        callback: function (result) {

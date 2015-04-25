@@ -88,7 +88,7 @@ public class EncryptUtil {
 		String s = EncryptUtil.md5Encrypt("111111");
 		System.out.println(s);
 		
-		String c = EncryptUtil.md5Encrypt("abc");
-		System.out.println(c);
+//		String c = EncryptUtil.md5Encrypt("abc");
+//		System.out.println(c);
 	}
 }

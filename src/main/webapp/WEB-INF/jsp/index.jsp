@@ -156,7 +156,7 @@
    		$(function(){
 			$("#page").page({
 			//	pageSize: 1,
-			//	btnCount: 11, // 按钮数需要设置成奇数
+			//	btnCount: 9, // 按钮数需要设置成奇数
 				alwaysShowPage: true,
 			    remote: {
 			        url: contextPath + '/recruits',  //请求地址
@@ -166,12 +166,19 @@
 			            var html = "";
  			            for(var i = 0; i < length; i++) {
 							var data = datas[i];
+							var endDate = data.endDate;
+							if(endDate != null && endDate.trim() != '') {
+								endDate = formatterDate(data.endDate)
+							}else {
+								endDate = "无";
+							}
+							
 							html += "<tr>"
 								+ "<td>"+ data.title +"</td>"	
 								+ "<td>"+ data.postName +"</td>"	
 								+ "<td>"+ data.empName +"</td>"	
 								+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
-								+ "<td>"+ formatterDate(data.endDate) +"</td>"	
+								+ "<td>"+ endDate +"</td>"	
 								+ "<td><a href='${ctx}/detail/"+data.id+"'>查看详情</a></td>"	
 								+ "</tr>";
 			            }

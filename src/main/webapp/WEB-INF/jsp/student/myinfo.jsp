@@ -233,6 +233,9 @@
 						html += pro;
 					}
 					// 学生所在学院id
+					if(collegeId == null || collegeId.trim() == '') {
+						collegeId = 1;
+					}
 					params.colId = collegeId;
 					getProfessions(); 
 					

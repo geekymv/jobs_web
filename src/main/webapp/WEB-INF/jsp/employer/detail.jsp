@@ -129,10 +129,10 @@
    <script type="text/javascript">
    	$(function() {
 		var endDate = '${recruit.endDate }';
-		$("#endDate").attr("value", dateFormatter(endDate));
+		$("#endDate").attr("value", formatterDate(endDate));
 		
 		var releaseDate = '${recruit.releaseDate }';
-		$("#releaseDate").html(dateFormatter(releaseDate));
+		$("#releaseDate").html(formatterDate(releaseDate));
 		
 		// 判断该招聘信息是否被申请
 		$.ajax({
@@ -149,7 +149,7 @@
 					$('#endDate').removeAttr('onFocus')
 					$('#salary').attr('readonly', 'readonly')
 					$('#context').attr('readonly', 'readonly')
-					$("#is_applyed").html('<span color="red">已经被申请了，不可编辑</span>');
+					$("#is_applyed").html('<span style="color:blue;">已经被申请了，不可编辑！</span>');
 				}else if(data == 'notApplyed') {
 				}					
 			}
@@ -245,20 +245,7 @@
 			});
 
 		});
-		
-	
    	});
-   	
-   	function dateFormatter(time) {
-   		if (time.length == 14) {
-   			return time.substring(0, 4) + "-" + time.substring(4, 6) + "-"
-   					+ time.substring(6, 8);
-   		}
-   		return "&nbsp;";
-   	}
-   
-   
-   
    </script>
 
 </body>

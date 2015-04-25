@@ -53,7 +53,11 @@ public class RecruitServiceImpl implements RecruitService {
 				String num = student.getNum();
 				String name = student.getName();
 				Long proId = student.getProfessionId();
-				String profession = dictDao.queryById(proId).getName();
+				String profession = "无";
+				if(proId != null) {
+					profession = dictDao.queryById(proId).getName();
+				}
+				
 				
 				RecruitStuVO vo = new RecruitStuVO(num, name, profession, applyDate, status);
 				vos.add(vo);
