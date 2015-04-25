@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
@@ -22,7 +23,7 @@
 		<small style="color:white">
 			Copyright &copy; 2014-2015  安徽农业大学学生资助管理中心  All Rights Reserved
 			<br>
-			技术支持：<a href="gyhk.htm" target="_blank">嘿客科技传媒</a>. &nbsp;&nbsp;联系邮箱：1784160856@qq.com		
+			技术支持：<a href="${ctx }/hkkj" target="_blank">嘿客科技传媒</a>. &nbsp;&nbsp;联系邮箱：1784160856@qq.com		
 		</small>
 	</div>
 		

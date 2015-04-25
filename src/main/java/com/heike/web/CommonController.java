@@ -24,6 +24,39 @@ public class CommonController {
 	@Autowired
 	private EmployerService employerService;
 	
+	/**
+	 * 系统简介
+	 * @return
+	 */
+	@RequestMapping("/introduce")
+	public String introduce() {
+		return "introduce";
+	}
+	
+	/**
+	 * 开发团队
+	 * @return
+	 */
+	@RequestMapping("/hkkj")
+	public String hkkj() {
+		return "hkkj";
+	}
+	
+	/**
+	 * 帮助中心
+	 * @return
+	 */
+	@RequestMapping("/help")
+	public String help() {
+		return "help";
+	}
+	
+	/**
+	 * 工资下载
+	 * @param month
+	 * @param response
+	 * @param session
+	 */
 	@RequestMapping("/download/{month}")
 	public void download(@PathVariable("month")String month, 
 			HttpServletResponse response, HttpSession session) {

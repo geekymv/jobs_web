@@ -61,9 +61,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
-                <li><a href="explain.html" target="_blank">系统简介</a></li>
-                <li><a href="gyhk.htm" target="_blank">开发团队</a></li>
-                <li><a href="help.html" target="_blank">帮助中心</a></li>
+                <li><a href="${ctx }/introduce" target="_blank">系统简介</a></li>
+                <li><a href="${ctx }/hkkj" target="_blank">开发团队</a></li>
+                <li><a href="${ctx }/help" target="_blank">帮助中心</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
            	<c:if test="${user != null }">

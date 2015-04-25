@@ -69,7 +69,7 @@
 		</p>
 	</div>
 	<%
-		response.setHeader("Refresh", "6;url=" + "index.jsp");
+		response.setHeader("Refresh", "6;url=" + "index");
 	%>
 
 </body>

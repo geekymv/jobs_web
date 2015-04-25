@@ -17,9 +17,9 @@
 		</div>
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
-                <li><a href="explain.html" target="_blank">系统简介</a></li>
+                <li><a href="${ctx }/introduce" target="_blank">系统简介</a></li>
                 <li><a href="gyhk.htm" target="_blank">开发团队</a></li>
-                <li><a href="help.html" target="_blank">帮助中心</a></li>
+                <li><a href="${ctx }/help" target="_blank">帮助中心</a></li>
           </ul>
 		  <ul class="nav navbar-nav navbar-right">
 	           	<li><a style="cursor: pointer;">${user.name } <span class="glyphicon glyphicon-user"></span></a></li>

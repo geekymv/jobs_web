@@ -1,4 +1,6 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/jsp/inc/taglibs.jsp" %>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,23 +10,23 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="css/styles.css" rel="stylesheet" type="text/css">
+<link href="resources/css/styles.css" rel="stylesheet" type="text/css">
 
-<link href="js/poshytip/tip-twitter/tip-twitter.css" rel="stylesheet" type="text/css">
-<link href="js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css">
-<link href="js/jnotify/jNotify.jquery.css" rel="stylesheet" type="text/css">
-<link href="front-end/css/styles.css" rel="stylesheet" type="text/css">
-<link href="front-end/js/dropkick/dropkick.css" rel="stylesheet" type="text/css">
+<link href="resources/js/poshytip/tip-twitter/tip-twitter.css" rel="stylesheet" type="text/css">
+<link href="resources/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css">
+<link href="resources/js/jnotify/jNotify.jquery.css" rel="stylesheet" type="text/css">
+<link href="resources/front-end/css/styles.css" rel="stylesheet" type="text/css">
+<link href="resources/front-end/js/dropkick/dropkick.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery-1.7.2.min.js"></script>
 
 
-<script type="text/javascript" src="js/slider/jquery.sudoSlider.min.js"></script>
+<script type="text/javascript" src="resources/js/slider/jquery.sudoSlider.min.js"></script>
 
-<script type="text/javascript" src="js/poshytip/jquery.poshytip.min.js"></script>
-<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript" src="resources/js/poshytip/jquery.poshytip.min.js"></script>
+<script type="text/javascript" src="resources/js/scripts.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
