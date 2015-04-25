@@ -50,4 +50,11 @@ public interface EmployerService {
 	 */
 	public boolean layoff(Long stuId, Long empId);
 
+	/**
+	 * 验证该账号是否和其他账号重复	
+	 * @param empId
+	 * @param account
+	 * @return true重复，false不重复
+	 */
+	public boolean isExist(Long empId, String account);
 }

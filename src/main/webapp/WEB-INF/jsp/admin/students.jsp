@@ -82,7 +82,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
-	    <div class="modal-content">
+	    <div class="modal-content" style="width: 660px;">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">学生资料</h4>
@@ -91,35 +91,36 @@
       		<form class="form-horizontal" role="form" id="form" >
      	  		<div class="form-group div-top">
 	        		<label for="num" class="col-md-4 control-label">学号：</label>
-	        		<div  class="col-md-6">
+	        		<div  class="col-md-5">
 	        			<input type="text" class="form-control" id="num" name="num" />
 	        			<input type="hidden" id="id" name="id" />
 	        		</div>
+	        		<div class='col-sm-3 div-top' id="stuIsExist" style="font-size: 9px; color: red; display: none;">学号已存在！</div>
         		</div>
         		<div class="form-group">
 	        		<label for="name" class="col-md-4 control-label">姓名：</label>
-	        		<div  class="col-md-6">
+	        		<div  class="col-md-5">
 	        			<input type="text" class="form-control" id="name" name="name" autofocus="autofocus" value="${student.name }"/>
 	        		</div>
         		</div>
         		
         		<div class="form-group">
 	        		<label for="name" class="col-md-4 control-label">登录密码：</label>
-	        		<div class="col-md-6">
+	        		<div class="col-md-5">
 	        			<input type="password" class="form-control" name="pwd" id="password" maxlength="20" />
-	        			<span style="font-size: 9px; color: blue;">若不改密码，不用填写！</span>
 	        		</div>
+					<div class='col-sm-3 div-top' style="font-size: 9px; color: blue;">若不改密码，不用填写！</div>
         		</div>
         		<div class="form-group">
 	        		<label for="name" class="col-md-4 control-label">密码确认：</label>
-	        		<div class="col-md-6">
+	        		<div class="col-md-5">
 	        			<input type="password" class="form-control" id="repassword" maxlength="20"/>
 	        		</div>
         		</div>
         		
         		<div class="form-group">
 				  	<label for="gender" class="col-md-4 control-label">性别：</label>
-				  	<div class="col-md-6">
+				  	<div class="col-md-5">
 		  				<label class="radio-inline control-label">
 					  		<input type="radio" name="gender" id="male" value="男" checked="checked"> 男
 						</label>
@@ -130,46 +131,46 @@
 				</div>
 				<div class="form-group">
 				    <label for="college" class="col-sm-4 control-label">学院：</label>
-				    <div class="col-sm-6">
+				    <div class="col-sm-5">
 				      <select class="form-control" id="college" name="collegeId">
 					  </select>
 				    </div>
 				</div>
 				<div class="form-group">
 				    <label for="profession" class="col-sm-4 control-label">专业：</label>
-				    <div class="col-sm-6">
+				    <div class="col-sm-5">
 				      <select class="form-control" id="profession" name="professionId">
 					  </select>
 				    </div>
 				</div>
         		<div class="form-group">
 	        		<label for="mobile" class="col-md-4 control-label">手机号码：</label>
-	        		<div  class="col-md-6">
+	        		<div  class="col-md-5">
 	        			<input type="text" class="form-control" id="mobile" name="mobile" value="${student.mobile }"/>
 	        		</div>
         		</div>
         		<div class="form-group">
 	        		<label for="email" class="col-md-4 control-label">邮箱：</label>
-	        		<div  class="col-md-6">
+	        		<div  class="col-md-5">
 	        			<input type="text" class="form-control" id="email" name="email" value="${student.email }"/>
 	        		</div>
         		</div>
         		<div class="form-group">
 	        		<label for="introduce" class="col-md-4 control-label">自我介绍：</label>
-	        		<div  class="col-md-6">
+	        		<div  class="col-md-5">
 	        			<textarea id="introduce" name="introduce" class="form-control"></textarea>
 	        		</div>
         		</div>
         		<div class="form-group">
 	        		<label class="col-md-4 control-label">注册时间：</label>
-	        		<div  class="col-md-6 div-top" id="regTime">
+	        		<div  class="col-md-5 div-top" id="regTime">
 	        		</div>
         		</div>
         	</form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	        <button type="button" class="btn btn-primary" id="update">更新</button>
+	        <button type="button" class="btn btn-primary" id="update" >更新</button>
 	      </div>
 	    </div>
 	  </div>
@@ -179,6 +180,6 @@
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    </div>
    
-   <script type="text/javascript" src="<c:url value='/resources/scripts/ui/admin_students.js'/>"></script>
+   <script type="text/javascript" src="<c:url value='/resources/scripts/ui/admin/students.js'/>"></script>
 </body>
 </html>

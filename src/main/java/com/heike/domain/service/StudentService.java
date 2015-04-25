@@ -55,6 +55,14 @@ public interface StudentService {
 	 * @return
 	 */
 	public boolean update(Student student);
+
+	/**
+	 * 判断该学号是否和其他学号重复
+	 * @param stuId
+	 * @param num
+	 * @return true 重复， false不重复
+	 */
+	public boolean isExist(Long stuId, String num);
 	
 	
 }

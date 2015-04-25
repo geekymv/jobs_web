@@ -13,6 +13,26 @@ $(function(){
 		params.colId = $("#college").val();
 		getProfessions();
 	});
+	
+	$('#num').blur(function(){
+		var id = $('#id').val();
+		var num = $('#num').val(); // 学号
+		
+		$.post(contextPath+"/stuIsExist", {'stuId': id, 'num': num}).done(function(data){
+			if(data == 'isExist') {
+				$('#stuIsExist').show();
+				$('#update').attr('disabled', 'disabled')
+			}else if (data == 'notExist') {
+				$('#stuIsExist').hide();
+				$('#update').removeAttr('disabled');
+			}
+		}).fail(function(msg){
+			alert('服务器端错误！');
+		});
+		
+	});
+	
+	
 });
 
 function page() {
@@ -142,6 +162,13 @@ $('#update').click(function(){
 		$('#mobile').focus();
 		return;
 	}		
+
+	var reg = /^1\d{10}$/;	// 以1开头 11位数字
+	if(!reg.test(mobile)){
+		alert('手机号码格式不正确！');
+		$('#mobile').focus();
+		return;
+	}
 	
 	// 邮箱验证
 	var email = $('#email').val();

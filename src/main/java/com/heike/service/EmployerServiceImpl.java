@@ -76,5 +76,11 @@ public class EmployerServiceImpl implements EmployerService {
 		int res = empStuDao.updateStatus(SysCode.EmployerStudent.LEAVE_JOB, stuId, empId);
 		return res == 1 ? true : false;
 	}
+
+	@Override
+	public boolean isExist(Long empId, String account) {
+		long count = employerDao.queryByIdAndAccount(empId, account);
+		return count >= 1L ? true : false;
+	}
 	
 }

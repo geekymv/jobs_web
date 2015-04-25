@@ -129,7 +129,6 @@
    		
 		// 更新
 		$("#edit").click(function(){
-			// TODO 输入验证
 	   		var id = $("#id").val();
 	   		var name = $("#name").val();
 	   		var mobile = $("#mobile").val();

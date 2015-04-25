@@ -128,4 +128,22 @@ public class StudentDao extends HibernateDao {
 		return super.queryById(Student.class, id);
 	}
 	
+	/**
+	 * 根据id和学号查询
+	 * @param stuId
+	 * @param num
+	 * @return
+	 */
+	public long queryByIdAndNum(Long stuId, String num) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select count(*) from Student s")
+			.append(" where s.id != :stuId and s.num = :num");
+		
+		return (Long)getSession().createQuery(builder.toString())
+			.setLong("stuId", stuId)
+			.setString("num", num)
+			.uniqueResult();
+	}
+	
+	
 }

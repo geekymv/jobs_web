@@ -27,7 +27,14 @@ public class EmployerDao extends HibernateDao {
 		Map<String, Object> values = new HashMap<String, Object>();
 		values.put("name", dto.getName());
 		
-		if(StringUtils.isNotBlank(dto.getPwd())){	// 更新密码
+		// 更新账号
+		String account = dto.getAccount();
+		if(StringUtils.isNotBlank(account)) {
+			builder.append(", account = :account");
+			values.put("account", account);
+		}
+		// 更新密码
+		if(StringUtils.isNotBlank(dto.getPwd())){	
 			builder.append(", pwd = :pwd");
 			values.put("pwd", EncryptUtil.md5Encrypt(dto.getPwd()));
 		}
@@ -107,13 +114,15 @@ public class EmployerDao extends HibernateDao {
 	 * @return
 	 */
 	public Employer queryById(Long id) {
-		return (Employer)getSession().get(Employer.class, id);
+//		return (Employer)getSession().get(Employer.class, id);
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("select new Employer(id as id, account, name, teacher, mobile, totalMoney, postNum, regDate, status, remarks)")
+			.append(" from Employer e where e.id = :id");
 		
-//		String hql = "from Employer e where e.id = :id";
-//		return (Employer)getSession().createQuery(hql) //
-//					.setLong("id", id) //
-//					.uniqueResult();
-		
+		return (Employer)getSession().createQuery(builder.toString())
+					.setLong("id", id)
+					.uniqueResult();
 	}
 	
 	/**
@@ -138,16 +147,24 @@ public class EmployerDao extends HibernateDao {
 		findByPage(builder.toString(), params, pager);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 根据用工单位id和账号查询
+	 * 验证账号是否和其他账号重复
+	 * @param empId
+	 * @param account
+	 * @return
+	 */
+	public long queryByIdAndAccount(Long empId, String account) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("select count(*) from Employer e")
+			.append("  where e.id != :empId and e.account = :account");
+		
+		return (Long)getSession().createQuery(builder.toString())
+			.setLong("empId", empId)
+			.setString("account", account)
+			.uniqueResult();
+		
+	}
 	
 	
 	

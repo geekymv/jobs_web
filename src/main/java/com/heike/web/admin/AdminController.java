@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.heike.domain.dto.EmployerDto;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.SalaryDto;
 import com.heike.domain.dto.SalaryQueryDto;
@@ -16,6 +17,7 @@ import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.AdminService;
 import com.heike.domain.service.DictService;
+import com.heike.domain.service.EmployerService;
 import com.heike.domain.service.SalaryService;
 import com.heike.domain.service.StudentService;
 
@@ -30,6 +32,8 @@ public class AdminController {
 	private SalaryService salaryService;
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private EmployerService employerService;
 	
 	@RequestMapping("/home")
 	public String home(){
@@ -94,9 +98,9 @@ public class AdminController {
 	 * 跳转到用工单位列表
 	 * @return
 	 */
-	@RequestMapping(value="/employerList", method=RequestMethod.GET)
+	@RequestMapping(value="/employers", method=RequestMethod.GET)
 	public String employerList() {
-		return "admin/employerList";
+		return "admin/employers";
 	}
 	
 	/**
@@ -109,6 +113,13 @@ public class AdminController {
 	public Pager<Employer> employerList(Pager<Employer> pager, String name) {
 		adminService.getEmployerByPage(pager, name);
 		return pager;
+	}
+
+	@RequestMapping("/editEmployer")
+	@ResponseBody
+	public String editEmployer(EmployerDto dto) {
+		employerService.edit(dto);
+		return "success";
 	}
 	
 	

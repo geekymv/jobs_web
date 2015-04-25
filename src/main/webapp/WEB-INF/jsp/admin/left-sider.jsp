@@ -21,7 +21,7 @@
         <h4 >单位管理</h4>
         <div class="list-item none">
           <p ><a href="${ctx }/admin/addemployer" target="_self">添加单位</a></p>
-          <p ><a href="${ctx }/admin/employerList" target="_self">单位列表</a></p>
+          <p ><a href="${ctx }/admin/employers" target="_self">单位列表</a></p>
         </div>
       </li>
       <li >

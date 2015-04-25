@@ -105,6 +105,12 @@ public class StudentServiceImpl implements StudentService {
 		return res == 1 ? true : false;
 	}
 
+	@Override
+	public boolean isExist(Long stuId, String num) {
+		long count = studentDao.queryByIdAndNum(stuId, num);
+		return count >= 1L? true : false;
+	}
+
 
 }
 

@@ -35,8 +35,21 @@ public class Employer {
 		this.name = name;
 		this.authority = authority;
 	}
-
 	
+	public Employer(Long id, String account, String name, String teacher,
+			String mobile, Integer totalMoney, Integer postNum,
+			String regDate, Integer status, String remarks) {
+		this.id = id;
+		this.account = account;
+		this.name = name;
+		this.teacher = teacher;
+		this.mobile = mobile;
+		this.totalMoney = totalMoney;
+		this.postNum = postNum;
+		this.regDate = regDate;
+		this.status = status;
+		this.remarks = remarks;
+	}
 	
 	public Employer(Long id, String account, String name, String teacher,
 			String mobile, Integer totalMoney, Integer postNum, Integer status) {
