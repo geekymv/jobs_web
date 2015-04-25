@@ -25,6 +25,7 @@ import com.heike.domain.service.SalaryService;
 import com.heike.domain.vo.EmployerStudentVO;
 import com.heike.domain.vo.RecruitStuVO;
 import com.heike.domain.vo.RecruitVO;
+import com.heike.util.DateUtils;
 
 @Controller
 @RequestMapping("/employer")
@@ -171,6 +172,12 @@ public class EmployerController {
 		return pager;
 	}
 	
+	/**
+	 * 审核学生报名
+	 * @param dto
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/approve")
 	@ResponseBody
 	public String approve(ApproveDto dto, HttpSession session) {
@@ -265,6 +272,19 @@ public class EmployerController {
 		return "employer/pubSalary";
 	}
 
+	/**
+	 * 判断当前时间是否是提交工资的时间
+	 * @return
+	 */
+	@RequestMapping("/isPubSalaryDate")
+	@ResponseBody
+	public String isPubSalaryDate() {
+		if (!DateUtils.isLast7Day()) {	// 不是提交工资的日期
+			return "noTime";
+		}
+		return "ok";
+	}
+	
 	/**
 	 * 判断学生某月的工资是否已经提交
 	 * @param sqd

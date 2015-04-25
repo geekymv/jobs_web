@@ -201,10 +201,10 @@
 								+ "<td>"+ data.postName +"</td>"	
 								+ "<td>"+ data.salary +"</td>"
 								+ "<td>"+ formatterDate(data.date) +"</td>"
-								+ '<td><button class="btn btn-primary btn-sm" onclick="layoff(this)" data-toggle="modal" data-target="#myModal">提交工资</button></td>' 	
+								+ '<td><button class="btn btn-primary btn-sm" onclick="layoff(this)">提交工资</button></td>' 	
 								+ "</tr>";
 			            }
- 			            
+ 			            //  data-toggle="modal" data-target="#myModal"
  			            $("tbody").html(html);
 			        }
 			    },
@@ -270,7 +270,7 @@
 					if(data == 'isPublished') {
 						$('#tips').show();
 						return;
-					}else if(data == 'noPublished') {
+					}else if(data == 'noPublished') {	// 没有提交
 						$('#tips').hide();
 						// ==
 						var fffds = /^\d+(\.\d+)?$/;	// 匹配非负浮点数(0、正浮点数)
@@ -358,20 +358,35 @@
 	
    		
    		function layoff(t) {
-			var $this = $(t)
-			var $tr = $this.parent().parent();
-			// 学号
-			var num_val= $tr.find('#_num').text();
-			// 姓名
-			var name_val = $tr.find('#_name').text();
-			// id
-			var stuId = $tr.find('#_stuId').val();
+   			var $this = $(t)
+   			
+   			// 判断当前时间是否是提交工资的时间
+   			$.post(contextPath+"/employer/isPubSalaryDate").done(function(msg){
+				if(msg == 'ok') {
+					var $tr = $this.parent().parent();
+					// 学号
+					var num_val= $tr.find('#_num').text();
+					// 姓名
+					var name_val = $tr.find('#_name').text();
+					// id
+					var stuId = $tr.find('#_stuId').val();
+					
+					// 将学号、姓名和id显示在模态框上
+					$('#num').html(num_val);
+					$('#name').html(name_val);
+					$('#stuId').val(stuId);
+					// 显示模态框		
+					$('#myModal').modal('show')
+					
+				}else if (msg == 'noTime') { // 不是提交工资的日期
+					alert('还没到提交工资的时间！');
+					return;
+				}
+				
+   			}).fail(function(msg){
+				alert('服务器端错误！');   				
+   			});
 			
-			// 将学号、姓名和id显示在模态框上
-			$('#num').html(num_val);
-			$('#name').html(name_val);
-			$('#stuId').val(stuId);
-   		
    		}
    		
    		
