@@ -126,6 +126,19 @@ public class EmployerDao extends HibernateDao {
 	}
 	
 	/**
+	 * 根据用工单位id查询其月总金额
+	 * @param empId
+	 * @return
+	 */
+	public Integer queryTotalMoney(Long empId) {
+		String hql = "select totalMoney from Employer e where e.id = :id";
+		
+		return (Integer)getSession().createQuery(hql)
+					.setLong("id", empId)
+					.uniqueResult();
+	}
+	
+	/**
 	 * 分页查询
 	 * @param pager
 	 * @param name 单位名称

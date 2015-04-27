@@ -28,6 +28,14 @@ public class Salary {
 	public Salary() {
 	}
 
+	public Salary(String salary, String bonus, String toolFee) {
+		this.salary = salary;
+		this.bonus = bonus;
+		this.toolFee = toolFee;
+	}
+
+
+
 	@Id
 	@GeneratedValue
 	public Long getId() {

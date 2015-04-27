@@ -6,9 +6,10 @@ public class SalaryDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public SalaryDto(String name, String num, String profession,
+	public SalaryDto(Long id, String name, String num, String profession,
 			String postName, String empName, String worktime, String salary,
 			String toolFee, String bonus, String remarks, String month) {
+		this.id = id;
 		this.name = name;
 		this.num = num;
 		this.profession = profession;
@@ -51,6 +52,10 @@ public class SalaryDto {
 		this.remarks = remarks;
 	}
 	
+	/**
+	 * 薪水id
+	 */
+	private Long id;	
 	/**
 	 * 月份
 	 */
@@ -102,6 +107,13 @@ public class SalaryDto {
 	 * 备注
 	 */
 	private String remarks;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public String getMonth() {
 		return month;

@@ -344,6 +344,31 @@ public class EmployerController {
 		return pager;
 	}
 	
+	/**
+	 * 判断工资是否可以编辑
+	 * @param month
+	 */
+	@RequestMapping("/isEdit")
+	@ResponseBody
+	public String isEdit(String month) {
+		return salaryService.isEdit(month);
+	}
+	
+	/**
+	 * 编辑学生工资
+	 * 只能在提交工资期间编辑本月的工资
+	 * @param salary
+	 * @return
+	 */
+	@RequestMapping("/editSalary")
+	@ResponseBody
+	public String editSalary(Salary salary, HttpSession session) {
+		Employer employer = (Employer)session.getAttribute("user");
+		salary.setEmpId(employer.getId());
+		
+		return salaryService.edit(salary);
+	}
+	
 	
 }
 

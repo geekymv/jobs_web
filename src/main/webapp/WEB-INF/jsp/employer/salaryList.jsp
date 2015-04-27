@@ -51,7 +51,7 @@
 					<form class="form-inline">
 					  <div class="form-group">
 					    <label for="month">请选择月份</label>
-					    <input type="text" class="form-control" id="month" name="month" placeholder="请选择月份"
+					    <input type="text" class="form-control" id="content" name="month" placeholder="请选择月份"
 					     onClick="WdatePicker({dateFmt:'yyyy-MM', maxDate:'%y-%M', isShowClear:false})" />
 					  </div>
 					  &nbsp;&nbsp;
@@ -85,6 +85,76 @@
 	</div>
     
    </div><!-- /.container -->
+
+<!-- 编辑工资Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">编辑工资</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+		    <label for="num" class="col-sm-3 control-label">学号</label>
+		    <div class="col-sm-7 div-top" id="num">
+		    </div>
+		    <!-- 薪水id -->
+		    <input type="hidden" name="id" id="salId" />
+		  </div>
+		  <div class="form-group">
+		    <label for="name" class="col-sm-3 control-label">姓名</label>
+		    <div class="col-sm-7 div-top" id="name">
+		    </div>
+		  </div>
+
+          <div class="form-group">
+		    <label for="month" class="col-sm-3 control-label">月份</label>
+		    <div class="col-sm-7 div-top" id="month">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="worktime" class="col-sm-3 control-label">工作时间（小时）</label>
+		    <div class="col-sm-7">
+		      <input type="text" class="form-control" id="worktime" name="worktime">
+		    </div>
+		  </div>  
+			
+		  <div class="form-group">
+		    <label for="salary" class="col-sm-3 control-label">基本工资（元/月）</label>
+		    <div class="col-sm-7">
+		      <input type="text" class="form-control" id="salary" name="salary">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="bonus" class="col-sm-3 control-label">奖金（元）</label>
+		    <div class="col-sm-7">
+		      <input type="text" class="form-control" id="bonus" name="bonus">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="toolFee" class="col-sm-3 control-label">工具费（元）</label>
+		    <div class="col-sm-7">
+		      <input type="text" class="form-control" id="toolFee" name="toolFee">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="remarks" class="col-sm-3 control-label">备注</label>
+		    <div class="col-sm-7">
+		      <textarea class="form-control" id="remarks" name="remarks"></textarea>
+		    </div>
+		  </div>
+		</form>
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="updateSalary">更新</button>
+      </div>
+    </div>
+  </div>
+</div>
    
    <div class="footer">
 	   <jsp:include page="../inc/footer.jsp"></jsp:include>
@@ -97,7 +167,7 @@
    		
    		// 下载工资
    		$("#download").click(function(){
-   			var month = $('#month').val();
+   			var month = $('#content').val();
    			if(month.trim() == '') {
    				alert('请选择月份！');
    				return;
@@ -111,13 +181,97 @@
 			page();  			
    		});
    		
+   		// 更新工资
+   		$('#updateSalary').click(function(){
+			// 数据合法性验证
+			var fffds = /^\d+(\.\d+)?$/;	// 匹配非负浮点数(0、正浮点数)
+			var zfds = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/; //匹配正浮点数
+			var ffzs =   /^\d+$/; // 匹配非负整数
+			
+			// 工作时间是非负浮点数 、 0、 非负整数	
+			var worktime = $('#worktime').val();
+			if(worktime.trim() == "") {
+				alert('工作时间不能为空！');
+				$('#worktime').focus();
+				return;
+			}
+			if(!ffzs.test(worktime) || !fffds.test(worktime)) {
+				alert('工作时间不合法！');	
+				$('#worktime').focus();
+				return;
+			}
+			
+			var salary = $('#salary').val();
+			if(salary.trim() == "") {
+				alert('基本工资不能为空！');
+				$('#salary').focus();
+				return;
+			}
+			if(!ffzs.test(salary) || !fffds.test(salary)) {
+				alert('基本工资不合法！');	
+				$('#salary').focus();
+				return;
+			}
+			
+			var bonus = $('#bonus').val();
+			if(bonus.trim() == "") {
+				alert('奖金不能为空！');
+				$('#bonus').focus();
+				return;
+			}
+			if(!ffzs.test(bonus) || !fffds.test(bonus)) {
+				alert('奖金不合法！');	
+				$('#salary').focus();
+				return;
+			}
+			
+			var toolFee = $('#toolFee').val();
+			if(toolFee.trim() == "") {
+				alert('工具费不能为空！');
+				$('#toolFee').focus();
+				return;
+			}
+			if(!ffzs.test(toolFee) || !fffds.test(toolFee)) {
+				alert('工具费不合法！');	
+				$('#toolFee').focus();
+				return;
+			}
+				
+			var id = $('#id').val();
+			var remarks = $('#remarks').val();
+			var month = $('#month').html();
+			
+			var datas = {'id': id, 'month': month, 'worktime': worktime, 'salary': salary, 
+				'bonus': bonus, 'toolFee': toolFee, 'remarks': remarks };
+			
+			// 更新
+			$.post(contextPath+'/employer/editSalary', datas).done(function(msg){
+				if(msg == 'overspend') {
+					alert('超支了！');
+					return;
+				}
+				
+				if(msg == 'success') {
+					alert('更新成功！');
+					// 关闭模态框
+					$('#myModal').modal('hide');
+					window.location.reload();
+				}else if (msg == 'fail'){
+					alert('更新失败！');
+				}
+			}).fail(function(msg){
+				alert('服务器端错误！');
+			});
+			
+			
+   		});
    	});
    	
    	function page() {
    		$("#page").page({
 		    remote: {
 		        url: contextPath + '/employer/salaryList',
-		        params: {"month": $('#month').val()},
+		        params: {"month": $('#content').val()},
 		        callback: function (result) {
 		            //回调函数，result 为 请求返回的数据，绑定数据
 		            var datas = result.datas;
@@ -126,38 +280,76 @@
 			       	//  如果没有数据，隐藏表头
 		        	if(datas == null || length == 0){
 						$("#head").hide();	
-						html = "<div style='text-align:center;'>暂无数据...</div>";
+						html = "<div style='text-align:center;'>当前月暂无数据...</div>";
 		        	}else {
 		        		$("#head").show();
 		        		for(var i = 0; i < length; i++) {
 							var data = datas[i];
 							html += "<tr>"
-								+ "<td>"+ data.num +"</td>"	
-								+ "<td>"+ data.name +"</td>"	
-								+ "<td>"+ data.worktime +"</td>"	
-								+ "<td>"+ data.salary +"</td>"	
-								+ "<td>"+ data.toolFee +"</td>"	
-								+ "<td>"+ data.bonus +"</td>"	
-								+ "<td>"+ data.month +"</td>"	
-								+ "<td>"+ data.remarks +"</td>"	
+								+ "<td id='num_'>"+ data.num +"</td>"	
+								+ "<td id='name_'>"+ data.name +"</td>"	
+								+ "<td id='worktime_'>"+ data.worktime +"</td>"	
+								+ "<td id='salary_'>"+ data.salary +"</td>"	
+								+ "<td id='toolFee_'>"+ data.toolFee +"</td>"	
+								+ "<td id='bonus_'>"+ data.bonus +"</td>"	
+								+ "<td id='month_'>"+ data.month +"</td>"	
+								+ "<td id='remarks_'>"+ data.remarks +"</td>"	
 								+ "<td>"
-								+	"<button id='edit' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
-								+	"<button id='delete' class='btn btn-primary btn-sm mybtn'>删除</button>"
+								+	"<button id='edit' onclick='edit(this)' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
+								+	"<button id='delete' onclick='del(this)' class='btn btn-primary btn-sm mybtn'>删除</button>"
+								+ "<input type='hidden' id='id' value='"+data.id+"' />"
 								+ "</td>"	
 								+ "</tr>";
 			            }
 		        	}
-			    
 			       	$("#t_body").html(html);
-
 		        }
 		    },
-
 		    pageIndexName: 'pageIndex',     //请求参数，当前页数，索引从0开始
 		    pageSizeName: 'pageSize',       //请求参数，每页数量
 			totalName: 'totalRecord'       //指定返回数据的总数据量
 		});
    	}
+   	
+   	function edit(t) {
+   		var $this = $(t);
+   		var $tr = $this.parent().parent();
+   		var id = $tr.find('#id').val();
+   		var month = $tr.find('#month_').html().trim();
+   		
+   		$.post(contextPath+"/employer/isEdit", {'month': month}).done(function(msg){
+			if('noEdit' == msg){
+				alert('不可编辑！');
+				return;
+			}else if ('ok' == msg) {
+				// 调用模态框
+				$('#myModal').modal('show');
+				var num = $tr.find('#num_').html().trim();
+				var name = $tr.find('#name_').html().trim();
+			//	var month = $tr.find('#month_').html().trim();
+				var worktime = $tr.find('#worktime_').html().trim();
+				var salary = $tr.find('#salary_').html().trim();
+				var toolFee = $tr.find('#toolFee_').html().trim();
+				var bonus = $tr.find('#bonus_').html().trim();
+				var remarks = $tr.find('#remarks_').html().trim();
+				
+				$('#salId').attr('value', id);
+				$('#num').html(num);
+				$('#name').html(name);
+				$('#month').html(month);
+				$('#worktime').attr('value', worktime);
+				$('#salary').attr('value', salary);
+				$('#toolFee').attr('value', toolFee);
+				$('#bonus').attr('value', bonus);
+				$('#remarks').attr('value', remarks);
+				
+			}  			
+   		}).fail(function(msg){
+   			alert('服务器端错误！');
+   		});
+   	}
+   	
+   
    	
    
    </script>

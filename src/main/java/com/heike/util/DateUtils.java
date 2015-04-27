@@ -54,7 +54,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	 */
 	@SuppressWarnings("deprecation")
 	public static boolean isLast7Day() {
-		
 		Date current = new Date();
 		int cyear = current.getYear()+1900;
 		int cmonth = current.getMonth()+1;
@@ -64,7 +63,6 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		
 		Date date = getLastDayOfMonth(cyear, cmonth);	//取得某月的的最后一天 的日期
 		int day = date.getDate();
-		
 		
 		if(cday >= day-6 && cday <= day) {
 			return true;

@@ -37,5 +37,18 @@ public interface SalaryService {
 	 */
 	public void getSalaryPage2(Pager<SalaryDto> pager, SalaryQueryDto sqd);
 	
+	/**
+	 * 判断工资是否可以编辑
+	 * @param month
+	 * @return "noEdit"不可编辑，"ok"可编辑
+	 */
+	public String isEdit(String month);
+	
+	/**
+	 * 更新工资
+	 * @param salary
+	 * @return "noEdit"不可编辑 ，"overspend"超支了， "success" 更新成功，"fail" 更新失败
+	 */
+	public String edit(Salary salary);
 
 }
