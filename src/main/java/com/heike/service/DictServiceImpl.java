@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.heike.base.SysCode;
 import com.heike.dao.DictDao;
 import com.heike.domain.pojo.Dict;
 import com.heike.domain.service.DictService;
@@ -28,7 +28,7 @@ public class DictServiceImpl implements DictService {
 	 * value="queryCache"对应于ehcache.xml里的缓存名字
 	 * key = 参数 + 方法名,key="#params+'list'"
 	 */
-	@Cacheable(value="dictCache", key="#type")
+//	@Cacheable(value="dictCache", key="#type")
 	@Override
 	public List<Dict> list(String type) {
 		return dictDao.queryAllByType(type);
@@ -50,7 +50,53 @@ public class DictServiceImpl implements DictService {
 		dictDao.save(dict);
 		return dict;
 	}
+	
+	@Override
+	public String addCollege(Dict dict) {
+		// 根据学院名称，判断该学院是否已经存在
+		dict.setType(SysCode.DictCode.COLLEGE_TYPE);
+		Dict d  = dictDao.queryByNameAndType(dict);
+		if(d != null) {
+			return "isExist";
+		}
 
+		dictDao.saveOrUpdate(dict);
+		return "success";
+	}
+
+	@Override
+	public Dict findById(Long id) {
+		return dictDao.queryById(id);
+	}
+
+	@Override
+	public String addProfession(Dict dict) {
+		// 判断该学院是否已经有这个专业
+	//	Long colId = dict.getSuperiorId();
+	//	String proName = dict.getName();
+		
+		Dict d = dictDao.queryColIdAndProName(dict);
+		if(d != null) {
+			return "isExist";
+		}
+		
+		// 新建专业
+//		Dict dict = new Dict();
+//		dict.setName(proName);
+//		dict.setSuperiorId(colId);
+		dict.setType(SysCode.DictCode.PROFESSION_TYPE);
+		dictDao.saveOrUpdate(dict);
+
+		return "success";
+	}
+
+	@Override
+	public boolean delete(Long id) {
+		int res = dictDao.delete(id);
+		return res == 1 ? true : false;
+	}
+
+ 
 }
 
 

@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,7 @@ import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.SalaryDto;
 import com.heike.domain.dto.SalaryQueryDto;
 import com.heike.domain.dto.StudentDto;
+import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Employer;
 import com.heike.domain.pojo.Student;
 import com.heike.domain.service.AdminService;
@@ -40,21 +43,65 @@ public class AdminController {
 		return "admin/home";
 	}
 	
-//	@RequestMapping("/list")
-//	@ResponseBody
-//	public List<Dict> list(){
-//		return dictService.list(SysCode.DictCode.COLLEGE_TYPE);
-//	}
-//	
-//	@RequestMapping("/add")
-//	public void add() {
-//		Dict dict = new Dict();
-//		dict.setName("test");
-//		dict.setType("test");
-//		
-//		dictService.add(dict);
-//	}
+	/**
+	 * 跳转到学院管理页面
+	 * @return
+	 */
+	@RequestMapping("/colleges")
+	public String college() {
+		return "admin/colleges";
+	}
 	
+	/**
+	 * 添加学院
+	 * @param name 学院名称
+	 * @return
+	 */
+	@RequestMapping("/addCollege")
+	@ResponseBody
+	public String addCollege(Dict dict) {
+		return dictService.addCollege(dict);
+	}
+	
+	/**
+	 * 跳转到专业列表页面
+	 * @return
+	 */
+	@RequestMapping("/professions/{colId}")
+	public String professions(@PathVariable Long colId, Model model) {
+		System.out.println(colId);
+		
+		Dict dict = dictService.findById(colId);
+		model.addAttribute("dict", dict);
+		
+		return "admin/professions";
+	}
+	
+	/**
+	 * 添加专业、更新
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping("/addProfession")
+	@ResponseBody
+	public String addProfession(Dict dict) {
+		return dictService.addProfession(dict);
+	}
+	
+	/**
+	 * 根据id删除
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/deleteDict")
+	@ResponseBody
+	public String deleteDict(Long id) {
+		if(dictService.delete(id)) {
+			return "success";
+		}
+		return "fail";
+	}
+
 	/**
 	 * 跳转到添加用工单位页面
 	 * @return

@@ -25,6 +25,12 @@
         </div>
       </li>
       <li >
+        <h4 >学院管理</h4>
+        <div class="list-item none">
+          <p ><a href="${ctx }/admin/colleges" target="_self">学院列表</a></p>
+        </div>
+      </li>
+      <li >
         <h4 >工资管理</h4>
         <div class="list-item none">
           <p ><a href="${ctx }/admin/salaryList" target="_self">工资列表</a></p>
