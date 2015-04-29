@@ -69,8 +69,6 @@ public class AdminController {
 	 */
 	@RequestMapping("/professions/{colId}")
 	public String professions(@PathVariable Long colId, Model model) {
-		System.out.println(colId);
-		
 		Dict dict = dictService.findById(colId);
 		model.addAttribute("dict", dict);
 		

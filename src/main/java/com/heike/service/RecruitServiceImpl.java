@@ -13,6 +13,7 @@ import com.heike.dao.RecruitStuDao;
 import com.heike.dao.StudentDao;
 import com.heike.domain.dto.Pager;
 import com.heike.domain.dto.RecruitQueryDto;
+import com.heike.domain.pojo.Dict;
 import com.heike.domain.pojo.Recruit;
 import com.heike.domain.pojo.RecruitStu;
 import com.heike.domain.pojo.Student;
@@ -55,7 +56,10 @@ public class RecruitServiceImpl implements RecruitService {
 				Long proId = student.getProfessionId();
 				String profession = "无";
 				if(proId != null) {
-					profession = dictDao.queryById(proId).getName();
+					Dict dict = dictDao.queryById(proId);
+					if(dict != null) {
+						profession = dict.getName();
+					}
 				}
 				
 				

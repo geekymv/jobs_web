@@ -104,7 +104,7 @@
 		        		<label for="endDate" class="col-md-4 control-label">截止日期：</label>
 		        		<div class="col-md-3">
 		        			<input type="text" class="form-control" id="endDate" name="endDate" 
-		        			 onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false, readOnly:true})" />
+		        			 onFocus="WdatePicker({dateFmt:'yyyy-MM-dd', minDate:'%y-%M-%d', isShowClear:false})" />
 		      			</div>
 	      			</div>
 	        		<div class="form-group">
@@ -225,8 +225,8 @@
 				return;
 			}
 			// 替换所有的'-'				
-			endDate = endDate.replace(/-/g, "");
-			endDate = endDate + "240000";
+			endDate = endDate.replace(/-/g, "").replace(/' '/, '').replace(/:/, '');
+			endDate = endDate + '240000';
 			
 			var values = {"id": $("#id").val(), "title" : title.val(), "postName": postName.val(), "postNum": postNum.val(), 
 					"salary": salary.val(), "context": context.val(), "endDate": endDate};	

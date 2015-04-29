@@ -29,3 +29,8 @@
 	-khtml-user-select: none;
 	user-select: none;
 }
+
+.myspan {
+  cursor: pointer;
+  padding-left: 10px;	
+}

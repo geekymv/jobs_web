@@ -294,8 +294,8 @@
 								+ "<td id='month_'>"+ data.month +"</td>"	
 								+ "<td id='remarks_'>"+ data.remarks +"</td>"	
 								+ "<td>"
-								+	"<button id='edit' onclick='edit(this)' class='btn btn-primary btn-sm mybtn'>编辑</button>&nbsp;&nbsp;"
-								+	"<button id='delete' onclick='del(this)' class='btn btn-primary btn-sm mybtn'>删除</button>"
+									+ "<span title='编辑' class='glyphicon glyphicon-pencil myspan' onclick='edit(this)'></span>"
+									+ "&nbsp;&nbsp;<span title='删除' class='glyphicon glyphicon-trash myspan' onclick='del(this)'></span>"
 								+ "<input type='hidden' id='id' value='"+data.id+"' />"
 								+ "</td>"	
 								+ "</tr>";

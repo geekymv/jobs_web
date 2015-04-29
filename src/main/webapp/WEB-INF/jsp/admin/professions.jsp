@@ -47,9 +47,8 @@
     
       	<div class="col-md-10">
 	        <div class="panel panel-primary">
-	          <div class="panel-heading">${dict.name }专业列表</div>
-	          <div class="panel-body">
-	          	学院名称:${dict.name }
+	          <div class="panel-heading">${dict.name }&nbsp;专业列表</div>
+	          <div class="panel-body" style="text-align: center;">
 	          	<button class="btn btn-success" id="addProfession">添加专业</button>
 			  </div>
 	          <!-- Table -->
@@ -159,8 +158,9 @@
 						+ "<td>"+ (i+1) +"<input type='hidden' id='id' value='"+pro.id+"'></td>"
 						+ "<td id='pro_name'>"+ pro.name +"</td>"
 						+ "<td>"
-							+ "<button class='btn btn-primary' onclick='edit(this)'>编辑</button>"
-							+ "<button class='btn btn-primary' onclick='del(this)'>删除</button>"
+							+ "&nbsp;&nbsp;<span title='编辑' class='glyphicon glyphicon-pencil myspan' onclick='edit(this)'></span>"
+						//	+ "&nbsp;&nbsp;<span title='删除' class='glyphicon glyphicon-trash myspan' onclick='del(this)'></span>"
+						
 						+"</td>"
 						+ "</tr>";
 				}
@@ -193,21 +193,21 @@
 			var $this = $(t);
 			var $tr =  $this.parent().parent();
 			var proId = $tr.find('#id').val();
-			
-			$.post(contextPath+'/admin/deleteDict', {'id': proId}).done(function(msg){
-				if(msg == 'success') {
-					alert('操作成功！');
-					window.location.reload();
+			if(confirm('确定要删除么？')) {
+				$.post(contextPath+'/admin/deleteDict', {'id': proId}).done(function(msg){
+					if(msg == 'success') {
+						alert('操作成功！');
+						window.location.reload();
+						
+					}else if(msg == 'fail') {
+						alert('操作失败！');
+					}
 					
-				}else if(msg == 'fail') {
-					alert('操作失败！');
-				}
-				
-			}).fail(function(msg){
-				alert('服务器端错误！');
-			});
+				}).fail(function(msg){
+					alert('服务器端错误！');
+				});
+			}
 		}
-	
 	
 	</script>    
 

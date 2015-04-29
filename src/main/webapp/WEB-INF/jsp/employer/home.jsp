@@ -100,12 +100,13 @@
 			        		for(var i = 0; i < length; i++) {
 								var data = datas[i];
 								html += "<tr>"
-									+ "<td>"+ data.title +"</td>"	
+									+ "<td>"+ data.title +"<input type='hidden' id='id' value='"+data.id+"'/></td>"	
 									+ "<td>"+ data.postName +"</td>"	
 									+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
 									+ "<td>"+ formatterDate(data.endDate) +"</td>"	
 									+ "<td>"+ data.salary +"</td>"	
-									+ "<td><a href='${ctx}/employer/detail/"+data.id+"'>查看</a></td>"	
+									+ "<td><span title='查看' class='glyphicon glyphicon-eye-open myspan' onclick='show(this)'></span></td>"	
+								//	+ "<td><a href='${ctx}/employer/detail/"+data.id+"' class='glyphicon glyphicon-pencil myspan'></a></td>"	
 									+ "</tr>";
 				            }
 			        	}
@@ -123,6 +124,12 @@
 			});
    			
    		});
+   		
+   		function show(t) {
+   			var $this = $(t);
+   			var id = $this.parent().parent().find('#id').val();
+   			window.location.href = contextPath+"/employer/detail/" + id;
+   		}
    
    </script>
 </body>

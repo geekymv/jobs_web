@@ -133,7 +133,7 @@ function page() {
 							+ "<td>"+ data.totalMoney +"</td>"	
 							+ "<td>"+ data.status +"</td>"	
 							+ "<td>"
-							+	"<button id='edit' onclick='edit(this)' class='btn btn-primary btn-sm mybtn' data-toggle='modal' data-target='#myModal'>编辑</button>&nbsp;&nbsp;"
+							+   "<span title='编辑' class='glyphicon glyphicon-pencil myspan' onclick='edit(this)'></span>"
 							+ "</td>"	
 							+ "</tr>";
 						
@@ -153,6 +153,8 @@ function page() {
 
 // 编辑用工单位信息
 function edit(t) {
+	$('#myModal').modal('show');
+	
 	var $this = $(t);
 	var id = $this.parent().parent().find('input[name="id"]').val();
 	

@@ -30,12 +30,12 @@ public class StudentInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler) throws Exception {
 		
 		String uri = request.getRequestURI();
-		System.out.println("uri = " + uri);
+//		System.out.println("uri = " + uri);
 		
 		if(excludeUrls != null){
 			for (String excludeUrl : excludeUrls) {
 				if(uri.endsWith(excludeUrl) || uri.contains("/resources/")) {
-					System.out.println("url 不需要拦截...");
+//					System.out.println("url 不需要拦截...");
 					return true;
 				}
 			}
@@ -45,7 +45,7 @@ public class StudentInterceptor implements HandlerInterceptor {
 		Object obj = session.getAttribute("user");
 		
 		if(obj == null) {
-			System.out.println("session拦截木有通过...");
+//			System.out.println("session拦截木有通过...");
 			
 			String contextPath = request.getContextPath();
 //			System.out.println("contextPath = " + contextPath);
@@ -53,7 +53,7 @@ public class StudentInterceptor implements HandlerInterceptor {
 			
 			return false;
 		}else {
-			System.out.println("session拦截通过...");
+//			System.out.println("session拦截通过...");
 			if(obj instanceof Student) { // 是学生
 				return true;
 			}

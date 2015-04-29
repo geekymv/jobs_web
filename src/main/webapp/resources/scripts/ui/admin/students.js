@@ -70,8 +70,9 @@ function page() {
 							+ "<td>"+ data.name +"</td>"	
 							+ "<td style='width:220px;'>"+ data.college +"</td>"
 							+ "<td style='width:230px;'>"+ data.profession +"</td>"	
-							+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='edit(this)' data-toggle='modal' data-target='#myModal'>编辑</button>" 	
-							+	"</td>" 	
+							+ "<td>"
+							+   "<span title='编辑' class='glyphicon glyphicon-pencil myspan' onclick='edit(this)'></span>"
+							+ "</td>"
 							+ "</tr>";
 						//&nbsp;&nbsp;<button class='btn btn-primary btn-sm mybtn' onclick='del(this)' >删除</button>
 		            }
@@ -96,11 +97,17 @@ function del(t) {
 
 // 编辑
 function edit(t) {
+	$('#myModal').modal('show');
+	
 	var $this = $(t);
 	var stuId = $this.parent().parent().find('#stuId').val();
 	// 加载学生信息
 	$.post(contextPath+'/stuinfo', {'stuId': stuId}).done(function(data){
 		var collegeId = data.collegeId;
+		var professionId = data.professionId;
+		
+		params.professionId = professionId;
+		
 		// 获取所有学院
 		getColleges(collegeId);
 		
@@ -242,7 +249,8 @@ function getProfessions(){
 		dataType: "json",
 		success: function(data) {
 			var html = "";
-			var professionId = '${student.professionId}';
+			var professionId = params.professionId;
+			
 			for(var i = 0; i < data.length; i++) {
 				var pro = "<option value="+data[i].id+">" + data[i].name + "</option>";
 				if(professionId == data[i].id) {
