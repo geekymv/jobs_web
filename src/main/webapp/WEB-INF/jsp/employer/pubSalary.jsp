@@ -336,13 +336,20 @@
 								'bonus': bonus, 'toolFee': toolFee, 'remarks': remarks },
 							dataType: 'text'
 						}).done(function(data){
+							if(data == 'overspend') {
+								alert('超支了！');
+								return;
+							}
+							
 							if(data == 'success') {
 								alert('提交成功！');
 								$('#myModal').modal('hide');
+							}else if (data == 'fail') {
+								alert('提交失败！');
 							}	
 							
 						}).fail(function(){
-							
+							alert('服务器端错误！');
 						});						
 						//===
 					}

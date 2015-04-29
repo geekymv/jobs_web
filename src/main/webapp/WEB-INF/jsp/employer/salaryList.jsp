@@ -250,7 +250,6 @@
 					alert('超支了！');
 					return;
 				}
-				
 				if(msg == 'success') {
 					alert('更新成功！');
 					// 关闭模态框
@@ -311,6 +310,45 @@
 		});
    	}
    	
+   	// 删除事件
+   	function del(t) {
+   		var $this = $(t);
+   		var $tr = $this.parent().parent();
+
+   		var id = $tr.find('#id').val();
+   		var name = $tr.find('#name_').html();
+   		var month = $tr.find('#month_').html().trim();
+   		 
+   		//判断是否可以删除
+   		$.post(contextPath+"/employer/isEdit", {'month': month}).done(function(msg){
+			if('noEdit' == msg){
+				alert('不是本月工资，不可删除！');
+				return;
+			}else if ('ok' == msg) {
+				if(confirm('确定要删除'+name+'的' +month+ '月的工资么？')) {
+					delSalary(id);
+		   		}
+			}  			
+   		}).fail(function(msg){
+   			alert('服务器端错误！');
+   		});
+   	}
+   	
+   	// 删除
+   	function delSalary(id) {
+   		$.post(contextPath+'/employer/delSalary', {'sId': id}).done(function(msg) {
+			if(msg == 'success') {
+				alert('删除成功!');
+				window.location.reload();
+			} else if (msg == 'fail') {
+				alert('删除失败！');
+			} 			
+   		}).fail(function(msg) {
+   			alert('服务器端错误！');
+   		});
+   	}
+   	
+   	// 编辑
    	function edit(t) {
    		var $this = $(t);
    		var $tr = $this.parent().parent();
@@ -319,7 +357,7 @@
    		
    		$.post(contextPath+"/employer/isEdit", {'month': month}).done(function(msg){
 			if('noEdit' == msg){
-				alert('不可编辑！');
+				alert('不是本月工资，不可编辑！');
 				return;
 			}else if ('ok' == msg) {
 				// 调用模态框

@@ -172,6 +172,12 @@
 				$('#mobile').focus();
 				return;
    			}
+   			var reg = /(^(\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/;	// 电话号码与手机号码同时验证
+   			if(!reg.test(mobile)) {
+   				alert('电话号码不合法！');
+   				$("#mobile").focus();
+   				return;
+   			}
    			
    			var teacher = $('#teacher').val();
    			if(teacher.trim() == '') {
@@ -230,17 +236,19 @@
 	   		$.post(contextPath+'/admin/isExist', {'account':$('#account').val()}).done(function(data){
 	   			if(data == 'isexist') {
 	   				alert('账户名已经存在！');
+	   				$("#account").focus();
 	   				
 	   			}else if(data == 'notexist') {	// 不存在
 					// 提交表单数据
 	   				var data = $("#add_form").serialize();
 	   				data = decodeURIComponent(data,true); /* 解决中文乱码问题 */
-	   				alert(data);
 	   				
 	   				$.post(contextPath+'/admin/addemployer', data)
 	   				.done(function(data){
 	   					if(data == 'success'){
-							alert('添加成功!');	   						
+							alert('添加成功!');	
+							// 跳转到用工单位列表
+							window.location.href= contextPath+'/admin/employers';
 	   					}else if(data == 'fail') {
 							alert('添加失败');	   						
 	   					}	

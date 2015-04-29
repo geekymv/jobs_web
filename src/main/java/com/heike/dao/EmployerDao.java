@@ -117,7 +117,7 @@ public class EmployerDao extends HibernateDao {
 //		return (Employer)getSession().get(Employer.class, id);
 
 		StringBuilder builder = new StringBuilder();
-		builder.append("select new Employer(id as id, account, name, teacher, mobile, totalMoney, postNum, regDate, status, remarks)")
+		builder.append("select new Employer(id, account, name, teacher, mobile, totalMoney, postNum, regDate, status, remarks, authority)")
 			.append(" from Employer e where e.id = :id");
 		
 		return (Employer)getSession().createQuery(builder.toString())
@@ -147,7 +147,7 @@ public class EmployerDao extends HibernateDao {
 		StringBuilder builder = new StringBuilder();
 		builder.append("select new Employer(e.id, e.account, e.name, e.teacher, e.mobile, ")
 			.append(" e.totalMoney, e.postNum, e.status) from Employer e")
-			.append(" where e.authority = :authority");
+			.append(" where e.authority = :authority order by e.regDate desc");
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		if(StringUtils.isNotBlank(name)) {

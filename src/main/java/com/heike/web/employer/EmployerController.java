@@ -314,11 +314,8 @@ public class EmployerController {
 	public String pubSalary(HttpSession session, Salary salary) {
 		Employer employer = (Employer)session.getAttribute("user");
 		salary.setEmpId(employer.getId());
-		if(salaryService.pubSalary(salary)) {
-			return "success";
-		}
-		
-		return "fail";
+	
+		return salaryService.pubSalary(salary);
 	}
 	
 	/**
@@ -367,6 +364,17 @@ public class EmployerController {
 		salary.setEmpId(employer.getId());
 		
 		return salaryService.edit(salary);
+	}
+	
+	/**
+	 * 删除工资
+	 * @param sId
+	 * @return
+	 */
+	@RequestMapping("/delSalary")
+	@ResponseBody
+	public String delSalary(Long sId) {
+		return salaryService.delete(sId);
 	}
 	
 	

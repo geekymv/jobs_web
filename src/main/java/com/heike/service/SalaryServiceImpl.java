@@ -25,12 +25,36 @@ public class SalaryServiceImpl implements SalaryService {
 	private EmployerDao employerDao;
 
 	@Override
-	public boolean pubSalary(Salary salary) {
+	public String pubSalary(Salary salary) {
 		salary.setDate(DateUtils.getCurrentGaDate());
 		salary.setStatus(SysCode.SalaryStatus.NORMA);
 		
+		String month = salary.getMonth();
+		
+		// 判断本月已提交的工资 + 正要提交的工资之和是否大于 用工单位总金额
+		Long empId = salary.getEmpId();
+		int totalMoney = employerDao.queryTotalMoney(empId);
+		
+		// 获得该用工单位本月已提交的总金额除了当前要提交的
+		List<Salary> salaries = salaryDao.queryByEmpIdAndMonth(empId, month);
+		
+		float total = 0;
+		for (Salary s : salaries) {
+			total += (Float.valueOf(s.getSalary()) 
+					+ Float.valueOf(s.getToolFee()) 
+					+ Float.valueOf(s.getBonus())); 
+		}
+		
+		// 当前要提交的总工资
+		float currentTotal = (Float.valueOf(salary.getSalary()) + Float.valueOf(salary.getToolFee()) 
+									+ Float.valueOf(salary.getBonus())); 
+		
+		if((total + currentTotal) > totalMoney) {
+			return "overspend";	// 超支了
+		}	
+		
 		Long res = salaryDao.save(salary);
-		return res != null ? true : false;
+		return res != null ? "success" : "fail";
 	}
 
 	@Override
@@ -113,6 +137,12 @@ public class SalaryServiceImpl implements SalaryService {
 		}
 
 		return "ok";
+	}
+
+	@Override
+	public String delete(Long sId) {
+		int res = salaryDao.delete(sId);
+		return res == 1 ? "success" : "fail";
 	}
 	
 

@@ -141,6 +141,7 @@ public class ExcelUtil {
 			        		label = new Label(k, 4+i, values[k], format);
 				        	sheet.addCell(label);	
 			        	}
+		        		i++;
 			        }
 			        
 			       

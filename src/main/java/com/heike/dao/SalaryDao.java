@@ -39,7 +39,7 @@ public class SalaryDao extends HibernateDao{
 		.append(" where sl.month = :month and s.professionId = d.id")
 		.append(" and sl.stuId = s.id and sl.empId = e.id")
 		.append(" and rs.recId = r.id and rs.stuId = sl.stuId")
-		.append(" and r.empId = sl.empId");
+		.append(" and r.empId = sl.empId order by e.id");
 
 		return getSession().createQuery(builder.toString())
 				.setString("month", month)
@@ -94,13 +94,13 @@ public class SalaryDao extends HibernateDao{
 	 */
 	public void queryByPage2(Pager<SalaryDto> pager, SalaryQueryDto sqd) {
 		StringBuilder builder = new StringBuilder("select new com.heike.domain.dto.SalaryDto");
-		builder.append("(s.name, s.num, d.name, r.postName, "
+		builder.append("(sl.id, s.name, s.num, d.name, r.postName, "
 				+ "e.name, sl.worktime, sl.salary, sl.toolFee, sl.bonus, sl.remarks, sl.month)")
 		.append(" from Salary sl, Student s, Employer e, Recruit r, RecruitStu rs, Dict d")
 		.append(" where sl.month = :month and s.professionId = d.id")
 		.append(" and sl.stuId = s.id and sl.empId = e.id")
 		.append(" and rs.recId = r.id and rs.stuId = sl.stuId")
-		.append(" and r.empId = sl.empId");
+		.append(" and r.empId = sl.empId order by e.id");
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("month", sqd.getMonth());
@@ -163,7 +163,7 @@ public class SalaryDao extends HibernateDao{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Salary> queryByEmpIdAndMonth(Long empId, String month, Long id) {
+	public List<Salary> queryByEmpIdAndMonth(Long empId, String month) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("select new Salary(s.salary, s.bonus, s.toolFee) from Salary s")
 			.append(" where s.empId = :empId and s.month = :month");
@@ -172,7 +172,18 @@ public class SalaryDao extends HibernateDao{
 					.setLong("empId", empId)
 					.setString("month", month)
 					.list();
-					
+	}
+	
+	/**
+	 * 根据工资id删除
+	 * @param sId
+	 * @return
+	 */
+	public int delete(Long sId) {
+		String hql = "delete Salary s where s.id = :id";
+		return getSession().createQuery(hql)
+				.setLong("id", sId)
+				.executeUpdate();
 	}
 }
 

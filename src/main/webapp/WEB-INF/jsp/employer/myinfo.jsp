@@ -154,13 +154,21 @@
 					return;
 				}
 			}
-			
+			/*
 	   		var reg1 = /^((\d{4})?(\-)?\d{7,8}|\d{3}\-\d{6}|(\d{3}\-\d{7}-\d{3}))$/;
 			var reg2 = /^1\d{10}/;
 			if(mobile.trim() == "" || !reg1.test(mobile.trim()) || !reg2.test(mobile.trim())){
 				alert('电话号码不合法！');
 				return;
 			}
+			*/
+			
+			var reg = /(^(\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/;	// 电话号码与手机号码同时验证
+   			if(!reg.test(mobile)) {
+   				alert('电话号码不合法！');
+   				$("#mobile").focus();
+   				return;
+   			}
 
 			if(teacher.trim() == ""){
 				alert('负责老师为必填项！');
