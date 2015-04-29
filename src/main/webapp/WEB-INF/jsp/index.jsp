@@ -62,7 +62,7 @@
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
                 <li><a href="${ctx }/introduce" target="_blank">系统简介</a></li>
-                <li><a href="${ctx }/hkkj" target="_blank">开发团队</a></li>
+                <li><a href="http://hkkj.aliapp.com/" target="_blank">开发团队</a></li>
                 <li><a href="${ctx }/help" target="_blank">帮助中心</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -139,7 +139,7 @@
 	<div class="bottom_box">
 	    <div class="bottom">
 	        <p> Copyright &copy; 2014 安徽农业大学学生资助管理中心All Rights Reserved 
-	        <br>技术支持：<a href="gyhk.htm" target="_blank">嘿客科技传媒</a>.   联系邮箱：1784160856@qq.com</p>
+	        <br>技术支持：<a href="http://hkkj.aliapp.com/" target="_blank">嘿客科技传媒</a>.   联系邮箱：1784160856@qq.com</p>
 	        <a href="${ctx }/register" class="register">
 				<img src="<c:url value='/resources/img/btn_register.png'/>" width="112" height="39" />
 			</a>

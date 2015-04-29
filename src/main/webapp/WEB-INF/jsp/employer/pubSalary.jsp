@@ -166,6 +166,11 @@
 	
 	<script type="text/javascript">
    		$(function(){
+   			// 此事件在模态框被隐藏（并且同时在 CSS 过渡效果完成）之后被触发。
+   		/*	$('#myModal').on('hidden.bs.modal', function (e) {
+   				window.location.reload();
+   			})
+   		*/	
    			$("#page").page({
 			    remote: {
 			        url: contextPath + '/employer/studentPage',  //请求地址
@@ -243,9 +248,8 @@
 					}
 					
 				}).fail(function(){
-					
+					alert('服务器端错误！');
 				});
-
    			});
    		
 			// 提交工资
@@ -257,7 +261,6 @@
 					alert('请选择月份！');
 					return;
 				}
-				
 				
 				// 判断当前月的工资是否已经提交
 				$.ajax({
@@ -355,14 +358,10 @@
 					}
 					
 				}).fail(function(){
-					
+					alert('服务器端错误！');			
 				});
-				
 			});
-   			
-		
    		});
-	
    		
    		function layoff(t) {
    			var $this = $(t)
@@ -393,10 +392,7 @@
    			}).fail(function(msg){
 				alert('服务器端错误！');   				
    			});
-			
    		}
-   		
-   		
    		
    	</script>
 

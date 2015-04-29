@@ -1,4 +1,10 @@
 $(function(){
+	
+	// 此事件在模态框被隐藏（并且同时在 CSS 过渡效果完成）之后被触发。
+	$('#myModal').on('hidden.bs.modal', function (e) {
+		window.location.reload();
+	})
+	
 	page();
 	
 	$('#search').click(function(){
@@ -85,7 +91,6 @@ $(function(){
 		
 		var datas = $("#form").serialize();
 		datas = decodeURIComponent(datas, true); /* 解决中文乱码问题 */
-		alert(datas);
 		
 		$.post(contextPath+"/admin/editEmployer", datas).done(function(data){
 			if(data == 'success') {
@@ -129,9 +134,10 @@ function page() {
 							+ "<td>"+ data.status +"</td>"	
 							+ "<td>"
 							+	"<button id='edit' onclick='edit(this)' class='btn btn-primary btn-sm mybtn' data-toggle='modal' data-target='#myModal'>编辑</button>&nbsp;&nbsp;"
-							+	"<button id='delete' onclick='del(this)' class='btn btn-primary btn-sm mybtn'>删除</button>"
 							+ "</td>"	
 							+ "</tr>";
+						
+						// +	"<button id='delete' onclick='del(this)' class='btn btn-primary btn-sm mybtn'>删除</button>"
 		            }
 	        	}
 		    

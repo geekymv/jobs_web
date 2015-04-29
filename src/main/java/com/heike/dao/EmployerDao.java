@@ -39,6 +39,21 @@ public class EmployerDao extends HibernateDao {
 			values.put("pwd", EncryptUtil.md5Encrypt(dto.getPwd()));
 		}
 		
+		// 更新总金额
+		Integer totalMoney = dto.getTotalMoney();
+		if(null != totalMoney) {
+			builder.append(", totalMoney = :totalMoney");
+			values.put("totalMoney", dto.getTotalMoney());
+		}
+		
+		// 更新岗位数
+		Integer postNum = dto.getPostNum();;
+		if(null != postNum) {
+			builder.append(", postNum = :postNum");
+			values.put("postNum", dto.getPostNum());
+		}
+		
+		
 		builder.append(", teacher =:teacher, mobile = :mobile, remarks = :remarks where id = :id");
 		values.put("teacher", dto.getTeacher());
 		values.put("mobile", dto.getMobile());

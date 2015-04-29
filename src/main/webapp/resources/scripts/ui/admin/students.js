@@ -32,6 +32,10 @@ $(function(){
 		
 	});
 	
+	// 此事件在模态框被隐藏（并且同时在 CSS 过渡效果完成）之后被触发。
+	$('#myModal').on('hidden.bs.modal', function (e) {
+		window.location.reload();
+	})
 	
 });
 
@@ -64,10 +68,12 @@ function page() {
 							+ "<td>"+ (i+1) +"<input type='hidden' id='stuId' value="+data.id+"></td>"	
 							+ "<td>"+ data.num +"</td>"	
 							+ "<td>"+ data.name +"</td>"	
-							+ "<td>"+ data.college +"</td>"
-							+ "<td>"+ data.profession +"</td>"	
-							+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='edit(this)' data-toggle='modal' data-target='#myModal'>编辑</button></td>" 	
+							+ "<td style='width:220px;'>"+ data.college +"</td>"
+							+ "<td style='width:230px;'>"+ data.profession +"</td>"	
+							+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='edit(this)' data-toggle='modal' data-target='#myModal'>编辑</button>" 	
+							+	"</td>" 	
 							+ "</tr>";
+						//&nbsp;&nbsp;<button class='btn btn-primary btn-sm mybtn' onclick='del(this)' >删除</button>
 		            }
 	        	}
 	            $("tbody").html(html);
@@ -78,6 +84,15 @@ function page() {
 		totalName: 'totalRecord'       //指定返回数据的总数据量
 	});
 }
+
+// 删除
+function del(t) {
+	var $this = $(t);
+	var stuId = $this.parent().parent().find('#stuId').val();
+	
+	alert(stuId);
+}
+
 
 // 编辑
 function edit(t) {
@@ -175,6 +190,7 @@ $('#update').click(function(){
 	if(email.trim() == '') {
 		alert('邮箱不能为空！');					
 		$('#email').focus();
+		return;
 	}
 	
 	var datas = $("#form").serialize();
@@ -184,7 +200,7 @@ $('#update').click(function(){
 		if(data == 'success') {
 			alert('更新成功！');
 			$('#myModal').modal('hide');
-			window.location.reload();
+		//	window.location.reload();
 		}
 	}).fail(function(msg){
 		alert('服务器端错误！');

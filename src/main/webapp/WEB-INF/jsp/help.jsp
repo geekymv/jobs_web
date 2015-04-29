@@ -117,7 +117,7 @@
 </div>
 <div style="text-align:center;clear:both"><br>
 <p>Copyright 2014 &copy; 安徽农业大学 学生资助管理中心 All Rights Reserved <br>
-技术支持：<a href="http://qgzx.ahau.edu.cn/jobs/gyhk.htm" target="_blank">嘿客科技传媒</a>
+技术支持：<a href="http://hkkj.aliapp.com/" target="_blank">嘿客科技传媒</a>
 </p>
 </div><br>
 </body>
