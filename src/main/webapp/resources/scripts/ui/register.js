@@ -21,18 +21,36 @@
 			
 		});
 		$("#num").blur(function(){
-			$(".tips").remove();
+			var num = $('#num').val();
+		//	console.log(num.length);
+			
+			// 学号 长度8位，纯数字
+			if(num.length != 8) {
+				$('.tips').remove();
+				$("#num").parent().after("<div class='col-sm-3 tips'>学号不合法</div>");
+				$("#register").attr("disabled","disabled");
+				return;
+			}else {
+				$("#register").removeAttr("disabled");
+				$('.tips').remove();
+			}
+			
 			isRegistered();
 		});
 		
 		// 学生注册事件
 		$("#register").click(function(){
 			var num = $('#num').val();
+		//	console.log(num.length);
+			
 			// 学号 长度8位，纯数字
 			if(num.length != 8) {
+				$('.tips').remove();
 				$("#num").parent().after("<div class='col-sm-3 tips'>学号不合法</div>");
+				$("#register").attr("disabled","disabled");
 				return;
 			}else {
+				$("#register").removeAttr("disabled");
 				$('.tips').remove();
 			}
 			
@@ -65,6 +83,13 @@
 				return;
 			}	
 			
+			var reg = /^1\d{10}/;
+			if(!reg.test(mobile)) {
+				alert('手机号码不合法！');
+				$('#mobile').focus();
+				return;
+			} 
+			
 			// 邮箱
 			var email = $('#email').val();
 			if(email.trim() == '') {
@@ -72,9 +97,13 @@
 				$('#email').focus();
 				return;
 			}
-			
-			
-			
+			// 邮箱合法性验证
+			var reg_email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if(!reg_email.test(email)) {
+				alert('邮箱不合法！');
+				$('#email').focus();
+				return;
+			}
 			
 			register();
 		});
@@ -128,6 +157,7 @@
 			dataType: "text",
 			success: function(data) {
 				if(data == "yes") {
+					$(".tips").remove();
 					$("#num").parent().after("<div class='col-sm-3 tips'>学号已经注册了！<a href='login'>请点击登录</a></div>");
 					$("#register").attr("disabled","disabled");
 				}else if(data == "no"){

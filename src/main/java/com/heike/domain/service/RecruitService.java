@@ -44,7 +44,7 @@ public interface RecruitService {
 	 * 判断学生是否已经报名了招聘信息
 	 * @param stuId
 	 * @param recId
-	 * @return
+	 * @return "notApply"还未报名， "isApplyed"已经报名
 	 */
 	public String isApply(Long stuId, Long recId);
 	

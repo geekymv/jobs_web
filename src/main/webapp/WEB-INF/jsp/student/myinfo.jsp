@@ -193,6 +193,12 @@
 					$('#mobile').focus();
 					return;
 				}		
+				var reg = /^1\d{10}/;
+				if(!reg.test(mobile)) {
+					alert('手机号码不合法！');
+					$('#mobile').focus();
+					return;
+				} 
 				
 				// 邮箱验证
 				var email = $('#email').val();
@@ -200,6 +206,15 @@
 					alert('邮箱不能为空！');					
 					$('#email').focus();
 				}
+				
+				// 邮箱合法性验证
+				var reg_email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				if(!reg_email.test(email)) {
+					alert('邮箱不合法！');
+					$('#email').focus();
+					return;
+				}
+				
 				
 				
 				var datas = $("#form").serialize();
@@ -210,7 +225,7 @@
 						alert("更新成功！");						
 					}					
 				}).fail(function(msg){
-					
+					alert('服务器错误！');
 				});
 			});
 		});   

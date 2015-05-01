@@ -97,7 +97,7 @@
 	         	</table>
 	         	
 	         	<c:choose>
-	         		<c:when test="${isApply == 'isApplyed' }">
+	         		<c:when test="${isApply == 'notApply' }">
 	         			<button id="apply" class="btn btn-primary"
 							 style="margin-top: 20px;margin-left: 400px; margin-bottom: 30px;">马上报名</button>
 	         		</c:when>
