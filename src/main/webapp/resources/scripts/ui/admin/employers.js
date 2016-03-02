@@ -45,21 +45,21 @@ $(function(){
    		var repassword = $("#repassword").val();
    		
    		// 验证用工单位账号
-   		if(account.trim() == '') {
+   		if($.trim(account) == '') {
    			alert('账号不能为空！');
    			$('#account').focus();
    			return;
    		}
    		
 		// 验证用工单位名称
-   		if(name.trim() == "") {
+   		if($.trim(name) == "") {
 			alert('用工单位名称为必填项！');
 			$("#name").val("").focus();	// 清空并获得焦点
 			return;
 		}	   		
 		// 验证密码
-		if(repassword.trim() != ""){
-			if(password.trim() == ""){
+		if($.trim(repassword) != ""){
+			if($.trim(password) == ""){
 				alert("密码不能为空！");
 				$("#password").focus();
 				return;
@@ -71,7 +71,7 @@ $(function(){
 			}
 		}
 		
-		if(mobile.trim() == ''){
+		if($.trim(mobile) == ''){
 			alert('电话号码不能为空！');
 			$("#mobile").focus();
 			return;
@@ -83,7 +83,7 @@ $(function(){
 			return;
 		}
 
-		if(teacher.trim() == ""){
+		if($.trim(teacher) == ""){
 			alert('负责老师为必填项！');
 			$('#teacher').focus();
 			return;

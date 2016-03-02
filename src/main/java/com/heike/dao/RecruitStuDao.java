@@ -28,13 +28,13 @@ public class RecruitStuDao extends HibernateDao {
 	 */
 	public Pager<RecruitStuVO> queryWaitStudents(Pager<RecruitStuVO> pager, Long empId) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("select new com.heike.domain.vo.RecruitStuVO(s.id, s.num, s.name, d.name, rs.applyDate, r.postName, r.id)")
+		builder.append("select new com.heike.domain.vo.RecruitStuVO(s.id, s.num, s.name, s.mobile, d.name, rs.applyDate, r.postName, r.id)")
 		.append(" from RecruitStu rs, Recruit r, Student s, Dict d")
 		.append(" where rs.recId = r.id and rs.stuId = s.id")
 		.append(" and s.professionId = d.id")
 		.append(" and r.empId = :empId")
 		.append(" and rs.status = :status")
-		.append(" order by rs.applyDate");
+		.append(" order by rs.applyDate desc");
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("empId", empId);

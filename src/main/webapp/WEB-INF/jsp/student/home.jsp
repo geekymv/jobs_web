@@ -87,8 +87,8 @@
  			            for(var i = 0; i < length; i++) {
 							var data = datas[i];
 							html += "<tr>"
-								+ "<td>"+ data.title +"</td>"	
-								+ "<td>"+ data.postName +"</td>"	
+								+ "<td title="+data.title+">"+ contentSubStr(data.title) +"</td>"	
+								+ "<td title="+data.postName+">"+ contentSubStr(data.postName) +"</td>"	
 								+ "<td>"+ data.empName +"</td>"	
 								+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
 								+ "<td>"+ formatterDate(data.endDate) +"</td>"	

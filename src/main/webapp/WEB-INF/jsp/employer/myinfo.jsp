@@ -138,14 +138,14 @@
 	   		var repassword = $("#repassword").val();
 	   		
 			// 验证用工单位名称
-	   		if(name.trim() == "") {
+	   		if($.trim(name) == "") {
 				alert('用工单位名称为必填项！');
 				$("#name").val("").focus();	// 清空并获得焦点
 				return;
 			}	   		
 			// 验证密码
-			if(repassword.trim() != ""){
-				if(password.trim() == ""){
+			if($.trim(repassword) != ""){
+				if($.trim(password) == ""){
 					alert("密码不能为空！");
 					return;
 				}
@@ -170,7 +170,7 @@
    				return;
    			}
 
-			if(teacher.trim() == ""){
+			if($.trim(teacher) == ""){
 				alert('负责老师为必填项！');
 				return;
 			}

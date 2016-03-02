@@ -28,6 +28,13 @@
 		<ignore.test.failure>true</ignore.test.failure>
 		<release.mode>false</release.mode>
 	</properties>
+	
+	<repositories>
+	  <repository>
+	    <id>lychie-maven-repo</id>
+	    <url>https://raw.github.com/lychie/maven-repo/master/releases</url>
+	  </repository>
+	</repositories>
 
 	<dependencies>
 		<!-- junit -->
@@ -262,12 +269,18 @@
 		    <artifactId>jxl</artifactId>
 		    <version>2.6.3</version>
 		</dependency>
-	
+		<!--  
 		<dependency>
 			<groupId>jsptags</groupId>
 			<artifactId>pager-taglib</artifactId>
 			<version>2.0</version>
 		</dependency>
+		-->
+  <dependency>
+    <groupId>org.lychie</groupId>
+    <artifactId>jexcel</artifactId>
+    <version>1.0.1</version>
+  </dependency>
 
 	</dependencies>
 

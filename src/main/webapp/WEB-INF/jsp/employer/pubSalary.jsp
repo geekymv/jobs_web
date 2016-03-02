@@ -223,7 +223,7 @@
    			// 工作时间获得焦点
    			$('#worktime').focus(function(){
    				var month = $('#month').val();
-   				if(month.trim() == '') {
+   				if($.trim(month) == '') {
    					alert('请选择月份');
    					return;
    				}
@@ -257,7 +257,7 @@
 				var stuId = $('#stuId').val();
 				var month = $('#month').val();
 
-				if(month.trim() == '') {
+				if($.trim(month) == '') {
 					alert('请选择月份！');
 					return;
 				}
@@ -282,7 +282,7 @@
 						
 						// 工作时间是非负浮点数 、 0、 非负整数	
 						var worktime = $('#worktime').val();
-						if(worktime.trim() == "") {
+						if($.trim(worktime) == "") {
 							alert('工作时间不能为空！');
 							$('#worktime').focus();
 							return;
@@ -294,7 +294,7 @@
 						}
 						
 						var salary = $('#salary').val();
-						if(salary.trim() == "") {
+						if($.trim(salary) == "") {
 							alert('基本工资不能为空！');
 							$('#salary').focus();
 							return;
@@ -306,7 +306,7 @@
 						}
 						
 						var bonus = $('#bonus').val();
-						if(bonus.trim() == "") {
+						if($.trim(bonus) == "") {
 							alert('奖金不能为空！');
 							$('#bonus').focus();
 							return;
@@ -318,7 +318,7 @@
 						}
 						
 						var toolFee = $('#toolFee').val();
-						if(toolFee.trim() == "") {
+						if($.trim(toolFee) == "") {
 							alert('工具费不能为空！');
 							$('#toolFee').focus();
 							return;

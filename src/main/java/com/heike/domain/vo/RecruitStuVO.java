@@ -5,6 +5,7 @@ public class RecruitStuVO {
 	private Long stuId;	// 学生id
 	private String num;	// 学号
 	private String name;	// 姓名 
+	private String mobile; 	// 联系方式
 	private String profession; // 专业
 	private String applyDate;	// 报名时间
 	private Long recId;	// 报名的招聘信息id
@@ -33,6 +34,12 @@ public class RecruitStuVO {
 		this.applyDate = applyDate;
 		this.postName = postName;
 		this.recId = recId;
+	}
+	
+	public RecruitStuVO(Long stuId, String num, String name, String mobile, String profession,
+			String applyDate, String postName, Long recId) {
+		this(stuId, num, name, profession, applyDate, postName, recId);
+		this.mobile = mobile;
 	}
 	
 	public Long getStuId() {
@@ -87,4 +94,12 @@ public class RecruitStuVO {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
 }

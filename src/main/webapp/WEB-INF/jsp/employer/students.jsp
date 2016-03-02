@@ -57,7 +57,7 @@
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead>
 	                <tr id="head">
-	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>基本工资</th> <th>审核时间</th> <th>操作</th> 
+	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>联系方式</th> <th>专业</th> <th>岗位名称</th> <th>基本工资</th> <th>审核时间</th> <th>操作</th> 
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -105,8 +105,9 @@
 									+ "<td>"+ (i+1) +"</td>"	
 									+ "<td>"+ data.num +"</td>"	
 									+ "<td>"+ data.name +"</td>"	
+									+ "<td>"+ data.mobile +"</td>"	
 									+ "<td>"+ data.profession +"</td>"	
-									+ "<td>"+ data.postName +"</td>"	
+									+ "<td title="+data.postName+">"+ contentSubStr(data.postName) +"</td>"	
 									+ "<td>"+ data.salary +"</td>"
 									+ "<td>"+ formatterDate(data.date) +"</td>"
 									+ "<td><button class='btn btn-primary btn-sm mybtn' onclick='layoff("+ data.id +","+ data.num +")'>解聘</button></td>" 	

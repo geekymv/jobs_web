@@ -131,7 +131,7 @@
    		$('#addEmployer').click(function(){
 			// 输入验证
    			var account = $("#account").val();
-   			if(account.trim() == "") {
+   			if($.trim(account) == "") {
    				alert("账号不能为空！");
    				$("#account").focus();
    				return false;
@@ -140,18 +140,18 @@
    			var password = $("#password").val();
    			var repassword = $("#repassword").val();
    			
-   			if(password.trim() == ""){
+   			if($.trim(password) == ""){
    				alert("密码不能为空！");
    				$("#password").focus();
    				return false;
    			}
-   			if(repassword.trim() == ""){
+   			if($.trim(repassword) == ""){
    				alert("重复密码不能为空！");
    				$("#repassword").focus();
    				return false;
    			}
    			// 密码一致
-   			if(password.trim() != repassword.trim()) {
+   			if($.trim(password) != $.trim(repassword)) {
    				alert("两次输入的密码不一致！");
    				$("#repassword").focus();
    				return false;
@@ -159,7 +159,7 @@
    			
    			// 单位名称
    			var name = $('#name').val();
-   			if(name.trim() == '') {
+   			if($.trim(name) == '') {
    				alert('单位名称不能为空！');
    				$('#name').focus();
    				return;
@@ -167,7 +167,7 @@
    			
    			// 电话号码
    			var mobile = $('#mobile').val();
-   			if(mobile.trim() == '') {
+   			if($.trim(mobile) == '') {
 				alert('电话号码不能为空！');
 				$('#mobile').focus();
 				return;
@@ -180,7 +180,7 @@
    			}
    			
    			var teacher = $('#teacher').val();
-   			if(teacher.trim() == '') {
+   			if($.trim(teacher) == '') {
 				alert('负责老师不能为空！');
 				$('#teacher').focus();
 				return;
@@ -189,7 +189,7 @@
    			
    			//验证岗位数是否合法：必须是正整数
    			var postNum = $("#postNum").val();
-   			if(postNum.trim() == '') {
+   			if($.trim(postNum) == '') {
    				alert('岗位数不能为空！');
    				$("#postNum").focus();
    				return;
@@ -205,7 +205,7 @@
    		  	
    		  	// 月总金额不能为空
    		  	var totalMoney = $('#totalMoney').val();
-   		  	if(totalMoney.trim() == '') {
+   		  	if($.trim(totalMoney) == '') {
    		  		alert("月总金额不能为空");
    		  		$('#totalMoney').focus();
 		  	 	return false;
@@ -265,7 +265,7 @@
 
    	function mycheck() {
 		var account = $("#account").val();
-		if(account.trim() == "") {
+		if($.trim(account) == "") {
 			alert("账号不能为空！");
 			$("#account").focus();
 			return false;

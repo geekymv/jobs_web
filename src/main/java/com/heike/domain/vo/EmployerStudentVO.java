@@ -5,6 +5,7 @@ public class EmployerStudentVO {
 	private Long id;	// 学生id
 	private String name;	// 学生姓名
 	private String num;	// 学生学号
+	private String mobile;	// 联系方式
 	private String profession;	// 学生专业
 	private String postName;	// 岗位名称
 	private String salary;	// 基本工资
@@ -26,6 +27,13 @@ public class EmployerStudentVO {
 		this.salary = salary;
 		this.date = date;
 		this.status = status;
+	}
+	
+	public EmployerStudentVO(Long id, String num, String name, String mobile, String profession, 
+			String postName, String salary, String date,
+			Integer status) {
+		this(id, num, name, profession, postName, salary, date, status);
+		this.mobile = mobile;
 	}
 
 
@@ -81,4 +89,12 @@ public class EmployerStudentVO {
 		this.status = status;
 	}
 
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
 }

@@ -69,7 +69,7 @@ public class EmpStuDao extends HibernateDao {
 	public void queryStudentList(Pager<EmployerStudentVO> pager, Long empId) {
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("select new com.heike.domain.vo.EmployerStudentVO(s.id, s.num, s.name, d.name, r.postName, r.salary , es.date, es.status) ")
+		builder.append("select new com.heike.domain.vo.EmployerStudentVO(s.id, s.num, s.name, s.mobile, d.name, r.postName, r.salary , es.date, es.status) ")
 			.append(" from EmpStu es, Student s,")
 			.append(" RecruitStu rs, Recruit r, Dict d")
 			.append(" where es.empId = :empId")

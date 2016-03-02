@@ -56,7 +56,7 @@
 			
 			// 密码
 			var pwd = $('#pwd').val();
-			if(pwd.trim() == '') {
+			if($.trim(pwd) == '') {
 				alert('密码不能为空！');
 				$('#pwd').focus();
 				return;
@@ -69,7 +69,7 @@
 			}
 			// 姓名
 			var name = $('#name').val();
-			if(name.trim() == '') {
+			if($.trim(name) == '') {
 				alert('姓名不能为空！');
 				$('#name').focus();
 				return;
@@ -77,7 +77,7 @@
 			
 			// 手机号码
 			var mobile = $('#mobile').val();
-			if(mobile.trim() == '') {
+			if($.trim(mobile) == '') {
 				alert('手机号码不能为空！');
 				$('#mobile').focus();
 				return;
@@ -92,7 +92,7 @@
 			
 			// 邮箱
 			var email = $('#email').val();
-			if(email.trim() == '') {
+			if($.trim(email) == '') {
 				alert('邮箱不能为空！');
 				$('#email').focus();
 				return;

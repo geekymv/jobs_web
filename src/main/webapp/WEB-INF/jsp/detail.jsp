@@ -59,7 +59,7 @@
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
                 <li><a href="${ctx }/introduce" target="_blank">系统简介</a></li>
-                <li><a href="http://hkkj.aliapp.com/" target="_blank">开发团队</a></li>
+                <li><a href="javascript:;" target="_blank">开发团队</a></li>
                 <li><a href="${ctx }/help" target="_blank">帮助中心</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -118,16 +118,16 @@
 	         		<tr>
 	         			<td><span>招聘信息标题：</span>${recruit.title }</td>
 	         			
-	         			<td><span>发布单位：</span>${recruit.empName }</td>
+	         			<td width="200px;"><span>发布单位：</span>${recruit.empName }</td>
 	         			 
 	         		</tr>
 	         		<tr>
 	         			<td><span>岗位名称：</span>${recruit.postName }</td>
-	         			<td><span>薪资待遇：</span>${recruit.salary }</td>
+	         			<td width="200px;"><span>薪资待遇：</span>${recruit.salary }</td>
 	         		</tr>
 	         		<tr>
 	         			<td><span>招聘人数：</span>${recruit.postNum }</td>
-	         			<td><span>已报名人数：</span>${recruit.applyNum }</td>
+	         			<td width="200px;"><span>已报名人数：</span>${recruit.applyNum }</td>
 	         		</tr>
 	         		<tr>
 	         			<td colspan="2">
@@ -146,7 +146,7 @@
 						<td>
 							<span id="releaseDate">发布时间：</span>
 						</td>
-						<td>
+						<td width="200px;">
 							<span id="endDate">截止时间：</span>
 						</td>
 					</tr>
@@ -224,6 +224,8 @@
 		
 		// 我要报名
 		$("#apply").click(function(){
+				// 按钮不能点击
+				$("#apply").attr('disabled', true);
 				$.ajax({
 					url: contextPath + "/student/apply",
 					type: "post",
@@ -251,7 +253,12 @@
 							window.location.reload();
 						}
 					}
-				});  
+				});
+				
+				// 3秒后可以点击				
+				setTimeout(function () {
+					$("#apply").attr('disabled', false);
+				}, 3000); 	
 			});
 		
 		

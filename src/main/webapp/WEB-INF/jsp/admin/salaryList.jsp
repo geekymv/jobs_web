@@ -101,7 +101,7 @@
    		// 下载工资
    		$("#download").click(function(){
    			var month = $('#month').val();
-   			if(month.trim() == '') {
+   			if($.trim(month) == '') {
    				alert('请选择月份！');
    				return;
    			}
@@ -111,7 +111,7 @@
    		
    		$('#search').click(function(){
    			var month = $('#month').val();
-   			if(month.trim() == '') {
+   			if($.trim(month) == '') {
    				alert('请选择月份！');
    				$('#month').focus();
    				return;

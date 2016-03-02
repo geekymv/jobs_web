@@ -168,7 +168,7 @@
    		// 下载工资
    		$("#download").click(function(){
    			var month = $('#content').val();
-   			if(month.trim() == '') {
+   			if($.trim(month) == '') {
    				alert('请选择月份！');
    				return;
    			}
@@ -190,7 +190,7 @@
 			
 			// 工作时间是非负浮点数 、 0、 非负整数	
 			var worktime = $('#worktime').val();
-			if(worktime.trim() == "") {
+			if($.trim(worktime) == "") {
 				alert('工作时间不能为空！');
 				$('#worktime').focus();
 				return;
@@ -202,7 +202,7 @@
 			}
 			
 			var salary = $('#salary').val();
-			if(salary.trim() == "") {
+			if($.trim(salary) == "") {
 				alert('基本工资不能为空！');
 				$('#salary').focus();
 				return;
@@ -214,7 +214,7 @@
 			}
 			
 			var bonus = $('#bonus').val();
-			if(bonus.trim() == "") {
+			if($.trim(bonus) == "") {
 				alert('奖金不能为空！');
 				$('#bonus').focus();
 				return;
@@ -226,7 +226,7 @@
 			}
 			
 			var toolFee = $('#toolFee').val();
-			if(toolFee.trim() == "") {
+			if($.trim(toolFee) == "") {
 				alert('工具费不能为空！');
 				$('#toolFee').focus();
 				return;
@@ -317,7 +317,7 @@
 
    		var id = $tr.find('#id').val();
    		var name = $tr.find('#name_').html();
-   		var month = $tr.find('#month_').html().trim();
+   		var month = $.trim($tr.find('#month_').html());
    		 
    		//判断是否可以删除
    		$.post(contextPath+"/employer/isEdit", {'month': month}).done(function(msg){
@@ -353,7 +353,7 @@
    		var $this = $(t);
    		var $tr = $this.parent().parent();
    		var id = $tr.find('#id').val();
-   		var month = $tr.find('#month_').html().trim();
+   		var month = $.trim($tr.find('#month_').html());
    		
    		$.post(contextPath+"/employer/isEdit", {'month': month}).done(function(msg){
 			if('noEdit' == msg){
@@ -362,14 +362,14 @@
 			}else if ('ok' == msg) {
 				// 调用模态框
 				$('#myModal').modal('show');
-				var num = $tr.find('#num_').html().trim();
-				var name = $tr.find('#name_').html().trim();
-			//	var month = $tr.find('#month_').html().trim();
-				var worktime = $tr.find('#worktime_').html().trim();
-				var salary = $tr.find('#salary_').html().trim();
-				var toolFee = $tr.find('#toolFee_').html().trim();
-				var bonus = $tr.find('#bonus_').html().trim();
-				var remarks = $tr.find('#remarks_').html().trim();
+				var num = $.trim($tr.find('#num_').html());
+				var name = $.trim($tr.find('#name_').html());
+			//	var month = $.trim($tr.find('#month_').html());
+				var worktime = $.trim($tr.find('#worktime_').html());
+				var salary = $.trim($tr.find('#salary_').html());
+				var toolFee = $.trim($tr.find('#toolFee_').html());
+				var bonus = $.trim($tr.find('#bonus_').html());
+				var remarks = $.trim($tr.find('#remarks_').html());
 				
 				$('#salId').attr('value', id);
 				$('#num').html(num);

@@ -146,7 +146,7 @@ function edit(t) {
 // 更新学生信息
 $('#update').click(function(){
 	var num = $('#num').val();
-	if(num.trim() == ''){
+	if($.trim(num) == ''){
 		alert('学号不能为空！');	
 		$('#num').focus();
 		return;
@@ -154,7 +154,7 @@ $('#update').click(function(){
 	
 	// 输入验证
 	var name = $('#name').val();
-	if(name.trim() == '') {
+	if($.trim(name) == '') {
 		alert('姓名不能为空！') ;
 		$('#name').focus();
 		return;
@@ -164,8 +164,8 @@ $('#update').click(function(){
 	var password = $('#password').val();
 	var repassword = $('#repassword').val();
 	// 验证密码
-	if(repassword.trim() != ""){
-		if(password.trim() == ""){
+	if($.trim(repassword) != ""){
+		if($.trim(password) == ""){
 			alert("密码不能为空！");
 			$('#password').focus();
 			return;
@@ -179,7 +179,7 @@ $('#update').click(function(){
 	
 	// 手机号码
 	var mobile = $('#mobile').val();
-	if(mobile.trim() == '') {
+	if($.trim(mobile) == '') {
 		alert('手机号码不能为空！');
 		$('#mobile').focus();
 		return;
@@ -194,7 +194,7 @@ $('#update').click(function(){
 	
 	// 邮箱验证
 	var email = $('#email').val();
-	if(email.trim() == '') {
+	if($.trim(email) == '') {
 		alert('邮箱不能为空！');					
 		$('#email').focus();
 		return;

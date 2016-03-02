@@ -61,7 +61,7 @@
 	          <table class="table table-bordered table-hover table-condensed">
 	            <thead>
 	                <tr id="head">
-	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>专业</th> <th>岗位名称</th> <th>报名时间</th> <th>操作</th> 
+	                   	<th>序号</th> <th>学号</th> <th>姓名</th> <th>联系方式</th> <th>专业</th> <th>岗位名称</th> <th>报名时间</th> <th>操作</th> 
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -104,8 +104,9 @@
 									+ "<td>"+ (i+1) +"</td>"	
 									+ "<td>"+ data.num +"</td>"	
 									+ "<td>"+ data.name +"</td>"	
+									+ "<td>"+ data.mobile +"</td>"	
 									+ "<td>"+ data.profession +"</td>"	
-									+ "<td>"+ data.postName +"</td>"	
+									+ "<td title="+data.postName+">"+ contentSubStr(data.postName) +"</td>"	
 									+ "<td>"+ formatterDate(data.applyDate) +"</td>"	
 									+ "<td>"
 									+ "<button class='btn btn-primary btn-sm mybtn' onclick='hire("+data.stuId + "," +data.recId + ","+ 1 +")'>&nbsp;录用&nbsp;</button>&nbsp;&nbsp;"

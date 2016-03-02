@@ -120,7 +120,7 @@
 			
 			$('#add_profession').click(function() {
 				var name = $('#name').val();
-				if(name.trim() == '') {
+				if($.trim(name) == '') {
 					alert('专业名称不能为空！');
 					$('#name').focus();
 					return;

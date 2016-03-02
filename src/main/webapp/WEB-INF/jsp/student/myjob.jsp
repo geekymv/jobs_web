@@ -69,7 +69,7 @@
 					$("#t_header").show();
 					for(var i = 0; i < len; i++) {
 						html += "<tr>"
-							+ "<td>" + data[i].recruitName + "</td>"
+							+ "<td title="+data[i].recruitName+">"+contentSubStr(data[i].recruitName) + "</td>"
 							+ "<td>" + data[i].employer + "</td>"
 							+ "<td>" + formatterDate(data[i].date) + "</td>"
 							+ "<td>" + data[i].salary + "</td>"

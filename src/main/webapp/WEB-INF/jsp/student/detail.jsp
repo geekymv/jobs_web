@@ -50,15 +50,15 @@
 	         		<caption><span style="font-size: 18px; font-weight: bold;">招聘信息</span></caption>
 	         		<tr>
 	         			<td><span>招聘信息标题：</span>${recruit.title }</td>
-	         			<td><span>发布单位：</span>${recruit.empName }</td>
+	         			<td width="200px;"><span>发布单位：</span>${recruit.empName }</td>
 	         		</tr>
 	         		<tr>
 	         			<td><span>岗位名称：</span>${recruit.postName }</td>
-	         			<td><span>薪资待遇：</span>${recruit.salary }</td>
+	         			<td width="200px;"><span>薪资待遇：</span>${recruit.salary }</td>
 	         		</tr>
 	         		<tr>
 	         			<td><span>招聘人数：</span>${recruit.postNum }</td>
-	         			<td><span>已报名人数：</span>${recruit.applyNum }</td>
+	         			<td width="200px;"><span>已报名人数：</span>${recruit.applyNum }</td>
 	         		</tr>
 	         		<tr>
 	         			<td colspan="2">
@@ -77,7 +77,7 @@
 						<td>
 							<span id="releaseDate">发布时间：</span>
 						</td>
-						<td>
+						<td width="200px;">
 							<span id="endDate">截止时间：</span>
 						</td>
 					</tr>
@@ -126,6 +126,8 @@
    			$("#endDate").after(formatterDate(endDate));
    			
    			$("#apply").click(function(){
+   				// 按钮不能点击
+				$("#apply").attr('disabled', true);
    				$.ajax({
    					url: contextPath + "/student/apply",
    					type: "post",
@@ -154,6 +156,11 @@
    						}
    					}
    				});  
+   				
+   				// 3秒后可以点击				
+				setTimeout(function () {
+					$("#apply").attr('disabled', false);
+				}, 3000); 
    			});
    		});
    </script>

@@ -175,14 +175,14 @@
 		$("#edit").click(function() {
 			// 标题
 			var title = $("#title");
-			if(title.val().trim() == "") {
+			if($.trim(title.val()) == "") {
 				alert("标题不能为空！");
 				title.focus();
 				return;
 			}
 			// 岗位名称
 			var postName = $("#postName");
-			if(postName.val().trim() == "") {
+			if($.trim(postName.val()) == "") {
 				alert("岗位名称不能为空！");
 				postName.focus();
 				return;
@@ -191,7 +191,7 @@
 			var reg = /^(?:[1-9]\d*|0)$/;
 			// 招聘人数
 			var postNum = $("#postNum");
-			if(postNum.val().trim() == "") {
+			if($.trim(postNum.val()) == "") {
 				alert("招聘人数不能为空！");
 				postNum.focus();
 				return;
@@ -204,7 +204,7 @@
 
 			// 薪资待遇
 			var salary = $("#salary");
-			if(salary.val().trim() == "") {
+			if($.trim(salary.val()) == "") {
 				alert("薪资待遇不能为空！");
 				salary.focus();
 				return;
@@ -212,7 +212,7 @@
 			
 			// 工作要求
 			var context = $("#context");
-			if(context.val().trim() == "") {
+			if($.trim(context.val()) == "") {
 				alert("工作要求不能为空！");
 				context.focus();
 				return;

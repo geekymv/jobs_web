@@ -86,7 +86,7 @@
 						}		
 						
 						html += "<tr>"
-							+ "<td>" + data[i].postName + "</td>"
+							+ "<td title="+data[i].postName+">" + contentSubStr(data[i].postName) + "</td>"
 							+ "<td>" + data[i].employer + "</td>"
 							+ "<td>" + data[i].salary + "</td>"
 							+ "<td>" + formatterDate(data[i].applyTime) + "</td>"

@@ -29,6 +29,9 @@
 		    user-select: none;
 		}
 		
+		.navbar-nav li a {
+			color: white;
+		}
 	</style>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,8 +65,11 @@
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
                 <li><a href="${ctx }/introduce" target="_blank">系统简介</a></li>
-                <li><a href="http://hkkj.aliapp.com/" target="_blank">开发团队</a></li>
+                <li><a href="javascript:;" target="_blank">开发团队</a></li>
                 <li><a href="${ctx }/help" target="_blank">帮助中心</a></li>
+                <c:if test="${user != null }">
+                <li><a href="${ctx }/home">个人中心</a></li>
+                </c:if>
           </ul>
           <ul class="nav navbar-nav navbar-right">
            	<c:if test="${user != null }">
@@ -167,15 +173,15 @@
  			            for(var i = 0; i < length; i++) {
 							var data = datas[i];
 							var endDate = data.endDate;
-							if(endDate != null && endDate.trim() != '') {
+							if(endDate != null && $.trim(endDate) != '') {
 								endDate = formatterDate(data.endDate)
 							}else {
 								endDate = "无";
 							}
 							
 							html += "<tr>"
-								+ "<td>"+ data.title +"</td>"	
-								+ "<td>"+ data.postName +"</td>"	
+								+ "<td title="+data.title+">"+ contentSubStr(data.title, 15) +"</td>"	
+								+ "<td title="+data.postName+">"+ contentSubStr(data.postName, 15) +"</td>"	
 								+ "<td>"+ data.empName +"</td>"	
 								+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
 								+ "<td>"+ endDate +"</td>"	
@@ -205,8 +211,6 @@
 			})
 				
    		});
- 
-		
 	</script>
 
 </body>

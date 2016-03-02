@@ -121,7 +121,7 @@
 			
 			$('#add_college').click(function() {
 				var name = $('#name').val();
-				if(name.trim() == '') {
+				if($.trim(name) == '') {
 					alert('学院名称不能为空！');
 					$('#name').focus();
 					return;

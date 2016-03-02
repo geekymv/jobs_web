@@ -100,8 +100,8 @@
 			        		for(var i = 0; i < length; i++) {
 								var data = datas[i];
 								html += "<tr>"
-									+ "<td>"+ data.title +"<input type='hidden' id='id' value='"+data.id+"'/></td>"	
-									+ "<td>"+ data.postName +"</td>"	
+									+ "<td>"+ contentSubStr(data.title, 15) +"<input type='hidden' id='id' value='"+data.id+"'/></td>"	
+									+ "<td>"+ contentSubStr(data.postName) +"</td>"	
 									+ "<td>"+ formatterDate(data.releaseDate) +"</td>"	
 									+ "<td>"+ formatterDate(data.endDate) +"</td>"	
 									+ "<td>"+ data.salary +"</td>"	

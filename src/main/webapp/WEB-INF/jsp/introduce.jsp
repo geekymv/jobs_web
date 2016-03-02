@@ -43,7 +43,8 @@
 			<h1 class="test">美工努力开发中...现阶段只测试功能实现与否，ok 现在开始使用吧~~</h1>
 			 --%>
 			<p>
-				&nbsp;&nbsp;&nbsp;&nbsp;本系统为嘿客科技传媒独立开发，归安徽农业大学学生资助管理中心版权所有，在使用过程中，如有问题请和学生资助管理中心联系或者直接发送邮件到开发人员邮箱1784160856@qq.com或649193002@qq.com
+				&nbsp;&nbsp;&nbsp;&nbsp;本系统为嘿客科技传媒独立开发，归安徽农业大学学生资助管理中心版权所有，在使用过程中，
+				如有问题请和学生资助管理中心联系或者直接发送邮件到以下邮箱(&nbsp;ym2011678@foxmail.com、1784160856@qq.com、649193002@qq.com&nbsp;)
 				,谢谢！<br> &nbsp;&nbsp;&nbsp;&nbsp;<br />【注意事项】<br>
 				1、本系统为独立系统，学生在报名校内勤工助学岗位时，需注册个人账号。<br />
 				2、学生登录密码丢失时，需与勤工助学单位取得联系，由勤工助学单位帮其修改密码。<br>
@@ -58,7 +59,7 @@
 	<div style="text-align:center;clear:both">
 		<p>Copyright 2014 &copy; 安徽农业大学 学生资助管理中心 All Rights Reserved</p>
 		<p>
-			技术支持：<a href="http://hkkj.aliapp.com/" target="_blank">嘿客科技传媒</a>
+			技术支持：<a href="javascript:;" target="_blank">嘿客科技传媒</a>
 		</p>
 	</div>
 	<%--
